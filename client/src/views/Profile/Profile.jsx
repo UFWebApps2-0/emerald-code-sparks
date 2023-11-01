@@ -9,8 +9,12 @@ const Profile = () => {
           src="https://media.discordapp.net/attachments/1163871360972501144/1168945792451629216/image.png"
           alt="User profile"
         />
-        <h1 className={"profile-card-name"}>User name</h1>
-        <p className={"profile-card-name"}>User role</p>
+        <div className={"profile-card-item"}>
+          <h1 className={"profile-card-name"}>John Smithhasareallylongname</h1>
+        </div>
+        <div className={"profile-card-item"}>
+          <p className={"profile-card-role"}><span className={"bold"}>Role: </span>Student</p>
+        </div>
       </div>
     </>
   )

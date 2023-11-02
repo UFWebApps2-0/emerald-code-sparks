@@ -4,11 +4,15 @@ import GalleryItem from "./GalleryItem";
 
 
 const Gallery = () => (
-    <div className='flex flex-column'>
+    <>
         <NavBar />
-        <h1>Gallery</h1>
-        <GalleryItem />
-    </div>
+        <div className='container nav-padding'>
+            <h1>Gallery</h1>
+            <div className='flex flex-column'>
+                <GalleryItem />
+            </div>
+        </div>
+    </>
 )
 
 export default Gallery;

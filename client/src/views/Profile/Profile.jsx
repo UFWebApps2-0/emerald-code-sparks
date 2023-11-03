@@ -1,4 +1,5 @@
 import ProfileCard from "../../components/Profile/ProfileCard";
+import ProjectSection from "../../components/Profile/ProjectSection";
 import "./Profile.less";
 
 const Profile = () => {
@@ -9,14 +10,7 @@ const Profile = () => {
         name={"John Smith"}
         role={"Student"}
       />
-      <div className={"project-section"}>
-        {Array(10).fill("1").map(name => (
-          <div className="project-section-project">
-            Project {name}
-          </div>
-        ))
-        }
-      </div>
+      <ProjectSection/>
     </div>
   )
 }

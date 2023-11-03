@@ -20,9 +20,36 @@ const Post = ({ text }) => {
   };
 
   return (
-    <div>
-      <p>{text}</p>
+    <div
+      style={{
+        width: '70vw',
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.377)',
+        borderRadius: '10px',
+        margin: '20px',
+      }}
+    >
+      <p
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          padding: '20px',
+          fontSize: '1.2em',
+          textAlign: 'left',
+        }}
+      >
+        {text}
+      </p>
       <button
+        style={{
+          width: 'auto',
+          height: '2.5vh',
+          border: 'none',
+          color: '#414141',
+          background: '#',
+          transition: '0.25s',
+          cursor: 'pointer',
+          borderRadius: '30px',
+        }}
         onClick={(event) => {
           setReply(!reply);
         }}

@@ -1,2 +1,4 @@
 package-lock.json
-yarn.lock
+/yarn.lock
+/server/yarn.lock
+/server/package-lock.json

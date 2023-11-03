@@ -6,6 +6,6 @@ import React, { useEffect, useState } from 'react';
 
 export default function Admin() {
     return (
-        <div> Admin Page </div>
+        <h1> Admin Page</h1>
     );
 }

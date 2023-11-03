@@ -36,9 +36,9 @@ export default function TeacherLogin() {
         } else if (response.data.user.role.name === 'Researcher') {
           navigate('/report');
         } else {
-          //navigate('/dashboard');
-          //addition for ease
-          navigate('/admin');
+          //navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
+          //addition for ease               //--------------------------------------------------------------
+          navigate('/admin');               //--------------------------------------------------------------
         }
       })
       .catch((error) => {

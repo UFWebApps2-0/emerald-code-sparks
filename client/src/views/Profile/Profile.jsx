@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import "./Profile.less";
+
+import React, { useState } from 'react';
 import ProfileCard from "../../components/Profile/ProfileCard";
+import ProgressBar from "../../components/Profile/ProgressBar";
 import NavBar from "../../components/NavBar/NavBar";
 import ProjectSection from "../../components/Profile/ProjectSection";
-import "./Profile.less";
 
 const Profile = () => {
   const [bio, setBio] = useState('Your bio text goes here');
   const [isEditingBio, setIsEditingBio] = useState(false);
-  const [selectedBadges, setSelectedBadges] = useState([1,2,3,4]);
+  const [selectedBadges, setSelectedBadges] = useState([1, 2, 3, 4]);
   const [isEditingBadges, setIsEditingBadges] = useState(null);
 
   const handleBioEdit = () => {
@@ -27,7 +29,7 @@ const Profile = () => {
     // Toggle the editing state for the selected badge
     setIsEditingBadges(badgeIndex);
   };
-  
+
   const handleBadgeSave = (badgeIndex, newBadgeID) => {
     // Save the changes and update the selected badge
     setSelectedBadges((prevBadges) => {
@@ -77,6 +79,11 @@ const Profile = () => {
       </div>
       <div className='profile-available-badges'>
         <h2>Available Badges</h2>
+        <div>
+          <ProgressBar progress={20} />
+          <ProgressBar progress={50} />
+          <ProgressBar progress={90} />
+        </div>
       </div>
     </div>
   )

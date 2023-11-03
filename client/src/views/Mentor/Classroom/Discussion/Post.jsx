@@ -41,11 +41,14 @@ const Post = ({ text }) => {
       </p>
       <button
         style={{
+          display: 'flow',
+          flexDirection: 'row',
+          float: 'right',
           width: 'auto',
-          height: '2.5vh',
+          height: '3vh',
           border: 'none',
           color: '#414141',
-          background: '#',
+          background: '#F3D250',
           transition: '0.25s',
           cursor: 'pointer',
           borderRadius: '30px',
@@ -69,7 +72,18 @@ const Post = ({ text }) => {
         ) : null}
       </>
       {replies.map((post, index) => (
-        <p key={index}>{post}</p>
+        <p
+          key={index}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            marginLeft: '40px',
+            fontSize: '1.2em',
+            textAlign: 'left',
+          }}
+        >
+          {post}
+        </p>
       ))}
     </div>
   );

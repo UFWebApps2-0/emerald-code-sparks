@@ -17,10 +17,19 @@ const NewPost = ({ addPost }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea placeholder='Post' value={text} onChange={handleChange} />
-      <button type='submit'>Post</button>
-    </form>
+    <div
+      style={{
+        width: '70vw',
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.377)',
+        borderRadius: '10px',
+        margin: '20px',
+      }}
+    >
+      <form onSubmit={handleSubmit}>
+        <textarea placeholder='Post' value={text} onChange={handleChange} />
+        <button type='submit'>Post</button>
+      </form>
+    </div>
   );
 };
 

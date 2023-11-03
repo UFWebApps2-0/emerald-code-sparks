@@ -1,4 +1,5 @@
 import ProfileCard from "../../components/Profile/ProfileCard";
+import ProjectSection from "../../components/Profile/ProjectSection";
 import "./Profile.less";
 
 const Profile = () => {
@@ -9,6 +10,7 @@ const Profile = () => {
         name={"John Smith"}
         role={"Student"}
       />
+      <ProjectSection/>
     </div>
   )
 }

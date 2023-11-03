@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ProfileCard from "../../components/Profile/ProfileCard";
 import NavBar from "../../components/NavBar/NavBar";
+import ProjectSection from "../../components/Profile/ProjectSection";
 import "./Profile.less";
 
 const Profile = () => {

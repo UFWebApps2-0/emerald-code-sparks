@@ -2,10 +2,12 @@
 
 .profile-container {
   display: grid;
-  grid-template-columns: 0.5fr 2fr 3fr; /* Define 3 columns with the desired width ratio */
-  grid-template-rows: 1fr 2fr 3fr; /* Define 3 rows with the desired height ratio */
-  gap: 1rem; /* Add some gap between cells */
-  height: 100vh; /* Adjust the height as needed */
+  grid-template-columns: 0.5fr 2fr 3fr;
+  /* Define 3 columns with the desired width ratio */
+  grid-template-rows: 1fr 2fr 1;
+  /* Define 3 rows with the desired height ratio */
+  gap: 1rem;
+  /* Add some gap between cells */
 }
 
 .profile-card {
@@ -15,8 +17,7 @@
   grid-column: span 1;
 }
 
-.profile-biography-section 
-{
+.profile-biography-section {
   // padding-top: 10vh;
   // padding-right: 10vh;
   grid-row: span 1;
@@ -28,8 +29,7 @@
   background-color: #f0d65b;
 }
 
-.profile-badge-display
-{
+.profile-badge-display {
   grid-row: span 1;
   grid-column: span 2;
   border-radius: 2rem;
@@ -39,8 +39,7 @@
   background-color: #f0d65b;
 }
 
-.profile-project-display
-{
+.profile-project-display {
   grid-row: span 1;
   grid-column: span 2;
   border-radius: 2rem;
@@ -49,8 +48,8 @@
   border-width: 0.2rem;
   background-color: #f0d65b;
 }
-.profile-available-badges
-{
+
+.profile-available-badges {
   grid-row: span 1;
   grid-column: span 1;
   border-radius: 2rem;

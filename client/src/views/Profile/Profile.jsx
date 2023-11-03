@@ -73,10 +73,7 @@ const Profile = () => {
 
         </div>
       </div>
-      <div className='profile-project-display'>
-        <h2>Projects</h2>
-
-      </div>
+      <ProjectSection/>
       <div className='profile-available-badges'>
         <h2>Available Badges</h2>
         <div>

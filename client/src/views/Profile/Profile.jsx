@@ -1,4 +1,5 @@
 import ProfileCard from "../../components/Profile/ProfileCard";
+import ProgressBar from "../../components/Profile/ProgressBar";
 import "./Profile.less";
 
 const Profile = () => {
@@ -9,6 +10,8 @@ const Profile = () => {
         name={"John Smith"}
         role={"Student"}
       />
+      <ProgressBar
+      progress = {60}/>
     </div>
   )
 }

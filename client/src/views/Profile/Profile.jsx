@@ -9,6 +9,14 @@ const Profile = () => {
         name={"John Smith"}
         role={"Student"}
       />
+      <div className={"project-section"}>
+        {Array(10).fill("1").map(name => (
+          <div className="project-section-project">
+            Project {name}
+          </div>
+        ))
+        }
+      </div>
     </div>
   )
 }

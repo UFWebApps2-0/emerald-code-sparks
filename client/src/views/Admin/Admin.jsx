@@ -6,6 +6,11 @@ import NavBar from "../../components/NavBar/NavBar";
 import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
+    //handle click on create org button
+    function orgCreateClick(){
+        alert("you clicked the add org button! functionality coming soon");
+    }
+
     //handle click on org --> navigate(org page)
 
     //handle click on lesson button --> return a temp popup?
@@ -15,7 +20,9 @@ export default function Admin() {
         <div className='container nav-padding'>
             <NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs */}
             <div id='main-header'>Welcome, [insert name]</div> {/* replace 'admin' with role.name */}
-
+            {/*create org button*/}
+                {/*gonna require some kind of connection to org file*/}
+            <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to be moved to the right spot and do smth when clicked/hovered over */}
             {/*add custom element adminSubHeader*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>

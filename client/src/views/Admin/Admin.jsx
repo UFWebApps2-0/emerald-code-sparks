@@ -3,7 +3,7 @@ import "./Admin.less";
 //import { message } from 'antd';
 import NavBar from "../../components/NavBar/NavBar";
 //import { useGlobalState } from '../../../Utils/userState';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
     //handle click on org --> navigate(org page)
@@ -14,10 +14,12 @@ export default function Admin() {
     return (
         <div className='container nav-padding'>
             <NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs */}
-            <div id='main-header'>Welcome, Admin</div> {/* replace 'admin' with role.name */}
+            <div id='main-header'>Welcome, [insert name]</div> {/* replace 'admin' with role.name */}
 
             {/*add custom element adminSubHeader*/}
-            <div id='cardholder'>  [insert org cards here] </div>
+            <div id='cardholder'>
+                <h1>Your Orgs</h1>
+                <div>[insert orgs here]</div>
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}
 
@@ -25,6 +27,7 @@ export default function Admin() {
                 {/*I think a lesson creator exists? we just have to link to it and allow access*/}
             {/*create classroom button*/}
             {/* */}
+            </div>
         </div>
 
     );

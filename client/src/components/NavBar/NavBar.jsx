@@ -110,12 +110,17 @@ export default function NavBar() {
           value.role === 'ContentCreator'
             ? '/ccdashboard'
             : value.role === 'Mentor'
-            ? '/dashboard'
+            //? '/dashboard'
+            ? '/Admin'
             : value.role === 'Student'
             ? '/student'
             : value.role === 'Researcher'
             ? '/report'
+            //add value.role === 'Admin'
+            /*: value.role === 'Admin'
+            * ? '/Admin' */
             : '/'
+
         }
       >
         <img src={Logo} id='casmm-logo' alt='logo' />

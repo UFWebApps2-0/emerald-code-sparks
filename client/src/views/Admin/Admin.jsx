@@ -1,11 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import "./Admin.less";
 //import { message } from 'antd';
-//import NavBar from '../../../components/NavBar/NavBar';
+import NavBar from "../../components/NavBar/NavBar";
 //import { useGlobalState } from '../../../Utils/userState';
 //import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
+    //handle click on org --> navigate(org page)
+
+    //handle click on lesson button --> return a temp popup?
+
+
     return (
-        <h1> Admin Page</h1>
+        <div className='container nav-padding'>
+            <NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs */}
+            <div id='main-header'>Welcome, Admin</div> {/* replace 'admin' with role.name */}
+
+            {/*add custom element adminSubHeader*/}
+            <div id='cardholder'>  [insert org cards here] </div>
+            {/*generate org tiles*/}
+                {/*have them redirect to org page or org management page?*/}
+
+            {/*create lesson button. this may belong in an org management page*/}
+                {/*I think a lesson creator exists? we just have to link to it and allow access*/}
+            {/*create classroom button*/}
+            {/* */}
+        </div>
+
     );
 }

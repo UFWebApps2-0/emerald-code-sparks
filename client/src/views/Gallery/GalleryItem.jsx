@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal, Button } from 'antd';
 import { createPortal } from 'react-dom';
 import ExpandedGalleryItem from './ExpandedGalleryItem';
 import './GalleryItem.less';
 
 //Wrapper item needs to be a useState for it to get dynamically rendered
 
-const GalleryItem = () => {
-    
-    function handleShow(){
-        const modalHolder = document.getElementById('gallery-modal-holder');
-        if (modalHolder != undefined){
+const GalleryItem = (props) => {
+    const [visible, setVisible] = useState(false);
+    const title = props.title || 'Title';
 
-        }
-        console.log('show');
-        createPortal(<ExpandedGalleryItem />, document.getElementById('gallery-modal-holder'));
-    }
+    const showModal = () => {
+        setVisible(true);
+    };
+
+    const handleCancel = () => {
+        setVisible(false);
+    };
+
+    const handleOk = () => {
+        setVisible(false);
+    };
+
     return (
         <>
-        <div className='flex flex-row align-center justify-center'>
-            <div className='galleryItem' onClick={() => {handleShow()}}>
-                <div className='header'><div>Project Name</div></div>
+            <div className='galleryItem' onClick={() => { showModal() }}>
+                <div className='header'><div>{title}</div></div>
                 <img style={{ backgroundColor: 'red' }} />
                 <div className='flex flex-row'>
                     <div className='flex flex-column'>
@@ -33,8 +39,20 @@ const GalleryItem = () => {
                     </div>
                 </div>
             </div>
-        </div>
-        <div id='gallery-modal-holder'></div>
+            <div className='gallery-modal-holder'>
+                <Modal
+                    title={title}
+                    open={visible}
+                    onCancel={handleCancel}
+                    width='50vw'
+                >
+                    <div className='flex flex-row'>
+                        <div className='flex flex-column'>
+                            <img className='ooIMG'></img>
+                        </div>
+                    </div>
+                </Modal>
+            </div>
         </>
     );
 }

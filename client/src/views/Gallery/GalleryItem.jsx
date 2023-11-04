@@ -10,9 +10,6 @@ function GalleryItem() {
 	const path = './viewCountsRecord.JSON';
 
 
-
-
-
   const [viewCounts, setViewCounts] = useState(
     JSON.parse(localStorage.getItem("viewCounts")) || {}
   );

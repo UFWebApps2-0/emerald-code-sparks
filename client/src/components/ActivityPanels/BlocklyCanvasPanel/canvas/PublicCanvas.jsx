@@ -13,9 +13,10 @@ import {
 } from '../../Utils/consoleHelpers';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
+import {Search} from './Search';
+//import {window} from './Exporter';
 
 let plotId = 1;
-
 export default function PublicCanvas({ activity, isSandbox }) {
   const [hoverUndo, setHoverUndo] = useState(false);
   const [hoverRedo, setHoverRedo] = useState(false);
@@ -27,6 +28,12 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const [connectionOpen, setConnectionOpen] = useState(false);
   const [selectedCompile, setSelectedCompile] = useState(false);
   const [compileError, setCompileError] = useState('');
+
+  const [filterText,filterChange] = useState(''); //Really want access to filter text. may have to make an external prop just to export it
+
+  function filterUpdate(value) {
+    filterChange(value);
+  }
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const workspaceRef = useRef(null);
@@ -186,6 +193,8 @@ export default function PublicCanvas({ activity, isSandbox }) {
 
                   <Col flex={'200px'}>
                     <Row>
+                    <Search 
+                    filterUpdate = {filterUpdate}/> 
                       <Col className='flex flex-row'>
                         <button
                           onClick={handleUndo}

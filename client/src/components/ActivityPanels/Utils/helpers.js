@@ -8,6 +8,7 @@ import {
   updateActivityTemplate,
 } from '../../../Utils/requests';
 import { message } from 'antd';
+//import {}
 
 const AvrboyArduino = window.AvrgirlArduino;
 
@@ -42,7 +43,12 @@ export const getJS = (workspaceRef) => {
 export const getArduino = (workspaceRef, shouldAlert = true) => {
   window.Blockly.Arduino.INFINITE_LOOP_TRAP = null;
   let code = window.Blockly.Arduino.workspaceToCode(workspaceRef);
+  code = "void customcode(){}\n" + code.replace("void setup() {","void setup() {\n  customcode();");
+  let custom_code = "pinMode(12, OUTPUT); digitalWrite(12, HIGH);delay(1000);digitalWrite(12, LOW);delay(1000);"
+  code = code.replace("{}","{\n" + custom_code + "\n}")
   if (shouldAlert) alert(code);
+  console.log(code);
+  console.log(typeof(code));
   return code;
 };
 

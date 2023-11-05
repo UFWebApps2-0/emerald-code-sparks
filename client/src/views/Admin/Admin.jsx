@@ -19,7 +19,7 @@ export default function Admin() {
     return (
         <div className='container nav-padding'>
             <NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs */}
-            <div id='main-header'>Welcome, [insert name]</div> {/* replace 'admin' with role.name */}
+            <div id='main-header'>Welcome, [insertname]</div> {/* replace 'admin' with role.name */}
             {/*create org button*/}
                 {/*gonna require some kind of connection to org file*/}
             <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to be moved to the right spot and do smth when clicked/hovered over */}

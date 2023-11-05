@@ -35,13 +35,13 @@ export default function TeacherLogin() {
           navigate('/ccdashboard');
         } else if (response.data.user.role.name === 'Researcher') {
           navigate('/report');
-        } else if(response.data.user.role.name === 'Admin'){ //admin login added- not working. says invalid login. must be missing something
+        } else if(response.data.user.role.name === 'Admin'){ //admin login added-> this is catching nothing
             navigate('/admin');
         }
-        else {
+        else { //admin role.name must be wrong or smth bc the AdminTest is going here
           //navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
           //addition for ease               //--------------------------------------------------------------
-          navigate('/admin');               //--------------------------------------------------------------
+          navigate('/admin');               //bruh i changed it back and teacher still logs into the admin page
         }
       })
       .catch((error) => {

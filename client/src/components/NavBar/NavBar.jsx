@@ -110,17 +110,14 @@ export default function NavBar() {
           value.role === 'ContentCreator'
             ? '/ccdashboard'
             : value.role === 'Mentor'
-            //? '/dashboard'
-            ? '/Admin'    //remove this after custom admin navbar is done so
+            ? '/dashboard'
             : value.role === 'Student'
             ? '/student'
             : value.role === 'Researcher'
             ? '/report'
-            //add value.role === 'Admin'
             : value.role === 'Admin'
             ? '/Admin'
             : '/'
-
         }
       >
         <img src={Logo} id='casmm-logo' alt='logo' />

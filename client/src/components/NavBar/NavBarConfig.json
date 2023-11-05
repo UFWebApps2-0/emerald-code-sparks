@@ -23,6 +23,7 @@
       "SignOut",
       "BugReport"
     ],
-    "Researcher": ["ResearcherDashboard", "BugReport", "SignOut"]
+    "Researcher": ["ResearcherDashboard", "BugReport", "SignOut"],
+    "Admin": ["Home", "TeacherLogin", "Sandbox", "About"]
   }
 }

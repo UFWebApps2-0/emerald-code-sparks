@@ -19,7 +19,7 @@ function Search({filterUpdate}) {
       <input 
         ref = {input}
         type="text"
-        placeholder="Type to Filter"
+        placeholder="C++ code here"
         onChange = {() => handleChange()}
       />
     </form>

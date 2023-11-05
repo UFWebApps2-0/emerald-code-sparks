@@ -18,7 +18,7 @@ export default function Admin() {
 
     return (
         <div className='container nav-padding'>
-            {/*<NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs. it's currently showing the teacher one */}
+            <NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs. it's currently showing the teacher one */}
             <div id='main-header'>Welcome, [insertname]</div> {/* replace 'admin' with role.name */}
             {/*create org button*/}
                 {/*gonna require some kind of connection to org file*/}

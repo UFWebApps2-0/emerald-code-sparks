@@ -40,9 +40,9 @@ export default function TeacherLogin() {
             navigate('/admin');
         }
         else { //admin role.name must be wrong or smth bc AdminTest is going here
-          //navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
+          navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
           //addition for ease               //--------------------------------------------------------------
-          navigate('/admin');               //bruh i changed it back and teacher still logs into the admin page. whyyy
+          //navigate('/admin');               //--------------------------------------------------------------
         }
       })
       .catch((error) => {

@@ -175,6 +175,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
             spinning={selectedCompile}
           >
             <Row id='icon-control-panel'>
+
               <Col flex='none' id='section-header'>
                 Program your Arduino...
               </Col>
@@ -193,8 +194,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
 
                   <Col flex={'200px'}>
                     <Row>
-                    <Search 
-                    filterUpdate = {filterUpdate}/> 
+
                       <Col className='flex flex-row'>
                         <button
                           onClick={handleUndo}
@@ -242,7 +242,10 @@ export default function PublicCanvas({ activity, isSandbox }) {
                         </button>
                       </Col>
                     </Row>
+
                   </Col>
+                  <Search
+                      filterUpdate = {filterUpdate}/>
                   <Col flex={'230px'}>
                     <div
                       id='action-btn-container'
@@ -286,6 +289,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
           connectionOpen={connectionOpen}
           setConnectionOpen={setConnectionOpen}
         ></ConsoleModal>
+
         <PlotterModal
           show={showPlotter}
           connectionOpen={connectionOpen}

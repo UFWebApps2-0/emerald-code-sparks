@@ -24,6 +24,6 @@
       "BugReport"
     ],
     "Researcher": ["ResearcherDashboard", "BugReport", "SignOut"],
-    "Admin": ["Home", "TeacherLogin", "Sandbox", "About"]
+    "Admin": ["Home", "SignOut", "Sandbox", "About", "Admin"]
   }
 }

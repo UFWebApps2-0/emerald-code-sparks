@@ -99,6 +99,12 @@ export default function NavBar() {
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
+      {shouldShowRoute('Admin') ? (
+        <Menu.Item key='9' onClick={() => handleRouteChange(routes.Admin)}>
+          <i className='fa fa-user' />
+          &nbsp; Admin Page
+        </Menu.Item>
+      ) : null}
     </Menu>
   );
 

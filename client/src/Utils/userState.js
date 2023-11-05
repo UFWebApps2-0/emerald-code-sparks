@@ -29,7 +29,7 @@ export const getCurrUser = () => {
     };
   }
   //added admin role
-  else if (result.role.type === 'admin') {
+  else if (result.role.type === 'Admin') {
     return {
       role: 'Admin',
       name: result.role.name,

@@ -111,7 +111,7 @@ export default function NavBar() {
             ? '/ccdashboard'
             : value.role === 'Mentor'
             //? '/dashboard'
-            ? '/Admin'
+            ? '/Admin'    //remove this after custom admin navbar is done so
             : value.role === 'Student'
             ? '/student'
             : value.role === 'Researcher'

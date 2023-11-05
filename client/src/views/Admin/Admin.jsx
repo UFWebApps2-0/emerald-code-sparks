@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./Admin.less";
 //import { message } from 'antd';
 import NavBar from "../../components/NavBar/NavBar";
-//import { useGlobalState } from '../../../Utils/userState';
+//import { useGlobalState } from "../../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
@@ -23,7 +23,7 @@ export default function Admin() {
             {/*create org button*/}
                 {/*gonna require some kind of connection to org file*/}
             <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to be moved to the right spot and do smth when clicked/hovered over */}
-            {/*add custom element adminSubHeader*/}
+            {/*add custom element adminSubHeader?*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
                 <div>[insert orgs here]</div>

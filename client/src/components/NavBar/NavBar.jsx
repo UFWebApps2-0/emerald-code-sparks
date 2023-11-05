@@ -114,16 +114,16 @@ export default function NavBar() {
           id='link'
           to={
             value.role === 'ContentCreator'
-                ? '/ccdashboard'
-                : value.role === 'Mentor'
-                    ? '/dashboard'
-                    : value.role === 'Student'
-                        ? '/student'
-                        : value.role === 'Researcher'
-                            ? '/report'
-                            : value.role === 'Admin'
-                                ? '/Admin'
-                                : '/'
+            ? '/ccdashboard'
+            : value.role === 'Mentor'
+            ? '/dashboard'
+            : value.role === 'Student'
+            ? '/student'
+            : value.role === 'Researcher'
+            ? '/report'
+            : value.role === 'Admin'
+            ? '/Admin'
+            : '/'
           }
       >
         <img src={Logo} id='casmm-logo' alt='logo' />

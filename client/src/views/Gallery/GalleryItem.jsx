@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './GalleryItem.less';
+//rebased the branch views.
 
 //I make this declaration look like what is in the bootcamp3. 
 function GalleryItem() {

@@ -26,41 +26,40 @@ const Post = ({ text }) => {
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.377)',
         borderRadius: '10px',
         margin: '20px',
-        position: 'relative',
       }}
     >
-      <p
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          padding: '20px',
-          fontSize: '1.2em',
-          textAlign: 'left',
-        }}
-      >
-        {text}
-      </p>
-      <button
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          width: 'auto',
-          height: 'auto',
-          border: 'none',
-          color: '#414141',
-          background: '#F3D250',
-          transition: '0.25s',
-          cursor: 'pointer',
-          borderRadius: '30px',
-          padding: '10px',
-          float: 'inline-end',
-        }}
-        onClick={(event) => {
-          setReply(!reply);
-        }}
-      >
-        Reply
-      </button>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <p
+          style={{
+            padding: '20px',
+            fontSize: '1.2em',
+            textAlign: 'left',
+            display: 'inline - block',
+          }}
+        >
+          {text}
+        </p>
+        <button
+          style={{
+            width: 'auto',
+            height: 'auto',
+            border: 'none',
+            color: '#414141',
+            background: '#F3D250',
+            transition: '0.25s',
+            cursor: 'pointer',
+            borderRadius: '30px',
+            padding: '10px',
+            margin: '20px',
+            display: 'inline - block',
+          }}
+          onClick={(event) => {
+            setReply(!reply);
+          }}
+        >
+          Reply
+        </button>
+      </div>
       <>
         {reply ? (
           <form onSubmit={handleSubmit}>
@@ -78,7 +77,7 @@ const Post = ({ text }) => {
           key={index}
           style={{
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: 'column',
             marginLeft: '40px',
             fontSize: '1.2em',
             textAlign: 'left',

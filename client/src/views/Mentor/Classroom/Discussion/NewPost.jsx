@@ -26,8 +26,32 @@ const NewPost = ({ addPost }) => {
       }}
     >
       <form onSubmit={handleSubmit}>
-        <textarea placeholder='Post' value={text} onChange={handleChange} />
-        <button type='submit'>Post</button>
+        <textarea
+          style={{
+            width: '40vw',
+          }}
+          placeholder='Post'
+          value={text}
+          onChange={handleChange}
+        />
+        <button
+          style={{
+            width: 'auto',
+            height: 'auto',
+            border: 'none',
+            color: '#414141',
+            background: '#F3D250',
+            transition: '0.25s',
+            cursor: 'pointer',
+            borderRadius: '30px',
+            padding: '10px',
+            margin: '20px',
+            display: 'inline - block',
+          }}
+          type='submit'
+        >
+          Post
+        </button>
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import { server } from './hosts';
 import axios from 'axios';
 import { getToken } from './AuthRequests';
+import { getCurrUser } from './userState';
 
 const GET = 'GET';
 const PUT = 'PUT';
@@ -672,3 +673,23 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+export const createBlock = async (name, description, blocks_category, image_url) => {
+  const currentUser = getCurrUser();
+  const created_by = currentUser.name || 'student';
+  const updated_by = created_by;
+
+  makeRequest({
+    method: POST, 
+    path: `${server}/blocks`, 
+    auth: true, 
+    data: {
+      name, 
+      description, 
+      blocks_category, 
+      image_url, 
+      created_by, 
+      updated_by,
+    }, 
+    error: 'Unable to create new block',
+  })}

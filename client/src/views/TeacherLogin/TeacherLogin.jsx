@@ -35,10 +35,13 @@ export default function TeacherLogin() {
           navigate('/ccdashboard');
         } else if (response.data.user.role.name === 'Researcher') {
           navigate('/report');
-        } else {
-          //navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
+        } else if(response.data.user.role.name === 'Admin'){ //admin login added- not working. says invalid login.
+            navigate('/admin');
+        }
+        else {
+          navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
           //addition for ease               //--------------------------------------------------------------
-          navigate('/admin');               //--------------------------------------------------------------
+          //navigate('/admin');               //--------------------------------------------------------------
         }
       })
       .catch((error) => {

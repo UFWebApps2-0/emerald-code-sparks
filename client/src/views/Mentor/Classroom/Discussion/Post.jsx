@@ -26,6 +26,7 @@ const Post = ({ text }) => {
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.377)',
         borderRadius: '10px',
         margin: '20px',
+        position: 'relative',
       }}
     >
       <p
@@ -41,17 +42,18 @@ const Post = ({ text }) => {
       </p>
       <button
         style={{
-          display: 'flow',
+          display: 'flex',
           flexDirection: 'row',
-          float: 'right',
           width: 'auto',
-          height: '3vh',
+          height: 'auto',
           border: 'none',
           color: '#414141',
           background: '#F3D250',
           transition: '0.25s',
           cursor: 'pointer',
           borderRadius: '30px',
+          padding: '10px',
+          float: 'inline-end',
         }}
         onClick={(event) => {
           setReply(!reply);

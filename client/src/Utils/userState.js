@@ -28,13 +28,13 @@ export const getCurrUser = () => {
       name: result.role.name,
     };
   }
-  //add admin role
-  /*else if (result.role.type === 'admin') {
+  //added admin role
+  else if (result.role.type === 'admin') {
     return {
       role: 'Admin',
       name: result.role.name,
     };
-  }*/
+  }
 
 };
 

@@ -117,8 +117,8 @@ export default function NavBar() {
             : value.role === 'Researcher'
             ? '/report'
             //add value.role === 'Admin'
-            /*: value.role === 'Admin'
-            * ? '/Admin' */
+            : value.role === 'Admin'
+            ? '/Admin'
             : '/'
 
         }

@@ -24,7 +24,7 @@ function Login() {
   return (
       <div id="signInButton">
         <GoogleLogin
-          className="fuck"
+          className="googleButton"
           clientID={CLIENT_ID}
           buttonText="Sign-up with Google"
           onSuccess={onSucc}

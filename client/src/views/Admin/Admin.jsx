@@ -27,6 +27,7 @@ export default function Admin() {
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
                 <div>[insert orgs here]</div>
+                
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}
 
@@ -34,6 +35,11 @@ export default function Admin() {
                 {/*I think a lesson creator exists? we just have to link to it and allow access*/}
             {/*create classroom button*/}
             {/* */}
+            </div>
+            <div id='cardholder'>
+                <h1></h1>
+                <div>[insert orgs here]</div>
+                
             </div>
         </div>
 

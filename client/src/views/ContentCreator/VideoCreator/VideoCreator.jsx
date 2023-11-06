@@ -54,6 +54,9 @@ export default function VideoCreator({ gradeList }) {
           layout="horizontal"
           size="default"
         >
+          <p>
+            1. Upload video to youtube<br/>2. Copy/paste link to video
+          </p>
           <Form.Item id="form-label" label="Video Name">
             <Input
               onChange={e => setName(e.target.value)}

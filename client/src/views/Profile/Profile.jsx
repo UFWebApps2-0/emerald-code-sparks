@@ -71,15 +71,15 @@ const Profile = () => {
         <h2>Badge Display</h2>
         <div className='profile-display-container nav-padding'>
 
-        <h2 class='profile-badge-display-1'></h2>
-        <h2 class='profile-badge-display-2'></h2>
-        <h2 class='profile-badge-display-3'></h2>
-        <h2 class='profile-badge-display-4'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
         
-        <h3 class='profile-badge-display-change1'>Change</h3>
-        <h3 class='profile-badge-display-change2'>Change</h3>
-        <h3 class='profile-badge-display-change3'>Change</h3>
-        <h3 class='profile-badge-display-change4'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
         </div>
       </div>
       <ProjectSection/>

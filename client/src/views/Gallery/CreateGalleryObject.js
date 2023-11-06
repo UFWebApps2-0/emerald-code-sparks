@@ -1,10 +1,12 @@
-async function createGalleryObject(title, user_name, like_count, view_count, discussion_board) {
+async function createGalleryObject(title, user_name, like_count, view_count, discussion_board, type, visibility) {
   const data = {
     title, 
     user_name,
     like_count,
     view_count,
     discussion_board,
+    type,
+    visibility,
   };
 
   try {

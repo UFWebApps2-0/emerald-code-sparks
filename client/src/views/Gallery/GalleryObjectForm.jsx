@@ -9,8 +9,7 @@ function GalleryObjectForm() {
 
   const handleFormSubmit = (e) => {
 
-    // Call the function to create the gallery object with 'title' and 'visibility'
-    createGalleryObject(title, visibility);
+    createGalleryObject(title, "", 0, 0, visibility, "Project", "discussion board object here"); //ADD USERNAME HERE 
 
     // Clear the form and hide it
     setTitle("");

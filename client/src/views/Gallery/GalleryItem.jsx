@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
+import { createPortal } from 'react-dom';
+//import ExpandedGalleryItem from './ExpandedGalleryItem';
 import './GalleryItem.less';
 import DiscussionBoard from './DiscussionBoard';
 

@@ -27,4 +27,4 @@ async function createGalleryObject(title, user_name, like_count, view_count, dis
 }
 
 // Call the function to create the gallery object in the backend
-createGalleryObjectInBackend();
+export default createGalleryObject();

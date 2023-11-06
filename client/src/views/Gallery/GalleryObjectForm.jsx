@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import  createGalleryObject  from "../Gallery/CreateGalleryObject"
-
+import './GalleryObjectForm.less';
 
 function GalleryObjectForm() {
   const [title, setTitle] = useState("");

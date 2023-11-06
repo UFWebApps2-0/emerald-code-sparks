@@ -4,7 +4,12 @@ import Post from './Post';
 import NewPost from './NewPost';
 import MentorSubHeader from '../../../../components/MentorSubHeader/MentorSubHeader';
 
-import { getClassroom, getDiscussion } from '../../../../Utils/requests';
+import {
+  getClassroom,
+  getDiscussion,
+  createPost,
+  addDiscussionPost,
+} from '../../../../Utils/requests';
 import { message, Tag } from 'antd';
 
 const Discussion = ({ classroomId }) => {
@@ -13,7 +18,16 @@ const Discussion = ({ classroomId }) => {
   const [posts, setPosts] = useState([]);
 
   const addPost = (newPost) => {
-    setPosts([...posts, newPost]);
+    const addData = async () => {
+      const res = await createPost(newPost, 'John Doe');
+      if (res.data) {
+        setPosts([...posts, res.data]);
+        addDiscussionPost(discussion.id, posts, res.data);
+      } else {
+        message.error(res.err);
+      }
+    };
+    addData();
   };
 
   useEffect(() => {
@@ -22,20 +36,20 @@ const Discussion = ({ classroomId }) => {
       if (res.data) {
         const classroom = res.data;
         setClassroom(classroom);
+        const dis = await getDiscussion(classroom.discussion.id);
+        if (dis.data) {
+          const discussionData = dis.data;
+          setDiscussion(discussionData);
+          setPosts(discussionData.discussion_posts);
+        } else {
+          message.error(dis.err);
+        }
       } else {
         message.error(res.err);
       }
-      const dis = await getDiscussion(classroom.discussion.id);
-      if (dis.data) {
-        const discussion = dis.data;
-        setDiscussion(discussion);
-        console.log(discussion);
-      } else {
-        message.error(dis.err);
-      }
     };
     fetchData();
-  }, [classroomId]);
+  }, []);
 
   return (
     <>
@@ -54,7 +68,7 @@ const Discussion = ({ classroomId }) => {
       >
         <NewPost addPost={addPost} />
         {posts.map((post, index) => (
-          <Post key={index} text={post} />
+          <Post key={post.id} postId={post.id} />
         ))}
       </div>
     </>

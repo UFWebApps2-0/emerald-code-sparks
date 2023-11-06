@@ -684,5 +684,48 @@ export const getDiscussion = async (id) =>
     method: GET,
     path: `${server}/discussions/${id}`,
     auth: true,
-    error: 'Unable to retrive classroom workspaces',
+    error: 'Unable to retrive discussion',
+  });
+
+export const getPost = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/discussion-posts/${id}`,
+    auth: true,
+    error: 'Unable to retrive post',
+  });
+
+export const createPost = async (text, author) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/discussion-posts/`,
+    data: {
+      Text: text,
+      Author: author,
+      Replies: [],
+    },
+    auth: true,
+    error: 'Unable to add post',
+  });
+
+export const addDiscussionPost = async (id, posts, post) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/discussions/${id}`,
+    data: {
+      discussion_posts: [...posts, post],
+    },
+    auth: true,
+    error: 'Unable to add post',
+  });
+
+export const addReply = async (id, replies, reply) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/discussion-posts/${id}`,
+    data: {
+      Replies: [...replies, reply],
+    },
+    auth: true,
+    error: 'Unable to add reply',
   });

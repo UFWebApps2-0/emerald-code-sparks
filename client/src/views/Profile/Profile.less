@@ -1,16 +1,25 @@
 @import '../../assets/style.less';
 
-.profile-container {
+.profile-page-grid {
   display: grid;
-  grid-template-columns: 0.5fr 2fr 3fr;
   /* Define 3 columns with the desired width ratio */
-  grid-template-rows: 1fr 2fr 1;
+  grid-template-columns: 0.5fr 2fr 3fr;
   /* Define 3 rows with the desired height ratio */
-  gap: 1rem;
+  grid-template-rows: 1fr 2fr 1;
   /* Add some gap between cells */
+  gap: 1rem;
+
+  background-color: #3D5C82;
 }
 
-.profile-display-container {
+.profile-page-section {
+  padding: 1rem;
+
+  border-radius: 1rem;
+  background-color: #61a8dc;
+}
+
+.profile-badge-display-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   /* Define 3 columns with the desired width ratio */
@@ -18,60 +27,37 @@
   /* Define 3 rows with the desired height ratio */
   gap: 2rem;
   /* Add some gap between cells */
-  padding-left: 5vh;
-  padding-right: 5vh;
-  padding-bottom: 3vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
 }
 
 .profile-card {
-  padding-top: 10vh;
-  padding-left: 10vh;
   grid-row: span 2;
   grid-column: span 1;
 }
 
 .profile-biography-section {
-  // padding-top: 10vh;
-  // padding-right: 10vh;
   grid-row: span 1;
   grid-column: span 2;
-  border-radius: 2rem;
-  border-style: solid;
-  border-color: #4286c6;
-  border-width: 0.2rem;
-  background-color: #f0d65b;
 }
 
 .profile-badge-display {
   grid-row: span 1;
   grid-column: span 2;
-  border-radius: 2rem;
-  border-style: solid;
-  border-color: #4286c6;
-  border-width: 0.2rem;
-  background-color: #f0d65b;
 }
 
 .profile-project-display {
   grid-row: span 1;
   grid-column: span 2;
-  border-radius: 2rem;
-  border-style: solid;
-  border-color: #4286c6;
-  border-width: 0.2rem;
-  background-color: #f0d65b;
 }
 
 .profile-available-badges {
   grid-row: span 1;
   grid-column: span 1;
-  border-radius: 2rem;
-  border-style: solid;
-  border-color: #4286c6;
-  border-width: 0.2rem;
-  background-color: #f0d65b;
 }
 
+// Todo Should move to separate component
 .profile-badge-display-slot {
   grid-row: span 3;
   grid-column: span 1;
@@ -79,7 +65,7 @@
   border-style: solid;
   border-color: #0275f9;
   border-width: 0.2rem;
-  background-color: #4286c6;
+  background-color: #f0d65b;
 }
 
 .profile-badge-display-change-button {
@@ -89,6 +75,6 @@
   border-style: solid;
   border-color: #0275f9;
   border-width: 0.2rem;
-  background-color: #4286c6;
+  background-color: #f0d65b;
   text-align: center;
 }

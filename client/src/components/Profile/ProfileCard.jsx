@@ -7,7 +7,7 @@ const ProfileCard = ({
 }) => {
   return (
     <>
-      <div className={"profile-card"}>
+      <div className={"profile-page-section profile-card"}>
         <img
           className={"profile-card-image"}
           src={imageUrl}

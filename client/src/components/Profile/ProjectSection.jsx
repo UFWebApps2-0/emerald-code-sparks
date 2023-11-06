@@ -2,7 +2,7 @@ import "./ProjectSection.less";
 
 const ProjectSection = () => {
   return (
-    <div className={"profile-project-display"}>
+    <div className={"profile-project-display profile-page-section"}>
       <h2>Projects</h2>
       {Array(5).fill("1").map(name => (
         <div className="profile-project-display-project">

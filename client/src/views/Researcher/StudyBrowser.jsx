@@ -1,7 +1,4 @@
-import NavBar from '../../components/NavBar/NavBar';
 import RouteButton from '../../components/RouteButton/RouteButton';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Report.less';
 
 import React, { useEffect, useState } from 'react';
@@ -64,23 +61,6 @@ export default function StudyBrowser(props) {
     };
     if (paramObj['_sort']) fetchData();
   }, [paramObj]);
-  return (
-    <div className='container nav-padding'>
-      <NavBar />
-      <div id='main-header'>Welcome Researcher!</div>
-      <h1 id='report-subheader'>Reports</h1>
-      <div id='button-container'>
-      </div>
-    </div>
-  );
-}
-
-
-
-
-
-
-const ActivityLevelReport = () => {
   const [sessions, setSessions] = useState([]);
   const [sessionCount, setSessionCount] = useState(0);
   const navigate = useNavigate();
@@ -304,6 +284,3 @@ const ActivityLevelReport = () => {
     </div>
   );
 };
-
-export default ActivityLevelReport;
-

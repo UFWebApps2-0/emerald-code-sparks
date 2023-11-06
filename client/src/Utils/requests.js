@@ -682,14 +682,14 @@ export const createBlock = async (name, description, blocks_category, image_url)
   makeRequest({
     method: POST, 
     path: `${server}/blocks`, 
-    auth: true, 
     data: {
-      name, 
-      description, 
-      blocks_category, 
-      image_url, 
-      created_by, 
-      updated_by,
+      name: name, 
+      description: description, 
+      blocks_category: blocks_category, 
+      image_url: image_url, 
+      created_by: created_by, 
+      updated_by: updated_by,
     }, 
+    auth: true,
     error: 'Unable to create new block',
   })}

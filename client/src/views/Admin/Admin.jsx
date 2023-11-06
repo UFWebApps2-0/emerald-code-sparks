@@ -18,7 +18,7 @@ export default function Admin() {
 
     return (
         <div className='container nav-padding'>
-            <NavBar />  {/*edit admin nav bar in NavBar.jsx for admin specific needs. it's currently showing the teacher one */}
+            <NavBar />
             <div id='main-header'>Welcome, [insertname]</div> {/* replace 'admin' with role.name */}
             {/*create org button*/}
                 {/*gonna require some kind of connection to org file*/}
@@ -30,7 +30,7 @@ export default function Admin() {
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}
 
-            {/*create lesson button. this may belong in an org management page*/}
+            {/*create lesson button. this will belong in an org management page*/}
                 {/*I think a lesson creator exists? we just have to link to it and allow access*/}
             {/*create classroom button*/}
             {/* */}

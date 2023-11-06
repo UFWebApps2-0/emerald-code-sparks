@@ -1,21 +1,18 @@
 import { Button, Form, Input, message, Modal } from "antd"
 import React, { useState } from "react"
-import { createUnit } from "../../../Utils/requests"
+import { createVideo } from "../../../Utils/requests"
 import "./VideoCreator.less"
 
 export default function VideoCreator({ gradeList }) {
   const [visible, setVisible] = useState(false)
-  const [grade, setGrade] = useState("")
   const [name, setName] = useState("")
-  const [number, setNumber] = useState("")
+  const [url, setUrl] = useState("")
   const [description, setDescription] = useState("")
-  const [standard, setStandard] = useState("")
 
   const showModal = () => {
-    setNumber("")
     setName("")
+    setUrl("")
     setDescription("")
-    setStandard("")
     setVisible(true)
   }
 
@@ -24,18 +21,18 @@ export default function VideoCreator({ gradeList }) {
   }
 
   const handleSubmit = async e => {
-    const res = await createUnit(number, name, standard, description, grade)
+    const res = await createVideo(url, name, description)
     if (res.err) {
-      message.error("Fail to create a new unit")
+      message.error("Fail to create a new video")
     } else {
-      message.success("Successfully created unit")
+      message.success("Successfully created video")
       setVisible(false)
     }
   }
 
   return (
     <div>
-      <button onClick={showModal} id="add-unit-btn">
+      <button onClick={showModal} id="add-video-btn">
         + Add Video
       </button>
       <Modal
@@ -46,7 +43,7 @@ export default function VideoCreator({ gradeList }) {
         footer={null}
       >
         <Form
-          id="add-units"
+          id="add-videos"
           labelCol={{
             span: 6,
           }}
@@ -57,40 +54,20 @@ export default function VideoCreator({ gradeList }) {
           layout="horizontal"
           size="default"
         >
-          <Form.Item id="form-label" label="Grade">
-            <select
-              id="grade-dropdown"
-              name="grade"
-              defaultValue={grade}
-              required
-              onChange={e => setGrade(e.target.value)}
-            >
-              <option key={0} value={grade} disabled id="disabled-option">
-                Grade
-              </option>
-              {gradeList.map(grade_ => (
-                <option key={grade_.id} value={grade_.id}>
-                  {grade_.name}
-                </option>
-              ))}
-            </select>
-          </Form.Item>
-          <Form.Item id="form-label" label="Unit Name">
+          <Form.Item id="form-label" label="Video Name">
             <Input
               onChange={e => setName(e.target.value)}
               value={name}
-              placeholder="Enter unit name"
+              placeholder="Enter video name"
               required
             />
           </Form.Item>
-          <Form.Item id="form-label" label="Unit Number">
+          <Form.Item id="form-label" label="Video Url">
             <Input
-              onChange={e => setNumber(e.target.value)}
-              type="number"
-              value={number}
-              placeholder="Enter unit number"
-              min={1}
-              max={15}
+              onChange={e => setUrl(e.target.value)}
+              type="url"
+              value={url}
+              placeholder="Enter video url"
               required
             />
           </Form.Item>
@@ -99,16 +76,7 @@ export default function VideoCreator({ gradeList }) {
               rows={3}
               onChange={e => setDescription(e.target.value)}
               value={description}
-              placeholder="Enter unit description"
-              required
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Standards">
-            <Input
-              onChange={e => setStandard(e.target.value)}
-              value={standard}
-              placeholder="Enter unit Standards"
-              required
+              placeholder="Enter video description"
             />
           </Form.Item>
           <Form.Item

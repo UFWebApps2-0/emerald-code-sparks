@@ -1,10 +1,10 @@
 const { Client } = require('pg');
 const fetch = require('node-fetch'); 
-let counter = 0;
+let counter = 0; //counter for ID's of items pushed to gallery
 
 class galleryObject {
     //view count, like count, thumbnail, user name, date posted, title, discussion board object
-    constructor(title, user_name, date_posted, like_count, view_count, discussion_board, type, visibility) { //thumbnail will be added once we figure out automatic thumbails
+    constructor(title, user_name, like_count, view_count, discussion_board, type, visibility) { //thumbnail will be added once we figure out automatic thumbails
         this.title = title;
         this.user_name = user_name;
         this.date_posted = date_posted;
@@ -21,10 +21,12 @@ class galleryObject {
     }
 
     async init() {
+        const current_date = new Date();
         const data = {
             title: this.title,
             user_name: this.user_name,
-            date_posted: this.date_posted,
+            month_posted: current_date.getMonth(),
+            day_posted: current_date.getDate(), //function that takes current date
             like_count: this.like_count,
             view_count: this.view_count,
             discussion_board: this.discussion_board,

@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/createGalleryItem", 
+      "handler": "gallery.createGalleryItem",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

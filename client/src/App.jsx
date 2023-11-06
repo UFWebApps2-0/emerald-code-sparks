@@ -13,7 +13,7 @@ import Replay from './views/Replay/Replay';
 import ActivityLevelReport from './views/Researcher/ActivityLevelReport';
 import ActivityLevelReportView from './views/Researcher/ActivityLevelReportView';
 import GroupReport from './views/Researcher/GroupReport';
-import Report from './views/Researcher/Report';
+import Report from './views/Researcher/ReportBrowser';
 import Student from './views/Student/Student';
 import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
@@ -26,7 +26,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/teacherlogin' element={<TeacherLogin />} />
+        <Route path='/teacherlogin' element={<TeacherLogin/>} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/login' element={<StudentLogin />} />

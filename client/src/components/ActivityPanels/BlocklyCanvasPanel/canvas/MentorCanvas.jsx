@@ -15,7 +15,7 @@ import {
   handleCloseConnection,
   handleOpenConnection,
 } from '../../Utils/consoleHelpers';
-import { getAuthorizedWorkspace } from '../../../../Utils/requests';
+import { getAuthorizedWorkspace, createBlock } from '../../../../Utils/requests';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 
@@ -47,6 +47,30 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     });
   };
 
+  Blockly.Blocks['custom_block'] = {
+    init: function() {
+      this.appendValueInput("something 1")
+          .setCheck("Boolean")
+          .appendField("something 1");
+      this.appendStatementInput("something 2")
+          .setCheck("String")
+          .appendField("something 2");
+      this.setColour(230);
+   this.setTooltip("hello");
+   this.setHelpUrl("asjkdba");
+    }
+  };
+
+  Blockly.Arduino['custom_block'] = function(block) {
+    var value_something_1 = Blockly.Arduino.valueToCode(block, 'something 1', Blockly.Arduino.ORDER_ATOMIC);
+    var statements_something_2 = Blockly.Arduino.statementToCode(block, 'something 2');
+    // TODO: Assemble Arduino into code variable.
+    var code = '...;\n';
+    return code;
+  };
+
+  //const resp = createBlock('custom_block', 'null', '14', 'null');
+
   useEffect(() => {
     // once the activity state is set, set the workspace and save
     const setUp = async () => {
@@ -55,10 +79,10 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
       activityRef.current = activity;
       if (!workspaceRef.current && activity && Object.keys(activity).length !== 0) {
         setWorkspace();
-        // if (activity.template) {
-        //   let xml = window.Blockly.Xml.textToDom(activity.template);
-        //   window.Blockly.Xml.domToWorkspace(xml, workspaceRef.current);
-        // }
+        if (activity.template) {
+          let xml = window.Blockly.Xml.textToDom(activity.template);
+          window.Blockly.Xml.domToWorkspace(xml, workspaceRef.current);
+        }
         let xml = isMentorActivity
         ? window.Blockly.Xml.textToDom(activity.activity_template)
         : window.Blockly.Xml.textToDom(activity.template);
@@ -454,24 +478,24 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
         {
           // Maps out block categories
           activity &&
-            activity.toolbox &&
-            activity.toolbox.map(([category, blocks]) => (
-              <category name={category} is='Blockly category' key={category}>
-                {
-                  // maps out blocks in category
-                  // eslint-disable-next-line
-                  blocks.map((block) => {
-                    return (
-                      <block
-                        type={block.name}
-                        is='Blockly block'
-                        key={block.name}
-                      />
-                    );
-                  })
-                }
-              </category>
-            ))
+          activity.toolbox &&
+          activity.toolbox.map(([category, blocks]) => (
+            <category name={category} is='Blockly category' key={category}>
+              {
+                // maps out blocks in category
+                // eslint-disable-next-line
+                blocks.map((block) => {
+                  return (
+                    <block
+                      type={block.name}
+                      is='Blockly block'
+                      key={block.name}
+                    />
+                  );
+                })
+              }
+            </category>
+          ))
         }
       </xml>
 

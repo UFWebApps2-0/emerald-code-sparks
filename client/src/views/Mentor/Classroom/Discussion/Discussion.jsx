@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Post from './Post';
 import NewPost from './NewPost';
 import MentorSubHeader from '../../../../components/MentorSubHeader/MentorSubHeader';
 
-const Discussion = () => {
+import { getClassroom, getDiscussion } from '../../../../Utils/requests';
+import { message, Tag } from 'antd';
+
+const Discussion = ({ classroomId }) => {
+  const [classroom, setClassroom] = useState({});
+  const [discussion, setDiscussion] = useState({});
   const [posts, setPosts] = useState([]);
 
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getClassroom(classroomId);
+      if (res.data) {
+        const classroom = res.data;
+        setClassroom(classroom);
+      } else {
+        message.error(res.err);
+      }
+      const dis = await getDiscussion(classroom.discussion.id);
+      if (dis.data) {
+        const discussion = dis.data;
+        setDiscussion(discussion);
+        console.log(discussion);
+      } else {
+        message.error(dis.err);
+      }
+    };
+    fetchData();
+  }, [classroomId]);
 
   return (
     <>

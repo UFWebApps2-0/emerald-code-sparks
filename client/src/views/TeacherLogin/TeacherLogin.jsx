@@ -1,9 +1,40 @@
 import { message } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import './TeacherLogin.less';
+import {GoogleLogin} from 'react-google-login';
+import {gapi} from 'gapi-script';
+
+
+const CLIENT_ID = "296846904571-jiau68kb1m5ovbjodmho8ei6fe69qbkv.apps.googleusercontent.com";
+const API_KEY = "AIzaSyBH4GlSHNm7zUcrcINb-uKI82l36vbD4jA";
+const SCOPES = "https://www.googleapis.com/auth/drive";
+
+const onSucc = (res) => {
+  console.log(res);
+};
+
+const onFail = (res) => {
+  console.log(res);
+};
+
+function Login() {
+  return (
+      <div id="signInButton">
+        <GoogleLogin
+          className="fuck"
+          clientID={CLIENT_ID}
+          buttonText="Sign-up with Google"
+          onSuccess={onSucc}
+          onFailure={onFail}
+          cookiePolicy={'single_host_origin'}
+          isSignedIn={true}
+        />
+      </div>
+  )
+}
 
 const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -18,6 +49,18 @@ const useFormInput = (initialValue) => {
 };
 
 export default function TeacherLogin() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        scope: SCOPES
+      })
+    };
+
+    gapi.load('client:auth2', start);
+  })
+
   const email = useFormInput('');
   const password = useFormInput('');
   const [loading, setLoading] = useState(false);
@@ -78,6 +121,7 @@ export default function TeacherLogin() {
             disabled={loading}
           />
         </form>
+        <Login/>
       </div>
     </div>
   );

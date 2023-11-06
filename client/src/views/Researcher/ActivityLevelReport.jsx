@@ -286,6 +286,18 @@ const ActivityLevelReport = () => {
             >
               <Input />
             </Form.Item>
+            <Form.Item
+              name="studyID"
+              label="Study ID"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter the study ID',
+                },
+              ]}
+              >
+                <Input />
+              </Form.Item>
           </Form>
         </Modal>
 

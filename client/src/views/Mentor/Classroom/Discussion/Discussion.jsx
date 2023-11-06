@@ -9,6 +9,7 @@ import {
   getDiscussion,
   createPost,
   addDiscussionPost,
+  createDiscussion,
 } from '../../../../Utils/requests';
 import { message, Tag } from 'antd';
 
@@ -36,6 +37,9 @@ const Discussion = ({ classroomId }) => {
       if (res.data) {
         const classroom = res.data;
         setClassroom(classroom);
+        if (!classroom.discussion) {
+          createDiscussion(classroomId);
+        }
         const dis = await getDiscussion(classroom.discussion.id);
         if (dis.data) {
           const discussionData = dis.data;

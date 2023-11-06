@@ -729,3 +729,14 @@ export const addReply = async (id, replies, reply) =>
     auth: true,
     error: 'Unable to add reply',
   });
+
+export const createDiscussion = async (classroomId) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/discussions`,
+    data: {
+      classroom: classroomId,
+    },
+    auth: true,
+    error: 'Unable to add discussion',
+  });

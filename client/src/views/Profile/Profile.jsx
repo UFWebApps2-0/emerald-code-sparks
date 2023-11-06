@@ -74,15 +74,13 @@ const Profile = () => {
 
         </div>
       </div>
-      <ProjectSection/>
+      <ProjectSection />
       <div className='profile-available-badges'>
         <h2>Available Badges</h2>
         <div>
           <ProgressBar progress={20} />
           <ProgressBar progress={50} />
           <ProgressBar progress={90} />
-          
-
         </div>
         <div className='badge-table'>
           <BadgeTable />

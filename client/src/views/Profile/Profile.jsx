@@ -69,8 +69,17 @@ const Profile = () => {
       </div>
       <div className='profile-badge-display'>
         <h2>Badge Display</h2>
-        <div>
+        <div className='profile-display-container nav-padding'>
 
+        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot'></h2>
+        
+        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button'>Change</h3>
         </div>
       </div>
       <ProjectSection/>

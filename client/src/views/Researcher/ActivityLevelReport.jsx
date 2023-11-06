@@ -222,6 +222,10 @@ const ActivityLevelReport = () => {
         >
           Return to Dashboard
         </button>
+
+        <Button className='activity-level-return' onClick={() => navigate('/report')}>
+          Add Researcher 
+        </Button>
       </div>
       <button id='show-filter-btn' onClick={() => setShowFilter(!showFilter)}>
         {showFilter ? (

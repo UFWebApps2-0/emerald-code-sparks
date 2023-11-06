@@ -44,7 +44,7 @@ const Profile = () => {
     <div className='profile-container nav-padding'>
       <NavBar />
       <ProfileCard
-        imageUrl={"https://media.discordapp.net/attachments/1163871360972501144/1168945792451629216/image.png"}
+        imageUrl={"https://media.discordapp.net/attachments/517010400860962831/1171160597463838840/image.png"}
         name={"John Smith"}
         role={"Student"}
       />

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import './TeacherLogin.less';
+//import LoginWithGoogle from '../GoogleLogin/GoogleLoginComponent';
+
 
 const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -45,6 +47,25 @@ export default function TeacherLogin() {
       });
   };
 
+  const placeholderLogin = () =>
+  {
+    setLoading(true);
+    let placeholderBody = { identifier: 'teacher', password: 'easypassword' };
+
+    postUser(placeholderBody)
+      .then((response) => {
+        setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+        setLoading(false);
+        navigate('/dashboard');
+        //navigate('/ccdashboard');
+        //navigate('/report');
+      })
+      .catch((error) => {
+        setLoading(false);
+        message.error('Google Login Failed.');
+      });
+  };
+
   return (
     <div className='container nav-padding'>
       <NavBar />
@@ -75,6 +96,13 @@ export default function TeacherLogin() {
             type='button'
             value={loading ? 'Loading...' : 'Login'}
             onClick={handleLogin}
+            disabled={loading}
+          />
+          <p/>
+          <input
+            type='button'
+            value={loading ? 'Loading...' : 'Login with Google'}
+            onClick={placeholderLogin}
             disabled={loading}
           />
         </form>

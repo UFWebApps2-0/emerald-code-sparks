@@ -71,15 +71,15 @@ const Profile = () => {
         <h2>Badge Display</h2>
         <div className='profile-badge-display-container nav-padding'>
 
-        <h2 class='profile-badge-display-slot'></h2>
-        <h2 class='profile-badge-display-slot'></h2>
-        <h2 class='profile-badge-display-slot'></h2>
-        <h2 class='profile-badge-display-slot'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
         
-        <h3 class='profile-badge-display-change-button'>Change</h3>
-        <h3 class='profile-badge-display-change-button'>Change</h3>
-        <h3 class='profile-badge-display-change-button'>Change</h3>
-        <h3 class='profile-badge-display-change-button'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
         </div>
       </div>
       <ProjectSection/>

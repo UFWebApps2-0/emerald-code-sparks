@@ -42,14 +42,14 @@ const Profile = () => {
   };
 
   return (
-    <div className='profile-container nav-padding'>
+    <div className='profile-page-grid nav-padding'>
       <NavBar />
       <ProfileCard
-        imageUrl={"https://media.discordapp.net/attachments/1163871360972501144/1168945792451629216/image.png"}
+        imageUrl={"https://media.discordapp.net/attachments/517010400860962831/1171160597463838840/image.png"}
         name={"John Smith"}
         role={"Student"}
       />
-      <div className="profile-biography-section">
+      <div className="profile-biography-section profile-page-section">
         <h2>User Biography</h2>
         {isEditingBio ? (
           <div>
@@ -68,14 +68,23 @@ const Profile = () => {
           </div>
         )}
       </div>
-      <div className='profile-badge-display'>
+      <div className='profile-badge-display profile-page-section'>
         <h2>Badge Display</h2>
-        <div>
+        <div className='profile-badge-display-container nav-padding'>
 
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
+        
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
         </div>
       </div>
-      <ProjectSection />
-      <div className='profile-available-badges'>
+      <ProjectSection/>
+      <div className='profile-available-badges profile-page-section'>
         <h2>Available Badges</h2>
         <div>
           <ProgressBar progress={20} />

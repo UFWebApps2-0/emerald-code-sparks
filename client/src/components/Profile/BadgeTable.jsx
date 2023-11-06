@@ -1,5 +1,5 @@
 import React from 'react';
-import './gridTable.less';
+import './BadgeTable.less';
 
 const BadgeTable = () => {
   const numRows = 4;

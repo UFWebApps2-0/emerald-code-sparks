@@ -41,13 +41,17 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
   const activityRef = useRef(null);
   const navigate = useNavigate();
 
+  // for create block popup
+  const [blockPopUp, setBlockPopUp] = useState(false);
+
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
       toolbox: document.getElementById('toolbox'),
     });
   };
 
-  Blockly.Blocks['custom_block'] = {
+  // tester block -- include in temp category in xml
+  Blockly.Blocks['special_block_tester'] = {
     init: function() {
       this.appendValueInput("something 1")
           .setCheck("Boolean")
@@ -61,7 +65,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     }
   };
 
-  Blockly.Arduino['custom_block'] = function(block) {
+  Blockly.Arduino['special_block_tester'] = function(block) {
     var value_something_1 = Blockly.Arduino.valueToCode(block, 'something 1', Blockly.Arduino.ORDER_ATOMIC);
     var statements_something_2 = Blockly.Arduino.statementToCode(block, 'something 2');
     // TODO: Assemble Arduino into code variable.
@@ -126,6 +130,15 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
       }
     }
   };
+
+  const openBlockMenu = () => {
+    console.log('clicked');
+    setBlockPopUp(true);
+  }
+
+  const closeBlockMenu = () => {
+    setBlockPopUp(false);
+  }
 
   const handleSave = async () => {
     // if we already have the workspace in the db, just update it.
@@ -320,6 +333,14 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
   return (
     <div id='horizontal-container' className='flex flex-column'>
       <div className='flex flex-row'>
+        {blockPopUp ? 
+          <div>
+            <h2>Popup Menu</h2>
+            <input type="text" placeholder="Text Field 1"></input>
+            <input type="text" placeholder="Text Field 2"></input>
+            <button onClick={closeBlockMenu}>Close</button>
+          </div>
+        : null}
         <div
           id='bottom-container'
           className='flex flex-column vertical-container overflow-visible'
@@ -351,6 +372,14 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
                   </Col>
                   <Col flex='auto' />
                   <Row id='right-icon-container'>
+                    {!isSandbox ? (
+                      <Col 
+                        className='flex flex-row'
+                        id='create-block-button'
+                      >
+                        <button onClick={openBlockMenu}>Create Block</button>
+                      </Col>
+                    ) : null}
                     {!isSandbox ? (
                       <Col
                         className='flex flex-row'
@@ -497,6 +526,10 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
             </category>
           ))
         }
+        {/* this category only exists locally for testing purposes */}
+        <category name='Test'> 
+          <block type='special_block_tester'></block>
+        </category>
       </xml>
 
       {compileError && (
@@ -506,7 +539,8 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
           closable
           onClose={(e) => setCompileError('')}
         ></Alert>
-      )}
+      )
+    }
     </div>
   );
 }

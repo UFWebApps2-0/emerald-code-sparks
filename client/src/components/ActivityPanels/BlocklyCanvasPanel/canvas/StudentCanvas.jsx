@@ -8,6 +8,8 @@ import ConsoleModal from '../modals/ConsoleModal';
 import PlotterModal from '../modals/PlotterModal';
 import DisplayDiagramModal from '../modals/DisplayDiagramModal'
 import VersionHistoryModal from '../modals/VersionHistoryModal';
+import RubricModal from '../modals/RubricModal';
+
 import {
   connectToPort,
   handleCloseConnection,
@@ -24,6 +26,7 @@ export default function StudentCanvas({ activity }) {
   const [hoverUndo, setHoverUndo] = useState(false);
   const [hoverRedo, setHoverRedo] = useState(false);
   const [hoverCompile, setHoverCompile] = useState(false);
+  const [hoverCompile2, setHoverCompile2] = useState(false);
   const [hoverImage, setHoverImage] = useState(false);
   const [hoverConsole, setHoverConsole] = useState(false);
   const [showConsole, setShowConsole] = useState(false);
@@ -87,7 +90,7 @@ export default function StudentCanvas({ activity }) {
     let blockType = '';
     if (blockId !== '') {
       let type = window.Blockly.mainWorkspace.getBlockById(blockId)?.type;
-      type ? blockType = type : blockType = ''; 
+      type ? blockType = type : blockType = '';
     }
 
     let xml = window.Blockly.Xml.workspaceToDom(workspaceRef.current);
@@ -128,7 +131,7 @@ export default function StudentCanvas({ activity }) {
       event.element === 'field' &&
       replayRef.current.length > 1 &&
       replayRef.current[replayRef.current.length - 1].action ===
-        'change field' &&
+      'change field' &&
       replayRef.current[replayRef.current.length - 1].blockId === event.blockId
     ) {
       replayRef.current.pop();
@@ -299,6 +302,7 @@ export default function StudentCanvas({ activity }) {
     }
   };
   const handleCompile = async () => {
+    window.alert("Submitted " + Date());
     if (showConsole || showPlotter) {
       message.warning(
         'Close Serial Monitor and Serial Plotter before uploading your code'
@@ -472,9 +476,19 @@ export default function StudentCanvas({ activity }) {
                           Upload to Arduino
                         </div>
                       )}
-                    <DisplayDiagramModal
-                      image={activity.images}
-                    />
+
+                      <RubricModal
+                        image={activity.images}
+                        setHoverCompile2={setHoverCompile2} />
+                      {hoverCompile2 && (
+                        <div className='popup ModalCompile'>
+                          Rubric
+                        </div>
+                      )}
+
+                      <DisplayDiagramModal
+                        image={activity.images}
+                      />
                       <i
                         onClick={() => handleConsole()}
                         className='fas fa-terminal hvr-info'
@@ -511,7 +525,7 @@ export default function StudentCanvas({ activity }) {
           plotData={plotData}
           setPlotData={setPlotData}
           plotId={plotId}
-        />          
+        />
       </div>
 
       {/* This xml is for the blocks' menu we will provide. Here are examples on how to include categories and subcategories */}
@@ -519,24 +533,24 @@ export default function StudentCanvas({ activity }) {
         {
           // Maps out block categories
           activity &&
-            activity.toolbox &&
-            activity.toolbox.map(([category, blocks]) => (
-              <category name={category} is='Blockly category' key={category}>
-                {
-                  // maps out blocks in category
-                  // eslint-disable-next-line
-                  blocks.map((block) => {
-                    return (
-                      <block
-                        type={block.name}
-                        is='Blockly block'
-                        key={block.name}
-                      />
-                    );
-                  })
-                }
-              </category>
-            ))
+          activity.toolbox &&
+          activity.toolbox.map(([category, blocks]) => (
+            <category name={category} is='Blockly category' key={category}>
+              {
+                // maps out blocks in category
+                // eslint-disable-next-line
+                blocks.map((block) => {
+                  return (
+                    <block
+                      type={block.name}
+                      is='Blockly block'
+                      key={block.name}
+                    />
+                  );
+                })
+              }
+            </category>
+          ))
         }
       </xml>
 

@@ -10,6 +10,7 @@ import {
 } from "../../../../Utils/requests"
 import "../../../ContentCreator/ActivityEditor/ActivityEditor.less"
 import ActivityComponentTags from "../../../ContentCreator/ActivityEditor/components/ActivityComponentTags"
+import RubricModal from "../../../../components/ActivityPanels/BlocklyCanvasPanel/modals/RubricModal"
 
 const SCIENCE = 1
 const MAKING = 2
@@ -34,6 +35,10 @@ const MentorActivityDetailModal = ({
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const [linkError, setLinkError] = useState(false)
   const [submitButton, setSubmitButton] = useState(0)
+  const [CompilePoints, setCompilePoints] = useState("")
+  const [ReadabilityPoints, setReadabilityPoints] = useState("")
+  const [TimePoints, setTimePoints] = useState("")
+  const [TotalPoints, setTotalPoints] = useState("")
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -50,6 +55,11 @@ const MentorActivityDetailModal = ({
       setImages(response.data.images)
       setLink(response.data.link)
       setLinkError(false)
+      setCompilePoints(response.data.CompilePoints)
+      setReadabilityPoints(response.data.ReadabilityPoints)
+      setTimePoints(response.data.TimePoints)
+      setTotalPoints(response.data.TotalPoints)
+
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
         .map(element => {
@@ -120,6 +130,10 @@ const MentorActivityDetailModal = ({
       StandardS,
       images,
       link,
+      CompilePoints,
+      TimePoints,
+      ReadabilityPoints,
+      TotalPoints,
       scienceComponents,
       makingComponents,
       computationComponents
@@ -147,67 +161,67 @@ const MentorActivityDetailModal = ({
   const showModal = () => {
     setVisible(true)
     //setOpen(true)
-};
+  };
   return (
     <div id="mentoredit">
-    <Button id="view-activity-button"
-    onClick={showModal} style={{width: '40px',marginRight: "auto"}} >
-<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
->
-<g
+      <Button id="view-activity-button"
+        onClick={showModal} style={{ width: '40px', marginRight: "auto" }} >
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
+        >
+          <g
             id="link"
             stroke="none"
             fill="none"
           >
-            </g>
-            <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+          </g>
+          <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" /></svg>
       </Button>
-    <Modal
-      title={`${learningStandard.name} - Activity ${selectActivity.number} - ID ${selectActivity.id}`}
-      visible={visible}
-      onCancel={() => setVisible(false)}
-      footer={null}
-      width="45vw"
-    >
-      <Form
-        id="activity-detail-editor"
-        layout="horizontal"
-        size="default"
-        labelCol={{
-          span: 6,
-        }}
-        wrapperCol={{
-          span: 14,
-        }}
-        onFinish={handleSave}
+      <Modal
+        title={`${learningStandard.name} - Activity ${selectActivity.number} - ID ${selectActivity.id}`}
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        footer={null}
+        width="45vw"
       >
-        <Form.Item id="form-label" label="Description">
-          <Input.TextArea
-            onChange={e => setDescription(e.target.value)}
-            value={description}
-            required
-            placeholder="Enter description"
-          ></Input.TextArea>
-        </Form.Item>
+        <Form
+          id="activity-detail-editor"
+          layout="horizontal"
+          size="default"
+          labelCol={{
+            span: 6,
+          }}
+          wrapperCol={{
+            span: 14,
+          }}
+          onFinish={handleSave}
+        >
+          <Form.Item id="form-label" label="Description">
+            <Input.TextArea
+              onChange={e => setDescription(e.target.value)}
+              value={description}
+              required
+              placeholder="Enter description"
+            ></Input.TextArea>
+          </Form.Item>
 
-        <Form.Item id="form-label" label="StandardS">
-          <Input
-            onChange={e => setStandardS(e.target.value)}
-            value={StandardS}
-            className="input"
-            required
-            placeholder="Enter standards"
-          ></Input>
-        </Form.Item>
-        <Form.Item id="form-label" label="Table Chart">
-          <Input.TextArea
-            onChange={e => setImages(e.target.value)}
-            value={images}
-            className="input"
-            placeholder="Enter image URL"
-          ></Input.TextArea>
-        </Form.Item>
-        {/* <Form.Item id="form-label" label="Student Template">
+          <Form.Item id="form-label" label="StandardS">
+            <Input
+              onChange={e => setStandardS(e.target.value)}
+              value={StandardS}
+              className="input"
+              required
+              placeholder="Enter standards"
+            ></Input>
+          </Form.Item>
+          <Form.Item id="form-label" label="Table Chart">
+            <Input.TextArea
+              onChange={e => setImages(e.target.value)}
+              value={images}
+              className="input"
+              placeholder="Enter image URL"
+            ></Input.TextArea>
+          </Form.Item>
+          {/* <Form.Item id="form-label" label="Student Template">
           <Input.TextArea
             onChange={e => setTemplate(e.target.value)}
             value={template}
@@ -223,79 +237,120 @@ const MentorActivityDetailModal = ({
             placeholder="Enter mentor code template"
           ></Input.TextArea>
         </Form.Item> */}
-        <h3 id="subtitle">Lesson Materials</h3>
-        <Form.Item id="form-label" label="Classroom Materials">
-          <ActivityComponentTags
-            components={scienceComponents}
-            setComponents={setScienceComponents}
-            colorOffset={1}
-          />
-        </Form.Item>
-        <Form.Item id="form-label" label="Student Materials">
-          <ActivityComponentTags
-            components={makingComponents}
-            setComponents={setMakingComponents}
-            colorOffset={4}
-          />
-        </Form.Item>
-        <Form.Item id="form-label" label="Arduino Components">
-          <ActivityComponentTags
-            components={computationComponents}
-            setComponents={setComputationComponents}
-            colorOffset={7}
-          />
-        </Form.Item>
-        <h3 id="subtitle">Additional Information</h3>
-        <Form.Item
-          id="form-label"
-          label="Link to Additional Resources (Optional)"
-        >
-          <Input
-            onChange={e => {
-              setLink(e.target.value)
-              setLinkError(false)
-            }}
-            className="input"
-            value={link}
-            style={linkError ? { backgroundColor: "#FFCCCC" } : {}}
-            placeholder="Enter a link"
-          ></Input>
-        </Form.Item>
-        <Form.Item
-          id="form-label"
-          wrapperCol={{
-            offset: 6,
-            span: 30,
-          }}
-        >
-          <button id="save--set-activity-btn" onClick={() => setSubmitButton(1)}>
-            Edit Student Template
-          </button>
-          <button id="save--set-demo-btn" onClick={() => setSubmitButton(2)}>
-            Edit Demo Template
-            <br />
-            
-          </button>
-        </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-          style={{ marginBottom: "0px" }}
-        >
-          <Button
-            onClick={() => setSubmitButton(0)}
-            type="primary"
-            htmlType="submit"
-            size="large"
-            className="content-creator-button"
+          <h3 id="subtitle">Lesson Materials</h3>
+          <Form.Item id="form-label" label="Classroom Materials">
+            <ActivityComponentTags
+              components={scienceComponents}
+              setComponents={setScienceComponents}
+              colorOffset={1}
+            />
+          </Form.Item>
+          <Form.Item id="form-label" label="Student Materials">
+            <ActivityComponentTags
+              components={makingComponents}
+              setComponents={setMakingComponents}
+              colorOffset={4}
+            />
+          </Form.Item>
+          <Form.Item id="form-label" label="Arduino Components">
+            <ActivityComponentTags
+              components={computationComponents}
+              setComponents={setComputationComponents}
+              colorOffset={7}
+            />
+          </Form.Item>
+          <Form.Item>
+            <h3 id="subtitle">Rubric</h3>
+          </Form.Item>
+          <Form.Item id="form-label" label="Compile">
+            <Input.TextArea
+              onChange={e => setCompilePoints(e.target.value)}
+              value={CompilePoints}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Submission Time">
+            <Input.TextArea
+              onChange={e => setTimePoints(e.target.value)}
+              value={TimePoints}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Readability">
+            <Input.TextArea
+              onChange={e => setReadabilityPoints(e.target.value)}
+              value={ReadabilityPoints}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Total">
+            <Input.TextArea
+              onChange={e => setTotalPoints(e.target.value)}
+              value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0)).toString()}
+
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+
+          <h3 id="subtitle">Additional Information</h3>
+          <Form.Item
+            id="form-label"
+            label="Link to Additional Resources (Optional)"
           >
-            Save
-          </Button>
-        </Form.Item>
-      </Form>
-    </Modal>
+            <Input
+              onChange={e => {
+                setLink(e.target.value)
+                setLinkError(false)
+              }}
+              className="input"
+              value={link}
+              style={linkError ? { backgroundColor: "#FFCCCC" } : {}}
+              placeholder="Enter a link"
+            ></Input>
+          </Form.Item>
+          <Form.Item
+            id="form-label"
+            wrapperCol={{
+              offset: 6,
+              span: 30,
+            }}
+          >
+            <button id="save--set-activity-btn" onClick={() => setSubmitButton(1)}>
+              Edit Student Template
+            </button>
+            <button id="save--set-demo-btn" onClick={() => setSubmitButton(2)}>
+              Edit Demo Template
+              <br />
+
+            </button>
+          </Form.Item>
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+            style={{ marginBottom: "0px" }}
+          >
+            <Button
+              onClick={() => setSubmitButton(0)}
+              type="primary"
+              htmlType="submit"
+              size="large"
+              className="content-creator-button"
+            >
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   )
 }

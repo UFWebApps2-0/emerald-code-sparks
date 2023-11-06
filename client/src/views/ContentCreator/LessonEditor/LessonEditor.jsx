@@ -24,6 +24,11 @@ export default function LessonEditor({
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
 
+  const [CompilePoints, setCompilePoints] = useState("")
+  const [TimePoints, setTimePoints] = useState("")
+  const [ReadabilityPoints, setReadabilityPoints] = useState("")
+  const [TotalPoints, setTotalPoints] = useState("")
+
   const showModal = async () => {
     setVisible(true)
     const res = await getLessonModule(learningStandard.id)
@@ -32,6 +37,10 @@ export default function LessonEditor({
     setStandards(res.data.standards)
     setLink(res.data.link)
     setLinkError(false)
+    setCompilePoints(response.data.CompilePoints)
+    setReadabilityPoints(response.data.CompilePoints)
+    setTimePoints(response.data.TimePoints)
+    setTotalPoints(response.data.TotalPoints)
   }
 
   useEffect(() => {
@@ -56,7 +65,11 @@ export default function LessonEditor({
       name,
       description,
       standards,
-      link
+      link,
+      CompilePoints,
+      TimePoints,
+      TotalPoints,
+      ReadabilityPoints
     )
     if (response.err) {
       message.error("Fail to update lesson")
@@ -127,6 +140,44 @@ export default function LessonEditor({
               placeholder="Enter lesson standards"
             />
           </Form.Item>
+
+          <Form.Item id="form-label" label="Compile">
+            <Input.TextArea
+              onChange={e => setCompilePoints(e.target.value)}
+              required
+              value={CompilePoints}
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Submission Time">
+            <Input.TextArea
+              onChange={e => setTimePoints(e.target.value)}
+              required
+              value={TimePoints}
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Readability">
+            <Input.TextArea
+              onChange={e => setReadabilityPoints(e.target.value)}
+              required
+              value={ReadabilityPoints}
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Total">
+            <Input.TextArea
+              onChange={e => setTotalPoints(e.target.value)}
+              value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0))}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+
           <Form.Item label="Link to Additional Resources (Optional)">
             <Input
               onChange={e => {

@@ -140,6 +140,10 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     setBlockPopUp(false);
   }
 
+  const handleBlockCreation = async => {
+    console.log('form');
+  }
+
   const handleSave = async () => {
     // if we already have the workspace in the db, just update it.
     if (activity && activity.id) {
@@ -335,10 +339,32 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
       <div className='flex flex-row'>
         {blockPopUp ? 
           <div>
-            <h2>Popup Menu</h2>
-            <input type="text" placeholder="Text Field 1"></input>
-            <input type="text" placeholder="Text Field 2"></input>
-            <button onClick={closeBlockMenu}>Close</button>
+            <h2>Create a Custom Block</h2>
+            <form onSubmit={handleBlockCreation}>
+              <label for='blockName'>Block Name: </label>
+              <div>
+                <input type='text' name='blockName'></input>
+              </div>
+
+              <label for='blockDescription'>Block Description: </label>
+              <div>
+                <input type='text' name='blockDescription'></input>
+              </div>
+
+              <label for='blockDefinition'>Block Definition: </label>
+              <div>
+                <textarea rows='10' type='text' name='blockDefinition'></textarea>
+              </div>
+
+              <label for='codeStub'>Code Stub: </label>
+              <div>
+                <textarea rows='10' type='text' name='codeStub'></textarea>
+              </div>
+              <div>
+                <input type='submit' value='Create Block'></input>
+                <button onClick={closeBlockMenu}>Cancel</button>
+              </div>
+            </form>
           </div>
         : null}
         <div

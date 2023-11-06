@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import  createGalleryObject  from "../Gallery/CreateGalleryObject"
+import { Form, Input, Button, Select } from "antd";
+import createGalleryObject from "../Gallery/CreateGalleryObject"
 import './GalleryObjectForm.less';
 
 function GalleryObjectForm() {
@@ -19,11 +20,11 @@ function GalleryObjectForm() {
 
   return (
     <div>
-      <button onClick={() => setFormVisible(true)}>Create Gallery Object</button>
+      <Button onClick={() => setFormVisible(true)}>Create Gallery Object</Button>
       {formVisible && (
-        <form onSubmit={handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit}>
           <label htmlFor="title">Project Name:</label>
-          <input
+          <Input
             type="text"
             id="title"
             name="title"
@@ -33,7 +34,7 @@ function GalleryObjectForm() {
           />
           <br />
           <label htmlFor="visibility">Visibility:</label>
-          <select
+          <Select
             id="visibility"
             name="visibility"
             value={visibility}
@@ -42,10 +43,10 @@ function GalleryObjectForm() {
             <option value="public">Public</option>
             <option value="organization">Organization</option>
             <option value="classroom">Classroom</option>
-          </select>
+          </Select>
           <br />
-          <button type="submit">Publish</button>
-        </form>
+          <Button type="submit">Publish</Button>
+        </Form>
       )}
     </div>
   );

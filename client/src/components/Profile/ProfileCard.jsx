@@ -7,16 +7,16 @@ const ProfileCard = ({
 }) => {
   return (
     <>
-      <div className={"profile-card"}>
+      <div className={"profile-page-section profile-card"}>
         <img
-          className={"profile-card-image"}
+          className={"profile-card-image profile-page-item-border"}
           src={imageUrl}
           alt={`${name}'s profile`}
         />
-        <div className={"profile-card-item"}>
+        <div className={"profile-card-item profile-page-item-border profile-page-round-large"}>
           <h1 className={"profile-card-name"}>{name}</h1>
         </div>
-        <div className={"profile-card-item"}>
+        <div className={"profile-card-item profile-page-item-border profile-page-round-large"}>
           <p className={"profile-card-role"}><span className={"bold"}>Role: </span>{role}</p>
         </div>
       </div>

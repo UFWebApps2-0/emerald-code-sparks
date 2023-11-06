@@ -43,6 +43,12 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
 
   // for create block popup
   const [blockPopUp, setBlockPopUp] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    blockDefinition: '',
+    codeStub: '',
+  });
 
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
@@ -131,18 +137,42 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     }
   };
 
+  // following function definitions for handling block creation
+
   const openBlockMenu = () => {
     console.log('clicked');
     setBlockPopUp(true);
-  }
+  };
 
   const closeBlockMenu = () => {
     setBlockPopUp(false);
-  }
+  };
 
-  const handleBlockCreation = async => {
-    console.log('form');
-  }
+  const handleBlockCreation = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await createBlock(formData.name, formData.description, '14', '');
+      //console.log(formData.name + " " + formData.description);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setFormData({
+      name: '',
+      description: '',
+      blockDefinition: '',
+      codeStub: '',
+    });
+  };
+
+  const handleFormChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handleSave = async () => {
     // if we already have the workspace in the db, just update it.
@@ -341,24 +371,49 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
           <div>
             <h2>Create a Custom Block</h2>
             <form onSubmit={handleBlockCreation}>
-              <label for='blockName'>Block Name: </label>
+              <label htmlFor='name'>Block Name: </label>
               <div>
-                <input type='text' name='blockName'></input>
+                <input 
+                type='text' 
+                name='name'
+                value={formData.name}
+                onChange={handleFormChange}
+                required>
+                </input>
               </div>
 
-              <label for='blockDescription'>Block Description: </label>
+              <label htmlFor='description'>Block Description: </label>
               <div>
-                <input type='text' name='blockDescription'></input>
+                <input 
+                type='text' 
+                name='description' 
+                value={formData.description} 
+                onChange={handleFormChange}>
+                </input>
               </div>
 
-              <label for='blockDefinition'>Block Definition: </label>
+              <label htmlFor='blockDefinition'>Block Definition: </label>
               <div>
-                <textarea rows='10' type='text' name='blockDefinition'></textarea>
+                <textarea 
+                rows='10' 
+                type='text' 
+                name='blockDefinition'
+                value={formData.blockDefinition}
+                onChange={handleFormChange}
+                required>
+                </textarea>
               </div>
 
-              <label for='codeStub'>Code Stub: </label>
+              <label htmlFor='codeStub'>Code Stub: </label>
               <div>
-                <textarea rows='10' type='text' name='codeStub'></textarea>
+                <textarea 
+                rows='10' 
+                type='text' 
+                name='codeStub'
+                value={formData.codeStub}
+                onChange={handleFormChange}
+                required>
+                </textarea>
               </div>
               <div>
                 <input type='submit' value='Create Block'></input>

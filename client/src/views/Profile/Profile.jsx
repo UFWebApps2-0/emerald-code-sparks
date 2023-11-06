@@ -5,6 +5,7 @@ import ProfileCard from "../../components/Profile/ProfileCard";
 import ProgressBar from "../../components/Profile/ProgressBar";
 import NavBar from "../../components/NavBar/NavBar";
 import ProjectSection from "../../components/Profile/ProjectSection";
+import BadgeTable from "../../components/Profile/BadgeTable";
 
 const Profile = () => {
   const [bio, setBio] = useState('Your bio text goes here');
@@ -89,6 +90,9 @@ const Profile = () => {
           <ProgressBar progress={20} />
           <ProgressBar progress={50} />
           <ProgressBar progress={90} />
+        </div>
+        <div className='badge-table'>
+          <BadgeTable />
         </div>
       </div>
     </div>

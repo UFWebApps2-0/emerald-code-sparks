@@ -1,30 +1,13 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import './GalleryItem.less';
-import DiscussionBoard from './DiscussionBoard';
+import Like from './like';
 
-//Wrapper item needs to be a useState for it to get dynamically rendered
-
-const GalleryItem = (props) => {
-    const [visible, setVisible] = useState(false);
-    const title = props.title || 'Title';
-
-    const showModal = () => {
-        setVisible(true);
-    };
-
-    const handleCancel = () => {
-        setVisible(false);
-    };
-
-    const handleOk = () => {
-        setVisible(false);
-    };
-
-    return (
-        <>
-            <div className='galleryItem' onClick={() => { showModal() }}>
-                <div className='header'><div>{title}</div></div>
+const GalleryItem = () => (
+    <div className='container nav-padding'>
+        <div className='flex flex-row align-center justify-center'>
+            <div className='galleryItem'>
+                <div className='header'><div>Project Name</div></div>
                 <img style={{ backgroundColor: 'red' }} />
                 <div className='flex flex-row'>
                     <div className='flex flex-column'>
@@ -36,6 +19,7 @@ const GalleryItem = (props) => {
                     <div className='flex flex-column justify-end'>
                         <p>7  5</p>
                     </div>
+                    <Like> </Like>
                 </div>
             </div>
             <div className='gallery-modal-holder'>

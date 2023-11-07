@@ -23,7 +23,7 @@ const GalleryItem = (props) => {
 
     return (
         <>
-            <div className='galleryItem' onClick={() => { showModal() }}>
+            <div className='galleryItem' tabIndex={0} onClick={() => { showModal() }}>
                 <div className='header'><div>{title}</div></div>
                 <img style={{ backgroundColor: 'red' }} />
                 <div className='flex flex-row'>

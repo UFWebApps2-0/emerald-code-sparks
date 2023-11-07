@@ -43,9 +43,13 @@
       "collection": "selection"
     },
     "authorized_workspaces": {
-      "via": "classroom",
       "private": true,
+      "via": "classroom",
       "collection": "authorized-workspace"
+    },
+    "discussion": {
+      "via": "classroom",
+      "model": "discussion"
     }
   }
 }

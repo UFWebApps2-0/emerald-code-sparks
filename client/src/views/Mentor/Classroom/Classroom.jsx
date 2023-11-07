@@ -1,4 +1,4 @@
-import {React, useEffect} from 'react';
+import { React, useEffect } from 'react';
 import { Tabs } from 'antd';
 import './Classroom.less';
 
@@ -6,6 +6,7 @@ import NavBar from '../../../components/NavBar/NavBar';
 import Roster from './Roster/Roster';
 import Home from './Home/Home';
 import SavedWorkSpaceTab from '../../../components/Tabs/SavedWorkspaceTab';
+import Discussion from './Discussion/Discussion';
 import { useSearchParams, useParams } from 'react-router-dom';
 
 const { TabPane } = Tabs;
@@ -23,7 +24,6 @@ export default function Classroom({
 
   useEffect(() => {
     sessionStorage.setItem('classroomId', id);
-
   }, [id]);
 
   return (
@@ -50,6 +50,9 @@ export default function Classroom({
             setSearchParams={setSearchParams}
             classroomId={id}
           />
+        </TabPane>
+        <TabPane tab='Discussion' key='discussion'>
+          <Discussion classroomId={parseInt(id)} />
         </TabPane>
       </Tabs>
     </div>

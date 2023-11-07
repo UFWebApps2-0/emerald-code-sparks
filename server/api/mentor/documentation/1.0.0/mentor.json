@@ -618,6 +618,9 @@
                     "type": "string"
                   }
                 },
+                "discussion": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

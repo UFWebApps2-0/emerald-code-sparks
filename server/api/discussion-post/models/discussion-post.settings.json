@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discussion_posts",
+  "info": {
+    "name": "Discussion Post",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Text": {
+      "type": "text"
+    },
+    "Author": {
+      "type": "string"
+    },
+    "Replies": {
+      "collection": "discussion-post"
+    }
+  }
+}

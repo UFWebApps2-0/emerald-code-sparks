@@ -393,7 +393,13 @@ export const createLessonModule = async (
     error: 'Login failed.',
   });
 
-export const createUnit = async (number, name, standardsID, standardsDescrip, grade) =>
+export const createUnit = async (
+  number,
+  name,
+  standardsID,
+  standardsDescrip,
+  grade
+) =>
   makeRequest({
     method: POST,
     path: `${server}/units`,
@@ -504,7 +510,7 @@ export const getLessonModuleActivities = async (lsId) =>
     error: 'Activity cannot be retrived',
   });
 
-  export const getActivityLevels = async (lsId) =>
+export const getActivityLevels = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces?activities.id=${lsId}`,
@@ -671,4 +677,66 @@ export const getClassroomWorkspace = async (id) =>
     path: `${server}/classroom/workspaces/${id}`,
     auth: true,
     error: 'Unable to retrive classroom workspaces',
+  });
+
+export const getDiscussion = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/discussions/${id}`,
+    auth: true,
+    error: 'Unable to retrive discussion',
+  });
+
+export const getPost = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/discussion-posts/${id}`,
+    auth: true,
+    error: 'Unable to retrive post',
+  });
+
+export const createPost = async (text, author) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/discussion-posts/`,
+    data: {
+      Text: text,
+      Author: author,
+      Replies: [],
+    },
+    auth: true,
+    error: 'Unable to add post',
+  });
+
+export const addDiscussionPost = async (id, posts, post) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/discussions/${id}`,
+    data: {
+      discussion_posts: [...posts, post],
+    },
+    auth: true,
+    error: 'Unable to add post',
+  });
+
+export const addReply = async (id, replies, reply) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/discussion-posts/${id}`,
+    data: {
+      Replies: [...replies, reply],
+    },
+    auth: true,
+    error: 'Unable to add reply',
+  });
+
+export const createDiscussion = async (classroomId) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/discussions`,
+    data: {
+      classroom: classroomId,
+    },
+    auth: true,
+    error: 'Unable to add discussion',
   });

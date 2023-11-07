@@ -20,6 +20,8 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import ParentLogin from  './views/ParentLogin/ParentLogin';
+import MissedClass from './views/MissedClass/MissedClass';
+
 
 const App = () => {
   return (
@@ -79,6 +81,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Student />
+            </PrivateRoute>
+          }
+        />
+        <Route 
+          path='missed-class'
+          element={
+            <PrivateRoute>
+              <MissedClass />
             </PrivateRoute>
           }
         />

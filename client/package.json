@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/w3c-web-serial": "^1.0.3",
-    "@vitejs/plugin-react-swc": "^3.2.0",
+    "@vitejs/plugin-react-swc": "^3.4.0",
     "parse-full-name": "^1.2.6"
   }
 }

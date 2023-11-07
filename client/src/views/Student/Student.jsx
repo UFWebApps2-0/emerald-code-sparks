@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
@@ -9,6 +9,9 @@ import './Student.less';
 function Student() {
   const [learningStandard, setLessonModule] = useState({});
   const navigate = useNavigate();
+  const [showMissedClassPrompt, setShowMissedClassPrompt] = useState(
+    !sessionStorage.getItem('missedClassPromptDismissed')
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
@@ -36,9 +39,33 @@ function Student() {
     navigate('/workspace');
   };
 
+  const dismissPrompt = () => {
+    setShowMissedClassPrompt(false);
+    sessionStorage.setItem('missedClassPromptDismissed', 'true');
+  };
+
   return (
     <div className='container nav-padding'>
       <NavBar />
+
+      {showMissedClassPrompt && (
+      <Modal
+        title="Missed Class?"
+        visible={showMissedClassPrompt}
+        onOk={() => {
+          dismissPrompt();
+          navigate('/missed-class');
+        }}
+        onCancel={() => {
+          dismissPrompt();
+        }}
+        okText = "Yes"
+        cancelText="No"
+      >
+        <p>Did you miss yesterday's class?</p>
+      </Modal>
+      )}
+
       <div id='activity-container'>
         <div id='header'>
           <div>Select your Activity</div>

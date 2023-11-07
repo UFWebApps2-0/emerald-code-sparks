@@ -34,7 +34,14 @@ const App = () => {
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
           {/*make it private*/}
-          <Route path='/admin' element={<Admin />} />
+        <Route
+          path='/admin'
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
         <Route
           path='/report'
           element={

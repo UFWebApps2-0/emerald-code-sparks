@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import { getStudentClassroom } from '../../Utils/requests';
+import ShareImage from '../../assets/share.png';
 import './Student.less';
 
 function Student() {
   const [learningStandard, setLessonModule] = useState({});
   const navigate = useNavigate();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +22,9 @@ function Student() {
         } else {
           message.error(res.err);
         }
-      } catch {}
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchData();
   }, []);
@@ -49,21 +53,31 @@ function Student() {
                   id='list-item-wrapper'
                   onClick={() => handleSelection(activity)}
                 >
-                  <li>{`${learningStandard.name}: Activity ${activity.number}`}</li>
+                  <li>
+                    <div className="activity-item">
+                      <div className="activity-info">
+                        {`${learningStandard.name}: Activity ${activity.number}`}
+                      </div>
+                      <img src={ShareImage} alt="Share" className="share-icon" />
+                    </div>
+                  </li>
                 </div>
               ))
           ) : (
             <div>
               <p>There is currently no active learning standard set.</p>
-              <p>
-                When your classroom manager selects one, it will appear here.
-              </p>
+              <p>When your classroom manager selects one, it will appear here.</p>
             </div>
           )}
         </ul>
+      </div>
+
+      <div id='bottom-section'>
+        <div>View programs other students have shared with you</div>
       </div>
     </div>
   );
 }
 
 export default Student;
+

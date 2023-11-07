@@ -5,3 +5,5 @@ const ResearcherNavbar = () => {
         </div>
     )
 }
+
+export default ResearcherNavbar

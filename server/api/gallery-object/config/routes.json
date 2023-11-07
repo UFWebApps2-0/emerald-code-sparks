@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/gallery-object",
+      "handler": "gallery-object.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/gallery-object",
+      "handler": "gallery-object.initializeAndCreate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gallery-object/:id",
+      "handler": "gallery-object.getGalleryObject",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/gallery-object/:id",
+      "handler": "gallery-object.updateGalleryObject",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

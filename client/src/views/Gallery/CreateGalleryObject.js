@@ -1,32 +1,31 @@
-async function createGalleryObject(title, user_name, like_count, view_count, discussion_board, type, visibility) {
+import { handlePostToGallery } from '../../components/ActivityPanels/Utils/helpers';
+
+async function createGalleryObject(title, user_name, like_count, view_count, visibility, type) {
+
+  //**********create default discussion board here
+  const discussion_board = ['test'];
+
   const data = {
-    title, 
+    title,
     user_name,
     like_count,
     view_count,
-    discussion_board,
+    discussion_board, // Make sure this variable is defined
     type,
     visibility,
   };
 
-  try {
-    const response = await fetch('http://172.18.0.3', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+ try {
+      const response = await handlePostToGallery(JSON.stringify(data),);
 
-    if (response.status === 201) {
-      console.log('Gallery object created successfully in the backend.');
-    } else {
-      console.error('Failed to create the gallery object in the backend.');
+      if (response.status === 201) {
+        console.log('Gallery object created successfully in the backend.');
+      } else {
+        console.error('Failed to create the gallery object in the backend.');
+      }
+    } catch (error) {
+      console.error('Error making the POST request:', error);
     }
-  } catch (error) {
-    console.error('Error making the POST request:', error);
-  }
 }
 
-// Call the function to create the gallery object in the backend
-export default createGalleryObject();
+export default createGalleryObject;

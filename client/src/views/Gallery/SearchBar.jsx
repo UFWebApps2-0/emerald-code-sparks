@@ -20,7 +20,7 @@ const SearchBar = (props) => {
       <form>
       <input
         type="text"
-        placeholder="Type to Filter"
+        placeholder="Type to Search"
         value={searchTerm}
         onChange={handleSearchChange}
       />

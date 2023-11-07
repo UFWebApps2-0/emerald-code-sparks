@@ -32,8 +32,6 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
       <div id='reset-pass-wrapper'>
         <div id='reset-pass-title'>Reset Password</div>
         <Form id='reset-pass-form' onFinish={handleSubmit} layout="vertical">
@@ -71,7 +69,6 @@ const ResetPassword = () => {
           </Form.Item>
         </Form>
       </div>
-    </div>
   );
 };
 

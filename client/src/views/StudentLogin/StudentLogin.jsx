@@ -147,8 +147,7 @@ export default function StudentLogin() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
+    <>
       <img src={Logo} alt='logo' id='login-logo' />
       <div id='form-container'>
         {setForms().map((form) => form)}
@@ -165,6 +164,6 @@ export default function StudentLogin() {
           Enter
         </button>
       </div>
-    </div>
+      </>
   );
 }

@@ -33,8 +33,6 @@ const ForgetPassword = () => {
   });
 
   return (
-    <div className='container nav-padding'>
-      <NavBar/>
       <div id='forgot-pass-wrapper'>
         <div id='forgot-pass-title'>Forgot Password</div>
         <Form id='forgot-pass-form' onFinish={handleSubmit}>
@@ -66,7 +64,6 @@ const ForgetPassword = () => {
           </Form.Item>
          </Form>
       </div>
-    </div>
   );
 };
 

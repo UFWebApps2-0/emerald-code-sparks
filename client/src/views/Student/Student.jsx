@@ -33,8 +33,6 @@ function Student() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
       <div id='activity-container'>
         <div id='header'>
           <div>Select your Activity</div>
@@ -62,7 +60,6 @@ function Student() {
           )}
         </ul>
       </div>
-    </div>
   );
 }
 

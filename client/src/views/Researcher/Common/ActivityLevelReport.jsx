@@ -213,8 +213,7 @@ const ActivityLevelReport = () => {
   ];
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
+    <>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Activity Level - Student Report</div>
 
@@ -274,7 +273,7 @@ const ActivityLevelReport = () => {
           }}
         />
       </main>
-    </div>
+      </>
   );
 };
 

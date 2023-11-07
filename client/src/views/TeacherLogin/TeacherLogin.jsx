@@ -46,8 +46,6 @@ export default function TeacherLogin() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
       <div id='content-wrapper'>
         <form
           id='box'
@@ -79,6 +77,5 @@ export default function TeacherLogin() {
           />
         </form>
       </div>
-    </div>
   );
 }

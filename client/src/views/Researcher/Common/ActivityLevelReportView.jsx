@@ -61,8 +61,7 @@ const ActivityLevelReportView = () => {
     }
   };
   return (
-    <div className='container nav-padding'>
-      <NavBar />
+    <>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Activity Level - Student Report</div>
         <button
@@ -112,7 +111,7 @@ const ActivityLevelReportView = () => {
         <br />
         {showReplayButton()}
       </main>
-    </div>
+      </>
   );
 };
 

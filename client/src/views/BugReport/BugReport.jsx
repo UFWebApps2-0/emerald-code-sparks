@@ -34,8 +34,6 @@ const BugReport = () => {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
       <div id='bug-report-wrapper' style={{ marginTop: '0px' }}>
         <div id='bug-report-title'>Report a Bug</div>
         <Form id='bug-report-form' onFinish={handleSubmit}>
@@ -84,7 +82,6 @@ const BugReport = () => {
           </Form.Item>
         </Form>
       </div>
-    </div>
   );
 };
 

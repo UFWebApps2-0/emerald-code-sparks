@@ -7,8 +7,6 @@ import "./About.less"
 
 export default function About(props) {
   return (
-    <div className="container nav-padding">
-      <NavBar />
       <div id="about-content-container">
         <h1 id="title">About CASMM</h1>
         <div id="logos" className="flex space-between">
@@ -84,6 +82,5 @@ export default function About(props) {
           David Magda
         </p>
       </div>
-    </div>
   )
 }

@@ -264,7 +264,6 @@ const Replay = () => {
 
   return (
     <main className='container nav-padding'>
-      <NavBar />
       <div id='horizontal-container' className='flex flex-column'>
         <div id='top-container' className='flex flex-column vertical-container'>
           <div

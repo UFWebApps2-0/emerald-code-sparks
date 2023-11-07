@@ -35,8 +35,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
+    <>
       <div id='main-header'>Welcome {value.name}</div>
       <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
       <div id='classrooms-container'>
@@ -63,6 +62,6 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

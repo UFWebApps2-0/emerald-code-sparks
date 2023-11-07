@@ -71,8 +71,7 @@ const StudyBrowser = () => {
   ];
 
   return (
-    <div className='container nav-padding'>
-      <NavBar/>
+    <>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Report Browser</div>
         <button className='activity-level-return' onClick={() => navigate('/report')}> Return to Dashboard </button>
@@ -91,7 +90,7 @@ const StudyBrowser = () => {
           }}
         /> */}
       </main>
-    </div>
+      </>
   );
 };
 

@@ -14,6 +14,7 @@ const BadgeTable = () => {
       {data.map((row, rowIndex) =>
         row.map((cell, cellIndex) => (
           <div className="grid-cell" key={`cell-${rowIndex}-${cellIndex}`}>
+            
             <span className="badge">{cell}</span>
           </div>
         ))

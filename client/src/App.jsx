@@ -19,6 +19,8 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import VideoEditor from './views/ContentCreator/VideoEditor/VideoEditor';
+import VideoDisplay from './views/ContentCreator/VideoEditor/VideoDisplay';
 
 const App = () => {
   return (
@@ -114,6 +116,8 @@ const App = () => {
         />
         <Route path='/bugreport' element={<BugReport />} />
         <Route path='*' element={<NotFound/>} />
+        <Route path='/videoedit' element={<VideoEditor />}/>
+        <Route path='/videodisplay/:title/:videoId' element={<VideoDisplay />} />
       </Routes>
     </div>
   );

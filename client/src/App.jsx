@@ -19,6 +19,8 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import ParentSignup from './views/ParentAccount/ParentSignup';
+import RestrictAccess from './views/ParentAccount/RestrictAccess'
 import ParentLogin from  './views/ParentLogin/ParentLogin';
 import MissedClass from './views/MissedClass/MissedClass';
 
@@ -30,6 +32,8 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/teacherlogin' element={<TeacherLogin />} />
+        <Route path='/parent-signup' element={<ParentSignup />} />
+        <Route path='/restrict-access' element={<RestrictAccess />} />
         <Route path='/ParentLogin' element={<ParentLogin />} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />

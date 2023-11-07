@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal } from "antd"
+import { Button, Form, Input, message, Modal, Table } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
@@ -34,7 +34,10 @@ const MentorActivityDetailModal = ({
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const [linkError, setLinkError] = useState(false)
   const [submitButton, setSubmitButton] = useState(0)
+  const [criteriaNum,setCriteriaNum] = useState(1)
+  const [ratingNum,setRatingNum] = useState(1)
   const navigate = useNavigate()
+  const [criteriaNames, setCriteriaNames] = useState([]);
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {
@@ -103,6 +106,7 @@ const MentorActivityDetailModal = ({
     localStorage.setItem("my-activity", JSON.stringify(activity))
     navigate("/activity")
   }
+
   const handleSave = async () => {
     if (link) {
       const goodLink = checkURL(link)
@@ -148,6 +152,43 @@ const MentorActivityDetailModal = ({
     setVisible(true)
     //setOpen(true)
 };
+
+const handleCriteriaNameChange = (index, value) => {
+  const updatedCriteriaNames = [...criteriaNames];
+  updatedCriteriaNames[index] = value;
+  setCriteriaNames(updatedCriteriaNames);
+};
+
+const enterCriteriaName = Array.from({ length: parseInt(criteriaNum) }, (_, index) => (
+  <Form.Item key={index} label={`Criteria ${index + 1}`}>
+    <Input
+      onChange={e => handleCriteriaNameChange(index, e.target.value)}
+      value={criteriaNames[index]}
+      placeholder={`Enter name for Criteria ${index + 1}`}
+    />
+  </Form.Item>
+));
+
+const columns = [
+  { 
+    dataIndex: 'criteriaName',
+    key: 'criteriaName',
+    fixed: 'left',
+  },
+  ...Array.from({ length: ratingNum }, (_, i) => ({
+    title: `Rating ${i + 1}`,
+    dataIndex: `rating_${i + 1}`,
+    key: `rating_${i + 1}`,
+  })),
+];
+
+const data = Array.from({ length: criteriaNum }, (_, i) => {
+  const record = { key: i, criteriaName: criteriaNames[i]  };
+  for (let j = 0; j < ratingNum; j++) {
+    record[`rating_${j + 1}`] = "";
+  }
+  return record;
+});
   return (
     <div id="mentoredit">
     <Button id="view-activity-button"
@@ -223,6 +264,43 @@ const MentorActivityDetailModal = ({
             placeholder="Enter mentor code template"
           ></Input.TextArea>
         </Form.Item> */}
+        <h3 id="subtitle">Rubric</h3>
+        <Form.Item
+          id="form-label"
+          label="Number of Rubric Criteria"
+        >
+          <Input
+            onChange={e => {
+              setCriteriaNum(e.target.value)
+            }}
+            type="number"
+            className="input"
+            value={criteriaNum}
+            placeholder="Enter Criteria number"
+          ></Input> 
+        </Form.Item>
+        {enterCriteriaName}
+        <Form.Item
+          id="form-label"
+          label="Number of Rubric Rating"
+        >
+          <Input
+            onChange={e => {
+              setRatingNum(e.target.value)
+            }}
+            type="number"
+            className="input"
+            value={ratingNum}
+            placeholder="Enter Rating number"
+          ></Input> 
+        </Form.Item>
+        <Table 
+          columns={columns} 
+          dataSource={data} 
+          pagination={false} 
+          bordered size="small" 
+          scroll={{x: 480,}} 
+        />
         <h3 id="subtitle">Lesson Materials</h3>
         <Form.Item id="form-label" label="Classroom Materials">
           <ActivityComponentTags

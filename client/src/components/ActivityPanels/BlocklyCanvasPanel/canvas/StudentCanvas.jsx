@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useReducer } from 'react';
 import '../../ActivityLevels.less';
-import { compileArduinoCode, handleSave } from '../../Utils/helpers';
+import { compileArduinoCode, getArduino, handleSave } from '../../Utils/helpers';
 import { message, Spin, Row, Col, Alert, Dropdown, Menu } from 'antd';
 import { getSaves } from '../../../../Utils/requests';
 import CodeModal from '../modals/CodeModal';
@@ -14,6 +14,7 @@ import {
   handleOpenConnection,
 } from '../../Utils/consoleHelpers';
 import ArduinoLogo from '../Icons/ArduinoLogo';
+import ArduinoVerify from '../Icons/ArduinoVerify';
 import PlotterLogo from '../Icons/PlotterLogo';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +24,7 @@ export default function StudentCanvas({ activity }) {
   const [hoverSave, setHoverSave] = useState(false);
   const [hoverUndo, setHoverUndo] = useState(false);
   const [hoverRedo, setHoverRedo] = useState(false);
+  const [hoverVerify, setHoverVerify] = useState(false);
   const [hoverCompile, setHoverCompile] = useState(false);
   const [hoverImage, setHoverImage] = useState(false);
   const [hoverConsole, setHoverConsole] = useState(false);
@@ -298,6 +300,47 @@ export default function StudentCanvas({ activity }) {
       setShowPlotter(false);
     }
   };
+  const handleVerify = async () => {
+    if (showConsole || showPlotter) {
+      message.warning(
+        'Close Serial Monitor and Serial Plotter before uploading your code'
+      );
+    } else {
+      //if (typeof window['port'] === 'undefined') {
+      //  await connectToPort();
+      //}
+      //if (typeof window['port'] === 'undefined') {
+      //  message.error('Fail to select serial device');
+      //  return;
+      //}
+      // call Virtual Compiler
+      const arduinoCode = getArduino(workspaceRef.current, false);
+      console.log('Start');
+      console.log(arduinoCode);
+      console.log('End');
+      
+      //const runCode = async() => {
+      // Compile the Arduino source code
+      // Take the source code, and translate into machine code
+      const result = await fetch('https://hexi.wokwi.com/build', {
+        method: 'post',
+        body: JSON.stringify({sketch: arduinoCode}),// This is the code we want to translate as a JSON object
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const {hex, stderr} = await result.json();
+      if(!hex) { // If no hex is returned, then there was a compile error
+        alert(stderr);
+        return;
+      }
+      else {
+        console.log('Compile Successful!');
+      }
+      
+      //}
+    }
+  };
   const handleCompile = async () => {
     if (showConsole || showPlotter) {
       message.warning(
@@ -463,6 +506,15 @@ export default function StudentCanvas({ activity }) {
                       id='action-btn-container'
                       className='flex space-around'
                     >
+                      <ArduinoVerify
+                        setHoverVerify={setHoverVerify}
+                        handleVerify={handleVerify}
+                      />
+                      {hoverVerify && (
+                        <div className='popup ModalCompile'>
+                          Verify code
+                        </div>
+                      )}
                       <ArduinoLogo
                         setHoverCompile={setHoverCompile}
                         handleCompile={handleCompile}

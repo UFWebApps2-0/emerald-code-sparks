@@ -47,8 +47,8 @@ export default function Admin() {
             <NavBar />
             <div id='main-header'>Welcome, {value.name}</div>
             {/*create org button*/}
-                {/*gonna require some kind of connection to org file*/}
-            <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to be moved to the right spot and do smth when clicked/hovered over */}
+                {/*gonna require some kind of connection to org file --> someone create a temp org page*/}
+            <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to do smth when clicked/hovered over */}
             {/*add custom element adminSubHeader?*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
-import { createPortal } from 'react-dom';
-//import ExpandedGalleryItem from './ExpandedGalleryItem';
 import './GalleryItem.less';
 
 //Wrapper item needs to be a useState for it to get dynamically rendered

@@ -7,9 +7,9 @@ const Badge = ({
 }) => {
   return (
     <>
-      <div className={"badge-page-section badge-card"}>
+      <div className="badge-page-section badge-card">
         <img
-          className={"badge-card-image badge-page-item-border"}
+          className="badge-card-image badge-page-item-border"
           src={imageUrl}
         />
         <div className={"badge-card-item badge-page-item-border badge-page-round-large"}>

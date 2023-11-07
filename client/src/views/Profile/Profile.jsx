@@ -1,5 +1,5 @@
 import "./Profile.less";
-import "./Badge.less";
+// import "./Badge.less";
 
 import React, { useState } from 'react';
 import ProfileCard from "../../components/Profile/ProfileCard";
@@ -8,6 +8,7 @@ import ProgressBar from "../../components/Profile/ProgressBar";
 import NavBar from "../../components/NavBar/NavBar";
 import ProjectSection from "../../components/Profile/ProjectSection";
 import BadgeTable from "../../components/Profile/BadgeTable";
+import BadgeDisplay from "../../components/Profile/BadgeDisplay";
 
 const Profile = () => {
   const [bio, setBio] = useState('Your bio text goes here');
@@ -73,16 +74,11 @@ const Profile = () => {
       <div className='profile-badge-display profile-page-section'>
         <h2>Badge Display</h2>
         <div className='profile-badge-display-container nav-padding'>
-
-        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
-        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
-        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
-        <h2 class='profile-badge-display-slot profile-page-item-border profile-page-round-large'></h2>
         
-        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
-        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
-        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
-        <h3 class='profile-badge-display-change-button profile-page-item-border profile-page-round-large'>Change</h3>
+        <BadgeDisplay />
+        <BadgeDisplay />
+        <BadgeDisplay />
+
         </div>
       </div>
       <ProjectSection/>
@@ -93,11 +89,7 @@ const Profile = () => {
           <ProgressBar progress={50} />
           <ProgressBar progress={90} />
         
-          <Badge
-        imageUrl={"https://media.discordapp.net/attachments/517010400860962831/1171160597463838840/image.png"}
-        name={"Complete 100 Python exercises"}
-        role={99}
-      />
+
         </div>
 
         <div className='badge-table'>

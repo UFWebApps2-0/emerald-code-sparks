@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
@@ -20,36 +20,45 @@ import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import ResearcherLayout from './views/Researcher/ResearcherLayout';
 import ResearcherDashboard from './views/Researcher/Dashboard/ResearcherDashboard';
+import NavBar from './components/NavBar/NavBar';
+import AppLayout from './AppLayout';
 
 const App = () => {
   return (
-    <div>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/teacherlogin' element={<TeacherLogin/>} />
-        <Route path='/forgot-password' element={<ForgetPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/login' element={<StudentLogin />} />
-        <Route path='/replay/:saveID' element={<Replay />} />
-        <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
-        <Route path='/researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
-          {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
-          <Route index element={<ResearcherDashboard/>}/>
-        </Route>
-        <Route path='/activityLevel' element={<PrivateRoute><ActivityLevelReport /></PrivateRoute>}/>
-        <Route path='/activityLevel/:id' element={ <PrivateRoute> <ActivityLevelReportView /> </PrivateRoute> }/>
-        <Route path='/group-report' element={ <PrivateRoute> <GroupReport /> </PrivateRoute> }/>
-        <Route path='/dashboard' element={ <PrivateRoute> <Dashboard /> </PrivateRoute> }/>
-        <Route path='/student' element={ <PrivateRoute> <Student /> </PrivateRoute> }/>
-        <Route path='/classroom/:id' element={ <PrivateRoute> <Classroom/> </PrivateRoute> }/>
-        <Route path='/workspace' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
-        <Route path='/activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
-        <Route path='/ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
-        <Route path='/bugreport' element={<BugReport />} />
-        <Route path='*' element={<NotFound/>} />
-      </Routes>
-    </div>
+    <>
+      <AppLayout>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/teacherlogin' element={<TeacherLogin/>} />
+            <Route path='/forgot-password' element={<ForgetPassword />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
+            <Route path='/login' element={<StudentLogin />} />
+            <Route path='/replay/:saveID' element={<Replay />} />
+            <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
+            <Route path='/activityLevel' element={<PrivateRoute><ActivityLevelReport /></PrivateRoute>}/>
+            <Route path='/activityLevel/:id' element={ <PrivateRoute> <ActivityLevelReportView /> </PrivateRoute> }/>
+            <Route path='/group-report' element={ <PrivateRoute> <GroupReport /> </PrivateRoute> }/>
+            <Route path='/dashboard' element={ <PrivateRoute> <Dashboard /> </PrivateRoute> }/>
+            <Route path='/student' element={ <PrivateRoute> <Student /> </PrivateRoute> }/>
+            <Route path='/workspace' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
+            <Route path='/activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
+            <Route path='/ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
+            <Route path='/bugreport' element={<BugReport />} />
+            {/* Researcher Layout / Nested Navbar */}
+            {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
+            <Route path='/researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
+              <Route index element={<ResearcherDashboard/>}/>
+            </Route>
+            
+            {/* mentor navbar variant */}
+            <Route path='/classroom/:id' element={ <PrivateRoute> <Classroom/> </PrivateRoute> }/>
+
+            {/* No Navbar */}
+            <Route path='*' element={<NotFound/>} />
+          </Routes>
+        </AppLayout>
+    </>
   );
 };
 

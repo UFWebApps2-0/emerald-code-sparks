@@ -2,7 +2,6 @@ import { message } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import BlocklyCanvasPanel from "../../components/ActivityPanels/BlocklyCanvasPanel/BlocklyCanvasPanel"
-import NavBar from "../../components/NavBar/NavBar"
 import {
   getAuthorizedWorkspaceToolbox,
   getActivityToolbox,

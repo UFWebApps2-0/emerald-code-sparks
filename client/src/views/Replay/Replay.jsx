@@ -8,7 +8,6 @@ import React, {
 import { Slider, Col, Row } from 'antd';
 import './Replay.less';
 import { useParams, useNavigate } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
 import { Table } from 'antd';
 import { getSave } from '../../Utils/requests';
 import { CSVDownloader } from 'react-papaparse';

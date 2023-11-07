@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Table, Button, Tag } from 'antd';
+import { Button, Tag } from 'antd';
 import './ActivityLevelReport.less';
-import { useSearchParam } from '../../../Utils/useSearchParam';
-import NavBar from '../../../components/NavBar/NavBar';
 
 import {
-  getSessionsWithFilter,
-  getSessionCountWithFilter,
   getGrades,
   getUnit,
   getGrade,

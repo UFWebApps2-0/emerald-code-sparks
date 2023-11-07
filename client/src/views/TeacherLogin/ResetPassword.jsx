@@ -2,7 +2,6 @@ import { Form, Input, Button, message } from 'antd';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { resetPassword } from '../../Utils/requests';
-import NavBar from '../../components/NavBar/NavBar';
 import "./TeacherLogin.less";
 
 const ResetPassword = () => {

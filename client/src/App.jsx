@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
@@ -20,7 +20,6 @@ import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import ResearcherLayout from './views/Researcher/ResearcherLayout';
 import ResearcherDashboard from './views/Researcher/Dashboard/ResearcherDashboard';
-import NavBar from './components/NavBar/NavBar';
 import AppLayout from './AppLayout';
 
 const App = () => {

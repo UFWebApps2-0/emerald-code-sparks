@@ -5,7 +5,6 @@ import { getStudents, postJoin } from '../../Utils/requests';
 import StudentLoginForm from './StudentLoginForm';
 import { setUserSession } from '../../Utils/AuthRequests';
 import { message } from 'antd';
-import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 export default function StudentLogin() {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import NavBar from '../../../components/NavBar/NavBar';
 import { getSession } from '../../../Utils/requests';
 import './ActivityLevelReportView.less';
 

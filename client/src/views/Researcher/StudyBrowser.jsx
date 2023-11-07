@@ -1,13 +1,7 @@
 import './StudyBrowser.less';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Table } from 'antd';
 import './ActivityLevelReport.less';
-import { useSearchParam } from '../../Utils/useSearchParam';
-import NavBar from '../../components/NavBar/NavBar';
-
-import { getSessionsWithFilter, getSessionCountWithFilter } from '../../Utils/requests';
-import { Filter } from './Common/ReportFilter';
 
 const StudyBrowser = () => {
   const navigate = useNavigate();

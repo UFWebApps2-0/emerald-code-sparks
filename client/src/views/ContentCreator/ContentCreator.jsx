@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { Tabs, Table, Popconfirm, message } from 'antd';
-import Navbar from '../../components/NavBar/NavBar';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import SavedWorkSpaceTab from '../../components/Tabs/SavedWorkspaceTab';
 import UnitCreator from './UnitCreator/UnitCreator';

@@ -4,7 +4,6 @@ import { message } from 'antd';
 import './Dashboard.less';
 import DashboardDisplayCodeModal from './DashboardDisplayCodeModal';
 import MentorSubHeader from '../../../components/MentorSubHeader/MentorSubHeader';
-import NavBar from '../../../components/NavBar/NavBar';
 import { useGlobalState } from '../../../Utils/userState';
 import { useNavigate } from 'react-router-dom';
 

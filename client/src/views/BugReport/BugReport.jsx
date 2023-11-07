@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { submitBugReport } from '../../Utils/requests';
-import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import "./BugReport.less";
 

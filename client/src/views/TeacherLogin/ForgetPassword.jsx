@@ -1,6 +1,5 @@
 import { Alert, Button, Form, Input, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar/NavBar';
 import { forgetPassword } from '../../Utils/requests';
 import "./TeacherLogin.less"
 

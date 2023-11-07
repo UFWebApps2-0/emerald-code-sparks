@@ -8,6 +8,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { removeUserSession } from '../../Utils/AuthRequests';
 import { useGlobalState } from '../../Utils/userState';
 
+
 export default function NavBar() {
   const [value] = useGlobalState('currUser');
   let currentRoute = window.location.pathname;
@@ -99,6 +100,24 @@ export default function NavBar() {
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
+      {shouldShowRoute('ParentSignUp') ? (
+        
+      
+        null == null ? (
+          <Menu.Item key='9' onClick={() => handleRouteChange(routes.ParentSignUp)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Parent Sign Up
+        </Menu.Item>
+        ) : (
+          <Menu.Item key='10' onClick={() => handleRouteChange(routes.ParentLogin)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Parent Login
+        </Menu.Item>
+        )
+        
+          
+      ) : null}
+      
     </Menu>
   );
 

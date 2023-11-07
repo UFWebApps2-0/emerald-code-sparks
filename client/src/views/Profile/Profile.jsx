@@ -1,7 +1,9 @@
 import "./Profile.less";
+import "./Badge.less";
 
 import React, { useState } from 'react';
 import ProfileCard from "../../components/Profile/ProfileCard";
+import Badge from "../../components/Profile/Badge";
 import ProgressBar from "../../components/Profile/ProgressBar";
 import NavBar from "../../components/NavBar/NavBar";
 import ProjectSection from "../../components/Profile/ProjectSection";
@@ -90,7 +92,14 @@ const Profile = () => {
           <ProgressBar progress={20} />
           <ProgressBar progress={50} />
           <ProgressBar progress={90} />
+        
+          <Badge
+        imageUrl={"https://media.discordapp.net/attachments/517010400860962831/1171160597463838840/image.png"}
+        name={"Complete 100 Python exercises"}
+        role={99}
+      />
         </div>
+
         <div className='badge-table'>
           <BadgeTable />
         </div>

@@ -1,54 +1,55 @@
 @import '../../assets/style.less';
 
-.badge-page-grid {
-  display: grid;
-  /* Define 3 columns with the desired width ratio */
-  grid-template-columns: 1.5fr 1.5fr 3fr;
-  /* Define 3 rows with the desired height ratio */
-  grid-template-rows: 1fr 2fr 1;
-  /* Add some gap between cells */
-  gap: 1rem;
-
-  background-color: #3D5C82;
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.badge-page-section {
-  padding: 1rem;
-
-  border-radius: 1rem;
-  background-color: #61a8dc;
+.profile-card>*+* {
+  margin-top: 1rem;
 }
 
-.badge-page-item-border {
-  border-style: solid;
-  border-color: #0275f9;
-  border-width: 0.2rem;
+.profile-card-image {
+  width: 10rem;
+  aspect-ratio: 1 / 1;
+
+  border-radius: 100rem;
 }
 
-.badge-page-round-large {
-  border-radius: 2rem;
+.profile-card-item {
+  width: fit-content;
+
+  padding: 0.5rem;
+
+  background-color: #f0d65b;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
 }
 
-.badge-page-round {
-  border-radius: 1rem;
+.profile-card-name {
+  padding: 0;
+  margin: 0;
+  width: 15rem;
+  max-width: 100%;
+
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
-.badge-badge-display-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* Define 3 columns with the desired width ratio */
-  grid-template-rows: 2fr 2fr 2fr 2fr;
-  /* Define 3 rows with the desired height ratio */
-  gap: 2rem;
-  /* Add some gap between cells */
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 1rem;
+.profile-card-role {
+  margin: 0;
+  width: 10rem;
+  max-width: 100%;
+
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.badge-badge-display-slot {
-    grid-row: span 3;
-    grid-column: span 1;
-  
-    background-color: #f0d65b;
-  }
+.bold {
+  font-weight: 700;
+}

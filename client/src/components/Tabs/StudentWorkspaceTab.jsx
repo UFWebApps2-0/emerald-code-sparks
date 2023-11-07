@@ -34,7 +34,7 @@ export default function SavedWorkSpaceTab({searchParams, setSearchParams, classr
     
     const wsColumn = [
         {
-          title: 'Name',
+          title: 'Student',
           dataIndex: 'name',
           key: 'name',
           editable: true,
@@ -43,7 +43,7 @@ export default function SavedWorkSpaceTab({searchParams, setSearchParams, classr
           render: (_, key) => key.name,
         },
         {
-          title: 'Description',
+          title: 'Activity',
           dataIndex: 'description',
           key: 'description',
           editable: true,
@@ -103,7 +103,7 @@ export default function SavedWorkSpaceTab({searchParams, setSearchParams, classr
     return (
         <div>
           <div id='page-header'>
-            <h1>Saved Workspaces</h1>
+            <h1>Student Workspaces</h1>
           </div>
           <div
             id='content-creator-table-container'

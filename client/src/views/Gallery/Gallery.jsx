@@ -19,7 +19,9 @@ function Gallery({ viewCountsRecords }) {
         <h1>Gallery</h1>
         <Search filterUpdate={filterUpdate} />
         <div className='flex flex-column'>
-          <GalleryItem filterText={filterText} viewCountsRecord={viewCountsRecord} />
+          <GalleryItem 
+		  filterText={filterText} 
+		  viewCountsRecord={viewCountsRecord} />
         </div>
       </div>
     </>

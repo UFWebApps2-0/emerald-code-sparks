@@ -9,6 +9,9 @@ import {
   getActivityToolboxAll,
 } from "../../Utils/requests"
 import { useGlobalState } from "../../Utils/userState"
+import  GalleryObjectForm  from "../Gallery/GalleryObjectForm"
+
+//TO SUBMIT TO GALLERY
 
 export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
@@ -77,7 +80,10 @@ export default function BlocklyPage({ isSandbox }) {
       <NavBar />
       <div className="flex flex-row">
         <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
+        <GalleryObjectForm /> {/* Render the GalleryObjectForm component */}
       </div>
+
     </div>
   )
 }
+//createGalleryObject("title", "name", 0, 0, "empty discussion board")

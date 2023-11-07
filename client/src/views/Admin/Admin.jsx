@@ -6,12 +6,18 @@ import NavBar from "../../components/NavBar/NavBar";
 import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
+    const navigate = useNavigate();
+
     //handle click on create org button
     function orgCreateClick(){
         alert("you clicked the add org button! functionality coming soon");
     }
 
     //handle click on org --> navigate(org page)
+    function orgClick(id) {
+        console.log("Clicked!")
+        navigate(`/admin/${id}`);
+    }
 
     //handle click on lesson button --> return a temp popup?
 
@@ -26,7 +32,8 @@ export default function Admin() {
             {/*add custom element adminSubHeader?*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
-                <div>[insert orgs here]</div>
+                {/* We'll run an async function to get all organizations. then map through the below div. */}
+                <div onClick={()=> orgClick("SampleOrgID")}>Sample Organization</div>
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}
 

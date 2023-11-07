@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "studies",
+  "info": {
+    "name": "Study"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "students": {
+      "collection": "student",
+      "via": "studies",
+      "dominant": true
+    },
+    "invited_students": {
+      "collection": "student"
+    },
+    "Start_Date": {
+      "type": "date"
+    },
+    "End_Date": {
+      "type": "date"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Tags": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "researchers": {
+      "collection": "researchers",
+      "via": "studies",
+      "dominant": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "researchers",
+  "info": {
+    "name": "Researchers",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "bio": {
+      "type": "string"
+    },
+    "userid": {
+      "unique": true,
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "studies": {
+      "via": "researchers",
+      "collection": "study"
+    }
+  }
+}

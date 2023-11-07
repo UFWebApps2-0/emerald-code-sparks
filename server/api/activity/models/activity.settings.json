@@ -46,6 +46,18 @@
     "activity_template": {
       "type": "text",
       "required": false
+    },
+    "CompilePoints": {
+      "type": "string"
+    },
+    "TimePoints": {
+      "type": "string"
+    },
+    "ReadabilityPoints": {
+      "type": "string"
+    },
+    "TotalPoints": {
+      "type": "string"
     }
   }
 }

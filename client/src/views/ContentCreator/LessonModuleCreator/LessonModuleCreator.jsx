@@ -25,6 +25,12 @@ export default function LessonModuleCreator({
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [learningStandardObj, setLessonModuleObj] = useState("")
+
+  const [CompilePoints, setCompilePoints] = useState("")
+  const [ReadabilityPoints, setReadabilityPoints] = useState("")
+  const [TimePoints, setTimePoints] = useState("")
+  const [TotalPoints, setTotalPoints] = useState("")
+
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
 
@@ -44,6 +50,10 @@ export default function LessonModuleCreator({
     setDescription("")
     setName("")
     setStandards("")
+    setCompilePoints("")
+    setReadabilityPoints("")
+    setTimePoints("")
+    setTotalPoints("")
     setLink("")
     setLinkError(false)
     setNumOfActivityLevels("")
@@ -70,6 +80,10 @@ export default function LessonModuleCreator({
       0,
       unit,
       standards,
+      CompilePoints,
+      TimePoints,
+      ReadabilityPoints,
+      TotalPoints,
       link
     )
     if (res.err) {
@@ -192,6 +206,45 @@ export default function LessonModuleCreator({
               placeholder="Enter lesson Standards"
             />
           </Form.Item>
+
+          <Form.Item id="form-label" label="Compile">
+            <Input.TextArea
+              onChange={e => setCompilePoints(e.target.value)}
+              value={CompilePoints}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Submission Time">
+            <Input.TextArea
+              onChange={e => setTimePoints(e.target.value)}
+              value={TimePoints}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Readability">
+            <Input.TextArea
+              onChange={e => setReadabilityPoints(e.target.value)}
+              value={ReadabilityPoints}
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+          <Form.Item id="form-label" label="Total">
+            <Input.TextArea
+              onChange={e => setTotalPoints(e.target.value)}
+              value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0)).toString()}
+
+              required
+              placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+
           <Form.Item label="Link to Additional Resource (Optional)">
             <Input
               onChange={e => {

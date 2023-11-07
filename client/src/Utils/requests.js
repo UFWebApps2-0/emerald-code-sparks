@@ -376,6 +376,10 @@ export const createLessonModule = async (
   number,
   unit,
   standards,
+  CompilePoints,
+  TimePoints,
+  ReadabilityPoints,
+  TotalPoints,
   link
 ) =>
   makeRequest({
@@ -387,6 +391,10 @@ export const createLessonModule = async (
       number,
       unit,
       standards,
+      CompilePoints,
+      TimePoints,
+      ReadabilityPoints,
+      TotalPoints,
       link,
     },
     auth: true,

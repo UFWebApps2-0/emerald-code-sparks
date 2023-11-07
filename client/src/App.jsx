@@ -19,7 +19,7 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
-import ParentSignUp from  './views/ParentSignUp/ParentSignUp';
+import ParentLogin from  './views/ParentLogin/ParentLogin';
 
 const App = () => {
   return (
@@ -28,7 +28,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/teacherlogin' element={<TeacherLogin />} />
-        <Route path='/ParentSignUp' element={<ParentSignUp />} />
+        <Route path='/ParentLogin' element={<ParentLogin />} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/login' element={<StudentLogin />} />

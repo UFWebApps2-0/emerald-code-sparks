@@ -11,7 +11,7 @@
     "ResearcherDashboard": "/report",
     "BugReport": "/bugreport",
     "ParentSignUp": "/parentsignup",
-    "ParentLogin": "parentlogin"
+    "ParentLogin": "/parentlogin"
   },
   "users": {
     "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About"],

@@ -100,18 +100,18 @@ export default function NavBar() {
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
-      {shouldShowRoute('ParentSignUp') ? (
+      {shouldShowRoute('ParentLogin') ? (
         
       
         null == null ? (
-          <Menu.Item key='9' onClick={() => handleRouteChange(routes.ParentSignUp)}>
-          <i className='fa fa-sign-in-alt' />
-          &nbsp; Parent Sign Up
-        </Menu.Item>
-        ) : (
-          <Menu.Item key='10' onClick={() => handleRouteChange(routes.ParentLogin)}>
+          <Menu.Item key='9' onClick={() => handleRouteChange(routes.ParentLogin)}>
           <i className='fa fa-sign-in-alt' />
           &nbsp; Parent Login
+        </Menu.Item>
+        ) : (
+          <Menu.Item key='10' onClick={() => handleRouteChange(routes.ParentSignUp)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Parent Sign Up
         </Menu.Item>
         )
         

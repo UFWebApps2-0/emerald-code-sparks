@@ -1,5 +1,5 @@
 import RouteButton from '../../components/RouteButton/RouteButton';
-import './Report.less';
+import './StudyBrowser.less';
 
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';

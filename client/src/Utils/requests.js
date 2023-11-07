@@ -676,7 +676,7 @@ export const getClassroomWorkspace = async (id) =>
 export const postGalleryObject = async (attributes) =>
   makeRequest({
     method: POST,
-    path: `localhost:5432/api//gallery-object`,
+    path: `${server}/gallery-object`,
     auth: false, //CHANGE TO TRUE LATER
     data: attributes,
     error: 'Unable to post to gallery',

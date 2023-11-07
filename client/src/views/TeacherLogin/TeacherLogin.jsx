@@ -13,7 +13,7 @@ const SCOPES = "https://www.googleapis.com/auth/drive";
 
 const onSucc = (res) => {
   console.log(res);
-  //placeholderLogin();
+  placeholderLogin();
 };
 
 const onFail = (res) => {

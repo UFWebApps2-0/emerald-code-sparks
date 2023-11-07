@@ -4,8 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import './TeacherLogin.less';
-//import LoginWithGoogle from '../GoogleLogin/GoogleLoginComponent';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
 
+const CLIENT_ID = "296846904571-jiau68kb1m5ovbjodmho8ei6fe69qbkv.apps.googleusercontent.com";
+const API_KEY = "AIzaSyBH4GlSHNm7zUcrcINb-uKI82l36vbD4jA";
+const SCOPES = "https://www.googleapis.com/auth/drive";
+
+const onSucc = (res) => {
+  console.log(res);
+  //placeholderLogin();
+};
+
+const onFail = (res) => {
+  console.log(res);
+};
+
+function Login() {
+  return (
+      <div id="signInButton">
+        <GoogleLogin
+          className="googleButton"
+          clientID={CLIENT_ID}
+          buttonText="Sign-up with Google"
+          onSuccess={onSucc}
+          onFailure={onFail}
+          cookiePolicy={'single_host_origin'}
+          isSignedIn={true}
+        />
+      </div>
+  )
+};
 
 const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -19,7 +48,41 @@ const useFormInput = (initialValue) => {
   };
 };
 
+
+//begin placeholder login
+const placeholderLogin = () =>
+{
+  setLoading(true);
+  //identifier = name/email
+  let placeholderBody = { identifier: 'teacher', password: 'easypassword' };
+
+  postUser(placeholderBody)
+    .then((response) => {
+      setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+      setLoading(false);
+      //navigate('/sandbox');
+      navigate('/dashboard');
+      //navigate('/ccdashboard');
+      //navigate('/report');
+    })
+    .catch((error) => {
+      setLoading(false);
+      message.error('Google Login Failed.');
+    });
+};
+//end placeholder login
+
 export default function TeacherLogin() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        scope: SCOPES
+      })};
+    gapi.load('client:auth2', start);
+  })
+  
   const email = useFormInput('');
   const password = useFormInput('');
   const [loading, setLoading] = useState(false);
@@ -44,25 +107,6 @@ export default function TeacherLogin() {
       .catch((error) => {
         setLoading(false);
         message.error('Login failed. Please input a valid email and password.');
-      });
-  };
-
-  const placeholderLogin = () =>
-  {
-    setLoading(true);
-    let placeholderBody = { identifier: 'teacher', password: 'easypassword' };
-
-    postUser(placeholderBody)
-      .then((response) => {
-        setUserSession(response.data.jwt, JSON.stringify(response.data.user));
-        setLoading(false);
-        navigate('/dashboard');
-        //navigate('/ccdashboard');
-        //navigate('/report');
-      })
-      .catch((error) => {
-        setLoading(false);
-        message.error('Google Login Failed.');
       });
   };
 
@@ -99,13 +143,8 @@ export default function TeacherLogin() {
             disabled={loading}
           />
           <p/>
-          <input
-            type='button'
-            value={loading ? 'Loading...' : 'Login with Google'}
-            onClick={placeholderLogin}
-            disabled={loading}
-          />
         </form>
+        <Login/>
       </div>
     </div>
   );

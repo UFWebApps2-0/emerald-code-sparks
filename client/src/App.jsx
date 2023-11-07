@@ -13,12 +13,13 @@ import Replay from './views/Replay/Replay';
 import ActivityLevelReport from './views/Researcher/Common/ActivityLevelReport';
 import ActivityLevelReportView from './views/Researcher/Common/ActivityLevelReportView';
 import GroupReport from './views/Researcher/Common/GroupReport';
-import StudyBrowser from './views/Researcher/StudyBrowser';
 import Student from './views/Student/Student';
 import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import ResearcherLayout from './views/Researcher/ResearcherLayout';
+import ResearcherDashboard from './views/Researcher/Dashboard/ResearcherDashboard';
 
 const App = () => {
   return (
@@ -32,86 +33,19 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
-        <Route
-          path='/researcher'
-          element={
-            <PrivateRoute>
-              <StudyBrowser />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/activityLevel'
-          element={
-            <PrivateRoute>
-              <ActivityLevelReport />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/activityLevel/:id'
-          element={
-            <PrivateRoute>
-              <ActivityLevelReportView />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/group-report'
-          element={
-            <PrivateRoute>
-              <GroupReport />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/dashboard'
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/student'
-          element={
-            <PrivateRoute>
-              <Student />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/classroom/:id'
-          element={
-            <PrivateRoute>
-              <Classroom/>
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/workspace'
-          element={
-            <PrivateRoute>
-              <BlocklyPage isSandbox={false} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/activity'
-          element={
-            <PrivateRoute>
-              <BlocklyPage isSandbox={false} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/ccdashboard'
-          element={
-            <PrivateRoute>
-              <ContentCreator />
-            </PrivateRoute>
-          }
-        />
+        <Route path='/researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
+          {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
+          <Route path='/dashboard' element={<ResearcherDashboard/>}/>
+        </Route>
+        <Route path='/activityLevel' element={<PrivateRoute><ActivityLevelReport /></PrivateRoute>}/>
+        <Route path='/activityLevel/:id' element={ <PrivateRoute> <ActivityLevelReportView /> </PrivateRoute> }/>
+        <Route path='/group-report' element={ <PrivateRoute> <GroupReport /> </PrivateRoute> }/>
+        <Route path='/dashboard' element={ <PrivateRoute> <Dashboard /> </PrivateRoute> }/>
+        <Route path='/student' element={ <PrivateRoute> <Student /> </PrivateRoute> }/>
+        <Route path='/classroom/:id' element={ <PrivateRoute> <Classroom/> </PrivateRoute> }/>
+        <Route path='/workspace' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
+        <Route path='/activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
+        <Route path='/ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
         <Route path='/bugreport' element={<BugReport />} />
         <Route path='*' element={<NotFound/>} />
       </Routes>

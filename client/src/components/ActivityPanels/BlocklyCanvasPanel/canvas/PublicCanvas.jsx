@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import '../../ActivityLevels.less';
 import { compileArduinoCode } from '../../Utils/helpers';
-import { message, Spin, Row, Col, Alert, Menu, Dropdown } from 'antd';
+import { message, Spin, Row, Col, Alert, Menu, Dropdown, Button } from 'antd';
 import CodeModal from '../modals/CodeModal';
 import ConsoleModal from '../modals/ConsoleModal';
 import PlotterModal from '../modals/PlotterModal';
@@ -15,6 +15,8 @@ import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 
 let plotId = 1;
+
+console.log("The public content was accessed!");
 
 export default function PublicCanvas({ activity, isSandbox }) {
   const [hoverUndo, setHoverUndo] = useState(false);
@@ -52,6 +54,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const handleUndo = () => {
     if (workspaceRef.current.undoStack_.length > 0)
       workspaceRef.current.undo(false);
+
   };
 
   const handleRedo = () => {
@@ -60,6 +63,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
   };
 
   const handleConsole = async () => {
+
+    console.log("Something happened!");
+
     if (showPlotter) {
       message.warning('Close serial plotter before openning serial monitor');
       return;
@@ -154,6 +160,62 @@ export default function PublicCanvas({ activity, isSandbox }) {
     </Menu>
   );
 
+
+  var toolBoxActive = true;
+  var id = null
+  function toggleToolBox(){
+
+    //message.info("Triggered collapse!");
+
+    var toolBox = document.getElementsByClassName("blocklyToolboxDiv");
+
+    //message.info(toolBox);
+
+    clearInterval(id);
+    id = setInterval(frame, .5);
+    var width = 0;
+
+    if(toolBoxActive){
+      width = 115;
+      //need to retract the toolbox into the left side of the screen
+      //toolBox.style.left = 
+    }
+    else{
+      width = 0;
+      //need to extend the toolbox into the screen
+    }
+
+    function frame(){
+      //message.info(width);
+    if(toolBoxActive){
+      if(width <= 0){
+
+        toolBoxActive = false;
+
+        clearInterval(id);
+      }
+        
+      width -= 2;
+      toolBox[0].style.width = width + 'px';
+      //need to retract the toolbox into the left side of the screen
+      //toolBox.style.left = 
+      
+    }
+    else{
+      if(width >= 115){
+        toolBoxActive = true;
+        clearInterval(id);
+      }
+        
+      width += 2;
+      toolBox[0].style.width = width + 'px';
+      //need to extend the toolbox into the screen
+      
+    }
+  }
+
+  }
+
   return (
     <div id='horizontal-container' className='flex flex-column'>
       <div className='flex flex-row'>
@@ -167,6 +229,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
             size='large'
             spinning={selectedCompile}
           >
+             
             <Row id='icon-control-panel'>
               <Col flex='none' id='section-header'>
                 Program your Arduino...
@@ -248,6 +311,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
                           Upload to Arduino
                         </div>
                       )}
+                      <button onClick={toggleToolBox}>TB</button>
 
                       <i
                         onClick={() => handleConsole()}
@@ -256,6 +320,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
                         onMouseEnter={() => setHoverConsole(true)}
                         onMouseLeave={() => setHoverConsole(false)}
                       />
+                      
                       {hoverConsole && (
                         <div className='popup ModalCompile'>
                           Show Serial Monitor
@@ -264,8 +329,10 @@ export default function PublicCanvas({ activity, isSandbox }) {
                       <Dropdown overlay={menu}>
                         <i className='fas fa-ellipsis-v'></i>
                       </Dropdown>
+                      
                     </div>
                   </Col>
+                  
                 </Row>
               </Col>
             </Row>
@@ -321,6 +388,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
           onClose={(e) => setCompileError('')}
         ></Alert>
       )}
+      
     </div>
   );
 }

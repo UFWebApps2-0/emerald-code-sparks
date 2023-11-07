@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PublicCanvas from './canvas/PublicCanvas';
 import StudentCanvas from './canvas/StudentCanvas';
 import MentorCanvas from './canvas/MentorCanvas';
@@ -9,6 +9,8 @@ const BlocklyCanvasPanel = ({ activity, isSandbox, setActivity }) => {
   const [value] = useGlobalState('currUser');
 
   const userRole = value.role;
+
+  console.log("Channel in one!");
 
   switch (userRole) {
     case 'DefaultUser':

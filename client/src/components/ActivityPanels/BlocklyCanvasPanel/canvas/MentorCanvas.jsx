@@ -293,6 +293,9 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     </Menu>
   );
 
+
+  var toolBoxActive = true;
+  var id = null;
   function toggleToolBox(){
 
     //message.info("Triggered collapse!");

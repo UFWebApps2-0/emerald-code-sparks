@@ -160,6 +160,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
     </Menu>
   );
 
+    var toolBoxActive = true;
+    var id = null;
+
   function toggleToolBox(){
 
     //message.info("Triggered collapse!");

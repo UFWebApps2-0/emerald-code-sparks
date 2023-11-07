@@ -349,6 +349,9 @@ export default function StudentCanvas({ activity }) {
     </Menu>
   );
 
+
+  var toolBoxActive = true;
+  var id = null;
   function toggleToolBox(){
 
     //message.info("Triggered collapse!");

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Table, Button, Tag } from 'antd';
 import './ActivityLevelReport.less';
-import { useSearchParam } from '../../Utils/useSearchParam';
-import NavBar from '../../components/NavBar/NavBar';
+import { useSearchParam } from '../../../Utils/useSearchParam';
+import NavBar from '../../../components/NavBar/NavBar';
 
 import {
   getSessionsWithFilter,
@@ -12,7 +12,7 @@ import {
   getUnit,
   getGrade,
   getClassroom,
-} from '../../Utils/requests';
+} from '../../../Utils/requests';
 import Form from 'antd/lib/form/Form';
 
 import { Filter } from './ReportFilter';

@@ -1,4 +1,4 @@
-import NavBar from '../../components/NavBar/NavBar';
+import NavBar from '../../../components/NavBar/NavBar';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GroupReport.less';

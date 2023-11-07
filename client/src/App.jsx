@@ -10,9 +10,9 @@ import Classroom from './views/Mentor/Classroom/Classroom';
 import Dashboard from './views/Mentor/Dashboard/Dashboard';
 import NotFound from './views/NotFound';
 import Replay from './views/Replay/Replay';
-import ActivityLevelReport from './views/Researcher/ActivityLevelReport';
-import ActivityLevelReportView from './views/Researcher/ActivityLevelReportView';
-import GroupReport from './views/Researcher/GroupReport';
+import ActivityLevelReport from './views/Researcher/Common/ActivityLevelReport';
+import ActivityLevelReportView from './views/Researcher/Common/ActivityLevelReportView';
+import GroupReport from './views/Researcher/Common/GroupReport';
 import StudyBrowser from './views/Researcher/StudyBrowser';
 import Student from './views/Student/Student';
 import StudentLogin from './views/StudentLogin/StudentLogin';
@@ -33,7 +33,7 @@ const App = () => {
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
         <Route
-          path='/report'
+          path='/researcher'
           element={
             <PrivateRoute>
               <StudyBrowser />
@@ -84,7 +84,7 @@ const App = () => {
           path='/classroom/:id'
           element={
             <PrivateRoute>
-              <Classroom />
+              <Classroom/>
             </PrivateRoute>
           }
         />

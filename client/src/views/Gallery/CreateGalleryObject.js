@@ -1,4 +1,4 @@
-import { handlePostToGallery } from '../../components/ActivityPanels/Utils/helpers';
+import { postGalleryObject } from '../../Utils/requests';
 
 async function createGalleryObject(title, user_name, like_count, view_count, visibility, type) {
 
@@ -16,7 +16,7 @@ async function createGalleryObject(title, user_name, like_count, view_count, vis
   };
 
  try {
-      const response = await handlePostToGallery(JSON.stringify(data),);
+      const response = await postGalleryObject(JSON.stringify(data),);
 
       if (response.status === 201) {
         console.log('Gallery object created successfully in the backend.');

@@ -44,23 +44,18 @@ const GalleryItem = (props) => {
 
     return (
         <>
-            <div className='flex flex-column'>
-                <div className='galleryItem' onClick={() => { showModal() }}>
-                    <div className='header'><div>{title}</div></div>
-                    <img style={{ backgroundColor: 'red' }} />
-                    <div className='flex flex-row'>
-                        <div className='flex flex-column'>
-                            <p>Creator:</p>
-                            <p>{props.item.User_name}</p>
-                            <p>Date:</p>
-                            <p>{props.item.PostedTime}</p>
-                            <p>Views:</p>
-                            <p>{viewCounts}</p>
-                        </div>
-                        <div className='flex flex-column justify-end'>
-                            <p> </p>
-                        </div>
-                        <Like> </Like>
+            <div className='galleryItem' tabIndex={0} onClick={() => { showModal() }}>
+                <div className='header'><div>{title}</div></div>
+                <img style={{ backgroundColor: 'red' }} />
+                <div className='flex flex-row'>
+                    <div className='flex flex-column'>
+                        <p>Creator:</p>
+                        <p>Creator Name</p>
+                        <p>Posted:</p>
+                        <p>Posted Date</p>
+                    </div>
+                    <div className='flex flex-column justify-end'>
+                        <p>7  5</p>
                     </div>
                 </div>
             </div>

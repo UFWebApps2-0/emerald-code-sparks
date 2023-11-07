@@ -6,6 +6,7 @@ import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import './TeacherLogin.less';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
+import './style.css'
 
 
 const CLIENT_ID = "296846904571-jiau68kb1m5ovbjodmho8ei6fe69qbkv.apps.googleusercontent.com";
@@ -26,7 +27,7 @@ function Login() {
         <GoogleLogin
           className="googleButton"
           clientID={CLIENT_ID}
-          buttonText="Sign-up with Google"
+          buttonText="Google Sign-up"
           onSuccess={onSucc}
           onFailure={onFail}
           cookiePolicy={'single_host_origin'}

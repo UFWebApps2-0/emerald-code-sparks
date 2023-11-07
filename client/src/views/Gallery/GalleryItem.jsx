@@ -40,17 +40,21 @@ const GalleryItem = (props) => {
             </div>
             <div className='gallery-modal-holder'>
                 <Modal
+                    className='galleryItem-expanded'
                     title={title}
                     open={visible}
                     onCancel={handleCancel}
-                    width='50vw'
+                    width='90vw'
+                    maskClosable={false}
+                    cancelText='Close'
+                    footer={null}
                 >
                     <div className='flex flex-row'>
                         <div className='flex flex-column'>
                             <img className='ooIMG'></img>
                         </div>
                         <div className='flex flex-column'>
-                            <DiscussionBoard/>
+                            <DiscussionBoard />
                         </div>
 
                     </div>

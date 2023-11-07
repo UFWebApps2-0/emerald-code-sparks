@@ -1,26 +1,27 @@
 import react from 'react';
 import React, { useState } from 'react';
+import likeImage from './like.png';
+import unlikedImage from './unlike.png';
 
 const Like = () => {
-    //let like_count = 0;
     const [like_count, set_like_count] = useState(0);
     const [liked, set_liked] = useState(false);
 
     function like_feature() {
         if (!liked) {
             set_like_count(like_count + 1);
-            set_liked(true);
-        }
-        else {
+        } else {
             set_like_count(like_count - 1);
-            set_liked(false);
         }
+        set_liked(!liked); // Toggle the liked state
     }
 
     return (
         <>
-        <button onClick = {() => {like_feature()}}>Like</button> 
-        <p> Like count: {like_count} </p>
+            <button className="like-button" onClick={like_feature}>
+                <img src={liked ? likeImage : unlikedImage} alt="Like" />
+            </button>
+            <p> Like count: {like_count} </p>
         </>
     );
 }

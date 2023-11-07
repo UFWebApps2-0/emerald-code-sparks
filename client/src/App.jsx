@@ -35,7 +35,7 @@ const App = () => {
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
         <Route path='/researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
           {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
-          <Route path='/dashboard' element={<ResearcherDashboard/>}/>
+          <Route index element={<ResearcherDashboard/>}/>
         </Route>
         <Route path='/activityLevel' element={<PrivateRoute><ActivityLevelReport /></PrivateRoute>}/>
         <Route path='/activityLevel/:id' element={ <PrivateRoute> <ActivityLevelReportView /> </PrivateRoute> }/>

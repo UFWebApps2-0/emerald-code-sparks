@@ -27,15 +27,18 @@ function GalleryItem({ filterText, viewCountsRecord }) {
 //Detect if the project is clicked. 
 //should change the red block to the img of galleryItem in the future.
   const recordList = viewCountsRecord.map((directory) => {
-    return (
+    return (		  
 	
-	<div key={directory.Id} onClick={() => handleClicked(directory)}>
-	<div className='header'><div>{directory.Name}</div></div>
+		  <div key={directory.Id} onClick={() => handleClicked(directory)}>
+			<div className='header'><div>{directory.Name}</div></div>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{ backgroundColor: 'red', width: '100px', height: '100px' }}></div>
+		  </div>
 
         <p >Creator: {directory.Creator}</p>
         <p>Posted Time: {directory.PostedTime}</p>
         <p>Views: {viewCounts[directory.Id] || 0}</p>
+		<br/>
       </div>
 	  
     );

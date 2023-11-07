@@ -2,7 +2,7 @@ import { message } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar'; 
-import './ParentSignup.less'; 
+import './Parent.less'; 
 
 const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);

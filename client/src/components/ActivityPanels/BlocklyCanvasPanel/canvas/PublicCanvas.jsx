@@ -160,9 +160,6 @@ export default function PublicCanvas({ activity, isSandbox }) {
     </Menu>
   );
 
-
-  var toolBoxActive = true;
-  var id = null
   function toggleToolBox(){
 
     //message.info("Triggered collapse!");
@@ -306,12 +303,13 @@ export default function PublicCanvas({ activity, isSandbox }) {
                         setHoverCompile={setHoverCompile}
                         handleCompile={handleCompile}
                       />
+
+                      <button onClick={toggleToolBox}>TB</button>
                       {hoverCompile && (
                         <div className='popup ModalCompile'>
                           Upload to Arduino
                         </div>
                       )}
-                      <button onClick={toggleToolBox}>TB</button>
 
                       <i
                         onClick={() => handleConsole()}

@@ -82,7 +82,7 @@ export default function Admin() {
             />    
             <div id='cardholder'>
                 <h1>Teacher Management Tool</h1>
-                <div id='description' onClick={orgCreateClick}>View CurrentTeachers</div>      
+                <div id='description' onClick={orgCreateClick}>View Current Teachers</div>      
             </div>
         </div>
 

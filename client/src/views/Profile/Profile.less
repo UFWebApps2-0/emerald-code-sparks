@@ -1,0 +1,88 @@
+@import '../../assets/style.less';
+
+.profile-page-grid {
+  display: grid;
+  /* Define 3 columns with the desired width ratio */
+  grid-template-columns: 1.5fr 1.5fr 3fr;
+  /* Define 3 rows with the desired height ratio */
+  grid-template-rows: 1fr 2fr 1;
+  /* Add some gap between cells */
+  gap: 1rem;
+
+  background-color: #3D5C82;
+}
+
+.profile-page-section {
+  padding: 1rem;
+
+  border-radius: 1rem;
+  background-color: #61a8dc;
+}
+
+.profile-page-item-border {
+  border-style: solid;
+  border-color: #0275f9;
+  border-width: 0.2rem;
+}
+
+.profile-page-round-large {
+  border-radius: 2rem;
+}
+
+.profile-page-round {
+  border-radius: 1rem;
+}
+
+.profile-badge-display-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* Define 3 columns with the desired width ratio */
+  grid-template-rows: 2fr 2fr 2fr 2fr;
+  /* Define 3 rows with the desired height ratio */
+  gap: 2rem;
+  /* Add some gap between cells */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.profile-card {
+  grid-row: span 2;
+  grid-column: span 1;
+}
+
+.profile-biography-section {
+  grid-row: span 1;
+  grid-column: span 2;
+}
+
+.profile-badge-display {
+  grid-row: span 1;
+  grid-column: span 2;
+}
+
+.profile-project-display {
+  grid-row: span 1;
+  grid-column: span 2;
+}
+
+.profile-available-badges {
+  grid-row: span 1;
+  grid-column: span 1;
+}
+
+// Todo Should move to separate component
+.profile-badge-display-slot {
+  grid-row: span 3;
+  grid-column: span 1;
+
+  background-color: #f0d65b;
+}
+
+.profile-badge-display-change-button {
+  grid-row: span 1;
+  grid-column: span 1;
+
+  background-color: #f0d65b;
+  text-align: center;
+}

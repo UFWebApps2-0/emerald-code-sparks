@@ -4,13 +4,14 @@ import "./Admin.less";
 import NavBar from "../../components/NavBar/NavBar";
 import LessonModal from "../../components/LessonModal/LessonModal";
 import TeacherModal from "../../components/TeacherModal/TeacherModal";
-//import { useGlobalState } from "../../../Utils/userState";
+import { useGlobalState } from "../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
-    //handle click on create org button
+    const [value] = useGlobalState('currUser');
     const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
     const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
+    //handle click on create org button
     function orgCreateClick(){
         alert("you clicked the add org button! functionality coming soon");
     }
@@ -41,13 +42,10 @@ export default function Admin() {
         setIsTeacherModalOpen(true)
     }
 
-    
-
-
     return (
         <div className='container nav-padding'>
             <NavBar />
-            <div id='main-header'>Welcome, [insertname]</div> {/* replace 'admin' with role.name */}
+            <div id='main-header'>Welcome, {value.name}</div>
             {/*create org button*/}
                 {/*gonna require some kind of connection to org file*/}
             <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to be moved to the right spot and do smth when clicked/hovered over */}

@@ -1,0 +1,88 @@
+@import "../../assets/style.less";
+
+.notification-container {
+  background-color: #colors[primary];
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 100vw;
+  text-align: center;
+  padding: 5vh 5vw;
+}
+
+.notification-box {
+  background-color: #colors[tertiary];
+  border-radius: 15px;
+  border: 2px solid #colors[secondary];
+  padding: 20px;
+  margin: 2vh auto;
+  text-align: left;
+}
+
+.notification-title {
+  background-color: #colors[secondary];
+  color: #colors[text-secondary];
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 80px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.notification-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #eee;
+  background: #fafafa;
+}
+
+.notification-button {
+  background: darken(#colors[tertiary], 30%);
+  border: 2px solid #colors[secondary];
+  color: #colors[text-secondary];
+  font-weight: 550;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 10px 0;
+  transition: background-color 0.25s, color 0.25s;
+  &:hover {
+    background: lighten(#colors[tertiary], 10%);
+    color: lighten(#colors[secondary], 20%);
+  }
+}
+
+.tabs {
+  text-align: left;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  display: inline-block;
+  background: #f0f0f0;
+  margin-right: 5px;
+  border: none;
+  outline: none;
+  transition: background-color 0.25s;
+  &:hover {
+    background: #ddd;
+  }
+}
+
+.tab.active {
+  background: #ddd;
+}
+
+.tab-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: none;
+  &.active {
+    display: block;
+  }
+}

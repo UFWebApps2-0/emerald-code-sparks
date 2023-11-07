@@ -3,7 +3,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import './MissedClass.less'
 import { Link } from 'react-router-dom'
 
-const [announcements, setAnnouncements] = React.useState([]);
+// const [announcements, setAnnouncements] = React.useState([]);
 
 const LectureMaterials = ({ resources }) => {
     return (
@@ -40,7 +40,7 @@ const LectureMaterials = ({ resources }) => {
   };
 
 
-const MissedClassDetails = () => {
+  const MissedClassDetails = () => {
     const missedDetails = {
         date: 'YYYY-MM-DD', 
         topic: 'The topic covered in the missed',
@@ -79,13 +79,14 @@ const MissedClassDetails = () => {
             <div id='header'>
                 <div>What happened when you were gone</div>
             </div>
-            <div id="lecture-materials-column" className="column">
+            <div id="class-content">
+              <div id="lecture-materials-column" className="column">
                 <LectureMaterials resources={missedDetails.resources} />
-            </div>
-            <div id="divider"></div>
-            <div id="announcements-column" className="column">
+              </div>
+              <div id="announcements-column" className="column">
                 <Announcements announcements={missedDetails.announcements || []} />
-            </div>
+              </div>
+          </div>
         </div>
     );
 };

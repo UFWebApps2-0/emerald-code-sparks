@@ -1,6 +1,6 @@
 import React from 'react';
 import './GalleryItem.less';
-
+import Like from './like';
 
 const GalleryItem = () => (
     <div className='container nav-padding'>
@@ -18,6 +18,7 @@ const GalleryItem = () => (
                     <div className='flex flex-column justify-end'>
                         <p>7  5</p>
                     </div>
+                    <Like> </Like>
                 </div>
             </div>
         </div>

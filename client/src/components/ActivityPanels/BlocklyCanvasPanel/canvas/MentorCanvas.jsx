@@ -27,6 +27,10 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
   const [hoverCompile, setHoverCompile] = useState(false);
   const [hoverConsole, setHoverConsole] = useState(false);
   const [showSaveAsModal, setShowSaveAsModal] = useState(false);
+  
+     //set visibility What is the default option?
+  const [selectedOption, setSelectedOption] = useState('Organizational');
+  
   const [showConsole, setShowConsole] = useState(false);
   const [showPlotter, setShowPlotter] = useState(false);
   const [plotData, setPlotData] = useState([]);
@@ -128,6 +132,13 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     if (workspaceRef.current.redoStack_.length > 0)
       workspaceRef.current.undo(true);
   };
+  
+  
+   //Set visibility
+  const handleVisibilityClicked = (event) => {
+		 setSelectedOption(event.target.value);
+	};
+	
 
   const handleConsole = async () => {
     if (showPlotter) {
@@ -338,6 +349,16 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
                         <i className='fas fa-angle-down' id='caret'></i>
                       </Col>
                     ) : null}
+					
+					
+					<Col className='flex-row'> Visibility : {` `}
+				    <select value={selectedOption} onChange={handleVisibilityClicked}>
+					<option value="Public">Public</option>
+					<option value="Organizational">Organizational</option>
+					<option value="Classroom">Classroom</option>
+					</select>
+					</Col>					
+					
                     <Col className='flex flex-row' id='redo-undo-container'>
                       <button
                         onClick={handleUndo}

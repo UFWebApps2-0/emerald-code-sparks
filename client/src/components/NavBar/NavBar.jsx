@@ -105,6 +105,15 @@ export default function NavBar() {
           &nbsp; Gallery
         </Menu.Item>) : null
       }
+	  
+	 {shouldShowRoute('GalleryUploader') ? (
+        <Menu.Item key='10' onClick={() => handleRouteChange(routes.GalleryUploader)}> ///
+          <i className='fa fa-images' />
+          &nbsp; Gallery Uploader
+        </Menu.Item>) : null
+      }
+
+	  
     </Menu>
   );
 

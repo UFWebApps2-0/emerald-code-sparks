@@ -52,8 +52,6 @@ function GalleryUploader()
 		<h1>Publish Setting</h1>
 		<label>Role: {<p>roleOfpublisher</p>}</label>
 		<br/>
-		<label>Select a file: </label>
-		<br/>
 		<label>Visibility:</label>
 		<br/>
 			<select value={selectedOption} onChange={handleOptionClicked}>
@@ -62,11 +60,12 @@ function GalleryUploader()
 				<option value="Classroom">Classroom</option>
 			</select>
 			<br/>
-		<button onClick={handleSubmit}>Submit</button>
-		<br/>
-		<h1>File Upload Page</h1>
 		<input type="file" onChange={handleFileSelect} />
 		<button onClick={handleFileUpload}>Upload</button>
+		<br/>
+		<br/>
+		<button onClick={handleSubmit}>Submit</button>
+		<br/>
 	</div>
 	</div>
 	);

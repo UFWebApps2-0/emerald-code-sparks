@@ -35,6 +35,8 @@ export default function StudentCanvas({ activity }) {
   const [saves, setSaves] = useState({});
   const [lastSavedTime, setLastSavedTime] = useState(null);
   const [lastAutoSave, setLastAutoSave] = useState(null);
+    //set visibility What is the default option?
+  const [selectedOption, setSelectedOption] = useState('Classroom');
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const navigate = useNavigate();
@@ -238,6 +240,13 @@ export default function StudentCanvas({ activity }) {
       pushEvent('redo');
     }
   };
+  
+  
+  //Set visibility
+  const handleVisibilityClicked = (event) => {
+		 setSelectedOption(event.target.value);
+	};
+  
 
   const handleConsole = async () => {
     if (showPlotter) {
@@ -378,7 +387,15 @@ export default function StudentCanvas({ activity }) {
                     </button>
                   </Col>
                   <Col flex='auto' />
-
+				  
+				  <Col flex='auto'> Visibility : {` `}
+				    <select value={selectedOption} onChange={handleVisibilityClicked}>
+					<option value="Public">Public</option>
+					<option value="Organizational">Organizational</option>
+					<option value="Classroom">Classroom</option>
+					</select>
+					</Col>
+					
                   <Col flex={'300px'}>
                     {lastSavedTime ? `Last changes saved ${lastSavedTime}` : ''}
                   </Col>
@@ -455,6 +472,7 @@ export default function StudentCanvas({ activity }) {
                             <div className='popup ModalCompile4'>Redo</div>
                           )}
                         </button>
+	
                       </Col>
                     </Row>
                   </Col>

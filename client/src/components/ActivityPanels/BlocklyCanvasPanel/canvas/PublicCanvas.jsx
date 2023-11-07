@@ -27,6 +27,8 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const [connectionOpen, setConnectionOpen] = useState(false);
   const [selectedCompile, setSelectedCompile] = useState(false);
   const [compileError, setCompileError] = useState('');
+  //set visibility What is the default option?
+  const [selectedOption, setSelectedOption] = useState('Public');
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const workspaceRef = useRef(null);
@@ -58,6 +60,15 @@ export default function PublicCanvas({ activity, isSandbox }) {
     if (workspaceRef.current.redoStack_.length > 0)
       workspaceRef.current.undo(true);
   };
+  
+  //Set visibility
+  const handleVisibilityClicked = (event) => {
+		 setSelectedOption(event.target.value);
+	};
+  
+  
+  
+  
 
   const handleConsole = async () => {
     if (showPlotter) {
@@ -183,6 +194,14 @@ export default function PublicCanvas({ activity, isSandbox }) {
                     </Row>
                   </Col>
                   <Col flex='auto' />
+				  
+				  <Col flex={'200px'}> Visibility : {` `}
+				    <select value={selectedOption} onChange={handleVisibilityClicked}>
+					<option value="Public">Public</option>
+					<option value="Organizational">Organizational</option>
+					<option value="Classroom">Classroom</option>
+					</select>
+					</Col>
 
                   <Col flex={'200px'}>
                     <Row>

@@ -20,6 +20,7 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import Gallery from './views/Gallery/Gallery';
+import GalleryUploader from './views/Gallery/GalleryUploader';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
         <Route path='/gallery' element={<Gallery />} />
+		<Route path='/galleryuploader' element={<GalleryUploader />} />
         <Route
           path='/report'
           element={

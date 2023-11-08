@@ -1,4 +1,5 @@
 import React from 'react';
+import Badge from './Badge';
 import './BadgeTable.less';
 
 const BadgeTable = () => {
@@ -13,8 +14,13 @@ const BadgeTable = () => {
     <div className="grid-table">
       {data.map((row, rowIndex) =>
         row.map((cell, cellIndex) => (
-          <div className="grid-cell" key={`cell-${rowIndex}-${cellIndex}`}>
-            <span className="badge">{cell}</span>
+          <div className="grid-cell " key={`cell-${rowIndex}-${cellIndex}`}>
+            {/* TODO change hardcoded badge prop values to cell data values */}
+            <Badge 
+                imageUrl={"https://media.discordapp.net/attachments/517010400860962831/1171160597463838840/image.png"}
+                name={"Complete 100 Python exercises"}
+                progressPercent={99}  
+            />
           </div>
         ))
       )}

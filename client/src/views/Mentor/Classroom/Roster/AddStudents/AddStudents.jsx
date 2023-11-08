@@ -5,6 +5,7 @@ import React, { useState } from "react"
 import { CSVReader } from "react-papaparse"
 import { addStudent, addStudents } from "../../../../../Utils/requests"
 import "./AddStudents.less"
+import emoji from "emoji-dictionary";
 
 export default function AddStudents({ classroomId, addStudentsToTable }) {
   const [name, setName] = useState("")
@@ -64,22 +65,30 @@ export default function AddStudents({ classroomId, addStudentsToTable }) {
       message.error(res.err)
     }
   }
-
-  const handleCsvAdd = async () => {
-    const students = await uploadedRoster.map(student => {
-      return {
-        name: student.name.trim(),
-        character: student.animal.trim(),
-      }
-    })
-    const res = await addStudents(students, classroomId)
-    if (res.data) {
-      addStudentsToTable(res.data)
-      message.success("Uploaded roster added to classroom successfully.")
-    } else {
-      message.error(res.err)
-    }
+  function emojiFromName(name) {
+    const emojiSymbol = emoji.getUnicode(name);
+    return emojiSymbol || name; // Return the symbol or the original text as a fallback
   }
+  const handleCsvAdd = async () => {
+    const students = await Promise.all(uploadedRoster.map(async student => {
+      const name = student.name.trim();
+      const animal = student.animal.trim();
+      const emojiSymbol = await emojiFromName(animal); // Convert the animal name to emoji
+  
+      return {
+        name,
+        character: emojiSymbol || animal, // Use emoji if available, otherwise use the original name
+      };
+    }));
+  
+    const res = await addStudents(students, classroomId);
+    if (res.data) {
+      addStudentsToTable(res.data);
+      message.success("Uploaded roster added to classroom successfully.");
+    } else {
+      message.error(res.err);
+    }
+  };
 
   const columns = [
     {

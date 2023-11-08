@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/07/2023 6:55:47 PM"
+    "x-generation-date": "11/08/2023 4:28:35 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3318,7 +3318,7 @@
         }
       }
     },
-    "/gallery-object": {
+    "/gallery-posts": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -3370,7 +3370,7 @@
         },
         "summary": "",
         "tags": [
-          "Gallery-object"
+          "Gallery-post"
         ],
         "parameters": [
           {
@@ -3562,7 +3562,7 @@
         },
         "summary": "",
         "tags": [
-          "Gallery-object"
+          "Gallery-post"
         ],
         "requestBody": {
           "description": "",
@@ -3570,18 +3570,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/NewGallery-post"
               }
             }
           }
         }
       }
     },
-    "/gallery-object/{id}": {
+    "/gallery-posts/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -3633,7 +3629,64 @@
         },
         "summary": "",
         "tags": [
-          "Gallery-object"
+          "Gallery-post"
+        ],
+        "parameters": []
+      }
+    },
+    "/gallery-posts/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Gallery-post"
         ],
         "parameters": [
           {
@@ -3699,7 +3752,7 @@
         },
         "summary": "",
         "tags": [
-          "Gallery-object"
+          "Gallery-post"
         ],
         "requestBody": {
           "description": "",
@@ -3707,15 +3760,74 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
+                "$ref": "#/components/schemas/NewGallery-post"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
           }
         },
+        "summary": "",
+        "tags": [
+          "Gallery-post"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -12821,6 +12933,202 @@
             "items": {
               "type": "string"
             }
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Gallery-object": {
+        "required": [
+          "id",
+          "objectId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "user_name": {
+            "type": "string"
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "like_count": {
+            "type": "integer"
+          },
+          "view_count": {
+            "type": "integer"
+          },
+          "discussion_board": {
+            "type": "object"
+          },
+          "objectId": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "project",
+              "block",
+              "lesson"
+            ]
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "organization",
+              "classroom",
+              "public"
+            ]
+          }
+        }
+      },
+      "NewGallery-object": {
+        "required": [
+          "objectId"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "user_name": {
+            "type": "string"
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "like_count": {
+            "type": "integer"
+          },
+          "view_count": {
+            "type": "integer"
+          },
+          "discussion_board": {
+            "type": "object"
+          },
+          "objectId": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "project",
+              "block",
+              "lesson"
+            ]
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "organization",
+              "classroom",
+              "public"
+            ]
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Gallery-post": {
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "User_name": {
+            "type": "string"
+          },
+          "like_count": {
+            "type": "integer"
+          },
+          "view_count": {
+            "type": "integer"
+          },
+          "discussion_board": {
+            "type": "object"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "Public",
+              "Organization",
+              "Classroom"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Project",
+              "Block",
+              "Lesson"
+            ]
+          },
+          "object_id": {
+            "type": "integer"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewGallery-post": {
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "User_name": {
+            "type": "string"
+          },
+          "like_count": {
+            "type": "integer"
+          },
+          "view_count": {
+            "type": "integer"
+          },
+          "discussion_board": {
+            "type": "object"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "Public",
+              "Organization",
+              "Classroom"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Project",
+              "Block",
+              "Lesson"
+            ]
+          },
+          "object_id": {
+            "type": "integer"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"

@@ -41,9 +41,6 @@
         "Block",
         "Lesson"
       ]
-    },
-    "object_id": {
-      "type": "integer"
     }
   }
 }

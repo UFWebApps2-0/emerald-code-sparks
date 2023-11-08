@@ -4,6 +4,7 @@ import "./Admin.less";
 import NavBar from "../../components/NavBar/NavBar";
 import LessonModal from "../../components/LessonModal/LessonModal";
 import TeacherModal from "../../components/TeacherModal/TeacherModal";
+import Organization from "../../components/Organization/Organization";
 //import { useGlobalState } from "../../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ export default function Admin() {
     //handle click on create org button
     const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
     const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
+    const navigate = useNavigate();
     function orgCreateClick(){
         alert("you clicked the add org button! functionality coming soon");
     }
@@ -41,6 +43,13 @@ export default function Admin() {
         setIsTeacherModalOpen(true)
     }
 
+    const viewOrganizationsClick = () => {
+        navigate('Organization');
+        return(
+            <Organization/>
+        )
+    };
+
     
 
 
@@ -54,7 +63,7 @@ export default function Admin() {
             {/*add custom element adminSubHeader?*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Organizations</div>     
+                <div id='description' onClick={viewOrganizationsClick}>View Current Organizations</div>     
                 
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}

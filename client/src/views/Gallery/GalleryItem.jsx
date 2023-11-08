@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import './GalleryItem.less';
+import Like from './like';
 import DiscussionBoard from './DiscussionBoard';
 
 //Wrapper item needs to be a useState for it to get dynamically rendered
@@ -36,6 +37,7 @@ const GalleryItem = (props) => {
                     <div className='flex flex-column justify-end'>
                         <p>7  5</p>
                     </div>
+                    <Like> </Like>
                 </div>
             </div>
             <div className='gallery-modal-holder'>
@@ -50,7 +52,7 @@ const GalleryItem = (props) => {
                             <img className='ooIMG'></img>
                         </div>
                         <div className='flex flex-column'>
-                            <DiscussionBoard/>
+                            <DiscussionBoard />
                         </div>
 
                     </div>

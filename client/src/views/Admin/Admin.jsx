@@ -11,9 +11,15 @@ export default function Admin() {
     const [value] = useGlobalState('currUser');
     const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
     const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
+    const navigate = useNavigate();
     //handle click on create org button
     function orgCreateClick(){
         alert("you clicked the add org button! functionality coming soon");
+    }
+
+    function orgClick(id) {
+        console.log("Clicked!")
+        navigate(`/admin/${id}`);
     }
 
     const lessonCreateClick = () => {
@@ -52,7 +58,9 @@ export default function Admin() {
             {/*add custom element adminSubHeader?*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Organizations</div>     
+                <div id='description' onClick={orgCreateClick}>View Current Organizations</div>
+                {/* We'll run an async function to get all organizations. then map through the below div. */}
+                <div onClick={()=> orgClick("SampleOrgID")}>Sample Organization</div>
                 
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}

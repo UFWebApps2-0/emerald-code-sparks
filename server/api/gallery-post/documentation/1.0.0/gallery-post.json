@@ -566,9 +566,6 @@
               "Lesson"
             ]
           },
-          "object_id": {
-            "type": "integer"
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -607,9 +604,6 @@
               "Block",
               "Lesson"
             ]
-          },
-          "object_id": {
-            "type": "integer"
           },
           "published_at": {
             "type": "string",

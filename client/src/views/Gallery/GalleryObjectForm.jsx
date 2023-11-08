@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select, Modal } from "antd";
 import createGalleryObject from "../Gallery/CreateGalleryObject";
 import "./GalleryObjectForm.less";
 import { useGlobalState } from '../../Utils/userState';
-
 
 const { Option } = Select;
 
 function GalleryObjectForm() {
   const [form] = Form.useForm();
-  const [formVisible, setFormVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleCreateGalleryObject = () => {
-    setFormVisible(!formVisible); // Toggle the form visibility
+    setModalVisible(true); // Show the modal
   };
 
   const handleFormSubmit = async (values) => {
@@ -22,16 +21,24 @@ function GalleryObjectForm() {
     //const userName = value.name;
 
     // DEFAULT USERNAME FOR NOW
+    if (values.visibility == null) {
+      values.visibility = "Public";
+    }
     createGalleryObject(values.title, "test student", 0, 0, values.visibility, 'Project');
     console.log("Submitted values:", values);
     form.resetFields();
-    setFormVisible(false); // Hide the form after submission
+    setModalVisible(false); // Hide the modal after submission
   };
 
   return (
-    <div className={`GalleryObjectFormWrapper ${formVisible ? "visible" : ""}`}>
+    <div className="GalleryObjectFormWrapper">
       <Button onClick={handleCreateGalleryObject}>Publish to Gallery</Button>
-      {formVisible && (
+      <Modal
+        title="Publish to Gallery"
+        visible={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        footer={null}
+      >
         <Form form={form} onFinish={handleFormSubmit}>
           <div className="GalleryObjectForm">
             <Form.Item
@@ -55,7 +62,7 @@ function GalleryObjectForm() {
             </Form.Item>
           </div>
         </Form>
-      )}
+      </Modal>
     </div>
   );
 }

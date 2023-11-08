@@ -22,7 +22,8 @@ function GalleryObjectForm() {
     //const userName = value.name;
 
     // DEFAULT USERNAME FOR NOW
-    createGalleryObject(values.title, "test student", 0, 0, values.visibility, "Project");
+    createGalleryObject(values.title, "test student", 0, 0, values.visibility, 'Project');
+    console.log("Submitted values:", values);
     form.resetFields();
     setFormVisible(false); // Hide the form after submission
   };
@@ -41,10 +42,10 @@ function GalleryObjectForm() {
               <Input placeholder="Name the project" />
             </Form.Item>
             <Form.Item label="Visibility" name="visibility">
-              <Select defaultValue="public">
-                <Option value="public">Public</Option>
-                <Option value="organization">Organization</Option>
-                <Option value="classroom">Classroom</Option>
+              <Select defaultValue="Public">
+                <Option value="Public">Public</Option>
+                <Option value="Organization">Organization</Option>
+                <Option value="Classroom">Classroom</Option>
               </Select>
             </Form.Item>
             <Form.Item>

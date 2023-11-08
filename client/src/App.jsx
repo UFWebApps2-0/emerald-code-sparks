@@ -42,7 +42,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
-          <Route path='/admin/:orgId' element={<Organization />} />
+        <Route path='/admin/:orgId' element={<Organization />} />
         <Route
           path='/report'
           element={

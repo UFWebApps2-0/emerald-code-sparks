@@ -14,13 +14,17 @@ export default function Admin() {
     const navigate = useNavigate();
     //handle click on create org button
     function orgCreateClick(){
-        alert("you clicked the add org button! functionality coming soon");
+       alert("you clicked the add org button! functionality coming soon");
     }
 
     function orgClick(id) {
-        console.log("Clicked!")
-        navigate(`/admin/${id}`);
+        const organization = organizations.find(org => org.id === id);
+        if(organization){
+            console.log("Clicked!")
+            navigate(`/admin/${organization.id}`);
+        }
     }
+
 
     const lessonCreateClick = () => {
         setIsLessonModalOpen(true);
@@ -29,6 +33,10 @@ export default function Admin() {
     const closeLessonModal = () => {
         setIsLessonModalOpen(false);
     };
+
+    function lessonTileClick(id) {
+        alert("you clicked the lesson tile! functionality coming soon!");
+    }
 
     const submitLesson = (lessonData) => {
         console.log(lessonData);
@@ -48,6 +56,14 @@ export default function Admin() {
         setIsTeacherModalOpen(true)
     }
 
+    function teacherTileClick() {
+        alert("you clicked the teacher tile! functionality coming soon!");
+    }
+
+    const organizations = [
+        { id: "SampleOrgID", name: "Sample Organization"}, 
+    ];
+
     return (
         <div className='container nav-padding'>
             <NavBar />
@@ -58,9 +74,13 @@ export default function Admin() {
             {/*add custom element adminSubHeader?*/}
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Organizations</div>
+                <div>
+                    {organizations.map(organization => (
+                         <div id='description' onClick={() => orgClick(organization.id)}
+                         >{organization.name}</div>
+                    ))}
+                </div>
                 {/* We'll run an async function to get all organizations. then map through the below div. */}
-                <div onClick={()=> orgClick("SampleOrgID")}>Sample Organization</div>
                 
             {/*generate org tiles*/}
                 {/*have them redirect to org page or org management page?*/}
@@ -78,7 +98,7 @@ export default function Admin() {
             />            
             <div id='cardholder'>
                 <h1>Create Lesson</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Lessons</div>      
+                <div id='description' onClick={lessonTileClick}>View Current Lessons</div>      
             </div>
             <button id='createOrgButton' onClick={teacherTransferClick} style={{ marginTop: '20px' }}> + </button>
             <TeacherModal
@@ -88,7 +108,7 @@ export default function Admin() {
             />    
             <div id='cardholder'>
                 <h1>Teacher Management Tool</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Teachers</div>      
+                <div id='description' onClick={teacherTileClick}>View Current Teachers</div>      
             </div>
         </div>
 

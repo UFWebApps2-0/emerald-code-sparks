@@ -14,6 +14,7 @@ import {
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 import {Search} from './Search';
+import CodePopup from "./PopUp";
 //import {window} from './Exporter';
 
 let plotId = 1;
@@ -28,6 +29,15 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const [connectionOpen, setConnectionOpen] = useState(false);
   const [selectedCompile, setSelectedCompile] = useState(false);
   const [compileError, setCompileError] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   const [filterText,filterChange] = useState(''); //Really want access to filter text. may have to make an external prop just to export it
 
@@ -163,6 +173,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
 
   return (
     <div id='horizontal-container' className='flex flex-column'>
+      <Col>
+
+      </Col>
       <div className='flex flex-row'>
         <div
           id='bottom-container'
@@ -244,8 +257,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
                     </Row>
 
                   </Col>
-                  <Search
-                      filterUpdate = {filterUpdate}/>
+
                   <Col flex={'230px'}>
                     <div
                       id='action-btn-container'
@@ -325,6 +337,10 @@ export default function PublicCanvas({ activity, isSandbox }) {
             ))
         }
       </xml>
+      <div>
+        <button className="buttonPop" onClick={openPopup}>Inject Code</button>
+      </div>
+      <CodePopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={filterUpdate}/>
 
       {compileError && (
         <Alert
@@ -334,6 +350,8 @@ export default function PublicCanvas({ activity, isSandbox }) {
           onClose={(e) => setCompileError('')}
         ></Alert>
       )}
+
     </div>
+
   );
 }

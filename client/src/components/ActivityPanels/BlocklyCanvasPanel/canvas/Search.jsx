@@ -16,9 +16,8 @@ function Search({filterUpdate}) {
     // TODO: Add a ref attribute to the input tag
     // TODO: Add an onChange attribute to the input tag   <form onSubmit={HandleSubmit}>
     <form> 
-      <input 
+      <textarea
         ref = {input}
-        type="text"
         placeholder="C++ code here"
         onChange = {() => handleChange()}
       />

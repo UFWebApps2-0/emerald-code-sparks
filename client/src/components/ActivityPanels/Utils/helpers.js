@@ -50,6 +50,7 @@ export const getArduino = (workspaceRef, shouldAlert = true) => {
   console.log(code);
   console.log(typeof(code));
   return code;
+
 };
 
 let intervalId;

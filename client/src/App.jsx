@@ -20,6 +20,7 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import Admin from './views/Admin/Admin';
+import Organization from './views/Organization/Organization';
 
 const App = () => {
   return (
@@ -33,7 +34,6 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
-          {/*make it private*/}
         <Route
           path='/admin'
           element={
@@ -42,6 +42,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
+          <Route path='/admin/:orgId' element={<Organization />} />
         <Route
           path='/report'
           element={

@@ -1,4 +1,3 @@
-import react from 'react';
 import React, { useState } from 'react';
 import likeImage from './like.png';
 import unlikedImage from './unlike.png';

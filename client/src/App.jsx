@@ -12,6 +12,7 @@ import NotFound from './views/NotFound';
 import Replay from './views/Replay/Replay';
 import ActivityLevelReport from './views/Researcher/ActivityLevelReport';
 import ActivityLevelReportView from './views/Researcher/ActivityLevelReportView';
+import CreateStudyPage from './views/Researcher/CreateStudyPage';
 import GroupReport from './views/Researcher/GroupReport';
 import Report from './views/Researcher/Report';
 import Student from './views/Student/Student';
@@ -37,6 +38,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Report />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/createStudyPage'
+          element={
+            <PrivateRoute>
+              <CreateStudyPage />
             </PrivateRoute>
           }
         />

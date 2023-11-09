@@ -25,40 +25,39 @@ import AppLayout from './AppLayout';
 const App = () => {
   return (
     <>
-          <Routes>
-            <Route path='/' element={<AppLayout/>}>
-              <Route index element={<Home />} />
-              <Route path='about' element={<About />} />
-              <Route path='teacherlogin' element={<TeacherLogin/>} />
-              <Route path='forgot-password' element={<ForgetPassword />} />
-              <Route path='reset-password' element={<ResetPassword />} />
-              <Route path='login' element={<StudentLogin />} />
-              <Route path='replay/:saveID' element={<Replay />} />
-              <Route path='sandbox' element={<BlocklyPage isSandbox={true} />} />
-              <Route path='activityLevel' element={<PrivateRoute><ActivityLevelReport /></PrivateRoute>}/>
-              <Route path='activityLevel/:id' element={ <PrivateRoute> <ActivityLevelReportView /> </PrivateRoute> }/>
-              <Route path='group-report' element={ <PrivateRoute> <GroupReport /> </PrivateRoute> }/>
-              <Route path='dashboard' element={ <PrivateRoute> <Dashboard /> </PrivateRoute> }/>
-              <Route path='student' element={ <PrivateRoute> <Student /> </PrivateRoute> }/>
-              <Route path='workspace' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
-              <Route path='activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
-              <Route path='ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
-              <Route path='bugreport' element={<BugReport />} />
-              {/* Researcher Layout / Nested Navbar */}
-              {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
-              <Route path='researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
-                <Route index element={<ResearcherDashboard/>}/>
-              </Route>
-            </Route>
-            
-            {/* mentor navbar variant */}
-            {/* TODO: Add mentor navbar variant */}
-            <Route path='/classroom/:id' element={ <PrivateRoute> <Classroom/> </PrivateRoute> }/>
+      <Routes>
+        <Route path='/' element={<AppLayout/>}>
+          <Route index element={<Home />} />
+          <Route path='about' element={<About />} />
+          <Route path='teacherlogin' element={<TeacherLogin/>} />
+          <Route path='forgot-password' element={<ForgetPassword />} />
+          <Route path='reset-password' element={<ResetPassword />} />
+          <Route path='login' element={<StudentLogin />} />
+          <Route path='replay/:saveID' element={<Replay />} />
+          <Route path='sandbox' element={<BlocklyPage isSandbox={true} />} />
+          <Route path='activityLevel' element={<PrivateRoute><ActivityLevelReport /></PrivateRoute>}/>
+          <Route path='activityLevel/:id' element={ <PrivateRoute> <ActivityLevelReportView /> </PrivateRoute> }/>
+          <Route path='group-report' element={ <PrivateRoute> <GroupReport /> </PrivateRoute> }/>
+          <Route path='dashboard' element={ <PrivateRoute> <Dashboard /> </PrivateRoute> }/>
+          <Route path='student' element={ <PrivateRoute> <Student /> </PrivateRoute> }/>
+          <Route path='workspace' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
+          <Route path='activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
+          <Route path='ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
+          <Route path='bugreport' element={<BugReport />} />
+          {/* Researcher Layout / Nested Navbar */}
+          {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
+          <Route path='researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
+            <Route index element={<ResearcherDashboard/>}/>
+          </Route>
+        </Route>
+        
+        {/* mentor navbar variant */}
+        {/* TODO: Add mentor navbar variant */}
+        <Route path='/classroom/:id' element={ <PrivateRoute> <Classroom/> </PrivateRoute> }/>
 
-            {/* No Navbar */}
-            <Route path='*' element={<NotFound/>} />
-          </Routes>
-
+        {/* No Navbar */}
+        <Route path='*' element={<NotFound/>} />
+      </Routes>
     </>
   );
 };

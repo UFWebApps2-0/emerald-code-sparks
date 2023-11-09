@@ -3,9 +3,9 @@ import './DiscussionBoard.less';
 
 const DiscussionBoard = (props) => {
     const fakeComments = [
-        'Wow this project is life changing',
-        'Id endorse this project',
-        'This project is kinda bad',
+        'Comment 1',
+        'Comment 2',
+        'Comment 3',
     ];
 
     return (

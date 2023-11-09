@@ -1,8 +1,7 @@
 div.galleryItem {
     display: block;
     min-width: 20vw;
-    height: min-content;
-    aspect-ratio: 1/1;
+    height: 32rem;
     margin: 0.5rem;
     background-color: #F4F4F5;
     border-radius: 15px;
@@ -11,7 +10,8 @@ div.galleryItem {
     transition: transform 0.5s ease;
     padding: 0 2rem;
 
-    &:hover {
+    &:hover,
+    &:focus {
         cursor: pointer;
         transform: scale(1.05);
     }
@@ -31,13 +31,15 @@ div.galleryItem {
     }
 }
 
-div.galleryItem.galleryItem-expanded {
+div.galleryItem-expanded {
     width: 90dvw;
     height: 90dvw;
     display: block;
-    position: absolute;
-    background-color: red;
-
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 div.header {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
 import './GalleryItem.less';
 import Like from './like';
@@ -8,10 +8,23 @@ import DiscussionBoard from './DiscussionBoard';
 
 const GalleryItem = (props) => {
     const [visible, setVisible] = useState(false);
-    const title = props.title || 'Title';
+    const title = props.item.Title || 'Titlex';
+
+
+    const temp = "viewCounts" + props.Id ? props.Id : 0;
+    const [viewCounts, setViewCounts] = useState(
+        JSON.parse(localStorage.getItem(temp)) || 0
+    );
+
+    /*const [viewCounts, setViewCounts] = useState(() => {
+      const storedViewCounts = JSON.parse(localStorage.getItem('viewCounts'));
+      return storedViewCounts || {};
+    });*/
+
 
     const showModal = () => {
         setVisible(true);
+        setViewCounts((prevCount) => prevCount + 1);
     };
 
     const handleCancel = () => {
@@ -22,9 +35,16 @@ const GalleryItem = (props) => {
         setVisible(false);
     };
 
+    useEffect(() => {
+        localStorage.setItem(temp, JSON.stringify(viewCounts));
+    }, [viewCounts]);
+
+
+
+
     return (
         <>
-            <div className='galleryItem' onClick={() => { showModal() }}>
+            <div className='galleryItem' tabIndex={0} onClick={() => { showModal() }}>
                 <div className='header'><div>{title}</div></div>
                 <img style={{ backgroundColor: 'red' }} />
                 <div className='flex flex-row'>
@@ -37,15 +57,18 @@ const GalleryItem = (props) => {
                     <div className='flex flex-column justify-end'>
                         <p>7  5</p>
                     </div>
-                    <Like> </Like>
                 </div>
             </div>
             <div className='gallery-modal-holder'>
                 <Modal
+                    className='galleryItem-expanded'
                     title={title}
                     open={visible}
                     onCancel={handleCancel}
-                    width='50vw'
+                    width='90vw'
+                    maskClosable={false}
+                    cancelText='Close'
+                    footer={null}
                 >
                     <div className='flex flex-row'>
                         <div className='flex flex-column'>

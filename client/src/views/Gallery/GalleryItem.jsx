@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Modal } from 'antd';
 import './GalleryItem.less';
 import Like from './like';
@@ -8,10 +8,23 @@ import DiscussionBoard from './DiscussionBoard';
 
 const GalleryItem = (props) => {
     const [visible, setVisible] = useState(false);
-    const title = props.title || 'Title';
+    const title = props.item.Title || 'Titlex';
+	
+	
+	  const temp = "viewCounts"+props.Id?props.Id:0;
+	  const [viewCounts, setViewCounts] = useState(
+    JSON.parse(localStorage.getItem(temp)) || 0
+  );
 
+  /*const [viewCounts, setViewCounts] = useState(() => {
+    const storedViewCounts = JSON.parse(localStorage.getItem('viewCounts'));
+    return storedViewCounts || {};
+  });*/
+  
+  
     const showModal = () => {
-        setVisible(true);
+		 setVisible(true);
+		 setViewCounts((prevCount) => prevCount + 1);		
     };
 
     const handleCancel = () => {
@@ -21,6 +34,13 @@ const GalleryItem = (props) => {
     const handleOk = () => {
         setVisible(false);
     };
+	
+	  useEffect(() => {
+    localStorage.setItem(temp, JSON.stringify(viewCounts));
+  }, [viewCounts]);
+
+	
+	
 
     return (
         <>
@@ -30,12 +50,14 @@ const GalleryItem = (props) => {
                 <div className='flex flex-row'>
                     <div className='flex flex-column'>
                         <p>Creator:</p>
-                        <p>Creator Name</p>
-                        <p>Posted:</p>
-                        <p>Posted Date</p>
+<p>{props.item.User_name}</p>
+                        <p>Date:</p>
+                        <p>{props.item.PostedTime}</p>
+						<p>Views:</p>
+                        <p>{viewCounts}</p>
                     </div>
                     <div className='flex flex-column justify-end'>
-                        <p>7  5</p>
+                        <p> </p>
                     </div>
                     <Like> </Like>
                 </div>
@@ -45,6 +67,7 @@ const GalleryItem = (props) => {
                     title={title}
                     open={visible}
                     onCancel={handleCancel}
+					onOk = {handleOk}
                     width='50vw'
                 >
                     <div className='flex flex-row'>

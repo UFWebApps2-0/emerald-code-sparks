@@ -77,6 +77,7 @@ const GalleryItem = (props) => {
                         </div>
                         <div className='flex flex-column'>
                             <DiscussionBoard />
+                            <Like> </Like>
                         </div>
 
                     </div>

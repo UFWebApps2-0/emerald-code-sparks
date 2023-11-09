@@ -56,7 +56,39 @@ const CreateStudyPage =()=>{
 
             </select>
           </Form.Item>
+          <Form.Item>
+            <select
+            className='select'
+            placeholder='Researchers'>
+              <option>
+                Pick Researchers
+              </option>
 
+            </select>
+          </Form.Item>
+
+        </Form>
+        <Form form = {form} id={"checkbox-form"}>
+          <Form.Item className="checkbox-item">
+            <input type="checkbox" id="checkbox-1" />
+            <label htmlFor="checkbox-1" className="checkbox-label">Profile Info</label>
+          </Form.Item>
+          <Form.Item className="checkbox-item">
+            <input type="checkbox" id="checkbox-2" />
+            <label htmlFor="checkbox-2" className="checkbox-label">Access to Code Samples</label>
+          </Form.Item>
+          <Form.Item className="checkbox-item">
+            <input type="checkbox" id="checkbox-2" />
+            <label htmlFor="checkbox-2" className="checkbox-label">Messaging and Emails</label>
+          </Form.Item>
+          <Form.Item className="checkbox-item">
+            <input type="checkbox" id="checkbox-2" />
+            <label htmlFor="checkbox-2" className="checkbox-label">Access to Video/Lesson Usage</label>
+          </Form.Item>
+          <Form.Item className="checkbox-item">
+            <input type="checkbox" id="checkbox-2" />
+            <label htmlFor="checkbox-2" className="checkbox-label">Screen Recording</label>
+          </Form.Item>
         </Form>
       </div>
     </div>

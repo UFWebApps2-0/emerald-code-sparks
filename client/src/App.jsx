@@ -36,17 +36,17 @@ const App = () => {
         <Route
           path='/report'
           element={
-            <PrivateRoute>
+            //<PrivateRoute>
               <Report />
-            </PrivateRoute>
+            //</PrivateRoute>
           }
         />
         <Route
           path='/createStudyPage'
           element={
-            <PrivateRoute>
+            //<PrivateRoute>
               <CreateStudyPage />
-            </PrivateRoute>
+            //</PrivateRoute>
           }
         />
         <Route

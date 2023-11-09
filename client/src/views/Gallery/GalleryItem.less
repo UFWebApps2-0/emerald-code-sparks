@@ -10,7 +10,8 @@ div.galleryItem {
     transition: transform 0.5s ease;
     padding: 0 2rem;
 
-    &:hover {
+    &:hover,
+    &:focus {
         cursor: pointer;
         transform: scale(1.05);
     }
@@ -30,13 +31,15 @@ div.galleryItem {
     }
 }
 
-div.galleryItem.galleryItem-expanded {
+div.galleryItem-expanded {
     width: 90dvw;
     height: 90dvw;
     display: block;
-    position: absolute;
-    background-color: red;
-
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 div.header {

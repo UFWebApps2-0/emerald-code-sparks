@@ -10,7 +10,7 @@
     "ContentCreatorDashboard": "/ccdashboard",
     "ResearcherDashboard": "/report",
     "BugReport": "/bugreport",
-    "ParentSignUp": "/parentsignup",
+    "ParentSignUp": "/parent-signup",
     "ParentLogin": "/parentlogin"
   },
   "users": {

@@ -21,7 +21,7 @@ import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import ParentSignup from './views/ParentAccount/ParentSignup';
 import RestrictAccess from './views/ParentAccount/RestrictAccess'
-import ParentLogin from  './views/ParentLogin/ParentLogin';
+import ParentLogin from  './views/ParentAccount/ParentLogin';
 import MissedClass from './views/MissedClass/MissedClass';
 
 

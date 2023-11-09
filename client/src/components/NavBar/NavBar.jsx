@@ -103,7 +103,7 @@ export default function NavBar() {
       {shouldShowRoute('ParentLogin') ? (
         
       
-        null == null ? (
+        value.id % 2 == 0 ? (
           <Menu.Item key='9' onClick={() => handleRouteChange(routes.ParentLogin)}>
           <i className='fa fa-sign-in-alt' />
           &nbsp; Parent Login

@@ -53,6 +53,7 @@ const GalleryItem = (props) => {
                         <p>Creator Name</p>
                         <p>Posted:</p>
                         <p>Posted Date</p>
+                        <p>Views: {viewCounts}</p>
                     </div>
                     <div className='flex flex-column justify-end'>
                         <p>7  5</p>

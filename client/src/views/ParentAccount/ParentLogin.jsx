@@ -66,7 +66,7 @@ export default function ParentLogin() {
             Forgot Password?
           </p>
           <p id='forgot-password' onClick={() => navigate('/restrict-access')}>
-            skip-login
+            Skip Login
           </p>
           <input
             type='button'

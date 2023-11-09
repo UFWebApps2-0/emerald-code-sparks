@@ -9,6 +9,7 @@ import {
   getActivityToolboxAll,
 } from "../../Utils/requests"
 import { useGlobalState } from "../../Utils/userState"
+import ToggleToolbox from "./ToggleButton"
 
 export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
@@ -76,7 +77,8 @@ export default function BlocklyPage({ isSandbox }) {
     <div className="container nav-padding">
       <NavBar />
       <div className="flex flex-row">
-        <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
+        <BlocklyCanvasPanel id = "canvas" activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
+        <ToggleToolbox></ToggleToolbox>
       </div>
     </div>
   )

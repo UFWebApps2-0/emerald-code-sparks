@@ -9,24 +9,6 @@ const CreateStudyPage =()=>{
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  const handleAddResearcher = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        // You can handle the researcher data and send it to your server here
-        console.log('Received values:', values);
-  
-        // Close the modal
-        setIsModalVisible(false);
-  
-        // Reset the form fields
-        form.resetFields();
-      })
-      .catch((errorInfo) => {
-        console.log('Failed:', errorInfo);
-      });
-  };
-
   return (
     <div className='container nav-padding'>
       <NavBar/>

@@ -26,6 +26,7 @@ export default function LessonModuleCreator({
   const [linkError, setLinkError] = useState(false)
   const [learningStandardObj, setLessonModuleObj] = useState("")
 
+  // Create point variables to store input values for rubric
   const [CompilePoints, setCompilePoints] = useState("")
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
@@ -207,40 +208,47 @@ export default function LessonModuleCreator({
             />
           </Form.Item>
 
+          {/* Creates the box for teacher to input compile points / stores value*/}
           <Form.Item id="form-label" label="Compile">
             <Input.TextArea
               onChange={e => setCompilePoints(e.target.value)}
               value={CompilePoints}
               required
               placeholder="Total points for successful compile"
-
             ></Input.TextArea>
           </Form.Item>
+
+          {/* Creates the box for teacher to input submission points / stores value*/}
           <Form.Item id="form-label" label="Submission Time">
             <Input.TextArea
               onChange={e => setTimePoints(e.target.value)}
               value={TimePoints}
               required
-              placeholder="Total points for successful compile"
+              placeholder="Total points for on-time submission"
 
             ></Input.TextArea>
           </Form.Item>
+
+          {/* Creates the box for teacher to input readability points / stores value*/}
           <Form.Item id="form-label" label="Readability">
             <Input.TextArea
               onChange={e => setReadabilityPoints(e.target.value)}
               value={ReadabilityPoints}
               required
-              placeholder="Total points for successful compile"
+              placeholder="Total points for readable code"
 
             ></Input.TextArea>
           </Form.Item>
+
+          {/* Creates the box for total points by adding up the 3 above values / stores value*/}
+          {/* Edge case to check and make sure that the values are integer when adding them together, otherwise dont add it*/}
           <Form.Item id="form-label" label="Total">
             <Input.TextArea
               onChange={e => setTotalPoints(e.target.value)}
               value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0)).toString()}
 
               required
-              placeholder="Total points for successful compile"
+              placeholder="Total points for assignment"
 
             ></Input.TextArea>
           </Form.Item>

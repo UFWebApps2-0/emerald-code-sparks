@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/12/2023 1:28:43 PM"
+    "x-generation-date": "11/07/2023 1:14:50 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11873,6 +11873,18 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
+            "type": "string"
           }
         }
       },
@@ -11916,6 +11928,18 @@
             }
           },
           "activity_template": {
+            "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
             "type": "string"
           },
           "created_by": {
@@ -12697,6 +12721,18 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "CompilePoints": {
+                  "type": "string"
+                },
+                "TimePoints": {
+                  "type": "string"
+                },
+                "ReadabilityPoints": {
+                  "type": "string"
+                },
+                "TotalPoints": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -12831,6 +12867,18 @@
                   }
                 },
                 "activity_template": {
+                  "type": "string"
+                },
+                "CompilePoints": {
+                  "type": "string"
+                },
+                "TimePoints": {
+                  "type": "string"
+                },
+                "ReadabilityPoints": {
+                  "type": "string"
+                },
+                "TotalPoints": {
                   "type": "string"
                 },
                 "created_by": {
@@ -13168,6 +13216,18 @@
                 }
               },
               "activity_template": {
+                "type": "string"
+              },
+              "CompilePoints": {
+                "type": "string"
+              },
+              "TimePoints": {
+                "type": "string"
+              },
+              "ReadabilityPoints": {
+                "type": "string"
+              },
+              "TotalPoints": {
                 "type": "string"
               },
               "created_by": {
@@ -14245,6 +14305,18 @@
                 }
               },
               "activity_template": {
+                "type": "string"
+              },
+              "CompilePoints": {
+                "type": "string"
+              },
+              "TimePoints": {
+                "type": "string"
+              },
+              "ReadabilityPoints": {
+                "type": "string"
+              },
+              "TotalPoints": {
                 "type": "string"
               },
               "created_by": {

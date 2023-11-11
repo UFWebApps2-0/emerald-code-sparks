@@ -477,6 +477,8 @@ export default function StudentCanvas({ activity }) {
                         </div>
                       )}
 
+
+                      {/*Calls the RubricModal code to pull it up when the icon is clicked. Otherwise if hovered, display "rubric"*/}
                       <RubricModal
                         image={activity.images}
                         setHoverCompile2={setHoverCompile2} />

@@ -13,6 +13,7 @@ import axios from 'axios';
 export default function RubricModal(props) {
     const [visible, setVisible] = useState(false)
 
+    // Create point variables to store input values for rubric
     const [CompilePoints, setCompilePoints] = useState("")
     const [ReadabilityPoints, setReadabilityPoints] = useState("")
     const [TimePoints, setTimePoints] = useState("")
@@ -51,6 +52,7 @@ export default function RubricModal(props) {
             {hover ? <div className="popup ModalCompile">Rubric</div> : ""}
             <Button id="link">
 
+                {/*Draws the rubric icon on the student view*/}
                 <svg
                     width="25"
                     height="20px"
@@ -77,6 +79,7 @@ export default function RubricModal(props) {
                     </Button>,
                 ]}
             >
+                {/*Pulls the compile points that the teacher inputs and shows on the students rubric*/}
                 <Form.Item id="form-label" label="Compile">
                     <Input.TextArea
                         onChange={e => setCompilePoints(e.target.value)}
@@ -87,6 +90,8 @@ export default function RubricModal(props) {
 
                     ></Input.TextArea>
                 </Form.Item>
+
+                {/*Pulls the submission points that the teacher inputs and shows on the students rubric*/}
                 <Form.Item id="form-label" label="Submission Time">
                     <Input.TextArea
                         onChange={e => setTimePoints(e.target.value)}
@@ -97,6 +102,8 @@ export default function RubricModal(props) {
 
                     ></Input.TextArea>
                 </Form.Item>
+
+                {/*Pulls the readability points that the teacher inputs and shows on the students rubric*/}
                 <Form.Item id="form-label" label="Readability">
                     <Input.TextArea
                         onChange={e => setReadabilityPoints(e.target.value)}
@@ -107,6 +114,8 @@ export default function RubricModal(props) {
 
                     ></Input.TextArea>
                 </Form.Item>
+
+                {/*Pulls the total points from the values above, also has edge case to check for addig only integer values, otherwise ignore*/}
                 <Form.Item id="form-label" label="Total">
                     <Input.TextArea
                         onChange={e => setTotalPoints(e.target.value)}

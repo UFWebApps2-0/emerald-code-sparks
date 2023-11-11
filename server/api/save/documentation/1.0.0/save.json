@@ -637,6 +637,18 @@
               "activity_template": {
                 "type": "string"
               },
+              "CompilePoints": {
+                "type": "string"
+              },
+              "TimePoints": {
+                "type": "string"
+              },
+              "ReadabilityPoints": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },

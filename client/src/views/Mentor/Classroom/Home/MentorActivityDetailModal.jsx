@@ -35,10 +35,14 @@ const MentorActivityDetailModal = ({
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const [linkError, setLinkError] = useState(false)
   const [submitButton, setSubmitButton] = useState(0)
+
+  // Create point variables to store input values for rubric
   const [CompilePoints, setCompilePoints] = useState("")
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -48,6 +52,8 @@ const MentorActivityDetailModal = ({
         message.error(response.err)
         return
       }
+
+      // set the values below to the input values
       setDescription(response.data.description)
       setTemplate(response.data.template)
       setActivityTemplate(response.data.activity_template)
@@ -262,6 +268,8 @@ const MentorActivityDetailModal = ({
           <Form.Item>
             <h3 id="subtitle">Rubric</h3>
           </Form.Item>
+
+          {/* Creates the box for teacher to update/input compile points / stores value*/}
           <Form.Item id="form-label" label="Compile">
             <Input.TextArea
               onChange={e => setCompilePoints(e.target.value)}
@@ -271,23 +279,30 @@ const MentorActivityDetailModal = ({
 
             ></Input.TextArea>
           </Form.Item>
+
+          {/* Creates the box for teacher to update/input submission points / stores value*/}
           <Form.Item id="form-label" label="Submission Time">
             <Input.TextArea
               onChange={e => setTimePoints(e.target.value)}
               value={TimePoints}
               required
-              placeholder="Total points for successful compile"
+              placeholder="Total points for successful on-time submission"
 
             ></Input.TextArea>
           </Form.Item>
+
+          {/* Creates the box for teacher to update/input readability points / stores value*/}
           <Form.Item id="form-label" label="Readability">
             <Input.TextArea
               onChange={e => setReadabilityPoints(e.target.value)}
               value={ReadabilityPoints}
               required
-              placeholder="Total points for successful compile"
+              placeholder="Total points for readable code"
 
             ></Input.TextArea>
+
+          {/* Creates the box for total points by adding up the 3 above values / stores value*/}
+          {/* Edge case to check and make sure that the values are integer when adding them together, otherwise dont add it*/}
           </Form.Item>
           <Form.Item id="form-label" label="Total">
             <Input.TextArea
@@ -295,7 +310,7 @@ const MentorActivityDetailModal = ({
               value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0)).toString()}
 
               required
-              placeholder="Total points for successful compile"
+              placeholder="Total points for assignment"
 
             ></Input.TextArea>
           </Form.Item>

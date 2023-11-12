@@ -33,3 +33,4 @@ node_modules/
 build/
 server/public/client/*
 !server/public/client/.gitkeep
+client/pnpm-lock.yaml

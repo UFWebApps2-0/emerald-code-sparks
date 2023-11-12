@@ -38,6 +38,17 @@ const CreateStudyPage =()=>{
             <Input/>
           </Form.Item>
           <Form.Item
+          name = "Study ID"
+          label="ID"
+          rules={[
+            {
+              required: true,
+              message: 'Please enter ID of study',
+            },
+          ]}>
+            <Input/>
+          </Form.Item>
+          <Form.Item
           name="Study description"
           label="Description">
             <textarea
@@ -88,6 +99,20 @@ const CreateStudyPage =()=>{
           <Form.Item className="checkbox-item">
             <input type="checkbox" id="checkbox-2" />
             <label htmlFor="checkbox-2" className="checkbox-label">Screen Recording</label>
+          </Form.Item>
+        </Form>
+        <Form form={form} id={"search-bar-form"}>
+          <Form.Item>
+            <input
+            className='search-bar'
+            placeholder='Search for a Student'
+            />
+          </Form.Item>
+          <Form.Item>
+            <input
+            className='search-bar'
+            placeholder='Search for a Tags'
+            />
           </Form.Item>
         </Form>
       </div>

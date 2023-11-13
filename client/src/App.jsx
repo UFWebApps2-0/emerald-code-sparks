@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
+import HowItWorks from './views/HowItWorks/HowItWorks';
+import FAQ from './views/FAQ/FAQ'
+import OurTeam from './views/OurTeam/OurTeam';
+import Gallery from './views/Gallery/Gallery';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
 import BugReport from './views/BugReport/BugReport';
 import ContentCreator from './views/ContentCreator/ContentCreator';
@@ -63,6 +67,10 @@ const App = () => {
         
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
+        <Route path='/how-it-works' element={<HowItWorks />} />
+        <Route path='/faq' element={<FAQ />} />
+        <Route path='our-team' element={<OurTeam />} />
+        <Route path='/gallery' element={<Gallery />} />
         <Route path='/teacherlogin' element={<TeacherLogin />} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />

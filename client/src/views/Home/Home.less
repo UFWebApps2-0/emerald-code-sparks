@@ -11,35 +11,45 @@
 
 #join-wrapper {
   margin: 1vh auto 8vh auto;
-  display: inline-block;
+  padding: 75px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  max-width: 1600px;
 }
 
 #box {
   width: 300px;
-  padding: 40px 20px;
+  height: 325px;
   background-color: #colors[tertiary];
   text-align: center;
   border-radius: 15px;
-  border: 4px solid;
-  border-color: #colors[secondary];
-}
-
-#box-title {
-  background-color: #colors[secondary];
-  border-radius: 80px;
-  width: 80%;
-  min-height: 8%;
-  color: #colors[text-secondary];
-  font-size: 1.5em;
-  font-weight: bold;
+  border-color: #colors[quaternary] !important;
   position: relative;
-  top: -60px;
-  left: -40px;
-  line-height: 50px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
 }
 
-#box input[type='text'],
+#box input[type='text'] {
+  display: block;
+  background: none;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: #colors[text-primary];
+  border-radius: 24px;
+  transition: 0.25s;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -90%);
+}
+
 #box input[type='email'],
 #box input[type='password'] {
   display: block;
@@ -62,25 +72,29 @@
 }
 
 #box input[type='button'] {
-  background: darken(#colors[tertiary], 30%);
+  background: #colors[quaternary];
   width: 80%;
   display: block;
   margin: 0 auto;
-  border: 2px solid;
-  border-color: #colors[secondary];
+  border: none !important;
   padding: 14px 40px;
   outline: none;
-  color: #colors[text-secondary];
+  color: #colors[text-primary];
   font-size: 1.5em;
   font-weight: 550;
   border-radius: 30px;
   cursor: pointer;
   transition: 0.25s;
   &:hover {
-    color: lighten(#colors[secondary], 20%);
+    background-color: darken(#colors[quaternary], 15%);
   }
   position: relative;
-  bottom: -65px;
+  margin-top: auto;
+  bottom: -40px;
+}
+
+.join-button {
+  bottom: -65px !important;
 }
 
 #casmm-logo {
@@ -88,4 +102,68 @@
   height: auto;
   position: relative;
   bottom: -37.5px;
+}
+
+.login-text {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #colors[text-primary];
+  padding: 0px 5px;
+  margin: 0;
+}
+
+.projects-container {
+  background-color: #colors[tertiary];
+
+  h1 {
+    padding-top: 15px;
+    font-weight: bold;
+  }
+}
+
+.projects-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+
+.project-box {
+  width: 300px;
+  height: 300px;
+  background-color: #colors[secondary];
+  text-align: center;
+  border-radius: 15px;
+  margin: 10px auto;
+  position: relative;
+}
+
+.project-box .credits-overlay {
+  height: 100%;
+  border-radius: 15px;
+  background-color: rgba(0,0,0,.6);
+  transition: opacity .1s linear;
+  opacity: 0;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 250px; 
+
+  h1, h2 {
+    color: #colors[text-secondary];
+  }
+}
+
+.project-box:hover .credits-overlay,
+.project-box:focus .credits-overlay {
+  opacity: 1;
+}
+
+#home-logo {
+  height: 350px;
+  width: auto;
+  padding: 50px;
+  margin-top: 50px;
 }

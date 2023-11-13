@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal } from "antd"
+import { Button, Form, Input, message, Modal, DatePicker } from "antd"
 import React, { useState } from "react"
 import { createVideo } from "../../../Utils/requests"
 import "./VideoCreator.less"
@@ -8,11 +8,13 @@ export default function VideoCreator({ gradeList }) {
   const [name, setName] = useState("")
   const [url, setUrl] = useState("")
   const [description, setDescription] = useState("")
+  const [releaseDate, setReleaseDate] = useState("")
 
   const showModal = () => {
     setName("")
     setUrl("")
     setDescription("")
+    setReleaseDate("")
     setVisible(true)
   }
 
@@ -21,7 +23,7 @@ export default function VideoCreator({ gradeList }) {
   }
 
   const handleSubmit = async e => {
-    const res = await createVideo(url, name, description)
+    const res = await createVideo(url, name, description, releaseDate)
     if (res.err) {
       message.error("Fail to create a new video")
     } else {
@@ -80,6 +82,11 @@ export default function VideoCreator({ gradeList }) {
               onChange={e => setDescription(e.target.value)}
               value={description}
               placeholder="Enter video description"
+            />
+          </Form.Item>
+          <Form.Item id="form-label" label="Release Date">
+            <DatePicker
+              onChange={(date, dateString) => { setReleaseDate(dateString) }}
             />
           </Form.Item>
           <Form.Item

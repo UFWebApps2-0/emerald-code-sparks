@@ -1,4 +1,6 @@
 @import "../../assets/style.less";
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+
 
 .container {
   background-color: #colors[primary];
@@ -27,6 +29,15 @@
       margin: auto;
     }
   }
+
+  #title, #secondary-title, p {
+    font-family: 'Koulen', sans-serif;
+  }
+  
+  #title, #secondary-title {
+    font-weight: bold; // Only works if the font supports it
+  }
+  
 
   #title {
     font-size: 3em;

@@ -340,6 +340,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
       <div>
         <button className="buttonPop" onClick={openPopup}>Inject Code</button>
       </div>
+      {/*Code for the pop-up window to type code into*/}
       <CodePopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={filterUpdate}/>
 
       {compileError && (

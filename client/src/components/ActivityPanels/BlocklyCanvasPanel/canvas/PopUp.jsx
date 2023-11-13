@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import '../../ActivityLevels.less';
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
-
+// This is code for the Pop-up that allows you to write code into
 const CodePopup = ({ isOpen, onClose, onSubmit }) => {
     const [code, setCode] = useState('void foo(){\n\t// Write Here\n\t\n} foo();');
 

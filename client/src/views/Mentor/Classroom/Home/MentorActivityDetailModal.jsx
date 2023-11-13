@@ -38,6 +38,7 @@ const MentorActivityDetailModal = ({
   const [ratingNum,setRatingNum] = useState(1)
   const navigate = useNavigate()
   const [criteriaNames, setCriteriaNames] = useState([]);
+  const [ratingNames, setRatingNames] = useState([]);
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {
@@ -159,6 +160,12 @@ const handleCriteriaNameChange = (index, value) => {
   setCriteriaNames(updatedCriteriaNames);
 };
 
+const handleRatingNameChange = (index, value) => {
+  const updatedRatingNames = [...ratingNames];
+  updatedRatingNames[index] = value;
+  setRatingNames(updatedRatingNames);
+};
+
 const enterCriteriaName = Array.from({ length: parseInt(criteriaNum) }, (_, index) => (
   <Form.Item key={index} label={`Criteria ${index + 1}`}>
     <Input
@@ -169,6 +176,17 @@ const enterCriteriaName = Array.from({ length: parseInt(criteriaNum) }, (_, inde
   </Form.Item>
 ));
 
+const enterRatingName = Array.from({ length: parseInt(ratingNum) }, (_, index) => (
+  <Form.Item key={index} label={`Rating ${index + 1}`}>
+    <Input
+      onChange={e => handleRatingNameChange(index, e.target.value)}
+      value={ratingNames[index]}
+      placeholder={`Enter name for Rating ${index + 1}`}
+    />
+  </Form.Item>
+));
+
+
 const columns = [
   { 
     dataIndex: 'criteriaName',
@@ -176,7 +194,7 @@ const columns = [
     fixed: 'left',
   },
   ...Array.from({ length: ratingNum }, (_, i) => ({
-    title: `Rating ${i + 1}`,
+    title: ratingNames[i],
     dataIndex: `rating_${i + 1}`,
     key: `rating_${i + 1}`,
   })),
@@ -294,6 +312,7 @@ const data = Array.from({ length: criteriaNum }, (_, i) => {
             placeholder="Enter Rating number"
           ></Input> 
         </Form.Item>
+        {enterRatingName}
         <Table 
           columns={columns} 
           dataSource={data} 

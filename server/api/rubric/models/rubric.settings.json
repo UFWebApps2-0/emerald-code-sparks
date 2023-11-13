@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rubrics",
+  "info": {
+    "name": "Rubric"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Criteria": {
+      "type": "integer"
+    },
+    "Rating": {
+      "type": "integer"
+    },
+    "activity": {
+      "via": "rubric",
+      "model": "activity"
+    }
+  }
+}

@@ -17,6 +17,7 @@ import LessonEditor from './LessonEditor/LessonEditor';
 import { useSearchParams } from 'react-router-dom';
 
 import './ContentCreator.less';
+import VideoEditorButton from './VideoEditorButton/VideoEditorButton';
 
 const { TabPane } = Tabs;
 
@@ -131,6 +132,7 @@ export default function ContentCreator() {
         </div>
         <div id='content-creator-table-container'>
           <div id='content-creator-btn-container'>
+            <VideoEditorButton />
             <VideoCreator gradeList={gradeList} />
             <UnitCreator gradeList={gradeList} />
             <LessonModuleActivityCreator />
@@ -172,6 +174,7 @@ export default function ContentCreator() {
           </div>
           <div id='content-creator-table-container'>
             <div id='content-creator-btn-container'>
+              <VideoEditorButton />
               <VideoCreator gradeList={gradeList} />
               <UnitCreator gradeList={gradeList} />
               <LessonModuleActivityCreator

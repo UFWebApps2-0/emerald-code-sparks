@@ -393,7 +393,7 @@ export const createLessonModule = async (
     error: 'Login failed.',
   });
 
-  export const createVideo = async (url, name, description) =>
+  export const createVideo = async (url, name, description, releaseDate) =>
   makeRequest({
     method: POST,
     path: `${server}/videos`,
@@ -401,6 +401,7 @@ export const createLessonModule = async (
       url: url,
       name: name,
       description: description,
+      releaseDate: releaseDate,
     },
     auth: true,
     error: 'Fail to create new video.',

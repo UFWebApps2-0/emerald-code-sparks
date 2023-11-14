@@ -11,13 +11,13 @@ For every less file, the first import should be a local address to style.less wh
 
 Utilize the following primary colors defined in `style.less` to ensure brand consistency:
 
--   **Primary**: `#INSERT` (light blue)
--   **Secondary**: `#INSERT` (another shade of blue)
--   **Tertiary**: `#INSERT` (off-white)
--   **Quaternary**: `#INSERT` (yellow)
--   **Quinary**: `#INSERT` (golden yellow)
--   **Text-Primary**: `#INSERT` (dark grey for text)
--   **Text-Secondary**: `#INSERT` (white for text on dark backgrounds)
+-   **Primary**: `#colors[primary]` (light blue)
+-   **Secondary**: `#colors[secondary]` (another shade of blue)
+-   **Tertiary**: `#colors[Tertiary]` (off-white)
+-   **Quaternary**: `#colors[quaternary]` (yellow)
+-   **Quinary**: `#colors[quinary]` (golden yellow)
+-   **Text-Primary**: `#colors[text-Primary]` (dark grey for text)
+-   **Text-Secondary**: `#colors[text-Secondary]` (white for text on dark backgrounds)
 
 These colors should be consistently used for UI elements such as backgrounds, text, and buttons.
 
@@ -28,7 +28,7 @@ The background should be a light blue color (#colors[primary]). Should be the lo
 
 # Text Boxes
 
-The background for all text boxes will be white (#colors[INSERT LATER]) with the text color being black (#colors[INSERT LATER]).
+The background for all text boxes will be white (#colors[tertiary]) with the text color being black (#colors[text-primary]).
 
 ## ABOUT Section:
 
@@ -36,7 +36,7 @@ The background for all text boxes will be white (#colors[INSERT LATER]) with the
 
 Label: "ABOUT CASMM", “HOW IT WORKS”, “OUR TEAM”.
 
-Text Color: black at colors[INSERT].
+Text Color: black at colors[text-primary].
 
 Position: Top-center of the section.
 
@@ -94,7 +94,7 @@ Behavior: Allows the user to login to their chasmm account after selecting their
 
 ### HELP Button
 
-Background Color: The primary color of the button is a bright pink at color[INSERT].
+Background Color: The primary color of the button is a bright pink at #colors[].
 
 Size and Shape: The button appears circular. Specify the diameter of the button?
 
@@ -118,7 +118,7 @@ Position on Page: The button will be located on the bottom right corner of the h
 
 ### Featured Projects Section, Home Page
 
-Background: The background color appears to be a light blue at color[INSERT].
+Background: The background color appears to be a light blue at #colors[primary].
 
 #### Featured Projects Label:
 
@@ -150,7 +150,7 @@ Click: Possibly if there's any visual feedback when a card is clicked, like a sl
 
 Label: "FAQ".
 
-Text Color: Appears to be white.
+Text Color: White.
 
 Position: Top-center of the section.
 
@@ -256,7 +256,7 @@ Spacing: There's even spacing between the options.
 
 ## Student Login Input Box
 
-Background Color: White.
+Background Color: White #colors[tertiary].
 
 Border: Thin rounded pink border.
 
@@ -266,7 +266,7 @@ Placeholder Text: The field name (e.g., "NAME") in uppercase.
 
 ### Student Landing Page Join Box
 
-Background Color: White.
+Background Color: White #colors[tertiary].
 
 Border: Thin rounded pink border.
 
@@ -312,13 +312,13 @@ Interaction: Users can access the options within the dropdown by clicking on the
 
 ## Gallery
 
-Background Color: Light blue. It's the overall backdrop for the sections.
+Background Color: Light blue. #colors[primary]. It's the overall backdrop for the sections.
 
 ### Sections:
 
  #### Labels:
 
-Color: White.
+Color: White #colors[tertiary].
 
 Background: Lime green, pill-shaped background.
 
@@ -332,7 +332,7 @@ Background: Each section has a white rectangular background to demarcate its spa
 
 Design: Square tiles.
 
-Color: Yellow.
+Color: Yellow #colors[quaternary.
 
 Content: Each tile is numbered sequentially from 1 to 5. The number font appears to be bold and dark-colored (possibly black).
 

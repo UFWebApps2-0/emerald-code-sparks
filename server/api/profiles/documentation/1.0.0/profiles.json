@@ -516,7 +516,8 @@
     "schemas": {
       "Profiles": {
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
@@ -622,6 +623,9 @@
         }
       },
       "NewProfiles": {
+        "required": [
+          "type"
+        ],
         "properties": {
           "Biography": {
             "type": "string"

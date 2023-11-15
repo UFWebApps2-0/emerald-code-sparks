@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/14/2023 5:34:00 PM"
+    "x-generation-date": "11/15/2023 8:50:39 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -14185,7 +14185,8 @@
       },
       "Profiles": {
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
@@ -14291,6 +14292,9 @@
         }
       },
       "NewProfiles": {
+        "required": [
+          "type"
+        ],
         "properties": {
           "Biography": {
             "type": "string"

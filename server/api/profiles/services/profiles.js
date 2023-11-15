@@ -5,4 +5,15 @@
  * to customize this service
  */
 
-module.exports = {};
+const { createCoreController } = require('@strapi/strapi').factories;
+
+module.exports = createCoreController('api::profile.profile', ({ strapi }) =>  ({
+  // Method 1: Creating an entirely custom action
+  async exampleAction(ctx) {
+    try {
+      ctx.body = 'ok';
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
+}));

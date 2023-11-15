@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profiles",
+  "info": {
+    "name": "Profiles",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Biography": {
+      "type": "text"
+    },
+    "student": {
+      "model": "student"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "student",
+        "user"
+      ]
+    }
+  }
+}

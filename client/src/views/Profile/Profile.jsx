@@ -1,7 +1,7 @@
 import "./Profile.less";
 // import "./Badge.less";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileCard from "../../components/Profile/ProfileCard";
 import Badge from "../../components/Profile/Badge";
 import ProgressBar from "../../components/Profile/ProgressBar";
@@ -9,8 +9,24 @@ import NavBar from "../../components/NavBar/NavBar";
 import ProjectSection from "../../components/Profile/ProjectSection";
 import BadgeTable from "../../components/Profile/BadgeTable";
 import BadgeDisplay from "../../components/Profile/BadgeDisplay";
+import { getProfile } from "../../Utils/requests";
 
 const Profile = () => {
+  const userId = 1; // Todo Get from url params
+  const isStudent = false; // Todo Get from url params
+
+  const [profile, setProfile] = useState(null);
+
+  const refreshPageData = async () => {
+    const getProfileResponse = await getProfile(userId, isStudent);
+
+    setProfile(getProfileResponse.data);
+  }
+
+  useEffect(() => {
+    refreshPageData();
+  });
+
   const [bio, setBio] = useState('Your bio text goes here');
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [selectedBadges, setSelectedBadges] = useState([1, 2, 3, 4]);

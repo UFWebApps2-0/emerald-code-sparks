@@ -13,10 +13,10 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   let err = null;
   const config = auth
     ? {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
     : null;
 
   try {
@@ -504,7 +504,7 @@ export const getLessonModuleActivities = async (lsId) =>
     error: 'Activity cannot be retrived',
   });
 
-  export const getActivityLevels = async (lsId) =>
+export const getActivityLevels = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces?activities.id=${lsId}`,
@@ -678,8 +678,8 @@ export const postGalleryObject = async (data) =>
     method: POST,
     path: `${server}/gallery-posts`,
     auth: true,
-    data:{
-      Title: data.Title, 
+    data: {
+      Title: data.Title,
       User_name: data.User_name,
       like_count: data.like_count,
       view_count: data.view_count,
@@ -689,4 +689,12 @@ export const postGalleryObject = async (data) =>
       object_id: 0,
     },
     error: 'Unable to post to gallery',
+  });
+
+export const getGalleryObjects = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/gallery-posts`,
+    auth: false,
+    error: 'Unable to retrive gallery objects',
   });

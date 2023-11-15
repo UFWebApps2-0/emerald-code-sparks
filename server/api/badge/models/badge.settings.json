@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "badges",
+  "info": {
+    "name": "Badge"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Progress": {
+      "type": "decimal"
+    }
+  }
+}

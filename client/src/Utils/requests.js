@@ -672,3 +672,11 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+  export const getProfile = async (id, isStudent) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/profile/${id}?student=${isStudent}`,
+    auth: true,
+    error: 'Unable to retrive profiles',
+  });

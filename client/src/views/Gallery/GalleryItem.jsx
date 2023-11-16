@@ -12,7 +12,7 @@ const GalleryItem = (props) => {
     const creator = props.User_name || 'Creator Name';
     const likeCount = props.like_count || 0;
     const viewCount = props.view_count || 0;
-    const posted = props.posted || 'Posted Date';
+    const posted = props.posted?.substr(0, 10) || 'Posted Date';
 
     const [viewCounts, setViewCounts] = useState(viewCount);
 

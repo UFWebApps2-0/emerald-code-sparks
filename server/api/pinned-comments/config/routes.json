@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/pinned-comments",
+      "handler": "pinned-comments.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pinned-comments/count",
+      "handler": "pinned-comments.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pinned-comments/:id",
+      "handler": "pinned-comments.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/pinned-comments",
+      "handler": "pinned-comments.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/pinned-comments/:id",
+      "handler": "pinned-comments.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/pinned-comments/:id",
+      "handler": "pinned-comments.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

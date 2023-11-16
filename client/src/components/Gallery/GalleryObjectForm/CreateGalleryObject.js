@@ -1,8 +1,8 @@
-import { postGalleryObject } from '../../Utils/requests';
+import { postGalleryObject } from '../../../Utils/requests';
 
 async function createGalleryObject(title, user_name, like_count, view_count, visibility, type) {
 
-  //**********create default discussion board here
+  //starts with empty discussion board
   const discussion_board = [];
 
     const data = {
@@ -18,10 +18,11 @@ async function createGalleryObject(title, user_name, like_count, view_count, vis
   console.log(data)
 
  try {
-      console.log("please omg", data)
       const response = await postGalleryObject(data);
 
-      if (response.status === 201) {
+      console.log('response: ', response.err)
+
+      if (response.err == null) {
         console.log('Gallery object created successfully in the backend.');
       } else {
         console.error('Failed to create the gallery object in the backend.');

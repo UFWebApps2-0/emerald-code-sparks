@@ -677,7 +677,7 @@ export const postGalleryObject = async (data) =>
   makeRequest({
     method: POST,
     path: `${server}/gallery-posts`,
-    auth: true,
+    auth: false,
     data:{
       Title: data.Title, 
       User_name: data.User_name,
@@ -689,4 +689,62 @@ export const postGalleryObject = async (data) =>
       object_id: 0,
     },
     error: 'Unable to post to gallery',
+  });
+
+export const postUnpinnedComment = async (data) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/unpinned-comments`,
+    auth: false,
+    data:{
+      User_name: data.User_name,
+      comment_string: data.comment,
+      is_pinned: false,
+    },
+    error: 'Unable to post to gallery',
+  });
+
+export const getUnpinnedComments = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/unpinned-comments`,
+    auth: false,
+    error: 'Unable to get unpinned comments',
+  });
+
+export const deleteUnpinnedComment = async (comment) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/unpinned-comments/${comment}`,
+    auth: true,
+    error: 'Failed to unpinned comment student.',
+  });
+
+export const postPinnedComment = async (data) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/pinned-comments`,
+    auth: false,
+    data:{
+      User_name: data.User_name,
+      comment_string: data.comment,
+      is_pinned: true,
+    },
+    error: 'Unable to post to gallery',
+  });
+
+export const getPinnedComments = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/pinned-comments`,
+    auth: false,
+    error: 'Unable to get pinned comments',
+  });
+
+  export const deletePinnedComment = async (comment) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/pinned-comments/${comment}`,
+    auth: true,
+    error: 'Failed to pinned comment student.',
   });

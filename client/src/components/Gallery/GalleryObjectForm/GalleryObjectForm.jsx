@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Select, Modal } from "antd";
-import createGalleryObject from "../Gallery/CreateGalleryObject";
+import createGalleryObject from "./CreateGalleryObject";
 import "./GalleryObjectForm.less";
-import { useGlobalState } from '../../Utils/userState';
+import { useGlobalState } from '../../../Utils/userState';
 
 const { Option } = Select;
 

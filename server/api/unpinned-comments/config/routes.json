@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/unpinned-comments",
+      "handler": "unpinned-comments.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/unpinned-comments/count",
+      "handler": "unpinned-comments.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/unpinned-comments/:id",
+      "handler": "unpinned-comments.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/unpinned-comments",
+      "handler": "unpinned-comments.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/unpinned-comments/:id",
+      "handler": "unpinned-comments.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/unpinned-comments/:id",
+      "handler": "unpinned-comments.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

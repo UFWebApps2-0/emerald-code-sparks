@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
 import './GalleryItem.less';
 import Like from './like';
-import DiscussionBoard from './DiscussionBoard';
+import DiscussionBoard from '../../components/Gallery/DiscussionBoard/DiscussionBoard';
 
 //Wrapper item needs to be a useState for it to get dynamically rendered
 

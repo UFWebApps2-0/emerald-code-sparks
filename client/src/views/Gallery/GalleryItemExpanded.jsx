@@ -12,11 +12,17 @@ const GalleryItemExpanded = () => {
     const [galleryObject, setGalleryObject] = useState(undefined);
     const [render, setRender] = useState(<p>Loading...</p>);
     const [titleHeading, setTitleHeading] = useState("Gallery Item Expanded");
+    const notFoundMessage = (
+        <div className='flex flex-row'>
+            <div className='flex flex-column discussion-col'>
+                <p id='notFound'>Could not find that item. Why not <a href="/gallery/">return to Gallery</a>?</p>
+            </div>
+        </div>);
 
     async function fetchObject() {
         const response = await getGalleryObject(galleryId);
         if (response.data === undefined || response.data === null) {
-            setRender(<p>Could not find that item. Why not <a href="/gallery/">return to Gallery</a>?</p>);
+            setRender(notFoundMessage);
             return;
         }
         setGalleryObject(response.data);
@@ -45,7 +51,7 @@ const GalleryItemExpanded = () => {
     //this will run once, on page load, to fetch the gallery object
     useEffect(() => {
         if (galleryId === null || galleryId === undefined || galleryId === "") {
-            setRender(<p>Could not find that item. Why not <a href="/gallery/">return to Gallery</a>?</p>)
+            setRender(notFoundMessage)
         }
         else {
             fetchObject();
@@ -58,7 +64,7 @@ const GalleryItemExpanded = () => {
             <div className='flex flex-row'>
                 <div className='flex flex-column justify-center'>
                     <div onClick={() => { window.location.href = "/gallery" }} className='return-button'>
-                        <p>Return to Gallery</p>
+                        <p>Return to Gallery ⬇️</p>
                     </div>
                 </div>
                 <div className='flex flex-column'>

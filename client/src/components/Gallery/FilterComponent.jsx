@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import './Filter.less';
+import { debounce } from 'lodash';
 
-const FilterComponent = ({ onFilterChange }) => {
+const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
+
+  //deboune lets us pause before doing the search to avoid unnecessary calls, improve performance
+  // const [debouncedFilterUpdate] = useState(() => debounce(filterUpdate, 1000));
+  // const input = useRef(null);
+
+  // const handleChange = () => {
+  //   debouncedFilterUpdate(input.current.input.value, loadedGalleryItems);
+  // }
+
   const [types, setTypes] = useState({
     block: false,
     lessons: false,
@@ -15,13 +25,31 @@ const FilterComponent = ({ onFilterChange }) => {
   });
 
   const handleTypeChange = (type) => {
-    setTypes({ ...types, [type]: !types[type] });
-    onFilterChange(types, visibility);
-  };
+    console.log('handleTypeChange called');
+    console.log('Types before update:', types);
 
+    setTypes((prevTypes) => {
+      const updatedTypes = { ...prevTypes, [type]: !prevTypes[type] };
+      console.log('Types after update:', updatedTypes);
+      return updatedTypes;
+    });
+
+    onFilterChange(types, visibility, loadedGalleryItems);
+
+  };
+  
   const handleVisibilityChange = (option) => {
-    setVisibility({ ...visibility, [option]: !visibility[option] });
-    onFilterChange(types, visibility);
+    console.log('handleVisibilityChange called');
+    console.log('Visibility before update:', visibility);
+  
+    setVisibility((prevVisibility) => {
+      const updatedVisibility = { ...prevVisibility, [option]: !prevVisibility[option] };
+      console.log('Visibility after update:', updatedVisibility);
+      return updatedVisibility;
+    });
+
+    onFilterChange(types, visibility, loadedGalleryItems);
+    
   };
 
   return (

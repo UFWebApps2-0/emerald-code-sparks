@@ -8,19 +8,13 @@ import DiscussionBoard from '../../components/Gallery/DiscussionBoard/Discussion
 
 const GalleryItem = (props) => {
     const [visible, setVisible] = useState(false);
-    const title = props.item.Title || 'Titlex';
+    const title = props.Title || 'Title';
+    const creator = props.User_name || 'Creator Name';
+    const likeCount = props.like_count || 0;
+    const viewCount = props.view_count || 0;
+    const posted = props.posted?.substr(0, 10) || 'Posted Date';
 
-
-    const temp = "viewCounts" + props.Id ? props.Id : 0;
-    const [viewCounts, setViewCounts] = useState(
-        JSON.parse(localStorage.getItem(temp)) || 0
-    );
-
-    /*const [viewCounts, setViewCounts] = useState(() => {
-      const storedViewCounts = JSON.parse(localStorage.getItem('viewCounts'));
-      return storedViewCounts || {};
-    });*/
-
+    const [viewCounts, setViewCounts] = useState(viewCount);
 
     const showModal = () => {
         setVisible(true);
@@ -35,13 +29,6 @@ const GalleryItem = (props) => {
         setVisible(false);
     };
 
-    useEffect(() => {
-        localStorage.setItem(temp, JSON.stringify(viewCounts));
-    }, [viewCounts]);
-
-
-
-
     return (
         <>
             <div className='galleryItem' tabIndex={0} onClick={() => { showModal() }}>
@@ -49,14 +36,11 @@ const GalleryItem = (props) => {
                 <img style={{ backgroundColor: 'red' }} />
                 <div className='flex flex-row'>
                     <div className='flex flex-column'>
-                        <p>Creator:</p>
-                        <p>Creator Name</p>
-                        <p>Posted:</p>
-                        <p>Posted Date</p>
+                        <p>Creator: {creator}</p>
+                        <p>Posted: {posted}</p>
                         <p>Views: {viewCounts}</p>
                     </div>
                     <div className='flex flex-column justify-end'>
-                        <p>7  5</p>
                     </div>
                 </div>
             </div>
@@ -77,7 +61,7 @@ const GalleryItem = (props) => {
                         </div>
                         <div className='flex flex-column'>
                             <DiscussionBoard />
-                            <Like> </Like>
+                            <Like likeCount={likeCount}> </Like>
                         </div>
 
                     </div>
@@ -86,5 +70,4 @@ const GalleryItem = (props) => {
         </>
     );
 }
-
 export default GalleryItem;

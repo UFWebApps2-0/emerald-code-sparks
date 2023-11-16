@@ -1,0 +1,59 @@
+/* Style for GalleryObjectForm */
+div.GalleryObjectForm {
+  display: block;
+  width: 80%;
+  margin: 0.5rem;
+  padding: 0 2rem;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+
+  .ant-form {
+    max-height: 50%;
+    max-width: 100%;
+    width: 100%;
+    height: 50%;
+    border-radius: inherit;
+    background-color: #F4F4F5;
+    position: relative;
+    
+    .ant-form-item {
+      display: block;
+      width: 100%;
+
+      .ant-select {
+        width: 100%;
+      }
+            }
+
+      /* Style for the input element (text box) */
+      input, textarea {
+        width: 80%; 
+      
+    }
+  }
+}
+
+/* Style for the wrapper div when form is visible */
+div.GalleryObjectFormWrapper.visible {
+  border: 4px solid #5BABDE;
+  border-radius: 15px;
+  position: relative;
+  background-color: #F4F4F5;
+  transition: all 0.5s ease; /* Add transition effect */
+  width: 25%;
+}
+
+
+/* Style for the wrapper div when form is not visible */
+div.GalleryObjectFormWrapper {
+  border: 4px solid #5BABDE;
+  border-radius: 15px;
+  position: relative;
+  background-color: #F4F4F5;
+  transition: all 0.5s ease; /* Add transition effect */
+  height: 50%; 
+  width: 11%;
+  overflow: hidden; /* Hide overflow content */
+}

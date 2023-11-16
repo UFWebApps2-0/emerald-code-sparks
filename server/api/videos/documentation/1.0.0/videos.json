@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/submissions": {
+    "/videos": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the videos's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Submission"
+                    "$ref": "#/components/schemas/Videos"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Videos"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new videos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Submission"
+                  "$ref": "#/components/schemas/Videos"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Videos"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSubmission"
+                "$ref": "#/components/schemas/NewVideos"
               }
             }
           }
         }
       }
     },
-    "/submissions/count": {
+    "/videos/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the number of videos documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Videos"
         ],
         "parameters": []
       }
     },
-    "/submissions/{id}": {
+    "/videos/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one videos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Submission"
+                  "$ref": "#/components/schemas/Videos"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Videos"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single videos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Submission"
+                  "$ref": "#/components/schemas/Videos"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Videos"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSubmission"
+                "$ref": "#/components/schemas/NewVideos"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single videos record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single videos based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Videos"
         ],
         "parameters": [
           {
@@ -514,202 +514,51 @@
   },
   "components": {
     "schemas": {
-      "Submission": {
+      "Videos": {
         "required": [
-          "id",
-          "status",
-          "workspace",
-          "board",
-          "sketch",
-          "sandbox"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "status": {
+          "content_date": {
             "type": "string",
-            "default": "WAITING"
+            "format": "date"
           },
-          "workspace": {
+          "Title": {
             "type": "string"
           },
-          "success": {
-            "type": "boolean"
-          },
-          "hex": {
+          "Description": {
             "type": "string"
           },
-          "stdout": {
+          "Duration": {
             "type": "string"
           },
-          "stderr": {
-            "type": "string"
-          },
-          "board": {
-            "type": "string"
-          },
-          "sketch": {
-            "type": "string"
-          },
-          "sandbox": {
-            "type": "boolean",
-            "default": false
-          },
-          "session": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "classroom": {
-                "type": "string"
-              },
-              "students": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "submissions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "saves": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "unit": {
-                "type": "string"
-              },
-              "grade": {
-                "type": "string"
-              },
-              "lesson_module": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "activity": {
-            "required": [
-              "id",
-              "number",
-              "template"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lesson_module": {
-                "type": "string"
-              },
-              "number": {
-                "type": "integer"
-              },
-              "template": {
-                "type": "string"
-              },
-              "blocks": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "description": {
-                "type": "string"
-              },
-              "StandardS": {
-                "type": "string"
-              },
-              "images": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "learning_components": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "activity_template": {
-                "type": "string"
-              },
-              "date_of_creation": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "job_id": {
-            "type": "integer"
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewSubmission": {
-        "required": [
-          "status",
-          "workspace",
-          "board",
-          "sketch",
-          "sandbox"
-        ],
+      "NewVideos": {
         "properties": {
-          "status": {
+          "content_date": {
             "type": "string",
-            "default": "WAITING"
+            "format": "date"
           },
-          "workspace": {
+          "Title": {
             "type": "string"
           },
-          "success": {
-            "type": "boolean"
-          },
-          "hex": {
+          "Description": {
             "type": "string"
           },
-          "stdout": {
+          "Duration": {
             "type": "string"
           },
-          "stderr": {
-            "type": "string"
-          },
-          "board": {
-            "type": "string"
-          },
-          "sketch": {
-            "type": "string"
-          },
-          "sandbox": {
-            "type": "boolean",
-            "default": false
-          },
-          "session": {
-            "type": "string"
-          },
-          "activity": {
-            "type": "string"
-          },
-          "job_id": {
-            "type": "integer"
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -723,7 +572,7 @@
   },
   "tags": [
     {
-      "name": "Submission"
+      "name": "Videos"
     }
   ]
 }

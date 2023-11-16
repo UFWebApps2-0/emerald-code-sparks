@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "announcements",
+  "info": {
+    "name": "Announcements",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    }
+  }
+}

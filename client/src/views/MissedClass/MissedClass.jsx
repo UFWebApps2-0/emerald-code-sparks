@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 
 // const [announcements, setAnnouncements] = React.useState([]);
 
-const LectureMaterials = ({ resources }) => {
+const MissedMaterials = ({ resources }) => {
     return (
-      <div className="lecture-materials-container">
-        <h2>Lecture Materials</h2>
+      <div className="missed-materials-container">
+        <h2>Missed Materials</h2>
         {resources.map((resource, index) => (
           <div key={index} className="resource-item">
             <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.title}</a>
@@ -80,8 +80,8 @@ const LectureMaterials = ({ resources }) => {
                 <div>What happened when you were gone</div>
             </div>
             <div id="class-content">
-              <div id="lecture-materials-column" className="column">
-                <LectureMaterials resources={missedDetails.resources} />
+              <div id="missed-materials-column" className="column">
+                <MissedMaterials resources={missedDetails.resources} />
               </div>
               <div id="announcements-column" className="column">
                 <Announcements announcements={missedDetails.announcements || []} />

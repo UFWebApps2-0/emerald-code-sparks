@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "missed_contents",
+  "info": {
+    "name": "Missed Content"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "announcements": {
+      "collection": "announcements"
+    },
+    "videos": {
+      "collection": "videos"
+    },
+    "activities": {
+      "collection": "activity"
+    }
+  }
+}

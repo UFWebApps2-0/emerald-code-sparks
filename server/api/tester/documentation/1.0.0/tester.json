@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/submissions": {
+    "/testers": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Submission"
+                    "$ref": "#/components/schemas/Tester"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Tester"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Submission"
+                  "$ref": "#/components/schemas/Tester"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Tester"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSubmission"
+                "$ref": "#/components/schemas/NewTester"
               }
             }
           }
         }
       }
     },
-    "/submissions/count": {
+    "/testers/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Tester"
         ],
         "parameters": []
       }
     },
-    "/submissions/{id}": {
+    "/testers/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Submission"
+                  "$ref": "#/components/schemas/Tester"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Tester"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Submission"
+                  "$ref": "#/components/schemas/Tester"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Tester"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSubmission"
+                "$ref": "#/components/schemas/NewTester"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Submission"
+          "Tester"
         ],
         "parameters": [
           {
@@ -514,202 +514,41 @@
   },
   "components": {
     "schemas": {
-      "Submission": {
+      "Tester": {
         "required": [
-          "id",
-          "status",
-          "workspace",
-          "board",
-          "sketch",
-          "sandbox"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "status": {
+          "ere": {
             "type": "string",
-            "default": "WAITING"
+            "enum": [
+              "asfsa",
+              "sadfsda",
+              "asdf"
+            ]
           },
-          "workspace": {
-            "type": "string"
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "hex": {
-            "type": "string"
-          },
-          "stdout": {
-            "type": "string"
-          },
-          "stderr": {
-            "type": "string"
-          },
-          "board": {
-            "type": "string"
-          },
-          "sketch": {
-            "type": "string"
-          },
-          "sandbox": {
-            "type": "boolean",
-            "default": false
-          },
-          "session": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "classroom": {
-                "type": "string"
-              },
-              "students": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "submissions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "saves": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "unit": {
-                "type": "string"
-              },
-              "grade": {
-                "type": "string"
-              },
-              "lesson_module": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "activity": {
-            "required": [
-              "id",
-              "number",
-              "template"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lesson_module": {
-                "type": "string"
-              },
-              "number": {
-                "type": "integer"
-              },
-              "template": {
-                "type": "string"
-              },
-              "blocks": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "description": {
-                "type": "string"
-              },
-              "StandardS": {
-                "type": "string"
-              },
-              "images": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "learning_components": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "activity_template": {
-                "type": "string"
-              },
-              "date_of_creation": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "job_id": {
-            "type": "integer"
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewSubmission": {
-        "required": [
-          "status",
-          "workspace",
-          "board",
-          "sketch",
-          "sandbox"
-        ],
+      "NewTester": {
         "properties": {
-          "status": {
+          "ere": {
             "type": "string",
-            "default": "WAITING"
+            "enum": [
+              "asfsa",
+              "sadfsda",
+              "asdf"
+            ]
           },
-          "workspace": {
-            "type": "string"
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "hex": {
-            "type": "string"
-          },
-          "stdout": {
-            "type": "string"
-          },
-          "stderr": {
-            "type": "string"
-          },
-          "board": {
-            "type": "string"
-          },
-          "sketch": {
-            "type": "string"
-          },
-          "sandbox": {
-            "type": "boolean",
-            "default": false
-          },
-          "session": {
-            "type": "string"
-          },
-          "activity": {
-            "type": "string"
-          },
-          "job_id": {
-            "type": "integer"
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -723,7 +562,7 @@
   },
   "tags": [
     {
-      "name": "Submission"
+      "name": "Tester"
     }
   ]
 }

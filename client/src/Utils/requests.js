@@ -677,7 +677,7 @@ export const postGalleryObject = async (data) =>
   makeRequest({
     method: POST,
     path: `${server}/gallery-posts`,
-    auth: true,
+    auth: false,
     data: {
       Title: data.Title,
       User_name: data.User_name,

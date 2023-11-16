@@ -698,3 +698,11 @@ export const getGalleryObjects = async () =>
     auth: false,
     error: 'Unable to retrive gallery objects',
   });
+
+export const getGalleryObject = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/gallery-posts/${id}`,
+    auth: false,
+    error: 'Unable to retrive gallery object',
+  });

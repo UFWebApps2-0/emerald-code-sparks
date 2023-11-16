@@ -13,12 +13,12 @@ const GalleryItem = (props) => {
     const likeCount = props.like_count || 0;
     const viewCount = props.view_count || 0;
     const posted = props.posted?.substr(0, 10) || 'Posted Date';
+    const id = props.id || 0;
 
     const [viewCounts, setViewCounts] = useState(viewCount);
 
     const showModal = () => {
-        setVisible(true);
-        setViewCounts((prevCount) => prevCount + 1);
+        window.location.href = `/gallery/item/${id}`;
     };
 
     const handleCancel = () => {
@@ -43,29 +43,6 @@ const GalleryItem = (props) => {
                     <div className='flex flex-column justify-end'>
                     </div>
                 </div>
-            </div>
-            <div className='gallery-modal-holder'>
-                <Modal
-                    className='galleryItem-expanded'
-                    title={title}
-                    open={visible}
-                    onCancel={handleCancel}
-                    width='90vw'
-                    maskClosable={false}
-                    cancelText='Close'
-                    footer={null}
-                >
-                    <div className='flex flex-row'>
-                        <div className='flex flex-column'>
-                            <img className='ooIMG'></img>
-                        </div>
-                        <div className='flex flex-column'>
-                            <DiscussionBoard />
-                            <Like likeCount={likeCount}> </Like>
-                        </div>
-
-                    </div>
-                </Modal>
             </div>
         </>
     );

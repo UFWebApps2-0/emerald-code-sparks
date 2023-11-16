@@ -1,11 +1,36 @@
-import React from "react"
 
-const ResearcherDashboard = () => {
-    return (
-        <div style={{backgroundColor:"blue", height: "500px", width:"500px"}}>
-            Dashboard Component
-        </div>
-    )
-}
+/*
+[Your Studies] --> list of study objects in grid UI
+    [each study] --> description
+    [each study] --> button to view study/ view report 
+    [each study] --> tag
+
+[Create Study] --> button to create a new study TODO
+[Search tag] --> search bar to search for studies by tag TODO
+
+*/
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Table, Modal, Button, Tag, Form, Input } from 'antd';
+import './ResearcherDashboard.less';
+import NavBar from '../../../components/NavBar/NavBar';
+//import FormItem from 'antd/es/form/FormItem';
+
+const ResearcherDashboard =()=>{
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+
+  return (
+    <div className='container nav-padding'>
+      <div id='main-header'>Welcome Researcher!</div>
+      <h1 id='report-subheader'>Researcher Dashboard</h1>
+      <Button>
+        <Link to='/createstudy'>Create Study</Link>
+      </Button>
+
+    </div>
+  )
+
+};
 
 export default ResearcherDashboard;

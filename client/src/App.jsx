@@ -44,6 +44,7 @@ const App = () => {
               <Route path='activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
               <Route path='ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
               <Route path='bugreport' element={<BugReport />} />
+              <Route path='report' element={<PrivateRoute><ResearcherDashboard/></PrivateRoute>}/>
               {/* Researcher Layout / Nested Navbar */}
               {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
               <Route path='researcher' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>

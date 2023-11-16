@@ -5,6 +5,7 @@ import SearchBar from './Search';
 import FilterComponent from './FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
+import './Gallery.less';
 
 
 const Gallery = () => {

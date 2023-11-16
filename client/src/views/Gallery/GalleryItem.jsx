@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
-import './GalleryItem.less';
 import Like from './like';
 import DiscussionBoard from './DiscussionBoard';
 

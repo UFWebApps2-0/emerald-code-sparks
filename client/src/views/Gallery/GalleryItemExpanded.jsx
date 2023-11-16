@@ -55,7 +55,7 @@ const GalleryItemExpanded = () => {
                         </div>
                     </div>
                     <div className='flex flex-column content-col'>
-                        <h1>{titleHeading}</h1>
+                        <div className='pageHeader'><h1>{titleHeading}</h1></div>
                         {render}
                     </div>
                 </div>

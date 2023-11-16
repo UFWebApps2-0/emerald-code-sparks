@@ -47,16 +47,21 @@ const GalleryItemExpanded = () => {
     return (
         <>
             <NavBar />
-            <div className='container nav-padding'>
-                <div className='flex flex-row'>
-                    <div className='flex flex-column justify-center'>
-                        <div onClick={() => { window.location.href = "/gallery" }} className='return-button'>
-                            <p>Return to Gallery</p>
-                        </div>
+            <div className='flex flex-row'>
+                <div className='flex flex-column justify-center'>
+                    <div onClick={() => { window.location.href = "/gallery" }} className='return-button'>
+                        <p>Return to Gallery</p>
                     </div>
-                    <div className='flex flex-column content-col'>
-                        <div className='pageHeader'><h1>{titleHeading}</h1></div>
-                        {render}
+                </div>
+                <div className='flex flex-column'>
+                    <div className='container nav-padding'>
+                        <div className='flex flex-row'>
+
+                            <div className='flex flex-column content-col'>
+                                <div className='pageHeader'><h1>{titleHeading}</h1></div>
+                                {render}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

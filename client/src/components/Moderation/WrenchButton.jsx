@@ -8,6 +8,8 @@ import './WrenchButton.less';
 import { Button } from 'antd';
 
 export default function WrenchButton({uniqueKey}) {
+  let [status, setStatus] = useState("Unclicked");
+  let [clicked, setClicked] = useState(false);
 
     function HandleClick() {
         if (!clicked) {

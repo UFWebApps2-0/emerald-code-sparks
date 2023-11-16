@@ -1,47 +1,43 @@
 @import "../../assets/style.less";
-
-.ActionButtons {
-  padding: 0.80em 1.6em; /* Some padding */
-  width: 13em; /* Set a width if needed */
+@wrenchIcon: "src/assets/wrench.png";
+.Unclicked {
+  background-image: url(@wrenchIcon);
+  //image: url("../../assets/wrench.png");
+  background-size: cover;
+  background-color: transparent;
+  //padding: 0.80em 1.6em; /* Some padding *
+  width: 4em; /* Set a width if needed */
+  height: 3em;
   display: block; /* Make the buttons appear below each other */
 }
 
-.ant-btn.approve {
-  width: 100%;
-  border-radius: 2em;
-  border: 0px;
-  font-weight: bold;
-  margin-bottom: 0.35em;
-  background-color:  rgb(88, 199, 92);
-
-  &:hover {
-    color: rgba(0, 0, 0, 0.65);
-    background-color:  rgb(123, 235, 127);
-    border-color: rgb(123, 235, 127);
-  }
-  &:focus {
-    color: rgba(0, 0, 0, 0.65);
-    background-color:  rgba(255, 255, 255, 0.95);
-    border-color:  rgba(255, 255, 255, 0.95); 
-  }
+.Clicked {
+  background-image: url("src/assets/wrench.png");
+  //image: url("../../assets/wrench.png");
+  background-size: cover;
+  background-color: transparent;
+  //padding: 0.80em 1.6em; /* Some padding */
+  width: 4em; /* Set a width if needed */
+  height: 3em;
+  display: block; /* Make the buttons appear below each other */
 }
 
-.ant-btn.reject {
-  width: 100%;
-  border-radius: 2em;
+.ant-btn.flag{
+  @wrenchIcon = "src/assets/wrench.png";
+  width: 60%;
+  height: 95%;
   border: 0px;
-  font-weight: bold;
-  margin-top: 0.35em;
-  background-color:  rgb(231, 51, 51);
+  left: 3px;
+  top: 2px;
+  //background-color: rgb(255, 0, 0);
+  background-color:  transparent;
 
   &:hover {
-    color: rgba(0, 0, 0, 0.65);
-    background-color:  rgb(255, 107, 107);
-    border-color: rgb(255, 107, 107);
+    //background-color: rgb(255, 0, 0);
+    background-color:  transparent;
   }
   &:focus {
-    color: rgba(0, 0, 0, 0.65);
-    background-color:  rgba(255, 255, 255, 0.95);
-    border-color:  rgba(255, 255, 255, 0.95); 
+    //background-color: rgb(255, 0, 0);
+    background-color: transparent;
   }
 }

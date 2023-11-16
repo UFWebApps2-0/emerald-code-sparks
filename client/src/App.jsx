@@ -21,6 +21,7 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import GalleryAdmin from './views/Administrator/GalleryAdmin';
+import WrenchTest from './views/WrenchTest/WrenchTest';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
         <Route path='/galleryadmin' element={<GalleryAdmin />} />
         <Route path='/administrator' element={<Administrator />} />
+        <Route path= 'wrenchtest' element={<WrenchTest/>} />
 
         <Route
           path='/report'

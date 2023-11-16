@@ -26,9 +26,17 @@ const GalleryItemExpanded = () => {
                 <div className='flex flex-column'>
                     <img className='ooIMG'></img>
                 </div>
-                <div className='flex flex-column'>
-                    <DiscussionBoard />
-                    <Like likeCount={0}> </Like>
+                <div className='flex flex-column discussion-col'>
+                    <div className='flex flex-row' style={{ height: 80 + "%" }}>
+                        <div className='flex flex-column'>
+                            <DiscussionBoard />
+                        </div>
+                    </div>
+                    <div className='flex flex-row justify-end buttons-row'>
+                        <div className='flex flex-column'>
+                            <Like likeCount={0}> </Like>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -56,7 +64,6 @@ const GalleryItemExpanded = () => {
                 <div className='flex flex-column'>
                     <div className='container nav-padding'>
                         <div className='flex flex-row'>
-
                             <div className='flex flex-column content-col'>
                                 <div className='pageHeader'><h1>{titleHeading}</h1></div>
                                 {render}

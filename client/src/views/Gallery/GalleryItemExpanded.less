@@ -27,14 +27,17 @@ div.pageHeader {
 }
 
 .ooIMG {
-    width: 400px;
-    height: 600px;
+    min-width: 30dvw;
+    width: auto;
+    height: auto;
+    aspect-ratio: 2/3;
     background-color: red;
     border-radius: 15px;
+    max-height: 75vh;
 }
 
 .return-button {
-    height: 100vh;
+    height: 100%;
     width: 50px;
     background-color: #5BABDE;
     display: flex;
@@ -64,4 +67,21 @@ div.pageHeader {
     align-content: center;
     width: calc(100% - 50px);
     flex-wrap: wrap;
+}
+
+.discussion-col {
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 15px;
+    width: auto;
+    min-width: 45dvw;
+    margin-left: 5%;
+    max-height: 75vh;
+    height: auto;
+}
+
+div.buttons-row {
+    height: 20%;
+    flex-wrap: wrap;
+    align-items: end;
 }

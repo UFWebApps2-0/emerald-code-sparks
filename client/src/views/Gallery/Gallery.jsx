@@ -9,20 +9,37 @@ import { getGalleryObjects } from '../../Utils/requests';
 
 const Gallery = () => {
 
-    function filterUpdate(value) {
-        const filteredGalleryItems = loadedGalleryItems?.filter((item) => {
-            return item.props.Title.toLowerCase().includes(value.toLowerCase()) || item.props.User_name.toLowerCase().includes(value.toLowerCase());
-        });
-        setRenderedGalleryItems(filteredGalleryItems);
-    }
-
     /*The gallery page will need to have lazy loading implemented
     Therefore, we need to store ALL gallery objects, all which have been loaded (for searching), 
-    and all which are being rendered
-    */
+    and all which are being rendered currently (for lazy loading)
+     */
     const [galleryObjects, setGalleryObjects] = useState(undefined);
     const [renderedGalleryItems, setRenderedGalleryItems] = useState(undefined);
     const [loadedGalleryItems, setLoadedGalleryItems] = useState(undefined);
+
+    function filterUpdate(value, loadedGalleryItems) {
+        const filteredGalleryItems = loadedGalleryItems?.filter((item) => {
+            return item.props.Title.toLowerCase().includes(value.toLowerCase()) || item.props.User_name.toLowerCase().includes(value.toLowerCase());
+        });
+        renderInRows(filteredGalleryItems);
+    }
+
+    function renderInRows(items) {
+        let rows = [];
+        let row = [];
+        for (let i = 0; i < items.length; i++) {
+            row.push(items[i]);
+            if (row.length === 4) {
+                rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
+                row = [];
+            }
+        }
+        if (row.length > 0) {
+            rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+        }
+        setRenderedGalleryItems(rows);
+    }
+
 
     useEffect(() => {
         getGalleryObjects().then((response) => {
@@ -42,7 +59,7 @@ const Gallery = () => {
                 console.log(tempItems);
             }
             setLoadedGalleryItems(tempItems);
-            setRenderedGalleryItems(tempItems);
+            renderInRows(tempItems);
         });
     }, []); // Empty dependency array means this effect runs once when the component mounts
 
@@ -51,10 +68,14 @@ const Gallery = () => {
             <NavBar />
             <div className='container nav-padding'>
                 <h1>Gallery</h1>
-                <SearchBar filterUpdate={filterUpdate} />
+                <SearchBar filterUpdate={filterUpdate} loadedGalleryItems={loadedGalleryItems} />
                 <div className='flex flex-row'>
-                    <FilterComponent />
-                    {renderedGalleryItems}
+                    <div className='flex flex-column filterCol'>
+                        <FilterComponent />
+                    </div>
+                    <div className='flex flex-column'>
+                        {renderedGalleryItems}
+                    </div>
                 </div>
             </div>
         </>

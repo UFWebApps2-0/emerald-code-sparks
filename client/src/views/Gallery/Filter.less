@@ -1,16 +1,18 @@
 .filter-container {
-    width: 200px;
+    width: -moz-fit-content;
+    width: fit-content;
     padding: 20px;
     border: 3px solid #59ABDF;
-    position: relative;
-    left: 1vh;
-    top: -12vh;
-    height: 34vh;
-    bottom: 0;
+    position: fixed;
+    height: auto;
     background-color: #F4F4F5;
-    z-index: 1000;
     border-radius: 20px;
     margin-right: 1rem;
+}
+
+div.filterCol {
+    width: calc(100% - .5rem);
+    max-width: 250px;
 }
 
 h2 {

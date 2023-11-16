@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import likeImage from './like.png';
 import unlikedImage from './unlike.png';
 
-const Like = () => {
-    const [like_count, set_like_count] = useState(0);
+const Like = (props) => {
+    const inital_like_count = props.like_count || 0;
+    const [like_count, set_like_count] = useState(inital_like_count);
     const [liked, set_liked] = useState(false);
 
     function like_feature(e) {

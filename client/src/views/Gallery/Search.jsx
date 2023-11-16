@@ -1,38 +1,29 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { debounce } from 'lodash';
+import Input from 'antd/lib/input/Input';
+import Form from 'antd/lib/form/Form';
+import './Search.less';
 
-//modified from the bootcamp3 search
-function Search({ filterUpdate }) 
-{
-   const input = useRef(null); 
+function Search({ filterUpdate, loadedGalleryItems }) {
+  //deboune lets us pause before doing the search to avoid unnecessary calls, improve performance
+  const [debouncedFilterUpdate] = useState(() => debounce(filterUpdate, 1000));
+  const input = useRef(null);
 
-  function handleChange()
-  {
-	  filterUpdate(input.current.value); 
+  const handleChange = () => {
+    debouncedFilterUpdate(input.current.input.value, loadedGalleryItems);
   }
 
   return (
-
-    <form>
-      <input 
+    <Form className='search-form'>
+      <Input
+        size='large'
         type="text"
+        className='search-bar'
         placeholder="Search GalleryItems"
-		onChange={handleChange}
+        onChange={handleChange}
         ref={input}
       />
-    </form>
-	
+    </Form>
   );
-} 
-console.log("Search .jsx the end"); /////////////////
+}
 export default Search;
-
-
-/*
-Search.jsx: In this file you will
-
-Capture the text that is typed into the text box and store this value using the filterUpdate() function
-Use the onChange listener function
-Note: You will need to understand how to use ref values from form inputs
-
-
-*/

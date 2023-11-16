@@ -36,10 +36,8 @@ const GalleryItem = (props) => {
                 <img style={{ backgroundColor: 'red' }} />
                 <div className='flex flex-row'>
                     <div className='flex flex-column'>
-                        <p>Creator:</p>
-                        <p>{creator}</p>
-                        <p>Posted:</p>
-                        <p>{posted}</p>
+                        <p>Creator: {creator}</p>
+                        <p>Posted: {posted}</p>
                         <p>Views: {viewCounts}</p>
                     </div>
                     <div className='flex flex-column justify-end'>

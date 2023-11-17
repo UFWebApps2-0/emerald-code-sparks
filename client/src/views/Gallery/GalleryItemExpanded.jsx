@@ -42,17 +42,20 @@ const GalleryItemExpanded = () => {
                     </div>
                     <div className='flex flex-row justify-end buttons-row'>
                         <div className='flex flex-column'>
-						
-							<Fork galleryObject={galleryObject} /> 
-							<Share galleryObject={galleryObject} /> 
-							<Like likeCount={0} /> 
-							
-							
+                            <Fork galleryObject={galleryObject} />
+                            <Share title={response.data.Title} />
+                            <Like likeCount={0} />
                         </div>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    function handleGalleryEscape(event) {
+        if (event.keyCode === 27) {
+            window.location.href = '/gallery/';
+        }
     }
 
     //this will run once, on page load, to fetch the gallery object
@@ -63,16 +66,21 @@ const GalleryItemExpanded = () => {
         else {
             fetchObject();
         }
+        //bind listener to escape key to return to gallery
+        document.addEventListener('keydown', handleGalleryEscape);
+        return () => {
+            document.removeEventListener('keydown', handleGalleryEscape);
+        };
     }, []);
 
     return (
         <>
             <NavBar />
-            <div className='flex flex-row'>
+            <div onKeyDown={handleGalleryEscape} className='flex flex-row'>
                 <div className='flex flex-column justify-center'>
-                    <div onClick={() => { window.location.href = "/gallery" }} className='return-button'>
+                    <button tabIndex={0} onClick={() => { window.location.href = "/gallery" }} className='return-button'>
                         <p>Return to Gallery ⬇️</p>
-                    </div>
+                    </button>
                 </div>
                 <div className='flex flex-column'>
                     <div className='container nav-padding'>

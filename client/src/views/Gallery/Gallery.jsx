@@ -41,7 +41,6 @@ const Gallery = () => {
         setRenderedGalleryItems(rows);
     }
 
-
     useEffect(() => {
         getGalleryObjects().then((response) => {
             setGalleryObjects(response.data);
@@ -66,7 +65,7 @@ const Gallery = () => {
 
     return (
         <>
-            <NavBar />
+            < NavBar />
             <div className='container nav-padding'>
                 <h1>Gallery</h1>
                 <SearchBar filterUpdate={filterUpdate} loadedGalleryItems={loadedGalleryItems} />
@@ -78,7 +77,7 @@ const Gallery = () => {
                         {renderedGalleryItems}
                     </div>
                 </div>
-				
+
             </div>
         </>
     );

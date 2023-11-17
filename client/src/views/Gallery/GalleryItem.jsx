@@ -23,17 +23,15 @@ const GalleryItem = (props) => {
         window.location.href = `/gallery/item/${id}`;
     };
 
-    const handleCancel = () => {
-        setVisible(false);
-    };
-
-    const handleOk = () => {
-        setVisible(false);
-    };
+    function handleItemEnterKeydown(event) {
+        if (event.keyCode === 13) {
+            showModal();
+        }
+    }
 
     return (
         <>
-            <div className='galleryItem' tabIndex={0} onClick={() => { showModal() }}>
+            <div className='galleryItem' tabIndex={0} onKeyDown={handleItemEnterKeydown} onClick={() => { showModal() }}>
                 <div className='header'><div>{title}</div></div>
                 <img src={thumbnailImage} />
                 <div className='flex flex-row'>
@@ -41,7 +39,7 @@ const GalleryItem = (props) => {
                         <p>Creator: {creator}</p>
                         <p>Posted: {posted}</p>
                         <p>Views: {viewCounts}</p>
-						<p></p>
+                        <p></p>
                     </div>
                     <div className='flex flex-column justify-end'>
                     </div>

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/08/2023 4:28:35 PM"
+    "x-generation-date": "11/17/2023 7:02:53 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -12942,106 +12942,6 @@
           }
         }
       },
-      "Gallery-object": {
-        "required": [
-          "id",
-          "objectId"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "user_name": {
-            "type": "string"
-          },
-          "date_posted": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "like_count": {
-            "type": "integer"
-          },
-          "view_count": {
-            "type": "integer"
-          },
-          "discussion_board": {
-            "type": "object"
-          },
-          "objectId": {
-            "type": "integer"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "project",
-              "block",
-              "lesson"
-            ]
-          },
-          "visibility": {
-            "type": "string",
-            "enum": [
-              "organization",
-              "classroom",
-              "public"
-            ]
-          }
-        }
-      },
-      "NewGallery-object": {
-        "required": [
-          "objectId"
-        ],
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "user_name": {
-            "type": "string"
-          },
-          "date_posted": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "like_count": {
-            "type": "integer"
-          },
-          "view_count": {
-            "type": "integer"
-          },
-          "discussion_board": {
-            "type": "object"
-          },
-          "objectId": {
-            "type": "integer"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "project",
-              "block",
-              "lesson"
-            ]
-          },
-          "visibility": {
-            "type": "string",
-            "enum": [
-              "organization",
-              "classroom",
-              "public"
-            ]
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
       "Gallery-post": {
         "required": [
           "id"
@@ -13081,9 +12981,6 @@
               "Lesson"
             ]
           },
-          "object_id": {
-            "type": "integer"
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -13122,9 +13019,6 @@
               "Block",
               "Lesson"
             ]
-          },
-          "object_id": {
-            "type": "integer"
           },
           "published_at": {
             "type": "string",

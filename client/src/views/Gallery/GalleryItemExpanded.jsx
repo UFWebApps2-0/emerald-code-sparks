@@ -2,10 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import { getGalleryObject } from '../../Utils/requests';
-import Like from './like';
-import Share from './Share';
-import Fork from './Fork';
-import DiscussionBoard from './DiscussionBoard';
+import Like from '../../components/Gallery/like';
+import Share from '../../components/Gallery/Share';
+import Fork from '../../components/Gallery/Fork';
+import DiscussionBoard from '../../components/Gallery/DiscussionBoard';
 import './GalleryItemExpanded.less';
 
 const GalleryItemExpanded = () => {

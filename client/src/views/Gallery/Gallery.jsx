@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from "../../components/NavBar/NavBar";
-import GalleryItem from "./GalleryItem";
-import SearchBar from './Search';
-import FilterComponent from './FilterComponent';
+import GalleryItem from "../../components/Gallery/GalleryItem";
+import SearchBar from '../../components/Gallery/Search';
+import FilterComponent from '../../components/Gallery/FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
 import './Gallery.less';

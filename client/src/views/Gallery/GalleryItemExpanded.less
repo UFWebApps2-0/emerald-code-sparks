@@ -12,6 +12,26 @@ button.like-button {
     }
 }
 
+button.share-button {
+    max-width: 50px;
+    max-height: 50px;
+
+    &>img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+button.fork-button {
+    max-width: 50px;
+    max-height: 50px;
+
+    &>img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
 div.pageHeader {
     background-color: #5BABDE;
     border-radius: 80px;
@@ -84,8 +104,10 @@ div.pageHeader {
     height: auto;
 }
 
-div.buttons-row {
-    height: 20%;
-    flex-wrap: wrap;
-    align-items: end;
+div.buttons-row > div {
+    display: flex;
+    flex-direction: row; 
+    //align-items: center; 
+   margin-right: 20px;
+	gap: 10px;
 }

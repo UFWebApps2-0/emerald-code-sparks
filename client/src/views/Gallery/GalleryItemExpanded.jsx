@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import { getGalleryObject } from '../../Utils/requests';
 import Like from './like';
+import Share from './Share';
+import Fork from './Fork';
 import DiscussionBoard from './DiscussionBoard';
 import './GalleryItemExpanded.less';
 
 const GalleryItemExpanded = () => {
     const path = window.location.pathname;
-    const galleryId = path.substring(path.lastIndexOf("/item/") + 6).replace(/\D/g, '');;
+    const galleryId = path.substring(path.lastIndexOf("/item/") + 6).replace(/\D/g, '');
     const [galleryObject, setGalleryObject] = useState(undefined);
     const [render, setRender] = useState(<p>Loading...</p>);
     const [titleHeading, setTitleHeading] = useState("Gallery Item Expanded");
@@ -40,7 +42,12 @@ const GalleryItemExpanded = () => {
                     </div>
                     <div className='flex flex-row justify-end buttons-row'>
                         <div className='flex flex-column'>
-                            <Like likeCount={0}> </Like>
+						
+							<Fork galleryObject={galleryObject} /> 
+							<Share galleryObject={galleryObject} /> 
+							<Like likeCount={0} /> 
+							
+							
                         </div>
                     </div>
                 </div>

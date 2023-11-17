@@ -19,12 +19,12 @@ const Like = (props) => {
     }
 
     return (
-        <>
+		    <>
             <button className="like-button" onClick={(e) => { like_feature(e) }}>
                 <img src={liked ? likeImage : unlikedImage} alt="Like" />
-            </button>
-            <p>Like count:{like_count}</p>
-        </>
+            </button> 
+			<p>Likes: {like_count}</p>
+			</>
     );
 }
 

@@ -78,6 +78,7 @@ const Gallery = () => {
                         {renderedGalleryItems}
                     </div>
                 </div>
+				
             </div>
         </>
     );

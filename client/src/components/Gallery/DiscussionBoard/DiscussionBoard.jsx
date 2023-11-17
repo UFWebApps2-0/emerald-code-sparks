@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './DiscussionBoard.less';
-import { deletePinnedComment, deleteUnpinnedComment, postPinnedComment, postUnpinnedComment, getUnpinnedComments } from '../../../Utils/requests';
+import { deletePinnedComment, deleteUnpinnedComment, postPinnedComment, postUnpinnedComment , updateDiscussionBoard} from '../../../Utils/requests';
 
 const DiscussionBoard = ({ post }) => {
   // State to hold comments
@@ -11,18 +11,7 @@ const DiscussionBoard = ({ post }) => {
     // Fetch comments when the component mounts
     const fetchComments = async () => {
       try {
-        // Extract comments from discussion_board
-        const discussionBoard = post.discussion_board || [];
-
-        // Separate comments into two arrays based on the 'pinned' property
-        const pinnedComments = discussionBoard.filter(comment => comment.pinned === true);
-        const unpinnedComments = discussionBoard.filter(comment => comment.pinned !== true);
-
-        // Combine the sorted comments back into a single array
-        const sortedComments = [...pinnedComments, ...unpinnedComments];
-
-        // Update the state with the sorted comments
-        setSortedComments(sortedComments);
+        refreshComments();
       } catch (error) {
         console.error('Error fetching comments:', error.message);
       }
@@ -31,34 +20,46 @@ const DiscussionBoard = ({ post }) => {
     fetchComments();
   }, [post]);
 
-  const handleCommentSubmit = async () => {
-    try {
+const handleCommentSubmit = async () => {
+  try {
       // Check if the comment input is not empty
       if (commentInput.trim() !== '') {
         // Post an unpinned comment
-        await postUnpinnedComment({
+        const response = await postUnpinnedComment({
           User_name: 'test student', // Replace with the actual username or get it from your authentication system
           comment: commentInput,
           is_pinned: false,
         });
 
-        // Refetch comments to update the discussion board
-        const commentsResponse = await getUnpinnedComments();
-        const discussionBoard = commentsResponse.data || [];
-        const unpinnedComments = discussionBoard.filter(comment => comment.pinned !== true);
-        const updatedSortedComments = [...unpinnedComments];
-        setSortedComments(updatedSortedComments);
+        // Check the response status and handle accordingly
+        if (response.err === null) {
+          console.log('Comment posted successfully:', response.data);
 
-        // Clear the comment input after submission
-        setCommentInput('');
+          // Remove the "Username" attribute
+          const { Username, ...commentData } = response.data;
+
+          // Post to gallery-post attribute backend
+          const updatedDiscussionBoard = post.discussion_board || [];
+          updatedDiscussionBoard.push(commentData);
+          console.log(updatedDiscussionBoard);
+          await updateDiscussionBoard(post.id, updatedDiscussionBoard); //THIS IS NOT WORKING PROPERLY
+
+          refreshComments();
+
+          // Clear the comment input after submission
+          setCommentInput('');
+        } else {
+          console.error('Failed to post comment:', response.data);
+          throw new Error('Failed to post comment');
+        }
       } else {
         // Handle the case where the comment is empty
         console.warn('Comment cannot be empty.');
       }
     } catch (error) {
       console.error('Error submitting comment:', error.message);
-    }
-  };
+  }
+};
   //these props is the actual comment object
   const handlePinning = async (props) => {
     try {
@@ -70,8 +71,9 @@ const DiscussionBoard = ({ post }) => {
           is_pinned: false,
         });
 
-        //delete the pinned comment
+        //delete the pinned comment from pinned comment backend and from gallery-post attribute backend
         await deletePinnedComment(props.id);
+        await deleteDiscussionBoardElement(post.id, props.id);
       }
 
       else{
@@ -81,22 +83,57 @@ const DiscussionBoard = ({ post }) => {
           comment: props.comment_string,
           is_pinned: true,
         });
-        //delete the unpinned comment
+        //delete the unpinned comment from unpinned comment backend and from gallery-post attribute backend
         await deleteUnpinnedComment(props.id);
+        await deleteDiscussionBoardElement(post.id, props.id);
       }
 
-      
+      await refreshComments();
 
-        // Refetch comments to update the discussion board
-        const commentsResponse = await getUnpinnedComments();
-        const discussionBoard = commentsResponse.data || [];
-        const unpinnedComments = discussionBoard.filter(comment => comment.pinned !== true);
-        const updatedSortedComments = [...unpinnedComments];
-        setSortedComments(updatedSortedComments);
     } catch (error) {
       console.error('Error pinning comment:', error.message);
     }
-  };
+  }
+
+  const handleDelete = async (post, props) => {
+    try {
+      //delete the comment
+      const discussionBoard = post.discussion_board || [];
+      const updatedDiscussionBoard = discussionBoard.filter(comment => comment.id !== props.id);
+      await updateDiscussionBoardElement(post.id, updatedDiscussionBoard);
+      await refreshComments();
+    } catch (error) {
+      console.error('Error deleting comment:', error.message);
+    }
+  }
+
+  const refreshComments = async () => {
+
+    const discussionBoard = post.discussion_board || [];
+    const pinnedComments = discussionBoard.filter(comment => comment.is_pinned === true);
+    const unpinnedComments = discussionBoard.filter(comment => comment.is_pinned !== true);
+    const sortedComments = [...pinnedComments, ...unpinnedComments];
+    setSortedComments(sortedComments);
+  }
+
+  const handleUpdateComment = async (post, props) => {
+    try {
+      //update the comment
+      const discussionBoard = post.discussion_board || [];
+      const updatedDiscussionBoard = discussionBoard.map(comment => {
+        if(comment.id === props.id){
+          comment.comment_string = props.comment_string;
+        }
+        return comment;
+      }
+      );
+      await updateDiscussionBoardElement(post.id, updatedDiscussionBoard);
+      await refreshComments();
+    } catch (error) {
+      console.error('Error updating comment:', error.message);
+    }
+  }
+
 
   return (
     <div className='discussion-board'>
@@ -129,3 +166,5 @@ const DiscussionBoard = ({ post }) => {
 
 export default DiscussionBoard;
 // NEED TO ADD PINNING BUTTON IN THIS FILE TO REDO THE COMMENTS, I HAVE ADDED A FUNCTION TO HANDLE PINNING AND UNPINNING FOR NOW
+// NEED TO ADD COMPLETE DELETE BUTTON
+// NEED TO ADD EDIT BUTTON AND FUNCTIONALITY

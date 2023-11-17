@@ -753,6 +753,26 @@ export const getPinnedComments = async () =>
   makeRequest({
     method: DELETE,
     path: `${server}/pinned-comments/${comment}`,
-    auth: true,
+    auth: false,
     error: 'Failed to pinned comment student.',
   });
+
+export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
+  try {
+    const response = await makeRequest({
+      method: PUT,
+      path: `${server}/gallery-posts/${postId}/`,
+      data: {
+        Discussion_board: updatedDiscussionBoard,
+      },
+      auth: false,  // Adjust as needed based on your authentication requirements
+      error: 'Unable to update discussion board element',
+    });
+
+    console.log('Element updated successfully:', response.data);
+  } catch (error) {
+    console.error('Error updating discussion board element:', error.message);
+    throw error; 
+  }
+};
+

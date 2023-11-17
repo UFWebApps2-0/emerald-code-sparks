@@ -80,13 +80,10 @@ export default function BlocklyPage({ isSandbox }) {
       <NavBar />
       <div className="flex flex-row">
         <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
-        <GalleryObjectForm /> {/* Render the GalleryObjectForm component */}
-        <GalleryObjectForm /> {/* Render the GalleryObjectForm component */}
+        <GalleryObjectForm />
       </div>
 
 
     </div>
   )
 }
-//createGalleryObject("title", "name", 0, 0, "empty discussion board")
-//createGalleryObject("title", "name", 0, 0, "empty discussion board")

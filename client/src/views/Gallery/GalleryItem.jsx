@@ -13,7 +13,6 @@ const GalleryItem = (props) => {
     const likeCount = props.like_count || 0;
     const viewCount = props.view_count || 0;
     const posted = props.posted?.substr(0, 10) || 'Posted Date';
-
     const [viewCounts, setViewCounts] = useState(viewCount);
 
     const showModal = () => {
@@ -60,7 +59,7 @@ const GalleryItem = (props) => {
                             <img className='ooIMG'></img>
                         </div>
                         <div className='flex flex-column'>
-                            <DiscussionBoard />
+                            <DiscussionBoard post={props}/>
                             <Like likeCount={likeCount}> </Like>
                         </div>
 

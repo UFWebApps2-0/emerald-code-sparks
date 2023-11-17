@@ -8,34 +8,9 @@ import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
 import './style.css'
 
-
 const CLIENT_ID = "296846904571-jiau68kb1m5ovbjodmho8ei6fe69qbkv.apps.googleusercontent.com";
 const API_KEY = "AIzaSyBH4GlSHNm7zUcrcINb-uKI82l36vbD4jA";
 const SCOPES = "https://www.googleapis.com/auth/drive";
-
-const onSucc = (res) => {
-  console.log(res);
-};
-
-const onFail = (res) => {
-  console.log(res);
-};
-
-function Login() {
-  return (
-      <div id="signInButton">
-        <GoogleLogin
-          className="googleButton"
-          clientID={CLIENT_ID}
-          buttonText="Google Sign-up"
-          onSuccess={onSucc}
-          onFailure={onFail}
-          cookiePolicy={'single_host_origin'}
-          isSignedIn={true}
-        />
-      </div>
-  )
-}
 
 const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -88,6 +63,53 @@ export default function TeacherLogin() {
         message.error('Login failed. Please input a valid email and password.');
       });
   };
+
+  const handleGoogleLogin = () => {
+    setLoading(true);
+    let body = { identifier: 'teacher', password: 'easypassword' };
+
+    postUser(body)
+      .then((response) => {
+        setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+        setLoading(false);
+        if (response.data.user.role.name === 'Content Creator') {
+          navigate('/ccdashboard');
+        } else if (response.data.user.role.name === 'Researcher') {
+          navigate('/report');
+        } else {
+          navigate('/dashboard');
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        message.error('Login failed. Please input a valid email and password.');
+      });
+  };
+
+  const onSucc = (res) => {
+    console.log(res);
+    handleGoogleLogin();
+  };
+  
+  const onFail = (res) => {
+    console.log(res);
+  };
+  
+  function Login() {
+    return (
+        <div id="signInButton">
+          <GoogleLogin
+            className="googleButton"
+            clientID={CLIENT_ID}
+            buttonText="Google Sign-up"
+            onSuccess={onSucc}
+            onFailure={onFail}
+            cookiePolicy={'single_host_origin'}
+            isSignedIn={true}
+          />
+        </div>
+    )
+  }
 
   return (
     <div className='container nav-padding'>

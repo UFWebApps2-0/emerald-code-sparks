@@ -17,12 +17,12 @@ function Share({ title }) {
 	};
 
 	function handleShare(e) {
-		if (navigator.canShare()) {
-			const shareData = {
-				title: 'CASMM: ' + title,
-				text: 'Check out this awesome code I made using CASMM!',
-				url: shareLink,
-			};
+		const shareData = {
+			title: 'CASMM: ' + title,
+			text: 'Check out this awesome code I made using CASMM!',
+			url: shareLink,
+		};
+		if (navigator.canShare(shareData)) {
 			navigator.share(shareData);
 		}
 		else {

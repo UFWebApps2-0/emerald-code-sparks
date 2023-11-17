@@ -36,6 +36,7 @@ const Gallery = () => {
             let tempItems = [];
             try {
                 for (let i = 0; i < x; i++) {
+                    //TEST
                     const it = galleryObjects[i];
 
                     console.log(it.visibility);

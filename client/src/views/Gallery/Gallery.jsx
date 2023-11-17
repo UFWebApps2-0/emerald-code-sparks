@@ -32,6 +32,8 @@ const Gallery = () => {
             console.log(types);
             console.log(visibility);
 
+
+
             const x = Math.min(12, galleryObjects.length);
             let tempItems = [];
             try {
@@ -44,7 +46,7 @@ const Gallery = () => {
 
                     if (
                         // filteredByVisibility[it.visibility]
-                        (it.visibility == "Public") 
+                        (visibility.Public == true && it.visibility == "Public") 
                     ) {
 
                         tempItems.push(

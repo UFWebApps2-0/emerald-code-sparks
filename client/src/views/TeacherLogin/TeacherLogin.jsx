@@ -105,7 +105,7 @@ export default function TeacherLogin() {
             onSuccess={onSucc}
             onFailure={onFail}
             cookiePolicy={'single_host_origin'}
-            isSignedIn={true}
+            isSignedIn={false}
           />
         </div>
     )

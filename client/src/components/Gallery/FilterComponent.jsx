@@ -13,15 +13,15 @@ const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
   // }
 
   const [types, setTypes] = useState({
-    block: false,
-    lessons: false,
-    projects: false,
+    Block: false,
+    Lessons: false,
+    Projects: false,
   });
 
   const [visibility, setVisibility] = useState({
-    public: false,
-    organization: false,
-    classroom: false,
+    Public: false,
+    Organization: false,
+    Classroom: false,
   });
 
   const handleTypeChange = (type) => {
@@ -60,24 +60,24 @@ const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
         <label>
           <input
             type="checkbox"
-            checked={types.block}
-            onChange={() => handleTypeChange('block')}
+            checked={types.Block}
+            onChange={() => handleTypeChange('Block')}
           />
           Block
         </label>
         <label>
           <input
             type="checkbox"
-            checked={types.lessons}
-            onChange={() => handleTypeChange('lessons')}
+            checked={types.Lessons}
+            onChange={() => handleTypeChange('Lessons')}
           />
           Lessons
         </label>
         <label>
           <input
             type="checkbox"
-            checked={types.projects}
-            onChange={() => handleTypeChange('projects')}
+            checked={types.Projects}
+            onChange={() => handleTypeChange('Projects')}
           />
           Projects
         </label>
@@ -87,24 +87,24 @@ const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
         <label>
           <input
             type="checkbox"
-            checked={visibility.public}
-            onChange={() => handleVisibilityChange('public')}
+            checked={visibility.Public}
+            onChange={() => handleVisibilityChange('Public')}
           />
           Public
         </label>
         <label>
           <input
             type="checkbox"
-            checked={visibility.organization}
-            onChange={() => handleVisibilityChange('organization')}
+            checked={visibility.Organization}
+            onChange={() => handleVisibilityChange('Organization')}
           />
           Organization
         </label>
         <label>
           <input
             type="checkbox"
-            checked={visibility.classroom}
-            onChange={() => handleVisibilityChange('classroom')}
+            checked={visibility.Classroom}
+            onChange={() => handleVisibilityChange('Classroom')}
           />
           Classroom
         </label>

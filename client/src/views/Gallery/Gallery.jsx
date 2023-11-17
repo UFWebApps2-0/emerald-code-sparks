@@ -26,36 +26,75 @@ const Gallery = () => {
 
 
     function applyFilters(types, visibility, loadedGalleryItems) {
-        // Filter based on types
-        const filteredByTypes = loadedGalleryItems?.filter((item) => {
-          if (types.block && item.props.Type === 'block') {
-            return true;
-          }
-          if (types.lessons && item.props.Type === 'lessons') {
-            return true;
-          }
-          if (types.projects && item.props.Type === 'projects') {
-            return true;
-          }
-          return false;
-        });
-      
-        // Filter based on visibility
-        const filteredByVisibility = filteredByTypes?.filter((item) => {
-          if (visibility.public && item.props.Visibility === 'public') {
-            return true;
-          }
-          if (visibility.organization && item.props.Visibility === 'organization') {
-            return true;
-          }
-          if (visibility.classroom && item.props.Visibility === 'classroom') {
-            return true;
-          }
-          return false;
-        });
-      
-        renderInRows(filteredByVisibility);
-      }
+
+        getGalleryObjects().then((response) => {
+            
+            // Filter based on types
+            const filteredByTypes = loadedGalleryItems?.filter((item) => {
+                if (types.block && item.props.Type === 'Block') {
+                    return true;
+                }
+                if (types.lessons && item.props.Type === 'Lessons') {
+                    return true;
+                }
+                if (types.projects && item.props.Type === 'Projects') {
+                    return true;
+                }
+                return false;
+            });
+        
+            // Filter based on visibility
+            const filteredByVisibility = filteredByTypes?.filter((item) => {
+                
+                if (visibility.public && item.props.Visibility === 'Public') {
+                    return true;
+                }
+                if (visibility.organization && item.props.Visibility === 'Organization') {
+                    return true;
+                }
+                if (visibility.classroom && item.props.Visibility === 'Classroom') {
+                    return true;
+                }
+                return false;
+            });
+
+
+            const x = Math.min(12, galleryObjects.length);
+            let tempItems = [];
+            try {
+                for (let i = 0; i < x; i++) {
+                    const it = galleryObjects[i];
+
+                    console.log(it.visibility);
+                    console.log(it.type);
+
+                    if (
+                        filteredByVisibility[it.visibility]
+                        // (it.visibility == "Public") 
+                    ) {
+
+                        tempItems.push(
+                            <GalleryItem
+                                key={it.id}
+                                Title={it.Title}
+                                User_name={it.User_name}
+                                like_count={it.like_count}
+                                view_count={it.view_count}
+                                posted={it.updated_at}
+                            />
+                        );
+                    }
+                }
+            } catch (e) {
+                console.log("FAILED");
+                console.log("Error in gallery objects");
+                console.log(e);
+                console.log(tempItems);
+            }
+
+            renderInRows(tempItems);
+    });
+}
 
 
     function renderInRows(items) {

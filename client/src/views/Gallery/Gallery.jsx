@@ -28,36 +28,9 @@ const Gallery = () => {
     function applyFilters(types, visibility, loadedGalleryItems) {
 
         getGalleryObjects().then((response) => {
-            
-            // Filter based on types
-            const filteredByTypes = loadedGalleryItems?.filter((item) => {
-                if (types.block && item.props.Type === 'Block') {
-                    return true;
-                }
-                if (types.lessons && item.props.Type === 'Lessons') {
-                    return true;
-                }
-                if (types.projects && item.props.Type === 'Projects') {
-                    return true;
-                }
-                return false;
-            });
-        
-            // Filter based on visibility
-            const filteredByVisibility = filteredByTypes?.filter((item) => {
-                
-                if (visibility.public && item.props.Visibility === 'Public') {
-                    return true;
-                }
-                if (visibility.organization && item.props.Visibility === 'Organization') {
-                    return true;
-                }
-                if (visibility.classroom && item.props.Visibility === 'Classroom') {
-                    return true;
-                }
-                return false;
-            });
 
+            console.log(types);
+            console.log(visibility);
 
             const x = Math.min(12, galleryObjects.length);
             let tempItems = [];
@@ -69,8 +42,8 @@ const Gallery = () => {
                     console.log(it.type);
 
                     if (
-                        filteredByVisibility[it.visibility]
-                        // (it.visibility == "Public") 
+                        // filteredByVisibility[it.visibility]
+                        (it.visibility == "Public") 
                     ) {
 
                         tempItems.push(

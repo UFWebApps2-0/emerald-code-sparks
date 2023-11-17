@@ -27,28 +27,32 @@ const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
   const handleTypeChange = (type) => {
     console.log('handleTypeChange called');
     console.log('Types before update:', types);
+  
+    let updatedTypes;
 
     setTypes((prevTypes) => {
-      const updatedTypes = { ...prevTypes, [type]: !prevTypes[type] };
+      updatedTypes = { ...prevTypes, [type]: !prevTypes[type] };
       console.log('Types after update:', updatedTypes);
       return updatedTypes;
     });
-
-    onFilterChange(types, visibility, loadedGalleryItems);
-
+  
+    // Use the updatedTypes directly instead of the old 'types'
+    onFilterChange(updatedTypes, visibility, loadedGalleryItems);
   };
   
   const handleVisibilityChange = (option) => {
     console.log('handleVisibilityChange called');
     console.log('Visibility before update:', visibility);
+
+    let updatedVisibility;
   
     setVisibility((prevVisibility) => {
-      const updatedVisibility = { ...prevVisibility, [option]: !prevVisibility[option] };
+      updatedVisibility = { ...prevVisibility, [option]: !prevVisibility[option] };
       console.log('Visibility after update:', updatedVisibility);
       return updatedVisibility;
     });
 
-    onFilterChange(types, visibility, loadedGalleryItems);
+    onFilterChange(types, updatedVisibility, loadedGalleryItems);
     
   };
 

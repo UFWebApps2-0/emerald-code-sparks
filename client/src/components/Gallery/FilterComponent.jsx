@@ -4,18 +4,10 @@ import { debounce } from 'lodash';
 
 const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
 
-  //deboune lets us pause before doing the search to avoid unnecessary calls, improve performance
-  // const [debouncedFilterUpdate] = useState(() => debounce(filterUpdate, 1000));
-  // const input = useRef(null);
-
-  // const handleChange = () => {
-  //   debouncedFilterUpdate(input.current.input.value, loadedGalleryItems);
-  // }
-
   const [types, setTypes] = useState({
     Block: false,
-    Lessons: false,
-    Projects: false,
+    Lesson: false,
+    Project: false,
   });
 
   const [visibility, setVisibility] = useState({
@@ -35,8 +27,7 @@ const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
       console.log('Types after update:', updatedTypes);
       return updatedTypes;
     });
-  
-    // Use the updatedTypes directly instead of the old 'types'
+
     onFilterChange(updatedTypes, visibility, loadedGalleryItems);
   };
   
@@ -72,16 +63,16 @@ const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
         <label>
           <input
             type="checkbox"
-            checked={types.Lessons}
-            onChange={() => handleTypeChange('Lessons')}
+            checked={types.Lesson}
+            onChange={() => handleTypeChange('Lesson')}
           />
           Lessons
         </label>
         <label>
           <input
             type="checkbox"
-            checked={types.Projects}
-            onChange={() => handleTypeChange('Projects')}
+            checked={types.Project}
+            onChange={() => handleTypeChange('Project')}
           />
           Projects
         </label>

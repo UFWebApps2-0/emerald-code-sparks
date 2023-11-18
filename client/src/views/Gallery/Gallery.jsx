@@ -24,30 +24,30 @@ const Gallery = () => {
         renderInRows(filteredGalleryItems);
     }
 
-
+    // Check box filters
     function applyFilters(types, visibility, loadedGalleryItems) {
+        getGalleryObjects().then((response) => { // Backend
 
-        getGalleryObjects().then((response) => {
-
-            console.log(types);
-            console.log(visibility);
-
-
-
+            // Go through all gallery items
             const x = Math.min(12, galleryObjects.length);
             let tempItems = [];
             try {
                 for (let i = 0; i < x; i++) {
-                    //TEST
                     const it = galleryObjects[i];
 
-                    console.log(it.visibility);
-                    console.log(it.type);
-
+                    // Logic for getting the filtered items
                     if (
-                        // filteredByVisibility[it.visibility]
-                        (visibility.Public == true && it.visibility == "Public") 
-                    ) {
+                        ((visibility.Public == true && it.visibility == "Public") ||
+                        (visibility.Organization == true && it.visibility == "Organization") ||
+                        (visibility.Classroom == true && it.visibility == "Classroom") ||
+                        (!visibility.Public && !visibility.Organization && !visibility.Classroom)) &&
+
+                        ((types.Block == true && it.type == "Block") ||
+                        (types.Lesson == true && it.type == "Lesson") ||
+                        (types.Project == true && it.type == "Project") ||
+                        (!types.Block && !types.Lesson && !types.Project))
+
+                        ) {
 
                         tempItems.push(
                             <GalleryItem
@@ -61,6 +61,7 @@ const Gallery = () => {
                         );
                     }
                 }
+                
             } catch (e) {
                 console.log("FAILED");
                 console.log("Error in gallery objects");

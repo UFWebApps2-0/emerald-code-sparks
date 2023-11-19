@@ -312,6 +312,8 @@ Interaction: Users can access the options within the dropdown by clicking on the
 
 ## Gallery
 
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/bbe84982-1a9a-4a69-bcf6-47b2d08b2242)
+
 Background Color: Light blue. #colors[primary]. It's the overall backdrop for the sections.
 
 ### Sections:
@@ -321,6 +323,8 @@ Background Color: Light blue. #colors[primary]. It's the overall backdrop for th
 Color: White #colors[tertiary].
 
 Background: Lime green, pill-shaped background.
+
+Position: The lime green pill shaped labels are on the top left of the content blocks, with horizontally the labels are halfway through the content blocks and half on the light blue background.  
 
 Labels Used: "CATEGORY," "RECENT," and "BOOKMARKS."
 

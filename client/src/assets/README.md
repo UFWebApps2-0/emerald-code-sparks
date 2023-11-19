@@ -25,12 +25,15 @@ These colors should be consistently used for UI elements such as backgrounds, te
 
 The background should be a light blue color (#colors[primary]). Should be the lowest layered value in the object.  It's a completely static object that should not change at any time.
 
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/8df523da-45e5-43ad-a514-a0959d636769)
 
 # Text Boxes
 
 The background for all text boxes will be white (#colors[tertiary]) with the text color being black (#colors[text-primary]).
 
 ## ABOUT Section:
+
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/d47fdf8a-60c8-4614-85f7-06e6d09dd5a0)
 
 ### Title:
 
@@ -72,11 +75,15 @@ Position on Page: Middle of the page, below the navigation bar.
 
 # Buttons
 
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/1facd9de-3fc8-4229-b67d-41db23cd7616)
+
 ## Primary
 
 (submit/login button is primary, secondary would be like OK buttons)
 
 ### Student Login/Join/Teacher Login
+
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/5067dce3-a0e4-4a92-9c4f-e8c862e404fc)
 
 Primary Button (ENTER):
 
@@ -102,6 +109,8 @@ Size and Shape: The button appears circular. Specify the diameter of the button?
 
 Label: "HELP".
 
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/95657e8a-52b2-4211-a03a-11168bc6160c)
+
 Text Color: Black.
 
 Position: Centered within the button.
@@ -117,6 +126,8 @@ Click: Specify any visual feedback when the button is clicked?
 Position on Page: The button will be located on the bottom right corner of the home page.
 
 ### Featured Projects Section, Home Page
+
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/2d231417-d83a-4ab3-a068-d83afeeecb45)
 
 Background: The background color appears to be a light blue at #colors[primary].
 
@@ -145,6 +156,8 @@ Hover: specify if there's any visual effect (like a shadow or a border) when hov
 Click: Possibly if there's any visual feedback when a card is clicked, like a slight decrease in size (simulating a press effect) or a color change?
 
 ### FAQ Section
+
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/da1c2338-c12e-4f71-9e9c-9033ad9f4f5f)
 
 #### Title:
 
@@ -187,6 +200,8 @@ Spacing: Ensure consistent spacing between each question box for visual clarity.
 Position on Page: Middle of the page, below the navigation bar.
 
 ## Close Button (Accessibility features)
+
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/68e39b1f-a407-472f-a57e-8504fef43ecc)
 
 Icon: An "X" symbol.
 
@@ -256,6 +271,8 @@ Spacing: There's even spacing between the options.
 
 ## Student Login Input Box
 
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/9c97e133-8466-42ca-b807-a849c369748e)
+
 Background Color: White #colors[tertiary].
 
 Border: Thin rounded pink border.
@@ -277,6 +294,8 @@ Placeholder Text: The field name (e.g., "NAME")  in uppercase.
 # Linked Text 
 
 ## Nav Bar Links (HOME, ABOUT, GALLERY, CREATE)
+
+![image](https://github.com/CEN3031-Fall2023-Group-9a/emerald-code-sparks/assets/92881502/cf80fc67-95a7-4c65-90d3-c3648e133e65)
 
 Background: It seems to have a white background.
 

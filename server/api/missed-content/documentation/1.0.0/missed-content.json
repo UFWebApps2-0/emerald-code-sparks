@@ -548,6 +548,26 @@
                 "Title": {
                   "type": "string"
                 },
+                "Content": {
+                  "type": "string"
+                },
+                "date_posted": {
+                  "type": "string"
+                },
+                "urgency": {
+                  "type": "string",
+                  "enum": [
+                    "green",
+                    "yellow",
+                    "red"
+                  ]
+                },
+                "attachments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -576,10 +596,19 @@
                 "Title": {
                   "type": "string"
                 },
-                "Description": {
+                "Duration": {
                   "type": "string"
                 },
-                "Duration": {
+                "video": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "url": {
+                  "type": "string"
+                },
+                "teacher_notes": {
                   "type": "string"
                 },
                 "published_at": {

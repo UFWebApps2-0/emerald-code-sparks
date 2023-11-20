@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "videos",
   "info": {
-    "name": "Videos"
+    "name": "Videos",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -16,11 +17,26 @@
     "Title": {
       "type": "string"
     },
-    "Description": {
-      "type": "richtext"
-    },
     "Duration": {
       "type": "string"
+    },
+    "video": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "url": {
+      "type": "string"
+    },
+    "teacher_notes": {
+      "type": "text"
     }
   }
 }

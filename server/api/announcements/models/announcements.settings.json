@@ -13,6 +13,32 @@
   "attributes": {
     "Title": {
       "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    },
+    "date_posted": {
+      "type": "datetime"
+    },
+    "urgency": {
+      "type": "enumeration",
+      "enum": [
+        "green",
+        "yellow",
+        "red"
+      ]
+    },
+    "attachments": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }

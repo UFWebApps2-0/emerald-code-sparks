@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organizations",
+  "info": {
+    "name": "Organization",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "organization"
+    },
+    "classrooms": {
+      "collection": "classroom"
+    },
+    "mentors": {
+      "via": "organization",
+      "collection": "mentor"
+    }
+  }
+}

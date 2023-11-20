@@ -561,6 +561,9 @@
                 "role": {
                   "type": "string"
                 },
+                "organization": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

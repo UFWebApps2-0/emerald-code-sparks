@@ -143,23 +143,23 @@ const CreateStudyPage =()=>{
         </Form>
         <Form form={checkboxForm} id={"checkbox-form"}>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-1" onChange={handleCheckboxChange("profileInfo")} />
+            <input type="checkbox" id="checkbox-1" onChange={handleCheckboxChange("Profile Info")} />
             <label htmlFor="checkbox-1" className="checkbox-label">Profile Info</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-2" onChange={handleCheckboxChange("codeSamples")}/>
+            <input type="checkbox" id="checkbox-2" onChange={handleCheckboxChange("Access to Code Samples")}/>
             <label htmlFor="checkbox-2" className="checkbox-label">Access to Code Samples</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-3" onChange={handleCheckboxChange("messages")}/>
+            <input type="checkbox" id="checkbox-3" onChange={handleCheckboxChange("Messaging and Emails")}/>
             <label htmlFor="checkbox-3" className="checkbox-label">Messaging and Emails</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-4" onChange={handleCheckboxChange("videos")}/>
+            <input type="checkbox" id="checkbox-4" onChange={handleCheckboxChange("Access to Video/Lesson Usage")}/>
             <label htmlFor="checkbox-4" className="checkbox-label">Access to Video/Lesson Usage</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-5" onChange={handleCheckboxChange("screenRecordings")}/>
+            <input type="checkbox" id="checkbox-5" onChange={handleCheckboxChange("Screen Recording")}/>
             <label htmlFor="checkbox-5" className="checkbox-label">Screen Recording</label>
           </Form.Item>
         </Form>

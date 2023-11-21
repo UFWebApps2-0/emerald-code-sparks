@@ -1,11 +1,14 @@
 import { server } from './hosts';
 import axios from 'axios';
 import { getToken } from './AuthRequests';
+//"../../server/api/email/controllers/Email.js";
 
 const GET = 'GET';
 const PUT = 'PUT';
 const POST = 'POST';
 const DELETE = 'DELETE';
+
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwNTM3Nzk2LCJleHAiOjE3MDMxMjk3OTZ9.X1Mw2YfE295ZYiKJ2Lr766t0GPx1ajjGPrXoLjjbWR4";
 
 // all request functions should utilize makeRequest and return an obj with structure {data, err}
 const makeRequest = async ({ method, path, data, auth = false, error }) => {
@@ -14,17 +17,21 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   const config = auth
     ? {
         headers: {
-          Authorization: `Bearer ${getToken()}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     : null;
-
+console.log(config);
   try {
     switch (method) {
       case GET:
         res = (await axios.get(path, config)).data;
         break;
       case POST:
+        console.log(data);
+        console.log(config);
+        console.log(path);
+
         res = (await axios.post(path, data, config)).data;
         break;
       case PUT:
@@ -672,3 +679,17 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+  export const sendEmail = async (body) => {
+    //use emailController.send(body);
+    console.log("in sendEmail in requests.js");
+    console.log(body);
+    makeRequest({
+      method: POST,
+      path: `${server}/email/bug-report`,
+      data: body,
+      error: 'Unable to send email',
+    });
+
+  };
+

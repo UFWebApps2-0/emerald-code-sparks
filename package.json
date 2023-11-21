@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@strapi/plugin-sentry": "^4.15.4",
+    "axios": "^1.6.2"
+  }
+}

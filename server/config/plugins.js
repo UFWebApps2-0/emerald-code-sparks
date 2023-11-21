@@ -2,6 +2,8 @@ require('dotenv').config({ path: '../.env' });
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 
+//define the plugins
+
 module.exports = () => ({
   email: {
     provider: 'nodemailer',
@@ -14,12 +16,12 @@ module.exports = () => ({
       },
     },
     settings: {
-      defaultFrom: 'no-reply@casmm.org',
+      defaultFrom: 'chaitrapeddireddy@gmail.com',
       defaultReplyTo: 'no-reply@casmm.org',
     },
   },
   sentry: {
-    dsn: process.env.SENTRY_DNS || '',
+    dsn: process.env.SENTRY_DSN || '',
     integrations: [new Sentry.Integrations.Http({ tracing: true })],
     tracesSampleRate: 1.0,
   },

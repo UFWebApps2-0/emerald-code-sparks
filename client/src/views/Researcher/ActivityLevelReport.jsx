@@ -4,7 +4,8 @@ import { Table, Button, Tag, Modal, Input, Form } from 'antd';
 import './ActivityLevelReport.less';
 import { useSearchParam } from '../../Utils/useSearchParam';
 import NavBar from '../../components/NavBar/NavBar';
-
+//../../plugins/strapi-plugin-email/admin/src
+import { sendEmail } from '../../Utils/requests';
 import {
   getSessionsWithFilter,
   getSessionCountWithFilter,
@@ -36,22 +37,25 @@ const ActivityLevelReport = () => {
     setIsModalVisible(false);
   };
 
-  const handleAddResearcher = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        // You can handle the researcher data and send it to your server here
-        console.log('Received values:', values);
-  
-        // Close the modal
-        setIsModalVisible(false);
-  
-        // Reset the form fields
-        form.resetFields();
-      })
-      .catch((errorInfo) => {
-        console.log('Failed:', errorInfo);
-      });
+ const handleAddResearcher = () => {
+    //print form values to console
+    form.validateFields().then((values) => {
+      console.log(values);
+      //send email to researcher
+      //close modal
+      setIsModalVisible(false);
+      const emailTemplate = {
+        subject: 'Welcome to the Researcher Portal ' + values.username,
+        text: 'You have been added as a researcher to the study with the following study ID: ' + values.studyID,
+        html: '<p>You have been added as a researcher to the study with the following study ID: ' + values.studyID + '</p>',
+      }
+      //send email to admin
+      sendEmail(emailTemplate);
+    }
+    ).catch((info) => {
+      console.log('Validate Failed:', info);
+    });
+
   };
 
   useEffect(() => {

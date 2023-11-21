@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import { getMissedContent } from '../../Utils/requests';
+import { useNavigate } from 'react-router-dom';
 import './MissedClass.less'
 import { Link } from 'react-router-dom'
 
@@ -20,6 +21,7 @@ import { Link } from 'react-router-dom'
   }
 
   const MissedMaterials = ({ resources }) => {
+    const [learningStandard, setLessonModule] = useState({});
     return (
       <div className="missed-materials-container">
         <h2>Missed Materials</h2>
@@ -42,7 +44,6 @@ import { Link } from 'react-router-dom'
 
   const Announcements = ({ announcements }) => {
     if (!Array.isArray(announcements)) {
-        // Handle the case where announcements is not an array
         return <div>No announcements available.</div>;
     }
 
@@ -79,8 +80,6 @@ import { Link } from 'react-router-dom'
               announcements: firstItem.announcements || [],
             });
           }
-          // console.log(missedDetails.activities)
-          // console.log(missedDetails.videos)
           setIsLoading(false);
         } 
         catch (error) {

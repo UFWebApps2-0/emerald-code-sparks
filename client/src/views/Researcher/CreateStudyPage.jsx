@@ -4,27 +4,58 @@ import { Table, Modal, Button, Tag, Form, Input } from 'antd';
 import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-
-
+import { sendEmail } from '../../Utils/requests';
 
 const CreateStudyPage =()=>{
+  const [checkboxValues, setCheckboxValues] = useState({});
+
+  const handleCheckboxChange = (checkboxId) => (e) => {
+    setCheckboxValues((prevValues) => ({
+      ...prevValues,
+      [checkboxId]: e.target.checked,
+    }));
+  };
+
   const navigate = useNavigate();
-  const [form] = Form.useForm();
+  const [studyForm] = Form.useForm();
+  const [checkboxForm] = Form.useForm();
+  const [searchBarForm] = Form.useForm();
 
   //add submit button
   const [isModalVisible, setIsModalVisible] = useState(false);
-const showModal = () => {
-  setIsModalVisible(true);
-};
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
-const handleOk = () => {
-  console.log(form.getFieldsValue());
-  setIsModalVisible(false);
-}
-const handleCancel = () => {
+  const handleSubmitStudy = () => {
+    // Get study form values
+    const studyValues = studyForm.getFieldsValue();
 
-  setIsModalVisible(false);
-}
+    // Use the updated checkboxValues state
+    const values = {
+      ...studyValues,
+      checkboxes: checkboxValues,
+      searchBar: searchBarForm.getFieldsValue(),
+    };
+
+    console.log(values);
+    setIsModalVisible(false);
+
+    // Adjust the email template creation according to your form field names
+    const emailTemplate = {
+      name: values['Study name'],
+      studyID: values['Study ID'],
+      description: values['Study description'],
+      checkboxes: values.checkboxes,
+      searchBar: values.searchBar,
+    };
+
+  
+  }
+  const handleCancel = () => {
+
+    setIsModalVisible(false);
+  }
 
   return (
     <div className='container nav-padding'>
@@ -41,7 +72,7 @@ const handleCancel = () => {
       </div>
 
       <div id='button-container'>
-        <Form form={form} id={"study-form"} /* style={{ maxWidth: '600px', margin: 'auto' }} */>
+      <Form form={studyForm} id={"study-form"}>
           <h1 id="new-study-header">Study Information</h1>
           <Form.Item
           name="Study name"
@@ -96,29 +127,29 @@ const handleCancel = () => {
           </Form.Item>
 
         </Form>
-        <Form form = {form} id={"checkbox-form"}>
+        <Form form={checkboxForm} id={"checkbox-form"}>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-1" />
+            <input type="checkbox" id="checkbox-1" onChange={handleCheckboxChange("profileInfo")} />
             <label htmlFor="checkbox-1" className="checkbox-label">Profile Info</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-2" />
+            <input type="checkbox" id="checkbox-2" onChange={handleCheckboxChange("codeSamples")}/>
             <label htmlFor="checkbox-2" className="checkbox-label">Access to Code Samples</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-2" />
-            <label htmlFor="checkbox-2" className="checkbox-label">Messaging and Emails</label>
+            <input type="checkbox" id="checkbox-3" onChange={handleCheckboxChange("messages")}/>
+            <label htmlFor="checkbox-3" className="checkbox-label">Messaging and Emails</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-2" />
-            <label htmlFor="checkbox-2" className="checkbox-label">Access to Video/Lesson Usage</label>
+            <input type="checkbox" id="checkbox-4" onChange={handleCheckboxChange("videos")}/>
+            <label htmlFor="checkbox-4" className="checkbox-label">Access to Video/Lesson Usage</label>
           </Form.Item>
           <Form.Item className="checkbox-item">
-            <input type="checkbox" id="checkbox-2" />
-            <label htmlFor="checkbox-2" className="checkbox-label">Screen Recording</label>
+            <input type="checkbox" id="checkbox-5" onChange={handleCheckboxChange("screenRecordings")}/>
+            <label htmlFor="checkbox-5" className="checkbox-label">Screen Recording</label>
           </Form.Item>
         </Form>
-        <Form form={form} id={"search-bar-form"}>
+        <Form form={searchBarForm} id={"search-bar-form"}>
           <Form.Item>
             <input
             className='search-bar'
@@ -134,7 +165,7 @@ const handleCancel = () => {
           <Button className='add-researcher-button' onClick={showModal}>
               Submit Study Request 
           </Button>
-          <Modal title="Submit Study Request" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <Modal title="Submit Study Request" visible={isModalVisible} onOk={handleSubmitStudy} onCancel={handleCancel}>
             <p>Are you sure you want to submit this study request?</p>
           </Modal>
         </Form>

@@ -78,8 +78,8 @@ module.exports = {
           to: studentEmail,
           subject: 'Invitation to participate in a study',
           html: `
-          <h3>Dear Student ${name}, </h3>
-          <p>You have been invited to participate in study ${studyID}.</p>
+          <h3>Dear Student, </h3>
+          <p>You have been invited to participate in the study: ${name} #${studyID}.</p>
           <p>Please visit <a href='https://casmm.org'>casmm.org</a> to complete your enrollment.</p>
           <p>The following data will be collected: </p>
           <ul>

@@ -30,6 +30,13 @@ const CreateStudyPage =()=>{
   const handleSubmitStudy = () => {
     // Get study form values
     const studyValues = studyForm.getFieldsValue();
+    //sanitize data
+    studyValues['Study name'] = studyValues['Study name'].replace(/[^a-zA-Z0-9 ]/g, "");
+    studyValues['Study ID'] = studyValues['Study ID'].replace(/[^a-zA-Z0-9 ]/g, "");
+    studyValues['Study description'] = studyValues['Study description'].replace(/[^a-zA-Z0-9 ]/g, "");
+    //keep @ and . for email
+    studyValues['Student Email'] = studyValues['Student Email'].replace(/[^a-zA-Z0-9@. ]/g, "");
+    console.log(studyValues);
 
     // Use the updated checkboxValues state
     const values = {
@@ -65,7 +72,6 @@ const CreateStudyPage =()=>{
       <NavBar/>
       <div className='menu-bar'>
         <div id='create-study-header'>Create New study</div>
-
         <button
           className='activity-level-return'
           onClick={() => navigate('/report')}

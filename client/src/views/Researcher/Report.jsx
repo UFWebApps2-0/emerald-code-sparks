@@ -11,6 +11,12 @@ export default function Report(props) {
       <div id='main-header'>Welcome Researcher!</div>
       <h1 id='report-subheader'>Reports</h1>
 
+      <Link to={'/createStudyPage'}>
+        <button id='create-new-study'>
+          Create Study
+        </button>
+      </Link>
+      
       <div id='button-container'>
         {/* <div class='parent'>
           <div class='child inline-block-child'>Home</div>

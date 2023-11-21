@@ -36,3 +36,4 @@ server/public/client/*
 server/package-lock.json
 client/package.json
 client/pnpm-lock.yaml
+server/extensions/documentation/*

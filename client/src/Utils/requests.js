@@ -686,7 +686,7 @@ export const getClassroomWorkspace = async (id) =>
     console.log(body);
     makeRequest({
       method: POST,
-      path: `${server}/email/bug-report`,
+      path: `${server}/add-researcher`,
       data: body,
       error: 'Unable to send email',
     });

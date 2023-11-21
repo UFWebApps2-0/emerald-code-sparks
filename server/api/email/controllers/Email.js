@@ -1,37 +1,57 @@
-// File: /api/email/controllers/Email.js
+// File /api/email/controllers/Email.js
 'use strict';
 
 /**
  * Read the documentation () to implement custom controller functions
  */
 
-console.log("in email.js");
+module.exports = {
+  /**
+   * Sends an email to the recipient in the body of the request
+   */
+  send: async (ctx) => {
+    // ensure request was not sent as formdata
+    if (ctx.is('multipart'))
+      return ctx.badRequest('Multipart requests are not accepted!', {
+        error: 'ValidationError',
+      });
 
-/**
- * Sends an email to the recipient in the body of the request
- */
-const send = async (ctx) => {
-  try {
-    // Your email sending logic goes here
-    console.log("Sending email...");
+    // ensure the request has the right number of params
+    const params = Object.keys(ctx.request.body).length;
+    if (params !== 5)
+      return ctx.badRequest('Invalid number of params!', {
+        error: 'ValidationError',
+      });
 
-    const emailOptions = {
-      to: 'chaitrapeddireddy@gmail.com',
-      subject: 'Test Email',
-      html: '<p>This is a test email.</p>',
-    };
+    // validate the request
+    const { description, steps, name, email, systemInfo } = ctx.request.body;
+    if (!description || !steps || !name || !email || !systemInfo)
+      return ctx.badRequest(
+        'A description, steps, name, email and systemInfo must be provided!',
+        { error: 'ValidationError' }
+      );
 
-    // Using Strapi's email service to send the email
-    await strapi.plugins['email'].services.email.send(emailOptions);
-
-    console.log("Email sent successfully.");
-
-    ctx.send({ message: 'Email sent' });
-  } catch (err) {
-    console.error("Error sending email:", err);
-    ctx.send({ error: 'Error sending email' });
-  }
+    try {
+      const emailOptions = {
+        to: 'chaitra2304@icloud.com',
+        subject: 'Bug Report',
+        html: `
+        <h3>Description of the bug: </h3>
+        <p>${description}<p>
+        <h3>Steps to reproduce: </h3>
+        <p>${steps}<p>
+        <h3>Reported by: </h3>
+        <p>${name} <p> <a href='mailto: ${email}'>(${email})</a>
+        <h3>Captured in: </h3>
+        <p>${systemInfo}</p>
+        `,
+      };
+      await strapi.plugins['email'].services.email.send(emailOptions);
+      strapi.log.debug(`Email sent to casmm.help@gmail.com`);
+      ctx.send({ message: 'Email sent' });
+    } catch (err) {
+      strapi.log.error(`Error sending email to casmm.help@gmail.com, `, err);
+      ctx.send({ error: 'Error sending email' });
+    }
+  },
 };
-
-
-module.exports = { send }; // Export the send function as a named export

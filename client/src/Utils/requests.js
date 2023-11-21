@@ -679,17 +679,14 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
-
-  export const sendEmail = async (body) => {
-    //use emailController.send(body);
-    console.log("in sendEmail in requests.js");
-    console.log(body);
+  export const sendEmail = async (
+    body
+  ) =>
     makeRequest({
       method: POST,
-      path: `${server}/add-researcher`,
+      path: `${server}/bug-report`,
       data: body,
-      error: 'Unable to send email',
+      error: 'Unable to submit bug-report',
     });
-
-  };
+  
 

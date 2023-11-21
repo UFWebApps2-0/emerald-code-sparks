@@ -43,11 +43,12 @@ const ActivityLevelReport = () => {
       console.log(values);
       //send email to researcher
       //close modal
+      //const {name, email, studyID} = ctx.request.body;
       setIsModalVisible(false);
       const emailTemplate = {
-        subject: 'Welcome to the Researcher Portal ' + values.username,
-        text: 'You have been added as a researcher to the study with the following study ID: ' + values.studyID,
-        html: '<p>You have been added as a researcher to the study with the following study ID: ' + values.studyID + '</p>',
+        name: values.username,
+        email: values.email,
+        studyID: values.studyID,
       }
       //send email to admin
       sendEmail(emailTemplate);

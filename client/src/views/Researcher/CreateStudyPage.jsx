@@ -5,9 +5,26 @@ import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
 
+
+
 const CreateStudyPage =()=>{
   const navigate = useNavigate();
   const [form] = Form.useForm();
+
+  //add submit button
+  const [isModalVisible, setIsModalVisible] = useState(false);
+const showModal = () => {
+  setIsModalVisible(true);
+};
+
+const handleOk = () => {
+  console.log(form.getFieldsValue());
+  setIsModalVisible(false);
+}
+const handleCancel = () => {
+
+  setIsModalVisible(false);
+}
 
   return (
     <div className='container nav-padding'>
@@ -114,7 +131,16 @@ const CreateStudyPage =()=>{
             placeholder='Search for a Tags'
             />
           </Form.Item>
+          <Button className='add-researcher-button' onClick={showModal}>
+              Submit Study Request 
+          </Button>
+          <Modal title="Submit Study Request" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <p>Are you sure you want to submit this study request?</p>
+          </Modal>
         </Form>
+        
+        
+        
       </div>
     </div>
     

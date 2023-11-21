@@ -41,9 +41,10 @@ const ActivityLevelReport = () => {
     //print form values to console
     form.validateFields().then((values) => {
       console.log(values);
-      //send email to researcher
-      //close modal
-      //const {name, email, studyID} = ctx.request.body;
+      //sanitize input
+      values.username = values.username.replace(/[^a-zA-Z0-9]/g, '');
+      values.email = values.email.replace(/[^a-zA-Z0-9@.]/g, '');
+      values.studyID = values.studyID.replace(/[^a-zA-Z0-9]/g, '');
       setIsModalVisible(false);
       const emailTemplate = {
         name: values.username,

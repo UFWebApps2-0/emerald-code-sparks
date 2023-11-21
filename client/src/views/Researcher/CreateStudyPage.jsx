@@ -46,9 +46,12 @@ const CreateStudyPage =()=>{
       name: values['Study name'],
       studyID: values['Study ID'],
       description: values['Study description'],
+      studentEmail: values['Student Email'],
       checkboxes: values.checkboxes,
       searchBar: values.searchBar,
     };
+
+    sendEmail(emailTemplate); //send email to student 
 
   
   }
@@ -105,6 +108,17 @@ const CreateStudyPage =()=>{
             </textarea>
             
           </Form.Item>
+            <Form.Item
+            name="Student Email"
+            label="Student Email"
+            rules={[
+              {
+                required: true,
+                message: 'Please enter student email',
+              },
+            ]}>
+              <Input/>
+            </Form.Item>
           <Form.Item>
             <select
             className='select'

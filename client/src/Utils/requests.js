@@ -674,7 +674,7 @@ export const getClassroomWorkspace = async (id) =>
     error: 'Unable to retrive classroom workspaces',
   });
 
-export const createBlock = async (name, description, blocks_category, image_url) => {
+export const createBlock = async (name, description, blocks_category, image_url, block_definition, code_stub) => {
   const currentUser = getCurrUser();
   const created_by = currentUser.name || 'student';
   const updated_by = created_by;
@@ -687,9 +687,20 @@ export const createBlock = async (name, description, blocks_category, image_url)
       description: description, 
       blocks_category: blocks_category, 
       image_url: image_url, 
+      block_definition: block_definition,
+      code_stub: code_stub,
       created_by: created_by, 
       updated_by: updated_by,
     }, 
     auth: true,
     error: 'Unable to create new block',
   })}
+
+export const getBlocks = async (id) => {
+  makeRequest({
+    method: GET, 
+    path: `${server}/blocks-categories/${id}`,
+    auth: true,
+    error: 'Unable to retrieve blocks',
+  })
+}

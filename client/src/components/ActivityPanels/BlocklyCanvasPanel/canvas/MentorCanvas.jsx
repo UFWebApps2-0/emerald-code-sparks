@@ -49,6 +49,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     blockDefinition: '',
     codeStub: '',
   });
+  let initializedBlocks = false;
 
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
@@ -57,15 +58,18 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
   };
 
   const initBlocks = async () => {
-    try {
-      const res = await getBlocks(14);
-      // console.log(res.data.blocks); 
-      res.data.blocks.forEach((block) => {
-        eval(block.block_definition);
-        eval(block.code_stub);
-      })
-    } catch (error) {
-      console.error(error);
+    if (!initializedBlocks) {
+      try {
+        const res = await getBlocks(14);
+        // console.log(res.data.blocks); 
+        res.data.blocks.forEach((block) => {
+          eval(block.block_definition);
+          eval(block.code_stub);
+        })
+      } catch (error) {
+        console.error(error);
+      }
+      initializedBlocks = true;
     }
   };
   initBlocks();

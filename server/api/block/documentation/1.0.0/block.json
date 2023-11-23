@@ -556,6 +556,12 @@
           },
           "image_url": {
             "type": "string"
+          },
+          "block_definition": {
+            "type": "string"
+          },
+          "code_stub": {
+            "type": "string"
           }
         }
       },
@@ -574,6 +580,12 @@
             "type": "string"
           },
           "image_url": {
+            "type": "string"
+          },
+          "block_definition": {
+            "type": "string"
+          },
+          "code_stub": {
             "type": "string"
           },
           "created_by": {

@@ -51,7 +51,7 @@ const Gallery = () => {
             try {
                 for (let i = 0; i < x; i++) {
                     const it = response.data[i];
-                    tempItems.push(<GalleryItem key={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board}/>);
+                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board}/>);
                 }
             } catch (e) {
                 console.log("Error in gallery objects");

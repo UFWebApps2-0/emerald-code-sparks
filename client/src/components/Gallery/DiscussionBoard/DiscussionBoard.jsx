@@ -41,7 +41,7 @@ const handleCommentSubmit = async () => {
           // Post to gallery-post attribute backend
           const updatedDiscussionBoard = post.discussion_board || [];
           updatedDiscussionBoard.push(commentData);
-          console.log(updatedDiscussionBoard);
+          console.log('post hello', post.id);
           await updateDiscussionBoard(post.id, updatedDiscussionBoard); //THIS IS NOT WORKING PROPERLY
 
           refreshComments();
@@ -146,7 +146,7 @@ const handleCommentSubmit = async () => {
               rows='4'
               cols='50'
               value={comment.comment_string}
-              readOnly // Make the textarea read-only to prevent user editing; NEED TO ADD AN EDIT BUTTON FOR THE POSTER.
+              readOnly // Make the text area read-only to prevent user editing; NEED TO ADD AN EDIT BUTTON FOR THE POSTER.
             />
           </div>
         ))}

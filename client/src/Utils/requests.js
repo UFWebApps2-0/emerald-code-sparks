@@ -1,6 +1,7 @@
 import { server } from './hosts';
 import axios from 'axios';
 import { getToken } from './AuthRequests';
+import CompoundedSpace from 'antd/lib/space';
 
 const GET = 'GET';
 const PUT = 'PUT';
@@ -686,7 +687,6 @@ export const postGalleryObject = async (data) =>
       discussion_board: data.discussion_board,
       visibility: data.visibility,
       type: data.type,
-      object_id: 0,
     },
     error: 'Unable to post to gallery',
   });
@@ -758,21 +758,17 @@ export const getPinnedComments = async () =>
   });
 
 export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
-  try {
-    const response = await makeRequest({
-      method: PUT,
-      path: `${server}/gallery-posts/${postId}/`,
-      data: {
-        Discussion_board: updatedDiscussionBoard,
-      },
-      auth: false,  // Adjust as needed based on your authentication requirements
-      error: 'Unable to update discussion board element',
-    });
-
-    console.log('Element updated successfully:', response.data);
-  } catch (error) {
-    console.error('Error updating discussion board element:', error.message);
-    throw error; 
-  }
+  console.log('updatedDiscussionBoard: ', updatedDiscussionBoard );
+  console.log('postId: ', postId);
+    makeRequest({
+    method: PUT,
+    path: `${server}/gallery-posts/${postId}/`,
+    auth: false,
+    data: {
+      discussion_board: updatedDiscussionBoard,
+    },
+    error: 'Unable to update discussion board',
+  });
+  console.log('path', `${server}/gallery-posts/${postId}/`);
 };
 

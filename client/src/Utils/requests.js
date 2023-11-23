@@ -696,11 +696,11 @@ export const createBlock = async (name, description, blocks_category, image_url,
     error: 'Unable to create new block',
   })}
 
-export const getBlocks = async (id) => {
+export const getBlocks = async (id) => 
   makeRequest({
     method: GET, 
     path: `${server}/blocks-categories/${id}`,
     auth: true,
     error: 'Unable to retrieve blocks',
-  })
-}
+  });
+

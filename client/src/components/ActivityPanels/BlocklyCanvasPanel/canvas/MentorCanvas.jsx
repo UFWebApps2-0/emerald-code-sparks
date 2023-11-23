@@ -15,7 +15,7 @@ import {
   handleCloseConnection,
   handleOpenConnection,
 } from '../../Utils/consoleHelpers';
-import { getAuthorizedWorkspace, createBlock } from '../../../../Utils/requests';
+import { getAuthorizedWorkspace, createBlock, getAuthorizedWorkspaceToolbox, getBlocks } from '../../../../Utils/requests';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 
@@ -56,30 +56,19 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     });
   };
 
-  // tester block -- include in temp category in xml
-  Blockly.Blocks['special_block_tester'] = {
-    init: function() {
-      this.appendValueInput("something 1")
-          .setCheck("Boolean")
-          .appendField("something 1");
-      this.appendStatementInput("something 2")
-          .setCheck("String")
-          .appendField("something 2");
-      this.setColour(230);
-   this.setTooltip("hello");
-   this.setHelpUrl("asjkdba");
+  const initBlocks = async () => {
+    try {
+      const res = await getBlocks(14);
+      // console.log(res.data.blocks); 
+      res.data.blocks.forEach((block) => {
+        eval(block.block_definition);
+        eval(block.code_stub);
+      })
+    } catch (error) {
+      console.error(error);
     }
   };
-
-  Blockly.Arduino['special_block_tester'] = function(block) {
-    var value_something_1 = Blockly.Arduino.valueToCode(block, 'something 1', Blockly.Arduino.ORDER_ATOMIC);
-    var statements_something_2 = Blockly.Arduino.statementToCode(block, 'something 2');
-    // TODO: Assemble Arduino into code variable.
-    var code = '...;\n';
-    return code;
-  };
-
-  //const resp = createBlock('custom_block', 'null', '14', 'null');
+  initBlocks();
 
   useEffect(() => {
     // once the activity state is set, set the workspace and save
@@ -152,7 +141,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     e.preventDefault();
     
     try {
-      const response = await createBlock(formData.name, formData.description, '14', '');
+      const response = await createBlock(formData.name, formData.description, '14', '', formData.blockDefinition, formData.codeStub);
       //console.log(formData.name + " " + formData.description);
     } catch (error) {
       console.error(error);
@@ -607,10 +596,6 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
             </category>
           ))
         }
-        {/* this category only exists locally for testing purposes */}
-        <category name='Test'> 
-          <block type='special_block_tester'></block>
-        </category>
       </xml>
 
       {compileError && (

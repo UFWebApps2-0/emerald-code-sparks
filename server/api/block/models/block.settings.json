@@ -28,7 +28,7 @@
       "type": "string"
     },
     "block_definition": {
-      "type": "string"
+      "type": "text"
     },
     "code_stub": {
       "type": "text"

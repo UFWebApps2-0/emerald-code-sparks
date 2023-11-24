@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "studies",
+  "info": {
+    "name": "Study"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "studyID": {
+      "type": "integer"
+    },
+    "studyDescription": {
+      "type": "text"
+    }
+  }
+}

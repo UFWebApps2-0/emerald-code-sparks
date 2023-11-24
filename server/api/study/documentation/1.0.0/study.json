@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/schools": {
+    "/studies": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/School"
+                    "$ref": "#/components/schemas/Study"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "School"
+          "Study"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/School"
+                  "$ref": "#/components/schemas/Study"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "School"
+          "Study"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSchool"
+                "$ref": "#/components/schemas/NewStudy"
               }
             }
           }
         }
       }
     },
-    "/schools/count": {
+    "/studies/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "School"
+          "Study"
         ],
         "parameters": []
       }
     },
-    "/schools/{id}": {
+    "/studies/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/School"
+                  "$ref": "#/components/schemas/Study"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "School"
+          "Study"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/School"
+                  "$ref": "#/components/schemas/Study"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "School"
+          "Study"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSchool"
+                "$ref": "#/components/schemas/NewStudy"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "School"
+          "Study"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "School": {
+      "Study": {
         "required": [
           "id"
         ],
@@ -522,193 +522,29 @@
           "id": {
             "type": "string"
           },
-          "name": {
+          "studyID": {
+            "type": "integer"
+          },
+          "studyDescription": {
             "type": "string"
           },
-          "county": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "classrooms": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "code"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "school": {
-                  "type": "string"
-                },
-                "sessions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "mentors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "students": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "code": {
-                  "type": "string"
-                },
-                "grade": {
-                  "type": "string"
-                },
-                "selections": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "authorized_workspaces": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "researchers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "mentors": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "first_name": {
-                  "type": "string"
-                },
-                "last_name": {
-                  "type": "string"
-                },
-                "school": {
-                  "type": "string"
-                },
-                "classrooms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "user": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "researchers": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "first_name": {
-                  "type": "string"
-                },
-                "last_name": {
-                  "type": "string"
-                },
-                "school": {
-                  "type": "string"
-                },
-                "users_permissions_user": {
-                  "type": "string"
-                },
-                "classrooms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "researcherEmail": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewSchool": {
+      "NewStudy": {
         "properties": {
-          "name": {
+          "studyID": {
+            "type": "integer"
+          },
+          "studyDescription": {
             "type": "string"
           },
-          "county": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "classrooms": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "mentors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "researchers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -722,7 +558,7 @@
   },
   "tags": [
     {
-      "name": "School"
+      "name": "Study"
     }
   ]
 }

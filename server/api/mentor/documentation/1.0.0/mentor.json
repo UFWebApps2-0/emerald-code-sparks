@@ -557,6 +557,12 @@
                   "type": "string"
                 }
               },
+              "researchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -613,6 +619,12 @@
                   }
                 },
                 "authorized_workspaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "researchers": {
                   "type": "array",
                   "items": {
                     "type": "string"

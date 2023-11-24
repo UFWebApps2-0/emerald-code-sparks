@@ -70,6 +70,13 @@ const StudyLevelReport = () => {
       align: 'left',
     },
     {
+      title: "Study Tag",
+      key: "studyTag",
+      dataIndex: "studyTag",
+      width: "2%",
+      align: "left",
+    },
+    {
       title: 'Study Description',
       key: 'studyDescription',
       dataIndex: 'studyDescription',

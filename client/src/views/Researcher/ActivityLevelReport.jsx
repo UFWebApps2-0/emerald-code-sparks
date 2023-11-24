@@ -37,29 +37,6 @@ const ActivityLevelReport = () => {
     setIsModalVisible(false);
   };
 
- const handleAddResearcher = () => {
-    //print form values to console
-    form.validateFields().then((values) => {
-      console.log(values);
-      //sanitize input
-      values.username = values.username.replace(/[^a-zA-Z0-9]/g, '');
-      values.email = values.email.replace(/[^a-zA-Z0-9@.]/g, '');
-      values.studyID = values.studyID.replace(/[^a-zA-Z0-9]/g, '');
-      setIsModalVisible(false);
-      const emailTemplate = {
-        name: values.username,
-        email: values.email,
-        studyID: values.studyID,
-      }
-      //send email to admin
-      sendEmail(emailTemplate);
-    }
-    ).catch((info) => {
-      console.log('Validate Failed:', info);
-    });
-
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       let filter = '';
@@ -254,58 +231,6 @@ const ActivityLevelReport = () => {
         >
           Return to Dashboard
         </button>
-
-        <Button className='activity-level-return' onClick={showModal}>
-          Add Researcher 
-        </Button>
-        <Modal
-          title="Add Researcher"
-          visible={isModalVisible}
-          onOk={handleAddResearcher}
-          onCancel={handleCancel}>
-          <Form form={form} name="addResearcherForm">
-            <Form.Item
-              name="username"
-              label="Researcher Username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter the researcher username',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="email"
-              label="Email"
-              rules={[
-                {
-                  type: 'email',
-                  message: 'Please enter a valid email address',
-                },
-                {
-                  required: true,
-                  message: 'Please enter the email address',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="studyID"
-              label="Study ID"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter the study ID',
-                },
-              ]}
-              >
-                <Input />
-              </Form.Item>
-          </Form>
-        </Modal>
 
       </div>
       <button id='show-filter-btn' onClick={() => setShowFilter(!showFilter)}>

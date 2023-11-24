@@ -701,6 +701,13 @@
           "studyName": {
             "type": "string"
           },
+          "studyTag": {
+            "type": "string",
+            "enum": [
+              "qualitative",
+              "quantitative"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -735,6 +742,13 @@
           },
           "studyName": {
             "type": "string"
+          },
+          "studyTag": {
+            "type": "string",
+            "enum": [
+              "qualitative",
+              "quantitative"
+            ]
           },
           "published_at": {
             "type": "string",

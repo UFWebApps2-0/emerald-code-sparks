@@ -18,6 +18,7 @@ const StudyLevelReport = () => {
       if (studiesRes.error) {
         console.error('Fail to retrieve studies');
       }
+      console.log(studiesRes.data);
       setStudies(studiesRes.data);
     };
     fetchData();

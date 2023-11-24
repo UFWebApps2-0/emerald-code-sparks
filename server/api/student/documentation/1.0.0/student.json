@@ -834,6 +834,13 @@
                 "studyName": {
                   "type": "string"
                 },
+                "studyTag": {
+                  "type": "string",
+                  "enum": [
+                    "qualitative",
+                    "quantitative"
+                  ]
+                },
                 "published_at": {
                   "type": "string"
                 },

@@ -590,6 +590,12 @@
                     "type": "string"
                   }
                 },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -666,6 +672,12 @@
                 },
                 "researcherEmail": {
                   "type": "string"
+                },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "published_at": {
                   "type": "string"

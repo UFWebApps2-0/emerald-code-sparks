@@ -50,6 +50,10 @@
     "researchers": {
       "via": "classrooms",
       "collection": "researcher"
+    },
+    "studies": {
+      "via": "classrooms",
+      "collection": "study"
     }
   }
 }

@@ -949,6 +949,12 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -1053,6 +1059,58 @@
                 "researcherEmail": {
                   "type": "string"
                 },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "studies": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "studyID": {
+                  "type": "integer"
+                },
+                "studyDescription": {
+                  "type": "string"
+                },
+                "students": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "classrooms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "researchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -1115,6 +1173,12 @@
             }
           },
           "researchers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "studies": {
             "type": "array",
             "items": {
               "type": "string"

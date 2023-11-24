@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "studies",
   "info": {
-    "name": "Study"
+    "name": "Study",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -15,6 +16,21 @@
     },
     "studyDescription": {
       "type": "text"
+    },
+    "students": {
+      "collection": "student",
+      "via": "studies",
+      "dominant": true
+    },
+    "classrooms": {
+      "collection": "classroom",
+      "via": "studies",
+      "dominant": true
+    },
+    "researchers": {
+      "collection": "researcher",
+      "via": "studies",
+      "dominant": true
     }
   }
 }

@@ -32,6 +32,10 @@
     },
     "researcherEmail": {
       "type": "email"
+    },
+    "studies": {
+      "via": "researchers",
+      "collection": "study"
     }
   }
 }

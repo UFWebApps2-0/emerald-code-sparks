@@ -12,6 +12,8 @@ import NotFound from './views/NotFound';
 import Replay from './views/Replay/Replay';
 import ActivityLevelReport from './views/Researcher/ActivityLevelReport';
 import ActivityLevelReportView from './views/Researcher/ActivityLevelReportView';
+import StudyLevelReportView from './views/Researcher/StudyLevelReportView';
+import StudyLevelReport from './views/Researcher/StudyLevelReport';
 import CreateStudyPage from './views/Researcher/CreateStudyPage';
 import GroupReport from './views/Researcher/GroupReport';
 import Report from './views/Researcher/Report';
@@ -20,6 +22,7 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+
 
 const App = () => {
   return (
@@ -58,10 +61,26 @@ const App = () => {
           }
         />
         <Route
+          path='/studyLevel'
+          element={
+            <PrivateRoute>
+              <StudyLevelReport />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path='/activityLevel/:id'
           element={
             <PrivateRoute>
               <ActivityLevelReportView />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/studyLevel/:id'
+          element={
+            <PrivateRoute>
+              <StudyLevelReportView />
             </PrivateRoute>
           }
         />

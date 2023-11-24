@@ -22,6 +22,15 @@ export default function Report(props) {
           <div class='child inline-block-child'>Home</div>
           <div class='child inline-block-child'>Reports</div>
         </div> */}
+        <Link to={'/studyLevel'}>
+          <button
+            id={'route-button'}
+            className={`btn-${'primary'} btn-${'sm'}`}
+            type='button'
+          >
+            Study Level Report
+          </button>
+        </Link>
         <Link to={'/activityLevel'}>
           <button
             id={'route-button'}
@@ -29,15 +38,6 @@ export default function Report(props) {
             type='button'
           >
             Activity Level Report
-          </button>
-        </Link>
-        <Link to={'/group-report'}>
-          <button
-            id={'route-button'}
-            className={`btn-${'primary'} btn-${'sm'}`}
-            type='button'
-          >
-            Group Level Report
           </button>
         </Link>
       </div>

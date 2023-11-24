@@ -13,6 +13,7 @@ import {
   getUnit,
   getGrade,
   getClassroom,
+  getStudies
 } from '../../Utils/requests';
 
 const StudyLevelReport = () => {
@@ -132,6 +133,15 @@ const StudyLevelReport = () => {
     let output = new Date(value).toLocaleDateString(locale);
     return output + ' ' + new Date(value).toLocaleTimeString(locale);
   };
+  //print studies to console for testing
+    const handleViewStudies = () => {
+        getStudies().then((res) => {
+            console.log(res.data);
+        });
+    }
+    handleViewStudies();
+
+
 
   const columns = [
     {

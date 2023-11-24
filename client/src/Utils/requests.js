@@ -689,4 +689,13 @@ export const getClassroomWorkspace = async (id) =>
       error: 'Unable to submit bug-report',
     });
   
+//get studies for researcher
+export const getStudies = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/studies`,
+    auth: true,
+    error: 'Studies could not be retrieved.',
+  });
+  
 

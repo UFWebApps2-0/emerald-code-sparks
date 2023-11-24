@@ -4,6 +4,7 @@ import './StudyLevelReport.less';
 import { getStudies } from '../../Utils/requests';
 import { useNavigate } from 'react-router-dom';
 import { sendEmail } from '../../Utils/requests';
+import { Link } from 'react-router-dom';
 
 const StudyLevelReport = () => {
   const [studies, setStudies] = useState([]);
@@ -112,6 +113,11 @@ const StudyLevelReport = () => {
         <Button className='activity-level-return' onClick={showModal}>
           Add Researcher
         </Button>
+        <Link to={'/createStudyPage'}>
+        <Button className='activity-level-return' onClick={() => navigate('/createStudyPage')}>
+          Create Study
+        </Button>
+      </Link>
         <button
           className='activity-level-return'
           onClick={() => navigate('/report')}

@@ -698,4 +698,3 @@ export const getStudies = async () =>
     error: 'Studies could not be retrieved.',
   });
   
-

@@ -4,8 +4,6 @@ import { Table, Button, Tag, Modal, Input, Form } from 'antd';
 import './ActivityLevelReport.less';
 import { useSearchParam } from '../../Utils/useSearchParam';
 import NavBar from '../../components/NavBar/NavBar';
-//../../plugins/strapi-plugin-email/admin/src
-import { sendEmail } from '../../Utils/requests';
 import {
   getSessionsWithFilter,
   getSessionCountWithFilter,

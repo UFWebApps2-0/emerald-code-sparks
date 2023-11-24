@@ -31,6 +31,9 @@
       "collection": "researcher",
       "via": "studies",
       "dominant": true
+    },
+    "studyName": {
+      "type": "string"
     }
   }
 }

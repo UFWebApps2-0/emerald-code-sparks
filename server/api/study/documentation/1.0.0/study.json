@@ -698,6 +698,9 @@
               }
             }
           },
+          "studyName": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -729,6 +732,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "studyName": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

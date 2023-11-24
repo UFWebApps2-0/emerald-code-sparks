@@ -831,6 +831,9 @@
                     "type": "string"
                   }
                 },
+                "studyName": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Input, Form } from 'antd';
 import './StudyLevelReport.less';
-import { getStudies } from '../../Utils/requests';
 import { useNavigate } from 'react-router-dom';
-import { sendEmail } from '../../Utils/requests';
+import { sendEmail, getResearchers, getStudies} from '../../Utils/requests';
 import { Link } from 'react-router-dom';
 
 const StudyLevelReport = () => {
@@ -32,28 +31,57 @@ const StudyLevelReport = () => {
     setIsModalVisible(false);
   };
 
-  const handleAddResearcher = () => {
+  const handleAddResearcher = async () => {
     form.validateFields().then((values) => {
         console.log(values);
         //sanitize input
-        values.username = values.username.replace(/[^a-zA-Z0-9]/g, '');
+        values.first_name = values.first_name.replace(/[^a-zA-Z0-9]/g, '');
+        values.last_name = values.last_name.replace(/[^a-zA-Z0-9]/g, '');
         values.email = values.email.replace(/[^a-zA-Z0-9@.]/g, '');
         values.studyID = values.studyID.replace(/[^a-zA-Z0-9]/g, '');
         setIsModalVisible(false);
         const emailTemplate = {
-          name: values.username,
+          name: values.first_name + ' ' + values.last_name,
           email: values.email,
           studyID: values.studyID,
         }
-        //send email to admin
-        
-        sendEmail(emailTemplate);
-      }
-      ).catch((info) => {
-        console.log('Validate Failed:', info);
-      });
-  };
 
+        //get researchers 
+        const researchersRes = getResearchers();
+        //iterate through researchers to find the one with same first and last name
+        for (const researcher of researchersRes.data) {
+          if (researcher.first_name === values.first_name && researcher.last_name === values.last_name) {
+            //add studyID to researcher's studyIDs
+            console.log(researcher.studyIDs);
+            console.log(values.studyID);
+            
+            researcher.studyIDs.push(values.studyID);
+            //update researcher
+            //updateResearcher(researcher);
+            break;
+          }
+        }
+        console.log()
+        //get studies
+        const studiesRes = getStudies();
+        //iterate through studies to find the one with same studyID
+        for (const study of studiesRes.data) {
+          if (study.studyID === values.studyID) {
+            //add researcher to study's researchers
+            console.log(study.researchers);
+            console.log(values.first_name + ' ' + values.last_name);
+            study.researchers.push(values.first_name + ' ' + values.last_name);
+            //update study
+            //updateStudy(study);
+            break;
+          }
+        }
+
+
+        //send email to admin
+        sendEmail(emailTemplate);
+  });
+}
   const columns = [
     {
       title: 'Study ID',
@@ -140,12 +168,24 @@ const StudyLevelReport = () => {
           onCancel={handleCancel}>
           <Form form={form} name="addResearcherForm">
             <Form.Item
-              name="username"
-              label="Researcher Username"
+              name="first_name"
+              label="Researcher First Name"
               rules={[
                 {
                   required: true,
-                  message: 'Please enter the researcher username',
+                  message: 'Please enter the researcher first name',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="last_name"
+              label="Researcher Last Name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter the researcher last name',
                 },
               ]}
             >

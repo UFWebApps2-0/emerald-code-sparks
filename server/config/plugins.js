@@ -10,6 +10,7 @@ console.log(process.env.EMAIL_SMTP_PASS);
 process.env.EMAIL_SMTP_USER = "";
 process.env.EMAIL_SMTP_PASS = "";
 
+
 module.exports = () => ({
   email: {
     provider: 'nodemailer',

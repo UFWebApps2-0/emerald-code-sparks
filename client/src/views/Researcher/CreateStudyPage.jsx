@@ -10,7 +10,6 @@ const { Option } = Select;
 
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
-  const [selectedStudents, setSelectedStudents] = useState([]);
   const [selectedStudentsData, setSelectedStudentsData] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
   const [selectedStudyTag, setSelectedStudyTag] = useState(null);
@@ -42,26 +41,6 @@ const CreateStudyPage =()=>{
   }, []);
 
   const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
-
-  const [studyTags, setStudyTags] = useState([]);
-  useEffect(() => {
-  const fetchStudyTags = async () => {
-    console.log('Fetching study tags');
-    try {
-      const studiesRes = await getStudies();
-      if (studiesRes.error) {
-        console.error('Failed to retrieve studies');
-      } else {
-        const tags = studiesRes.data.map((study) => study.studyTag);
-        const uniqueTags = [...new Set(tags)];
-        setStudyTags(uniqueTags);
-      }
-    } catch (error) {
-      console.error('Error fetching study tags:', error);
-    }
-    };
-    fetchStudyTags();
-  }, []);
 
   const [researchers, setResearchers] = useState([]);
   useEffect(() => {
@@ -138,7 +117,7 @@ const CreateStudyPage =()=>{
       checkboxes: checkboxValues,
       selectedStudentsData: selectedStudentsData,
       newResearchers: researchers,
-      newTag: studyTags,
+      selectTags: selectedStudyTag.toString(),
     };
 
     console.log(values);
@@ -175,7 +154,7 @@ const CreateStudyPage =()=>{
       classrooms: [],
       researchers: values.newResearchers,
       studyName: values['Study name'],
-      studyTag: selectedStudyTag.toString(),
+      studyTag: values.selectTags,
       consentOptions: consentOptionsReformat,
     }
     console.log(studyData);

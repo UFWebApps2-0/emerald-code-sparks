@@ -4,7 +4,7 @@ import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail, getAllStudents} from '../../Utils/requests';
+import { sendEmail, getAllStudents, getStudies} from '../../Utils/requests';
 
 const { Option } = Select;
 
@@ -33,11 +33,27 @@ const [selectedStudents, setSelectedStudents] = useState([]);
     };
     fetchData();
   }, []);
-  
-  //update setSelectStudents
-  
 
-
+  const [studyTags, setStudyTags] = useState([]);
+  useEffect(() => {
+  const fetchStudyTags = async () => {
+    console.log('Fetching study tags');
+    try {
+      const studiesRes = await getStudies();
+      if (studiesRes.error) {
+        console.error('Failed to retrieve studies');
+      } else {
+        const tags = studiesRes.data.map((study) => study.studyTag);
+        const uniqueTags = [...new Set(tags)];
+        setStudyTags(uniqueTags);
+      }
+    } catch (error) {
+      console.error('Error fetching study tags:', error);
+    }
+    };
+    fetchStudyTags();
+  }, []);
+    
   const handleCheckboxChange = (checkboxId) => (e) => {
     setCheckboxValues((prevValues) => ({
       ...prevValues,
@@ -156,15 +172,18 @@ const [selectedStudents, setSelectedStudents] = useState([]);
             ]}>
               <Input/>
             </Form.Item>
-          <Form.Item>
-            <select
-            className='select'
-            placeholder='Select a Tag'>
-              <option>
-                Select a Study Tag
-              </option>
-
-            </select>
+            <Form.Item>
+            <Select
+              className='select'
+              placeholder='Select a Study Tag'
+              allowClear
+            >
+              {studyTags.map((tag) => (
+                <Select.Option key={tag} value={tag}>
+                  {tag}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item>
             <select

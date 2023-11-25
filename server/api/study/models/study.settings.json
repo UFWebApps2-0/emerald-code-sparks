@@ -39,18 +39,13 @@
       "type": "enumeration",
       "enum": [
         "qualitative",
-        "quantitative"
+        "quantitative",
+        "design",
+        "TBD"
       ]
     },
     "consentOptions": {
-      "type": "enumeration",
-      "enum": [
-        "profile",
-        "code_samples",
-        "emails_messages",
-        "video_lesson_usage",
-        "screen_recording"
-      ]
+      "type": "json"
     }
   }
 }

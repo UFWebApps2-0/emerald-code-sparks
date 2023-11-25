@@ -1118,18 +1118,13 @@
                   "type": "string",
                   "enum": [
                     "qualitative",
-                    "quantitative"
+                    "quantitative",
+                    "design",
+                    "TBD"
                   ]
                 },
                 "consentOptions": {
-                  "type": "string",
-                  "enum": [
-                    "profile",
-                    "code_samples",
-                    "emails_messages",
-                    "video_lesson_usage",
-                    "screen_recording"
-                  ]
+                  "type": "object"
                 },
                 "published_at": {
                   "type": "string"

@@ -13,6 +13,7 @@ const CreateStudyPage =()=>{
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [selectedStudentsData, setSelectedStudentsData] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
+  const [selectedStudyTag, setSelectedStudyTag] = useState(null);
 
   const handleStudentChange = async (selectedValues) => {
     //console.log(selectedValues);
@@ -39,6 +40,8 @@ const CreateStudyPage =()=>{
     };
     fetchData();
   }, []);
+
+  const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
 
   const [studyTags, setStudyTags] = useState([]);
   useEffect(() => {
@@ -151,22 +154,18 @@ const CreateStudyPage =()=>{
       checkboxes: values.checkboxes,
       searchBar: values.searchBar,
     };
+    const consentOptionsReformat = {};
+    for (const [key, value] of Object.entries(values.checkboxes)) {
+      if (value) {
+        consentOptionsReformat[key] = true;
+      }
+    }
 
-    var consetReformat = [];
-    if (values.checkboxes["Profile Info"]) {
-      consetReformat.push("profile");
-    }
-    if (values.checkboxes["Access to Code Samples"]) {
-      consetReformat.push("code_samples");
-    }
-    if (values.checkboxes["Messaging and Emails"]) {
-      consetReformat.push("emails_messages");
-    }
-    if (values.checkboxes["Access to Video/Lesson Usage"]) {
-      consetReformat.push("video_lesson_usage");
-    }
-    if (values.checkboxes["Screen Recording"]) {
-      consetReformat.push("screen_recording");
+     console.log(consentOptionsReformat);
+
+    if (!values.newTag) {
+      values.newTag = [];
+      values.newTag.push("");
     }
 
     const studyData = {
@@ -176,8 +175,8 @@ const CreateStudyPage =()=>{
       classrooms: [],
       researchers: values.newResearchers,
       studyName: values['Study name'],
-      studyTag: values.newTag,
-      consentOptions: consetReformat,
+      studyTag: selectedStudyTag.toString(),
+      consentOptions: consentOptionsReformat,
     }
     console.log(studyData);
 
@@ -254,13 +253,17 @@ const CreateStudyPage =()=>{
             <Select
               className='select'
               placeholder='Select a Study Tag'
+              value={selectedStudyTag}
+              onChange={(value) => setSelectedStudyTag(value)}
               allowClear
             >
-              {studyTags.map((tag) => (
-                <Select.Option key={tag} value={tag}>
-                  {tag}
-                </Select.Option>
-              ))}
+              {
+                studyTagsDefault.map((tag) => (
+                  <Select.Option key={tag} value={tag}>
+                    {tag}
+                  </Select.Option>
+                ))
+              }
             </Select>
           </Form.Item>
           <Form.Item>

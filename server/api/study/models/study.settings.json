@@ -41,6 +41,16 @@
         "qualitative",
         "quantitative"
       ]
+    },
+    "consentOptions": {
+      "type": "enumeration",
+      "enum": [
+        "profile",
+        "code_samples",
+        "emails_messages",
+        "video_lesson_usage",
+        "screen_recording"
+      ]
     }
   }
 }

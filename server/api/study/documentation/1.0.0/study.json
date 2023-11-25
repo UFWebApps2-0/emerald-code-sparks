@@ -708,6 +708,16 @@
               "quantitative"
             ]
           },
+          "consentOptions": {
+            "type": "string",
+            "enum": [
+              "profile",
+              "code_samples",
+              "emails_messages",
+              "video_lesson_usage",
+              "screen_recording"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -748,6 +758,16 @@
             "enum": [
               "qualitative",
               "quantitative"
+            ]
+          },
+          "consentOptions": {
+            "type": "string",
+            "enum": [
+              "profile",
+              "code_samples",
+              "emails_messages",
+              "video_lesson_usage",
+              "screen_recording"
             ]
           },
           "published_at": {

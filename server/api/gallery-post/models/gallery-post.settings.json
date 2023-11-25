@@ -41,6 +41,9 @@
         "Block",
         "Lesson"
       ]
+    },
+    "xml_text": {
+      "type": "text"
     }
   }
 }

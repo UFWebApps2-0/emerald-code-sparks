@@ -1,6 +1,6 @@
-import { postGalleryObject } from '../../Utils/requests';
+import { handleGalleryPost } from '../../components/ActivityPanels/Utils/helpers';
 
-async function createGalleryObject(title, user_name, like_count, view_count, visibility, type) {
+async function createGalleryObject(title, user_name, like_count, view_count, visibility, type, classroomId, workspaceRef) {
 
   //**********create default discussion board here
   const discussion_board = [];
@@ -13,19 +13,19 @@ async function createGalleryObject(title, user_name, like_count, view_count, vis
     discussion_board: discussion_board,
     visibility: visibility,
     type: type,
+    classroom_id: classroomId,
   };
 
-  console.log(data)
+  console.log(data);
 
  try {
-      console.log("please omg", data)
-      const response = await postGalleryObject(data);
-
-      if (response.status === 201) {
-        console.log('Gallery object created successfully in the backend.');
-      } else {
-        console.error('Failed to create the gallery object in the backend.');
-      }
+      const res = await handleGalleryPost(data, workspaceRef);
+      console.log('response: at createGalleryObject ', res.err);
+      if (res.err) {
+      message.error(res.err);
+    } else {
+      message.success('Posted to gallery successsfully.');
+    }
     } catch (error) {
       console.error('Error making the POST request:', error);
     }

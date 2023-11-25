@@ -6,25 +6,25 @@ import { useGlobalState } from '../../Utils/userState';
 
 const { Option } = Select;
 
-function GalleryObjectForm() {
+function GalleryObjectForm({workspaceRef, classroomId}) {
+  console.log(classroomId)
   const [form] = Form.useForm();
   const [modalVisible, setModalVisible] = useState(false);
+  const [value] = useGlobalState('currUser');
 
   const handleCreateGalleryObject = () => {
     setModalVisible(true); // Show the modal
   };
 
   const handleFormSubmit = async (values) => {
-    //NEED TO CHECK FOR IF LOGGED IN
-    
-    //const [value] = useGlobalState('currUser');
-    //const userName = value.name;
-
-    // DEFAULT USERNAME FOR NOW
+    //NEED TO CHECK FOR IF LOGGED IN --RIGHT NOW HAVE IT SO THAT YOU CAN ONLY SUBMIT FROM LOGGED IN
+    console.log(value);
+    const userName = value.username;
     if (values.visibility == null) {
       values.visibility = "Public";
     }
-    createGalleryObject(values.title, "test student", 0, 0, values.visibility, 'Project');
+    //NEED TO ADD TYPE OF PROJECT AS A PARAMETER IF OTHER TYPES BECOME POSSIBLE
+    createGalleryObject(values.title, userName, 0, 0, values.visibility, 'Project', classroomId, workspaceRef);
     console.log("Submitted values:", values);
     form.resetFields();
     setModalVisible(false); // Hide the modal after submission

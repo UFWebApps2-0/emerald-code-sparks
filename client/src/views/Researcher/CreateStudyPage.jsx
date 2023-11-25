@@ -71,7 +71,7 @@ const [selectedStudents, setSelectedStudents] = useState([]);
     const values = {
       ...studyValues,
       checkboxes: checkboxValues,
-      searchBar: searchBarForm.getFieldsValue(),
+      searchBar: selectedStudents,
     };
 
     console.log(values);
@@ -215,12 +215,6 @@ const [selectedStudents, setSelectedStudents] = useState([]);
                 </Option>
               ))}
             </Select>
-          </Form.Item>
-          <Form.Item>
-            <input
-            className='search-bar'
-            placeholder='Search for a Tags'
-            />
           </Form.Item>
           <Button className='add-researcher-button' onClick={showModal}>
               Submit Study Request 

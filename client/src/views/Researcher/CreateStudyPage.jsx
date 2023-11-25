@@ -1,13 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Table, Modal, Button, Tag, Form, Input } from 'antd';
+import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail } from '../../Utils/requests';
+import { sendEmail, getAllStudents} from '../../Utils/requests';
+
+const { Option } = Select;
 
 const CreateStudyPage =()=>{
+  const [students, setStudents] = useState([]);
+const [selectedStudents, setSelectedStudents] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
+
+  const handleStudentChange = (selectedValues) => {
+    //console.log(selectedValues);
+    setSelectedStudents(selectedValues);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const studentsRes = await getAllStudents();
+        if (studentsRes.error) {
+          console.error('Failed to retrieve students');
+        } else {
+          console.log(studentsRes.data);
+          setStudents(studentsRes.data);
+        }
+      } catch (error) {
+        console.error('Error fetching students:', error);
+      }
+    };
+    fetchData();
+  }, []);
+  
+  //update setSelectStudents
+  
+
 
   const handleCheckboxChange = (checkboxId) => (e) => {
     setCheckboxValues((prevValues) => ({
@@ -66,6 +95,8 @@ const CreateStudyPage =()=>{
 
     setIsModalVisible(false);
   }
+
+  
 
   return (
     <div className='container nav-padding'>
@@ -170,11 +201,20 @@ const CreateStudyPage =()=>{
           </Form.Item>
         </Form>
         <Form form={searchBarForm} id={"search-bar-form"}>
-          <Form.Item>
-            <input
-            className='search-bar'
-            placeholder='Search for a Student'
-            />
+        <Form.Item>
+            <Select
+              mode="multiple"
+              placeholder="Search for a Student"
+              onChange={handleStudentChange}
+              value={selectedStudents}
+              className="search-bar"
+            >
+              {students.map(student => (
+                <Option key={student.id} value={student.id}>
+                  {student.name}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item>
             <input

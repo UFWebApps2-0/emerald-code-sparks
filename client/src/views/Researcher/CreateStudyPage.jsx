@@ -129,7 +129,7 @@ const CreateStudyPage =()=>{
     studyValues['Study ID'] = studyValues['Study ID'].replace(/[^a-zA-Z0-9 ]/g, "");
     studyValues['Study description'] = studyValues['Study description'].replace(/[^a-zA-Z0-9 ]/g, "");
     //keep @ and . for email
-    studyValues['Student Email'] = studyValues['Student Email'].replace(/[^a-zA-Z0-9@. ]/g, "");
+    //studyValues['Student Email'] = studyValues['Student Email'].replace(/[^a-zA-Z0-9@. ]/g, "");
     console.log(studyValues);
 
     // Use the updated checkboxValues state
@@ -150,7 +150,7 @@ const CreateStudyPage =()=>{
       name: values['Study name'],
       studyID: values['Study ID'],
       description: values['Study description'],
-      studentEmail: values['Student Email'],
+      //studentEmail: values['Student Email'],
       checkboxes: values.checkboxes,
       searchBar: values.searchBar,
     };
@@ -238,17 +238,6 @@ const CreateStudyPage =()=>{
             </textarea>
             
           </Form.Item>
-            <Form.Item
-            name="Student Email"
-            label="Student Email"
-            rules={[
-              {
-                required: true,
-                message: 'Please enter student email',
-              },
-            ]}>
-              <Input/>
-            </Form.Item>
             <Form.Item>
             <Select
               className='select'

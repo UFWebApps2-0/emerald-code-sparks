@@ -698,3 +698,10 @@ export const getStudies = async () =>
     error: 'Studies could not be retrieved.',
   });
   
+export const getResearchers = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/researchers`,
+    auth: true,
+    error: 'Researchers could not be retrieved.',
+  });

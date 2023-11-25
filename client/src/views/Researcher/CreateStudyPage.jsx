@@ -4,7 +4,7 @@ import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail, getAllStudents, getStudies} from '../../Utils/requests';
+import { sendEmail, getAllStudents, getStudies, getResearchers} from '../../Utils/requests';
 
 const { Option } = Select;
 
@@ -53,6 +53,26 @@ const [selectedStudents, setSelectedStudents] = useState([]);
     };
     fetchStudyTags();
   }, []);
+
+  const [researchers, setResearchers] = useState([]);
+  useEffect(() => {
+    const fetchResearchers = async () => {
+      console.log('Fetching researchers');
+      try {
+        const researchersRes = await getResearchers();
+        if (researchersRes.error) {
+          console.error('Failed to retrieve researchers');
+        } else {
+          console.log(researchersRes.data);
+          setResearchers(researchersRes.data);
+        }
+      } catch (error) {
+        console.error('Error fetching researchers:', error);
+      }
+    };
+    fetchResearchers();
+  }, []);
+
     
   const handleCheckboxChange = (checkboxId) => (e) => {
     setCheckboxValues((prevValues) => ({
@@ -186,16 +206,19 @@ const [selectedStudents, setSelectedStudents] = useState([]);
             </Select>
           </Form.Item>
           <Form.Item>
-            <select
-            className='select'
-            placeholder='Researchers'>
-              <option>
-                Pick Researchers
-              </option>
-
-            </select>
+            <Select
+              mode='multiple'
+              className='select'
+              placeholder='Select a Researcher'
+              allowClear
+            >
+              {researchers.map((researcher) => (
+                <Select.Option key={researcher.id} value={researcher.id}>
+                  {researcher.first_name} {researcher.last_name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
-
         </Form>
         <Form form={checkboxForm} id={"checkbox-form"}>
           <Form.Item className="checkbox-item">

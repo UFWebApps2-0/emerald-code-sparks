@@ -4,18 +4,24 @@ import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail, getAllStudents, getStudies, getResearchers} from '../../Utils/requests';
+import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStudent} from '../../Utils/requests';
 
 const { Option } = Select;
 
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
-const [selectedStudents, setSelectedStudents] = useState([]);
+  const [selectedStudents, setSelectedStudents] = useState([]);
+  const [selectedStudentsData, setSelectedStudentsData] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
 
-  const handleStudentChange = (selectedValues) => {
+  const handleStudentChange = async (selectedValues) => {
     //console.log(selectedValues);
-    setSelectedStudents(selectedValues);
+    const studentsData = [];
+    for (const studentID of selectedValues) {
+      const student = await getStudent(studentID);
+      studentsData.push(student.data);
+    }
+    setSelectedStudentsData(studentsData);
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -93,6 +99,26 @@ const [selectedStudents, setSelectedStudents] = useState([]);
   };
 
   const handleSubmitStudy = () => {
+    /*
+      NewStudy{
+        studyID	integer
+        studyDescription	string
+        students	[string]
+        classrooms	[string]
+        researchers	[string]
+        studyName	string
+        studyTag	string
+        Enum:
+        [ qualitative, quantitative ]
+        consentOptions	string
+        Enum:
+        [ profile, code_samples, emails_messages, video_lesson_usage, screen_recording ]
+        published_at	string($date-time)
+        created_by	string
+        updated_by	string
+      }
+    */
+    
     // Get study form values
     const studyValues = studyForm.getFieldsValue();
     //sanitize data
@@ -107,11 +133,14 @@ const [selectedStudents, setSelectedStudents] = useState([]);
     const values = {
       ...studyValues,
       checkboxes: checkboxValues,
-      searchBar: selectedStudents,
+      selectedStudentsData: selectedStudentsData,
+      newResearchers: researchers,
+      newTag: studyTags,
     };
 
     console.log(values);
     setIsModalVisible(false);
+
 
     // Adjust the email template creation according to your form field names
     const emailTemplate = {
@@ -123,9 +152,38 @@ const [selectedStudents, setSelectedStudents] = useState([]);
       searchBar: values.searchBar,
     };
 
-    sendEmail(emailTemplate); //send email to student 
+    var consetReformat = [];
+    if (values.checkboxes["Profile Info"]) {
+      consetReformat.push("profile");
+    }
+    if (values.checkboxes["Access to Code Samples"]) {
+      consetReformat.push("code_samples");
+    }
+    if (values.checkboxes["Messaging and Emails"]) {
+      consetReformat.push("emails_messages");
+    }
+    if (values.checkboxes["Access to Video/Lesson Usage"]) {
+      consetReformat.push("video_lesson_usage");
+    }
+    if (values.checkboxes["Screen Recording"]) {
+      consetReformat.push("screen_recording");
+    }
 
-  
+    const studyData = {
+      studyID: values['Study ID'],
+      studyDescription: values['Study description'],
+      students: values.selectedStudentsData,
+      classrooms: [],
+      researchers: values.newResearchers,
+      studyName: values['Study name'],
+      studyTag: values.newTag,
+      consentOptions: consetReformat,
+    }
+    console.log(studyData);
+
+    //post study to database
+    addStudy(studyData);
+    //sendEmail(emailTemplate); //send email to student 
   }
   const handleCancel = () => {
 
@@ -244,19 +302,19 @@ const [selectedStudents, setSelectedStudents] = useState([]);
         </Form>
         <Form form={searchBarForm} id={"search-bar-form"}>
         <Form.Item>
-            <Select
-              mode="multiple"
-              placeholder="Search for a Student"
-              onChange={handleStudentChange}
-              value={selectedStudents}
-              className="search-bar"
-            >
-              {students.map(student => (
-                <Option key={student.id} value={student.id}>
-                  {student.name}
-                </Option>
-              ))}
-            </Select>
+        <Select
+            mode="multiple"
+            placeholder="Search for a Student"
+            onChange={handleStudentChange}
+            value={selectedStudentsData.map(student => student.id)}  // Use selectedStudentsData
+            className="search-bar"
+          >
+            {students.map(student => (
+              <Option key={student.id} value={student.id}>
+                {student.name}
+              </Option>
+            ))}
+          </Select>
           </Form.Item>
           <Button className='add-researcher-button' onClick={showModal}>
               Submit Study Request 

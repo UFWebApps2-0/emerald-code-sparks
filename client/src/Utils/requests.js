@@ -1,6 +1,7 @@
 import { server } from './hosts';
 import axios from 'axios';
 import { getToken } from './AuthRequests';
+import { json } from 'react-router-dom';
 //"../../server/api/email/controllers/Email.js";
 
 const GET = 'GET';
@@ -28,6 +29,7 @@ console.log(config);
         res = (await axios.get(path, config)).data;
         break;
       case POST:
+        console.log("in post logging data, config, path")
         console.log(data);
         console.log(config);
         console.log(path);
@@ -704,4 +706,13 @@ export const getResearchers = async () =>
     path: `${server}/researchers`,
     auth: true,
     error: 'Researchers could not be retrieved.',
+  });
+
+  export const addStudy = async(json) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/studies`,
+    data: json,
+    auth: true,
+    error: 'Studies could not be added.',
   });

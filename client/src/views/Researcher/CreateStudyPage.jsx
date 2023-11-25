@@ -52,6 +52,7 @@ const CreateStudyPage =()=>{
           console.error('Failed to retrieve researchers');
         } else {
           console.log(researchersRes.data);
+          //send email to researcher
           setResearchers(researchersRes.data);
         }
       } catch (error) {
@@ -161,7 +162,16 @@ const CreateStudyPage =()=>{
 
     //post study to database
     addStudy(studyData);
-    //sendEmail(emailTemplate); //send email to student 
+    //send email to all added researchers
+    console.log(values.newResearchers);
+    for (const researcher of values.newResearchers) {
+      const emailTemplate = {
+        name: researcher.first_name + ' ' + researcher.last_name,
+        email: researcher.researcherEmail,
+        studyID: values['Study ID'],
+      }
+      sendEmail(emailTemplate);
+    } 
   }
   const handleCancel = () => {
 

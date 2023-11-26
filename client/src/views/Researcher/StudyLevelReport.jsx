@@ -54,6 +54,7 @@ const StudyLevelReport = () => {
   };
 
   const handleAddResearcher = async () => {
+    console.log('add researcher');
     form.validateFields().then((values) => {
         console.log(values);
         //sanitize input
@@ -67,41 +68,9 @@ const StudyLevelReport = () => {
           email: values.email,
           studyID: values.studyID,
         }
-
-        //get researchers 
-        const researchersRes = getResearchers();
-        //iterate through researchers to find the one with same first and last name
-        for (const researcher of researchersRes.data) {
-          if (researcher.first_name === values.first_name && researcher.last_name === values.last_name) {
-            //add studyID to researcher's studyIDs
-            console.log(researcher.studyIDs);
-            console.log(values.studyID);
-            
-            researcher.studyIDs.push(values.studyID);
-            //update researcher
-            //updateResearcher(researcher);
-            break;
-          }
-        }
-        console.log()
-        //get studies
-        const studiesRes = getStudies();
-        //iterate through studies to find the one with same studyID
-        for (const study of studiesRes.data) {
-          if (study.studyID === values.studyID) {
-            //add researcher to study's researchers
-            console.log(study.researchers);
-            console.log(values.first_name + ' ' + values.last_name);
-            study.researchers.push(values.first_name + ' ' + values.last_name);
-            //update study
-            //updateStudy(study);
-            break;
-          }
-        }
-
-
         //send email to admin
         sendEmail(emailTemplate);
+        form.resetFields();
   });
 }
   const columns = [
@@ -165,34 +134,7 @@ const StudyLevelReport = () => {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <Button type="danger" onClick={() => handleDeleteStudy(record)}>
-          Delete
-        </Button>
-      ),
-      width: '1%',
-    },
-  ];
-
-  return (
-    <div className='container nav-padding'>
-      <div className='menu-bar'>
-        <div id='activity-level-report-header'>Study Level Report</div>
-
-        <Button className='activity-level-return' onClick={showModal}>
-          Add Researcher
-        </Button>
-        <Link to={'/createStudyPage'}>
-        <Button className='activity-level-return' onClick={() => navigate('/createStudyPage')}>
-          Create Study
-        </Button>
-      </Link>
-        <button
-          className='activity-level-return'
-          onClick={() => navigate('/report')}
-        >
-          Return to Dashboard
-        </button>
-
+        <>
         <Modal
           title="Add Researcher"
           visible={isModalVisible}
@@ -253,6 +195,34 @@ const StudyLevelReport = () => {
               </Form.Item>
           </Form>
         </Modal>
+          <Button type="primary" onClick={showModal}>
+            Add Researcher
+          </Button>
+          
+          <Button type="danger" onClick={() => handleDeleteStudy(record)}>
+            Delete
+          </Button>
+        </>
+      ),
+      width: '1%',
+    },
+  ];
+
+  return (
+    <div className='container nav-padding'>
+      <div className='menu-bar'>
+        <div id='activity-level-report-header'>Study Level Report</div>
+        <Link to={'/createStudyPage'}>
+        <Button onClick={() => navigate('/createStudyPage')} style={{ backgroundColor: 'green', color: 'white' }}>
+          Create Study
+        </Button>
+      </Link>
+        <button
+          className='activity-level-return'
+          onClick={() => navigate('/report')}
+        >
+          Return to Dashboard
+        </button>
       </div>
 
       <main id='activity-report-content-wrapper'>

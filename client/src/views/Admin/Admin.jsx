@@ -66,7 +66,7 @@ export default function Admin() {
             <div id='cardholder'>
                 <h1>Your Orgs</h1>
                 <div id='description' onClick={orgCreateClick}>View Current Organizations</div>
-                {/* We'll run an async function to get all organizations. then map through the below div. */}
+                
                 <div onClick={()=> orgClick("SampleOrgID")}>Sample Organization</div>
                 
             {/*generate org tiles*/}

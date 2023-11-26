@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/20/2023 8:10:10 AM"
+    "x-generation-date": "11/26/2023 6:27:56 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13659,8 +13659,11 @@
               "role": {
                 "type": "string"
               },
-              "organization": {
-                "type": "string"
+              "organizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -13795,8 +13798,11 @@
                 "role": {
                   "type": "string"
                 },
-                "organization": {
-                  "type": "string"
+                "organizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -15391,8 +15397,11 @@
                 "role": {
                   "type": "string"
                 },
-                "organization": {
-                  "type": "string"
+                "organizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -15507,44 +15516,47 @@
               }
             }
           },
-          "organization": {
-            "required": [
-              "id",
-              "Name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Name": {
-                "type": "string"
-              },
-              "users": {
-                "type": "array",
-                "items": {
+          "organizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "Name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "classrooms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mentors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
                   "type": "string"
                 }
-              },
-              "classrooms": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "mentors": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
               }
             }
           }
@@ -15589,8 +15601,11 @@
           "role": {
             "type": "string"
           },
-          "organization": {
-            "type": "string"
+          "organizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

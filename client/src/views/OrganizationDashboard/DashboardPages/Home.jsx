@@ -4,10 +4,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers } from "../../../Utils/requests";
+import { getOrgUsers } from '../../../Utils/requests';
 import { message } from 'antd';
-
-
 
 export default function OrganizationHome() {
   const [org, setOrg] = useState({});
@@ -15,7 +13,9 @@ export default function OrganizationHome() {
 
   useEffect(() => {
     let classroomIds = [];
-    getOrgUsers(JSON.parse(sessionStorage.getItem("user")).organization.id).then((res) => {
+    getOrgUsers(
+      JSON.parse(sessionStorage.getItem('user')).organization.id
+    ).then((res) => {
       if (res.data) {
         setOrg(res.data);
         console.log(org);
@@ -26,12 +26,13 @@ export default function OrganizationHome() {
     });
   }, []);
 
-  if (!("Name" in org)) {
-    return (<div id='main-header'>Welcome to Loading</div>);
+  if (!('Name' in org)) {
+    return <div id="main-header">Welcome to Loading</div>;
   }
-  return (<>
-    <div id='main-header'>Welcome to {org.Name}</div>
-    {/* <p>{sessionStorage.getItem("user")}</p>
+  return (
+    <>
+      <div id="main-header">Welcome to {org.Name}</div>
+      {/* <p>{sessionStorage.getItem("user")}</p>
     {orgs.map((organization) => (
       <div key={organization.id} id='dashboard-class-card'>
         <div id='card-left-content-container'>
@@ -52,5 +53,6 @@ export default function OrganizationHome() {
         </div>
       </div>
     ))} */}
-  </>);
+    </>
+  );
 }

@@ -59,9 +59,9 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "organization": {
+    "organizations": {
       "via": "users",
-      "model": "organization"
+      "collection": "organization"
     }
   }
 }

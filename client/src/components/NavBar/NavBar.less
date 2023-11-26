@@ -12,13 +12,19 @@
   -webkit-box-shadow: 0 1px 5px -1px darken(#colors[tertiary], 70%);
   box-shadow:         0 1px 5px -1px darken(#colors[tertiary], 70%);
 
-    #logo {
-      float: left;
-      padding: 5px;
-      bottom: -5px;
-      height: 4rem;
-      width: auto;
+  #logo {
+    float: left;
+    padding: 5px;
+    bottom: -5px;
+    height: 4rem;
+    width: auto;
+    transition: transform 0.3s ease; // This enables a smooth transition effect
+  
+    &:hover {
+      cursor: pointer; // Changes the cursor to indicate the logo is clickable
+      transform: scale(1.1); // Enlarges the logo by 10% on hover
     }
+  }
 }
 
 .top-nav p {

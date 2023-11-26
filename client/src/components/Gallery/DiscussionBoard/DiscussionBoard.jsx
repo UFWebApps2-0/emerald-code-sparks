@@ -2,6 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './DiscussionBoard.less';
 import { deletePinnedComment, deleteUnpinnedComment, postPinnedComment, postUnpinnedComment , updateDiscussionBoard} from '../../../Utils/requests';
 
+const Comment = ({ comment, handleUpdate, handleDelete, handlePinning }) => (
+  <div className='comment-box'>
+      <label className='comment-username'>{comment.User_name}</label>
+      <textarea className='comment-textarea' rows='4' cols='50' value={comment.comment_string} readOnly />
+      <div className='comment-buttons'>
+          <button onClick={() => handleUpdate(comment)}>Edit</button>
+          <button onClick={() => handleDelete(comment)}>Delete</button>
+          <button onClick={() => handlePinning(comment)}>{comment.is_pinned ? 'Unpin' : 'Pin'}</button>
+      </div>
+  </div>
+);
+
 const DiscussionBoard = ({ post }) => {
   // State to hold comments
   const [sortedComments, setSortedComments] = useState([]);
@@ -139,20 +151,13 @@ const DiscussionBoard = ({ post }) => {
       <h3>Discussion</h3>
       <div className='comments'>
         {sortedComments.map((comment, index) => (
-          <div key={index} className='comment'>
-            <p className='comment-username'>{comment.User_name}</p>
-            <textarea
-              rows='4'
-              cols='50'
-              value={comment.comment_string}
-              readOnly // Make the text area read-only to prevent user editing; NEED TO ADD AN EDIT BUTTON FOR THE POSTER.
-            />
-            <button onClick={() => handleUpdateComment(comment)}>Edit</button>
-            <button onClick={() => handleDelete(comment)}>Delete</button>
-            <button onClick={() => handlePinning(comment)}>
-              {comment.is_pinned ? 'Unpin' : 'Pin'}
-            </button>
-          </div>
+          <Comment
+            key={index}
+            comment={comment}
+            handleUpdate={handleUpdateComment}
+            handleDelete={handleDelete}
+            handlePinning={handlePinning}
+        />
         ))}
       </div>
       <div className='comment-input'>

@@ -22,27 +22,18 @@
   text-align: center;
   position: relative;
   float: right;
-  top: -7.75vh;
-  left: -14vw;
+  left: -10vw;
   cursor: pointer;
 
   &:hover {
-    //background-color: #808080; //doesn't work properly
-    //color: white;
+    color: #909090;
   }
 }
 
-.cardholder{
-  background-color: #colors[senary];
-  margin: 6vh auto 4vh auto;
-  padding-top: 40px;
-  padding-bottom: 40px;
+.adminSubHeader{
   width: 80vw;
-  height: auto;
-  border-radius: 25px;
-  border-color: #colors[secondary];
-  border-style: solid;
-  border-width: 2px;
+  margin: 0 auto 45px auto;
+  padding-bottom: 2vh;
 
   h1{
     position: relative;
@@ -50,7 +41,7 @@
     float: left;
     background-color: #colors[secondary];
     border-color: #000000;
-    color: #FFFFFF;
+    color: #colors[text-secondary];
     font-size: 1.2em;
     align-items: center;
     justify-content: center;
@@ -58,23 +49,52 @@
     height: auto;
     padding: 10px 5px;
     border-radius: 80px;
-    top: -8.5vh;
+    top: 5vh;
     left: -2vw;
     z-index: 1;
   }
 }
 
+.cardholder{
+  display: inline-grid;
+  justify-content: center;
+  width: 80vw;
+  margin: auto auto auto 2%;
+  background-color: #colors[senary];
+  padding-top: 40px;
+  padding-bottom: 10px;
+  height: auto;
+  border-radius: 5px;
+  border-color: #colors[secondary];
+  border-style: solid;
+  border-width: 2px;
+}
+
+.tile-container{
+  display: inline-grid;
+  grid-template-columns: 40vw 40vw;
+  justify-content: center;
+  width: 80vw;
+  margin: auto auto auto 2%;
+}
+
 .description{
-  margin-right: 500px;
-  background-color: rgb(49, 180, 180); 
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-right: 7vw;
+  margin-left: 7vw;
+  width: 24vw;
+  margin-bottom: 40px;
+
+  background-color: rgb(49, 180, 180);
   color: rgb(255, 255, 255);
-  text-align: center; 
+
   padding: 20px;
-  border: 1px solid rgb(14, 152, 184); 
+  border: 1px solid rgb(14, 152, 184);
   border-radius: 10px;
   font-weight: bold;
   font-size: 18px;
-  margin-left: 500px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  cursor: pointer; 
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.377);
+  cursor: pointer;
 }

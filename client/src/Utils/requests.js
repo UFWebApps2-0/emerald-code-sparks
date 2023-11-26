@@ -86,7 +86,7 @@ export const addOrganization = async (id, name, users) =>
     path: `${server}/organizations`,
     auth: true,
     data: {
-      id: 3,
+      id: id,
       name: name,
       users: users,
     },

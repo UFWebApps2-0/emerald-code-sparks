@@ -5,12 +5,18 @@ import NavBar from "../../components/NavBar/NavBar";
 //import { useGlobalState } from "../../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
 
+import {
+    addOrganization,
+    getOrgUsers
+} from '../../Utils/requests';
+
 export default function Admin() {
     const navigate = useNavigate();
 
     //handle click on create org button
-    function orgCreateClick(){
-        alert("you clicked the add org button! functionality coming soon");
+    async function orgCreateClick(){
+        let res = await getOrgUsers(1);
+        console.log(res)
     }
 
     //handle click on org --> navigate(org page)

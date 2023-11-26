@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation,useNavigate } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
 import HowItWorks from './views/HowItWorks/HowItWorks';
@@ -24,40 +24,30 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import {setHistory, getHistory} from './localStorageHelper';
-import { useNavigate } from 'react-router-dom';
 
 
 
 const App = () => {
   const currentLocation = useLocation();
   const navigate = useNavigate();
-  const [isInitial, initializeFirst] = useState(true);
+  const [isInitial, setIsInitial] = useState(true);
   useEffect(() => {
-    //console.log("Effect 2 is running");
     const lastRoute = getHistory('lastVisited');
-    //console.log("Last route from storage:", lastRoute);
     if(isInitial && lastRoute && lastRoute !== currentLocation.pathname){
-      //console.log("Navigating to:", lastRoute);
       
       navigate(lastRoute, {replace: true});//load the last path
       
     }
-    //else {
-      //console.log("Not navigating.");
-    //}console.log(navigate);
-    initializeFirst(false);//run on first open!
+    setIsInitial(false);//run on first open!
 
   },[currentLocation.pathname]);
   useEffect(() => {//Note! Don't put this before effect 2 or state tracking fails
-    //console.log("Effect 1 is running");
-    //console.log('Setting lastVisited to', currentLocation.pathname);
     if(!isInitial){
       setHistory('lastVisited', currentLocation.pathname);//store path
     }
   },[currentLocation.pathname]);//render if oath change
 
   if(isInitial){
-    //console.log("directed");
     return <div>Directing to where you left off...</div>;
   }//loading spinner in case loading time too long
   

@@ -12,7 +12,8 @@ const DiscussionBoard = ({ post }) => {
     const fetchComments = async () => {
       try {
         refreshComments();
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error fetching comments:', error.message);
       }
     };

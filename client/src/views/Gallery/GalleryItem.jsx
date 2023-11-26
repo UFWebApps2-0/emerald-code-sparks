@@ -60,7 +60,7 @@ const GalleryItem = (props) => {
                         </div>
                         <div className='flex flex-column'>
                             <DiscussionBoard post={props}/>
-                            <Like likeCount={likeCount}> </Like>
+1                            <Like likeCount={likeCount}> </Like>
                         </div>
 
                     </div>

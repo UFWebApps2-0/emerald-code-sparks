@@ -14,7 +14,15 @@
   font-size: 20px;
   background-color: white;
   border-radius: 4px;
+  transition: background-color 0.3s ease; // Smooth background transition
 
+  &:hover {
+    background-color: #e6e6e6; // Slightly darker on hover
+  }
+
+  &.active {
+    background-color: #d3d3d3; // Same as the content background when active
+  }
 }
 
 .accordion-title,
@@ -23,8 +31,5 @@
 }
 
 .accordion-content {
-  background-color:  rgb(211, 211, 211);
-
+  background-color: rgb(211, 211, 211);
 }
-
-

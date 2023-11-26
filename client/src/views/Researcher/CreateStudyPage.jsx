@@ -4,13 +4,15 @@ import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
 import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStudent} from '../../Utils/requests';
+import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStudent, getAllClassrooms, getClassroom} from '../../Utils/requests';
 
 const { Option } = Select;
 
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
+  const [classrooms, setClassrooms] = useState([]);
   const [selectedStudentsData, setSelectedStudentsData] = useState([]);
+  const [selectedClassroomsData, setSelectedClassroomsData] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
   const [selectedStudyTag, setSelectedStudyTag] = useState(null);
 
@@ -39,6 +41,35 @@ const CreateStudyPage =()=>{
     };
     fetchData();
   }, []);
+
+  const handleClassroomChange = async (selectedValues) => {
+    //console.log(selectedValues);
+    const classroomData = [];
+    for (const classroomID of selectedValues) {
+      const classroom = await getClassroom(classroomID);
+      classroomData.push(classroom.data);
+    }
+    setSelectedClassroomsData(classroomData);
+
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const classroomsRes = await getAllClassrooms();
+        if (classroomsRes.error) {
+          console.error('Failed to retrieve classrooms');
+        } else {
+          console.log(classroomsRes.data);
+          setClassrooms(classroomsRes.data);
+        }
+      } catch (error) {
+        console.error('Error fetching classrooms:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
 
   const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
 
@@ -172,6 +203,10 @@ const CreateStudyPage =()=>{
       }
       sendEmail(emailTemplate);
     } 
+    studyForm.resetFields();
+    checkboxForm.resetFields();
+    searchBarForm.resetFields();
+    setIsModalVisible(false);
   }
   const handleCancel = () => {
 
@@ -293,6 +328,19 @@ const CreateStudyPage =()=>{
             {students.map(student => (
               <Option key={student.id} value={student.id}>
                 {student.name}
+              </Option>
+            ))}
+          </Select>
+          <Select
+            mode="multiple"
+            placeholder="Search for a Classroom"
+            onChange={handleClassroomChange}
+            value={selectedClassroomsData.map(classroom => classroom.id)}  // Use selectedStudentsData
+            className="search-bar"
+          >
+            {classrooms.map(classroom => (
+              <Option key={classroom.id} value={classroom.id}>
+                {classroom.name}
               </Option>
             ))}
           </Select>

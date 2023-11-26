@@ -2,6 +2,8 @@
 
 > Computation and Science Modeling through Making
 
+See our style guide for the page [here](./client/src/assets/README.md)
+
 Cloud-based programming interface
 
 ![Deploy Staging](https://github.com/STEM-C/CaSMM/workflows/Deploy%20Staging/badge.svg)

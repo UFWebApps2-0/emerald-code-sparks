@@ -17,11 +17,10 @@ const DiscussionBoard = ({ post }) => {
         console.error('Error fetching comments:', error.message);
       }
     };
-
     fetchComments();
   }, [post]);
 
-const handleCommentSubmit = async () => {
+  const handleCommentSubmit = async () => {
   try {
       // Check if the comment input is not empty
       if (commentInput.trim() !== '') {
@@ -60,7 +59,7 @@ const handleCommentSubmit = async () => {
     } catch (error) {
       console.error('Error submitting comment:', error.message);
   }
-};
+  };
   //these props is the actual comment object
   const handlePinning = async (props) => {
     try {
@@ -91,10 +90,11 @@ const handleCommentSubmit = async () => {
 
       await refreshComments();
 
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error pinning comment:', error.message);
     }
-  }
+  };
 
   const handleDelete = async (post, props) => {
     try {
@@ -106,16 +106,15 @@ const handleCommentSubmit = async () => {
     } catch (error) {
       console.error('Error deleting comment:', error.message);
     }
-  }
+  };
 
   const refreshComments = async () => {
-
     const discussionBoard = post.discussion_board || [];
     const pinnedComments = discussionBoard.filter(comment => comment.is_pinned === true);
     const unpinnedComments = discussionBoard.filter(comment => comment.is_pinned !== true);
     const sortedComments = [...pinnedComments, ...unpinnedComments];
     setSortedComments(sortedComments);
-  }
+  };
 
   const handleUpdateComment = async (post, props) => {
     try {
@@ -134,8 +133,7 @@ const handleCommentSubmit = async () => {
       console.error('Error updating comment:', error.message);
     }
   }
-
-
+  
   return (
     <div className='discussion-board'>
       <h3>Discussion</h3>
@@ -149,6 +147,11 @@ const handleCommentSubmit = async () => {
               value={comment.comment_string}
               readOnly // Make the text area read-only to prevent user editing; NEED TO ADD AN EDIT BUTTON FOR THE POSTER.
             />
+            <button onClick={() => handleUpdateComment(comment)}>Edit</button>
+            <button onClick={() => handleDelete(comment)}>Delete</button>
+            <button onClick={() => handlePinning(comment)}>
+              {comment.is_pinned ? 'Unpin' : 'Pin'}
+            </button>
           </div>
         ))}
       </div>

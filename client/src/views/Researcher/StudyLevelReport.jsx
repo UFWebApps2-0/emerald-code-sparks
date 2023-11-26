@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Input, Form } from 'antd';
 import './StudyLevelReport.less';
 import { useNavigate } from 'react-router-dom';
-import { sendEmail, getResearchers, getStudies} from '../../Utils/requests';
+import { sendEmail, getResearchers, getStudies, deleteStudy} from '../../Utils/requests';
 import { Link } from 'react-router-dom';
 
 const StudyLevelReport = () => {
@@ -29,6 +29,28 @@ const StudyLevelReport = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const handleDeleteStudy = (study) => {
+    Modal.confirm({
+      title: 'Confirm Delete',
+      content: `Are you sure you want to delete the study with ID ${study.studyID}?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk: async () => {
+        const deleteRes = await deleteStudy(study.id);
+        if (deleteRes.error) {
+          console.error('Fail to delete study');
+        }
+        const studiesRes = await getStudies();
+        if (studiesRes.error) {
+          console.error('Fail to retrieve studies');
+        }
+        setStudies(studiesRes.data);
+        
+      },
+    });
   };
 
   const handleAddResearcher = async () => {
@@ -138,6 +160,16 @@ const StudyLevelReport = () => {
       ),
       width: '3%',
       align: 'left',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Button type="danger" onClick={() => handleDeleteStudy(record)}>
+          Delete
+        </Button>
+      ),
+      width: '1%',
     },
   ];
 

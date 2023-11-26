@@ -7,8 +7,8 @@ console.log("printing env variables");
 console.log(process.env)
 console.log(process.env.EMAIL_SMTP_USER);
 console.log(process.env.EMAIL_SMTP_PASS);
-process.env.EMAIL_SMTP_USER = "cpeddireddy@ufl.edu";
-process.env.EMAIL_SMTP_PASS = "1cQyNGHW05fSEMbI";
+process.env.EMAIL_SMTP_USER = "";
+process.env.EMAIL_SMTP_PASS = "";
 
 
 module.exports = () => ({

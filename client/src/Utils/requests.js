@@ -716,3 +716,11 @@ export const getResearchers = async () =>
     auth: true,
     error: 'Studies could not be added.',
   });
+
+  export const deleteStudy = async(id) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/studies/${id}`,
+    auth: true,
+    error: 'Studies could not be deleted.',
+  });

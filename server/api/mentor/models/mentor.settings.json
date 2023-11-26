@@ -31,7 +31,8 @@
       "model": "user"
     },
     "organization": {
-      "model":  "organization"
+      "via": "mentors",
+      "model": "organization"
     }
   }
 }

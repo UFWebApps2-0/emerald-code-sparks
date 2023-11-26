@@ -80,14 +80,13 @@ export const getActivities = async () =>
     error: 'Activities could not be retrieved.',
   });
 
-export const addOrganization = async (id, name, users) =>
+export const addOrganization = async (name, users) =>
   makeRequest({
     method: POST,
     path: `${server}/organizations`,
     auth: true,
     data: {
-      id: id,
-      name: name,
+      Name: name,
       users: users,
     },
     error: 'Could not add organization',

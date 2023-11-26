@@ -32,7 +32,9 @@ export const getCurrUser = () => {
   else if (result.role.type === 'admin') {
     return {
       role: 'Admin',
-      name: result.role.name,
+      name: result.username,
+      id: result.id,
+      email: result.email,
     };
   }
 

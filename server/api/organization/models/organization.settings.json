@@ -14,7 +14,7 @@
     "Name": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "users": {
       "plugin": "users-permissions",

@@ -25,6 +25,8 @@ export default function LessonModuleCreator({
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [learningStandardObj, setLessonModuleObj] = useState("")
+  const [releaseDate, setReleaseDate] = useState("")
+  const [closingDate, setClosingDate] = useState("")
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
 
@@ -70,7 +72,9 @@ export default function LessonModuleCreator({
       0,
       unit,
       standards,
-      link
+      link,
+      releaseDate,
+      closingDate
     )
     if (res.err) {
       message.error("Fail to create new learning standard")
@@ -202,6 +206,26 @@ export default function LessonModuleCreator({
               value={link}
               placeholder="Enter a link"
             />
+          </Form.Item>
+          <Form.Item label="Release Date">
+            <Input
+              type="date"
+              onChange={e => {
+                setReleaseDate(e.target.value)
+              }}
+              value={releaseDate}
+              placeholder="Select release date"
+            ></Input>
+          </Form.Item>
+          <Form.Item label="Closing Date">
+            <Input
+              type="date"
+              onChange={e => {
+                setClosingDate(e.target.value)
+              }}
+              value={closingDate}
+              placeholder="Select closing date"
+            ></Input>
           </Form.Item>
           <Form.Item
             wrapperCol={{

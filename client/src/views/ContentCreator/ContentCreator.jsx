@@ -16,6 +16,7 @@ import LessonEditor from './LessonEditor/LessonEditor';
 import { useSearchParams } from 'react-router-dom';
 
 import './ContentCreator.less';
+import LessonModuleCreator from './LessonModuleCreator/LessonModuleCreator';
 
 const { TabPane } = Tabs;
 
@@ -87,6 +88,31 @@ export default function ContentCreator() {
       align: 'left',
     },
     {
+      title: 'Open and Close Dates',
+      dataIndex: 'dates',
+      key: 'dates',
+      width: '26.5%',
+      align: 'left'
+    },
+    // {
+    //   title: 'Lesson',
+    //   dataIndex: 'name',
+    //   key: 'name',
+    //   editable: true,
+    //   width: '22.5%',
+    //   align: 'left',
+    //   render: (_, key) => (
+    //     <LessonEditor
+    //       learningStandard={key}
+    //       linkBtn={true}
+    //       viewing={viewing}
+    //       setViewing={setViewing}
+    //       tab={tab}
+    //       page={page}
+    //     />
+    //   ),
+    // },
+    {
       title: 'Delete',
       dataIndex: 'delete',
       key: 'delete',
@@ -115,6 +141,8 @@ export default function ContentCreator() {
       ),
     },
   ];
+
+
 
   const filterLS = (grade) => {
     return learningStandardList.filter((learningStandard) => {

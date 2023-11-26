@@ -1,9 +1,7 @@
 import { message } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
-import './TeacherLogin.less';
 
 const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -46,16 +44,13 @@ export default function TeacherLogin() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
-      <div id='content-wrapper'>
-        <form
-          id='box'
-          onKeyPress={(e) => {
-            if (e.key === 'Enter') handleLogin();
-          }}
-        >
-          <div id='box-title'>User Login</div>
+      <div 
+        id='box'
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') handleLogin();
+        }}
+      >
+         <h2 className='login-text'>PARENT / EDUCATOR</h2>
           <input
             type='email'
             {...email}
@@ -73,12 +68,10 @@ export default function TeacherLogin() {
           </p>
           <input
             type='button'
-            value={loading ? 'Loading...' : 'Login'}
+            value={loading ? 'LOADING...' : 'LOGIN'}
             onClick={handleLogin}
             disabled={loading}
           />
-        </form>
       </div>
-    </div>
   );
 }

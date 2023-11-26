@@ -1,7 +1,11 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Routes, useLocation,useNavigate } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
+import HowItWorks from './views/HowItWorks/HowItWorks';
+import FAQ from './views/FAQ/FAQ'
+import OurTeam from './views/OurTeam/OurTeam';
+import Gallery from './views/Gallery/Gallery';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
 import BugReport from './views/BugReport/BugReport';
 import ContentCreator from './views/ContentCreator/ContentCreator';
@@ -19,13 +23,44 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import {setHistory, getHistory} from './localStorageHelper';
+
+
 
 const App = () => {
+  const currentLocation = useLocation();
+  const navigate = useNavigate();
+  const [isInitial, setIsInitial] = useState(true);
+  useEffect(() => {
+    const lastRoute = getHistory('lastVisited');
+    if(isInitial && lastRoute && lastRoute !== currentLocation.pathname){
+      
+      navigate(lastRoute, {replace: true});//load the last path
+      
+    }
+    setIsInitial(false);//run on first open!
+
+  },[currentLocation.pathname]);
+  useEffect(() => {//Note! Don't put this before effect 2 or state tracking fails
+    if(!isInitial){
+      setHistory('lastVisited', currentLocation.pathname);//store path
+    }
+  },[currentLocation.pathname]);//render if oath change
+
+  if(isInitial){
+    return <div>Directing to where you left off...</div>;
+  }//loading spinner in case loading time too long
+  
   return (
     <div>
       <Routes>
+        
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
+        <Route path='/how-it-works' element={<HowItWorks />} />
+        <Route path='/faq' element={<FAQ />} />
+        <Route path='our-team' element={<OurTeam />} />
+        <Route path='/gallery' element={<Gallery />} />
         <Route path='/teacherlogin' element={<TeacherLogin />} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />

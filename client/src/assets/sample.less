@@ -1,0 +1,51 @@
+// Defining the color palette for consistency throughout the application
+#colors() {
+    primary: #3D5C82;           // Main color for primary elements
+    secondary: #5BABDE;         // Color for secondary elements or accents
+    tertiary: #F4F4F5;          // Background or tertiary elements color
+    text-primary: #414141;      // Primary text color
+    text-secondary: #FFFFFF;    // Secondary or contrast text color
+}
+
+// Flex container setup for responsive and fluid layouts
+.flex {
+    display: flex;
+}
+
+// Directional styles for Flex container 
+.flex-column {
+    flex-direction: column;     // Stacking children vertically
+}
+.flex-row {
+    flex-direction: row;       // Lining up children horizontally
+}
+
+// Alignment styles for Flex container for better positioning of children
+.space-between {
+    justify-content: space-between;   // Distributing children with space between them
+}
+.justify-end {
+    justify-content: flex-end;        // Aligning children towards the end
+}
+.justify-center {
+    justify-content: center;          // Centering children
+}
+
+// Basic container with full height and width for layout consistency
+.container {
+    height: 100%;
+    width: 100%;
+    background-color: #colors[primary];  // Using primary color from the color palette
+    min-height: 100vh;                   // Making sure it covers the full viewport height
+}
+
+// Style for cards which are often used for displaying content in a contained manner
+.card {
+    background-color: #colors[tertiary]; // Using tertiary color from the color palette
+    padding: .7em;                       // Giving some space around the content inside
+}
+
+// Text styling for emphasis
+.bold {
+    font-weight: bold;                  // Making the text bold for emphasis
+}

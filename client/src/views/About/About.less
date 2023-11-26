@@ -1,54 +1,82 @@
-@import "../../assets/style.less";
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 
-.container {
-  background-color: #colors[primary];
-  height: 100%;
-  min-height: 100vh;
-  width: 100%;
-  min-width: 100vw;
-  text-align: center;
+#colors() {
+    primary: #59ABDF;
+    secondary: #ABDF59;
+    tertiary: #F4F4F5;
+    quaternary: #F3D250;
+    quinary: #DF59AB; 
+    senary: #E9E9E9;
+    other: #DF59AB;
+    text-primary: #414141;
+    text-secondary: #FFFFFF;
 }
 
-#about-content-container {
-  margin: 8vh auto 5vh auto;
-  padding: 5vh 5vw;
-  width: 80vw;
-  background: #colors[tertiary];
-  border-radius: 20px;
-  border: 2px solid #colors[secondary];
+.flex {
+    display: flex;
+}
 
-  #logos {
-    width: 50vw;
-    margin: auto;
+.flex-column {
+    flex-direction: column;
+}
 
-    img {
-      width: 20%;
-      height: auto;
-      margin: auto;
-    }
-  }
+.flex-row {
+    flex-direction: row;
+}
 
-  #title {
-    font-size: 3em;
-    color: #colors[text-primary];
-    margin-bottom: 0;
-  }
+.space-between {
+    justify-content: space-between;
+}
 
-  #secondary-title {
-    font-size: 2em;
-    color: #colors[text-primary];
-  }
+.justify-end {
+    justify-content: flex-end;
+}
 
-  #divider {
-    width: 95%;
-    height: 0;
-    margin: 5vh 0;
-    border-bottom: 1px solid #colors[secondary];
-    opacity: 20%;
-  }
+.justify-center {
+    justify-content: center;
+}
 
-  p {
-    font-size: 1.5em;
-    color: #colors[text-primary];
-  }
+.container {
+    height: 100%;
+    width: 100%;
+    background-color: #colors[primary];
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Koulen', cursive;
+}
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.vertical-container {
+    margin: 1.5em;
+}
+
+.hvr-info {
+    cursor: pointer;
+}
+
+.card {
+    background-color: #colors[tertiary];
+    padding: .7em;
+}
+
+.overflow-visible {
+    overflow: visible;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.nav-padding {
+    padding-top: 8vh;
+}
+
+.replayButton {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
 }

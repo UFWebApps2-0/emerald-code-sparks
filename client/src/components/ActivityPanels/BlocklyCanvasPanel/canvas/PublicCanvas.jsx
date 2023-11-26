@@ -44,11 +44,28 @@ export default function PublicCanvas({ activity, isSandbox }) {
       activityRef.current = activity;
       if (!workspaceRef.current && activity && Object.keys(activity).length !== 0) {
         setWorkspace();
+        loadLocal();//load
+        const changeListener = workspaceRef.current.addChangeListener(saveLocal);
+        return () => workspaceRef.current.removeChangeListener(changeListener);
       }
     };
     setUp();
+    
   }, [activity]);
+  //State tracking stuff
+  const saveLocal = () => {//save current xml in local storage
+    const workSpaceXml = Blockly.Xml.workspaceToDom(workspaceRef.current);
+    const xmlText = Blockly.Xml.domToText(workSpaceXml);
+    localStorage.setItem('public-sandbox-progress', xmlText);
+  }
 
+  const loadLocal = () => {
+    const xmlText = localStorage.getItem('public-sandbox-progress');
+    if(xmlText && workspaceRef.current){
+      const xml = Blockly.Xml.textToDom(xmlText);
+      Blockly.Xml.domToWorkspace(xml, workspaceRef.current);
+    }
+  }
   const handleUndo = () => {
     if (workspaceRef.current.undoStack_.length > 0)
       workspaceRef.current.undo(false);

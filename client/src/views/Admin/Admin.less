@@ -1,6 +1,6 @@
-//@import "../../../assets/style.less";
+@import "../../assets/style.less";
 
-#main-header{ //same as mentor dashboard main header
+.main-header{ //same as mentor dashboard main header
   color: #FFFFFF;
   font-size: 3em;
   font-weight: bolder;
@@ -10,7 +10,7 @@
   padding-top: 20px;
 }
 
-#createOrgButton{
+.createButton{
   border-radius: 50%;
   border: none;
   background-color: transparent;
@@ -32,20 +32,23 @@
   }
 }
 
-#cardholder{
-  background-color: #E9E9E9; //#colors[senary]
+.cardholder{
+  background-color: #colors[senary];
   margin: 6vh auto 4vh auto;
   padding-top: 40px;
   padding-bottom: 40px;
   width: 80vw;
   height: auto;
   border-radius: 25px;
+  border-color: #colors[secondary];
+  border-style: solid;
+  border-width: 2px;
 
   h1{
     position: relative;
     display: flex;
     float: left;
-    background-color: #5BABDE; //#colors[secondary]
+    background-color: #colors[secondary];
     border-color: #000000;
     color: #FFFFFF;
     font-size: 1.2em;
@@ -61,7 +64,7 @@
   }
 }
 
-#description{
+.description{
   margin-right: 500px;
   background-color: rgb(49, 180, 180); 
   color: rgb(255, 255, 255);

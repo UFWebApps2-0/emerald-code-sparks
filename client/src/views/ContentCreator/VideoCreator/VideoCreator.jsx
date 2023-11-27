@@ -1,22 +1,18 @@
-<<<<<<< HEAD
 import { Button, Form, Input, message, Modal } from "antd"
 import React, { useState } from "react"
-import { createUnit } from "../../../Utils/requests"
-import "./UnitCreator.less"
+import { createVideo } from "../../../Utils/requests"
+import "./VideoCreator.less"
 
-export default function UnitCreator({ gradeList }) {
+export default function VideoCreator({ gradeList }) {
   const [visible, setVisible] = useState(false)
-  const [grade, setGrade] = useState("")
   const [name, setName] = useState("")
-  const [number, setNumber] = useState("")
+  const [url, setUrl] = useState("")
   const [description, setDescription] = useState("")
-  const [standard, setStandard] = useState("")
 
   const showModal = () => {
-    setNumber("")
     setName("")
+    setUrl("")
     setDescription("")
-    setStandard("")
     setVisible(true)
   }
 
@@ -25,22 +21,22 @@ export default function UnitCreator({ gradeList }) {
   }
 
   const handleSubmit = async e => {
-    const res = await createUnit(number, name, standard, description, grade)
+    const res = await createVideo(url, name, description)
     if (res.err) {
-      message.error("Fail to create a new unit")
+      message.error("Fail to create a new video")
     } else {
-      message.success("Successfully created unit")
+      message.success("Successfully created video")
       setVisible(false)
     }
   }
 
   return (
     <div>
-      <button onClick={showModal} id="add-unit-btn">
-        + Add Unit
+      <button onClick={showModal} id="add-video-btn">
+        + Add Video
       </button>
       <Modal
-        title="Create Unit"
+        title="Create Video"
         open={visible}
         width="35vw"
         onCancel={handleCancel}
@@ -58,40 +54,23 @@ export default function UnitCreator({ gradeList }) {
           layout="horizontal"
           size="default"
         >
-          <Form.Item id="form-label" label="Grade">
-            <select
-              id="grade-dropdown"
-              name="grade"
-              defaultValue={grade}
-              required
-              onChange={e => setGrade(e.target.value)}
-            >
-              <option key={0} value={grade} disabled id="disabled-option">
-                Grade
-              </option>
-              {gradeList.map(grade_ => (
-                <option key={grade_.id} value={grade_.id}>
-                  {grade_.name}
-                </option>
-              ))}
-            </select>
-          </Form.Item>
+          <p>
+            1. Upload video to youtube<br/>2. Copy/paste link to video
+          </p>
           <Form.Item id="form-label" label="Video Name">
             <Input
               onChange={e => setName(e.target.value)}
               value={name}
-              placeholder="Enter unit name"
+              placeholder="Enter video name"
               required
             />
           </Form.Item>
-          <Form.Item id="form-label" label="Video Number">
+          <Form.Item id="form-label" label="Video Url">
             <Input
-              onChange={e => setNumber(e.target.value)}
-              type="number"
-              value={number}
-              placeholder="Enter unit number"
-              min={1}
-              max={15}
+              onChange={e => setUrl(e.target.value)}
+              type="url"
+              value={url}
+              placeholder="Enter video url"
               required
             />
           </Form.Item>
@@ -100,16 +79,7 @@ export default function UnitCreator({ gradeList }) {
               rows={3}
               onChange={e => setDescription(e.target.value)}
               value={description}
-              placeholder="Enter unit description"
-              required
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Standards">
-            <Input
-              onChange={e => setStandard(e.target.value)}
-              value={standard}
-              placeholder="Enter unit Standards"
-              required
+              placeholder="Enter video description"
             />
           </Form.Item>
           <Form.Item
@@ -140,146 +110,3 @@ export default function UnitCreator({ gradeList }) {
     </div>
   )
 }
-=======
-import { Button, Form, Input, message, Modal } from "antd"
-import React, { useState } from "react"
-import { createUnit } from "../../../Utils/requests"
-import "./UnitCreator.less"
-
-export default function UnitCreator({ gradeList }) {
-  const [visible, setVisible] = useState(false)
-  const [grade, setGrade] = useState("")
-  const [name, setName] = useState("")
-  const [number, setNumber] = useState("")
-  const [description, setDescription] = useState("")
-  const [standard, setStandard] = useState("")
-
-  const showModal = () => {
-    setNumber("")
-    setName("")
-    setDescription("")
-    setStandard("")
-    setVisible(true)
-  }
-
-  const handleCancel = () => {
-    setVisible(false)
-  }
-
-  const handleSubmit = async e => {
-    const res = await createUnit(number, name, standard, description, grade)
-    if (res.err) {
-      message.error("Fail to create a new unit")
-    } else {
-      message.success("Successfully created unit")
-      setVisible(false)
-    }
-  }
-
-  return (
-    <div>
-      <button onClick={showModal} id="add-unit-btn">
-        + Add Unit
-      </button>
-      <Modal
-        title="Create Unit"
-        open={visible}
-        width="35vw"
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <Form
-          id="add-videos"
-          labelCol={{
-            span: 6,
-          }}
-          wrapperCol={{
-            span: 14,
-          }}
-          onFinish={handleSubmit}
-          layout="horizontal"
-          size="default"
-        >
-          <Form.Item id="form-label" label="Grade">
-            <select
-              id="grade-dropdown"
-              name="grade"
-              defaultValue={grade}
-              required
-              onChange={e => setGrade(e.target.value)}
-            >
-              <option key={0} value={grade} disabled id="disabled-option">
-                Grade
-              </option>
-              {gradeList.map(grade_ => (
-                <option key={grade_.id} value={grade_.id}>
-                  {grade_.name}
-                </option>
-              ))}
-            </select>
-          </Form.Item>
-          <Form.Item id="form-label" label="Video Name">
-            <Input
-              onChange={e => setName(e.target.value)}
-              value={name}
-              placeholder="Enter unit name"
-              required
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Video Number">
-            <Input
-              onChange={e => setNumber(e.target.value)}
-              type="number"
-              value={number}
-              placeholder="Enter unit number"
-              min={1}
-              max={15}
-              required
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Description">
-            <Input.TextArea
-              rows={3}
-              onChange={e => setDescription(e.target.value)}
-              value={description}
-              placeholder="Enter unit description"
-              required
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Standards">
-            <Input
-              onChange={e => setStandard(e.target.value)}
-              value={standard}
-              placeholder="Enter unit Standards"
-              required
-            />
-          </Form.Item>
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-            style={{ marginBottom: "0px" }}
-          >
-            <Button
-              type="primary"
-              htmlType="submit"
-              size="large"
-              className="content-creator-button"
-            >
-              Submit
-            </Button>
-            <Button
-              onClick={handleCancel}
-              size="large"
-              className="content-creator-button"
-            >
-              Cancel
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>
-  )
-}
->>>>>>> 837c1790c4b44ea0e5f49c457932042b46cf7e8d

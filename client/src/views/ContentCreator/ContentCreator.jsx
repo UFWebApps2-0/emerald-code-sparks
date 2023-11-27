@@ -5,6 +5,7 @@ import Navbar from '../../components/NavBar/NavBar';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import SavedWorkSpaceTab from '../../components/Tabs/SavedWorkspaceTab';
 import UnitCreator from './UnitCreator/UnitCreator';
+import VideoCreator from './VideoCreator/VideoCreator';
 import LessonModuleActivityCreator from './LessonModuleCreator/LessonModuleCreator';
 import {
   getLessonModuleAll,
@@ -130,6 +131,7 @@ export default function ContentCreator() {
         </div>
         <div id='content-creator-table-container'>
           <div id='content-creator-btn-container'>
+            <VideoCreator gradeList={gradeList} />
             <UnitCreator gradeList={gradeList} />
             <LessonModuleActivityCreator />
           </div>
@@ -170,6 +172,7 @@ export default function ContentCreator() {
           </div>
           <div id='content-creator-table-container'>
             <div id='content-creator-btn-container'>
+              <VideoCreator gradeList={gradeList} />
               <UnitCreator gradeList={gradeList} />
               <LessonModuleActivityCreator
                 setLessonModuleList={setLessonModuleList}

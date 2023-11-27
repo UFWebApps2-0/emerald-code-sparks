@@ -1,18 +1,19 @@
 {
   "paths": {
-    "/selections": {
+    "/lesson-videos": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the lesson-videos's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve lesson-videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Selection"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Selection"
+          "Lesson-videos"
         ],
         "parameters": [
           {
@@ -194,79 +195,16 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new lesson-videos record",
         "responses": {
           "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Selection"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Selection"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewSelection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/selections/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
+            "description": "Retrieve lesson-videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "foo": {
+                      "type": "string"
                     }
                   }
                 }
@@ -306,22 +244,36 @@
         },
         "summary": "",
         "tags": [
-          "Selection"
+          "Lesson-videos"
         ],
-        "parameters": []
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLesson-videos"
+              }
+            }
+          }
+        }
       }
     },
-    "/selections/{id}": {
+    "/lesson-videos/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the number of lesson-videos documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve lesson-videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Selection"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -359,7 +311,64 @@
         },
         "summary": "",
         "tags": [
-          "Selection"
+          "Lesson-videos"
+        ],
+        "parameters": []
+      }
+    },
+    "/lesson-videos/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Find one lesson-videos record",
+        "responses": {
+          "200": {
+            "description": "Retrieve lesson-videos document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Lesson-videos"
         ],
         "parameters": [
           {
@@ -376,14 +385,18 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single lesson-videos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve lesson-videos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Selection"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -421,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Selection"
+          "Lesson-videos"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewSelection"
+                "$ref": "#/components/schemas/NewLesson-videos"
               }
             }
           }
@@ -449,10 +462,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single lesson-videos record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single lesson-videos based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Selection"
+          "Lesson-videos"
         ],
         "parameters": [
           {
@@ -514,71 +527,63 @@
   },
   "components": {
     "schemas": {
-      "Selection": {
+      "Lesson-videos": {
         "required": [
-          "id",
-          "current"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "classroom": {
-            "required": [
-              "id",
-              "code"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "school": {
-                "type": "string"
-              },
-              "sessions": {
-                "type": "array",
-                "items": {
+          "LessonVideoTitle": {
+            "type": "string"
+          },
+          "LessonVideoDescription": {
+            "type": "string"
+          },
+          "LessonVideoLink": {
+            "type": "string"
+          },
+          "interactive_qs": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "Question": {
+                  "type": "string"
+                },
+                "CorrectAnswer": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "Answer1": {
+                  "type": "string"
+                },
+                "Answer2": {
+                  "type": "string"
+                },
+                "Answer3": {
+                  "type": "string"
+                },
+                "Answer4": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
                   "type": "string"
                 }
-              },
-              "mentors": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "students": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "code": {
-                "type": "string"
-              },
-              "grade": {
-                "type": "string"
-              },
-              "selections": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "authorized_workspaces": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
               }
             }
           },
@@ -630,26 +635,35 @@
               }
             }
           },
-          "current": {
-            "type": "boolean",
-            "default": true
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewSelection": {
-        "required": [
-          "current"
-        ],
+      "NewLesson-videos": {
         "properties": {
-          "classroom": {
+          "LessonVideoTitle": {
             "type": "string"
+          },
+          "LessonVideoDescription": {
+            "type": "string"
+          },
+          "LessonVideoLink": {
+            "type": "string"
+          },
+          "interactive_qs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "lesson_module": {
             "type": "string"
           },
-          "current": {
-            "type": "boolean",
-            "default": true
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -661,9 +675,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Selection"
-    }
-  ]
+  "tags": []
 }

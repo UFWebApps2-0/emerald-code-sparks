@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lesson_videos",
+  "info": {
+    "name": "LessonVideos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "LessonVideoTitle": {
+      "type": "string"
+    },
+    "LessonVideoDescription": {
+      "type": "text"
+    },
+    "LessonVideoLink": {
+      "type": "richtext"
+    },
+    "interactive_qs": {
+      "collection": "interactive-q"
+    },
+    "lesson_module": {
+      "model": "lesson-module",
+      "via": "lesson_videos"
+    }
+  }
+}

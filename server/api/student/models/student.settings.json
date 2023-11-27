@@ -32,6 +32,10 @@
     },
     "last_logged_in": {
       "type": "datetime"
+    },
+    "studies": {
+      "via": "students",
+      "collection": "study"
     }
   }
 }

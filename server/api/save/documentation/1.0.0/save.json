@@ -675,6 +675,12 @@
               "last_logged_in": {
                 "type": "string"
               },
+              "studies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },

@@ -46,6 +46,14 @@
       "via": "classroom",
       "private": true,
       "collection": "authorized-workspace"
+    },
+    "researchers": {
+      "via": "classrooms",
+      "collection": "researcher"
+    },
+    "studies": {
+      "via": "classrooms",
+      "collection": "study"
     }
   }
 }

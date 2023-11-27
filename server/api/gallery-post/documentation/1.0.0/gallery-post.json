@@ -566,6 +566,9 @@
               "Lesson"
             ]
           },
+          "xml_text": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -604,6 +607,9 @@
               "Block",
               "Lesson"
             ]
+          },
+          "xml_text": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

@@ -673,7 +673,7 @@ export const getClassroomWorkspace = async (id) =>
     error: 'Unable to retrive classroom workspaces',
   });
 
-export const postGalleryObject = async (data) =>
+export const postGalleryObject = async (data, xml_text) =>
   makeRequest({
     method: POST,
     path: `${server}/gallery-posts`,
@@ -686,7 +686,8 @@ export const postGalleryObject = async (data) =>
       discussion_board: data.discussion_board,
       visibility: data.visibility,
       type: data.type,
-      object_id: 0,
+      xml_text: xml_text,
+      classroom_id: data.classroom_id,
     },
     error: 'Unable to post to gallery',
   });
@@ -706,3 +707,25 @@ export const getGalleryObject = async (id) =>
     auth: false,
     error: 'Unable to retrive gallery object',
   });
+
+export const updateLikeCount = async (postId, like_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    like_count: like_count,
+  },
+  error: 'Unable to update discussion board',
+});};
+
+export const updateViewCount = async (postId, view_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    view_count: view_count,
+  },
+  error: 'Unable to update discussion board',
+});};

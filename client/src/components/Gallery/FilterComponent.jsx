@@ -1,27 +1,50 @@
 import React, { useState } from 'react';
 import './Filter.less';
+import { debounce } from 'lodash';
 
-const FilterComponent = ({ onFilterChange }) => {
+const FilterComponent = ({ onFilterChange, loadedGalleryItems }) => {
+
   const [types, setTypes] = useState({
-    block: false,
-    lessons: false,
-    projects: false,
+    Block: false,
+    Lesson: false,
+    Project: false,
   });
 
   const [visibility, setVisibility] = useState({
-    public: false,
-    organization: false,
-    classroom: false,
+    Public: false,
+    Organization: false,
+    Classroom: false,
   });
 
   const handleTypeChange = (type) => {
-    setTypes({ ...types, [type]: !types[type] });
-    onFilterChange(types, visibility);
-  };
+    console.log('handleTypeChange called');
+    console.log('Types before update:', types);
+  
+    let updatedTypes;
 
+    setTypes((prevTypes) => {
+      updatedTypes = { ...prevTypes, [type]: !prevTypes[type] };
+      console.log('Types after update:', updatedTypes);
+      return updatedTypes;
+    });
+
+    onFilterChange(updatedTypes, visibility, loadedGalleryItems);
+  };
+  
   const handleVisibilityChange = (option) => {
-    setVisibility({ ...visibility, [option]: !visibility[option] });
-    onFilterChange(types, visibility);
+    console.log('handleVisibilityChange called');
+    console.log('Visibility before update:', visibility);
+
+    let updatedVisibility;
+  
+    setVisibility((prevVisibility) => {
+      updatedVisibility = { ...prevVisibility, [option]: !prevVisibility[option] };
+      console.log('Visibility after update:', updatedVisibility);
+      return updatedVisibility;
+    });
+
+    onFilterChange(types, updatedVisibility, loadedGalleryItems);
+    
   };
 
   return (
@@ -32,24 +55,24 @@ const FilterComponent = ({ onFilterChange }) => {
         <label>
           <input
             type="checkbox"
-            checked={types.block}
-            onChange={() => handleTypeChange('block')}
+            checked={types.Block}
+            onChange={() => handleTypeChange('Block')}
           />
           Block
         </label>
         <label>
           <input
             type="checkbox"
-            checked={types.lessons}
-            onChange={() => handleTypeChange('lessons')}
+            checked={types.Lesson}
+            onChange={() => handleTypeChange('Lesson')}
           />
           Lessons
         </label>
         <label>
           <input
             type="checkbox"
-            checked={types.projects}
-            onChange={() => handleTypeChange('projects')}
+            checked={types.Project}
+            onChange={() => handleTypeChange('Project')}
           />
           Projects
         </label>
@@ -59,24 +82,24 @@ const FilterComponent = ({ onFilterChange }) => {
         <label>
           <input
             type="checkbox"
-            checked={visibility.public}
-            onChange={() => handleVisibilityChange('public')}
+            checked={visibility.Public}
+            onChange={() => handleVisibilityChange('Public')}
           />
           Public
         </label>
         <label>
           <input
             type="checkbox"
-            checked={visibility.organization}
-            onChange={() => handleVisibilityChange('organization')}
+            checked={visibility.Organization}
+            onChange={() => handleVisibilityChange('Organization')}
           />
           Organization
         </label>
         <label>
           <input
             type="checkbox"
-            checked={visibility.classroom}
-            onChange={() => handleVisibilityChange('classroom')}
+            checked={visibility.Classroom}
+            onChange={() => handleVisibilityChange('Classroom')}
           />
           Classroom
         </label>

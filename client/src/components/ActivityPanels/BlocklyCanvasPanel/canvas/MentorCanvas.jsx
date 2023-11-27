@@ -18,6 +18,7 @@ import {
 import { getAuthorizedWorkspace } from '../../../../Utils/requests';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
+import  GalleryObjectForm  from "../../../../views/Gallery/GalleryObjectForm"
 
 let plotId = 1;
 
@@ -46,7 +47,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
       toolbox: document.getElementById('toolbox'),
     });
   };
-
+  
   useEffect(() => {
     // once the activity state is set, set the workspace and save
     const setUp = async () => {
@@ -483,6 +484,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
           onClose={(e) => setCompileError('')}
         ></Alert>
       )}
+    <GalleryObjectForm workspaceRef={workspaceRef} classroomId={classroomId}/> 
     </div>
   );
 }

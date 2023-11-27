@@ -9,19 +9,23 @@
     "AccountInfo": "/account",
     "ContentCreatorDashboard": "/ccdashboard",
     "ResearcherDashboard": "/report",
-    "BugReport": "/bugreport"
+    "BugReport": "/bugreport",
+    "Gallery": "/gallery",
+	"GalleryUploader": "/galleryuploader"
   },
   "users": {
-    "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About"],
-    "Mentor": ["Dashboard", "AccountInfo", "SignOut", "Sandbox", "BugReport"],
-    "Student": ["SignOut"],
+    "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About", "Gallery","GalleryUploader"],
+    "Mentor": ["Dashboard", "AccountInfo", "SignOut", "Sandbox", "BugReport", "Gallery","GalleryUploader"],
+    "Student": ["SignOut", "Gallery","GalleryUploader"],
     "ContentCreator": [
       "ContentCreatorDashboard",
       "AccountInfo",
       "Sandbox",
       "SignOut",
-      "BugReport"
+      "BugReport",
+      "Gallery",
+	  "GalleryUploader"
     ],
-    "Researcher": ["ResearcherDashboard", "BugReport", "SignOut"]
+    "Researcher": ["ResearcherDashboard", "BugReport", "SignOut", "Gallery","GalleryUploader"]
   }
 }

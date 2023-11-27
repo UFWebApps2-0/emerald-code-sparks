@@ -99,6 +99,21 @@ export default function NavBar() {
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
+      {shouldShowRoute('Gallery') ? (
+        <Menu.Item key='9' onClick={() => handleRouteChange(routes.Gallery)}>
+          <i className='fa fa-images' />
+          &nbsp; Gallery
+        </Menu.Item>) : null
+      }
+	  
+	 {shouldShowRoute('GalleryUploader') ? (
+        <Menu.Item key='10' onClick={() => handleRouteChange(routes.GalleryUploader)}> ///
+          <i className='fa fa-images' />
+          &nbsp; Gallery Uploader
+        </Menu.Item>) : null
+      }
+
+	  
     </Menu>
   );
 
@@ -110,12 +125,12 @@ export default function NavBar() {
           value.role === 'ContentCreator'
             ? '/ccdashboard'
             : value.role === 'Mentor'
-            ? '/dashboard'
-            : value.role === 'Student'
-            ? '/student'
-            : value.role === 'Researcher'
-            ? '/report'
-            : '/'
+              ? '/dashboard'
+              : value.role === 'Student'
+                ? '/student'
+                : value.role === 'Researcher'
+                  ? '/report'
+                  : '/'
         }
       >
         <img src={Logo} id='casmm-logo' alt='logo' />

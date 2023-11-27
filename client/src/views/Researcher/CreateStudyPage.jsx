@@ -12,7 +12,7 @@ const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
   const [classrooms, setClassrooms] = useState([]);
   const [selectedStudentsData, setSelectedStudentsData] = useState([]);
-  const [selectedClassroomsData, setSelectedClassroomsData] = useState([]);
+  const [selectedClassrooms, setSelectedClassroomsData] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
   const [selectedStudyTag, setSelectedStudyTag] = useState(null);
 
@@ -46,8 +46,11 @@ const CreateStudyPage =()=>{
     //console.log(selectedValues);
     const classroomData = [];
     for (const classroomID of selectedValues) {
-      const classroom = await getClassroom(classroomID);
-      classroomData.push(classroom.data);
+      //instead of getting classroom by id, search from the list of all classrooms
+      const allClasses = await getAllClassrooms();
+      const classroom = allClasses.data.find((classroom) => classroom.id === classroomID);
+      //append to classroomData
+      classroomData.push(classroom);
     }
     setSelectedClassroomsData(classroomData);
 
@@ -112,7 +115,7 @@ const CreateStudyPage =()=>{
     setIsModalVisible(true);
   };
 
-  const handleSubmitStudy = () => {
+  const handleSubmitStudy = async () => {
     /*
       NewStudy{
         studyID	integer
@@ -138,7 +141,12 @@ const CreateStudyPage =()=>{
     //sanitize data
     studyValues['Study name'] = studyValues['Study name'].replace(/[^a-zA-Z0-9 ]/g, "");
     studyValues['Study ID'] = studyValues['Study ID'].replace(/[^a-zA-Z0-9 ]/g, "");
-    studyValues['Study description'] = studyValues['Study description'].replace(/[^a-zA-Z0-9 ]/g, "");
+    //check if defined 
+    if (studyValues['Study description'] === undefined) {
+      studyValues['Study description'] = "";
+    } else {
+      studyValues['Study description'] = studyValues['Study description'].replace(/[^a-zA-Z0-9 ]/g, "");
+    }
     //keep @ and . for email
     //studyValues['Student Email'] = studyValues['Student Email'].replace(/[^a-zA-Z0-9@. ]/g, "");
     console.log(studyValues);
@@ -150,6 +158,7 @@ const CreateStudyPage =()=>{
       selectedStudentsData: selectedStudentsData,
       newResearchers: researchers,
       selectTags: selectedStudyTag.toString(),
+      classrooms: selectedClassrooms,
     };
 
     console.log(values);
@@ -179,11 +188,24 @@ const CreateStudyPage =()=>{
       values.newTag.push("");
     }
 
+    //iterate through classrooms and add students to study
+    for (const classroom of values.classrooms) {
+      //use getStudent
+      for (const student of classroom.students) {
+        //add them to study
+        //get student
+        const studentData = await getStudent(student.id);
+        console.log(studentData);
+        //add study to selected student
+        selectedStudentsData.push(studentData.data);
+      }
+    }
+
     const studyData = {
       studyID: values['Study ID'],
       studyDescription: values['Study description'],
       students: values.selectedStudentsData,
-      classrooms: [],
+      classrooms: values.classrooms,
       researchers: values.newResearchers,
       studyName: values['Study name'],
       studyTag: values.selectTags,
@@ -203,6 +225,7 @@ const CreateStudyPage =()=>{
       }
       sendEmail(emailTemplate);
     } 
+
     studyForm.resetFields();
     checkboxForm.resetFields();
     searchBarForm.resetFields();
@@ -335,15 +358,16 @@ const CreateStudyPage =()=>{
             mode="multiple"
             placeholder="Search for a Classroom"
             onChange={handleClassroomChange}
-            value={selectedClassroomsData.map(classroom => classroom.id)}  // Use selectedStudentsData
+            value={selectedClassrooms.map((classroom) => classroom.id)}
             className="search-bar"
           >
-            {classrooms.map(classroom => (
+            {classrooms.map((classroom) => (
               <Option key={classroom.id} value={classroom.id}>
-                {classroom.name}
+                {classroom.id !== null && classroom.id !== undefined ? classroom.id : 'No ID'} - {classroom.name}
               </Option>
             ))}
           </Select>
+
           </Form.Item>
           <Button className='add-researcher-button' onClick={showModal}>
               Submit Study Request 

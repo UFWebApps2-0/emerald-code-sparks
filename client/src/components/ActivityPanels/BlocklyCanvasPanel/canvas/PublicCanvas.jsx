@@ -294,6 +294,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
           activity &&
             activity.toolbox &&
             activity.toolbox.map(([category, blocks]) => (
+              isSandbox && category == 'Custom' ? null :
               <category name={category} is='Blockly category' key={category}>
                 {
                   // maps out blocks in category

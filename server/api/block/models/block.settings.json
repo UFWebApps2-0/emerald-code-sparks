@@ -26,6 +26,12 @@
     },
     "image_url": {
       "type": "string"
+    },
+    "block_definition": {
+      "type": "text"
+    },
+    "code_stub": {
+      "type": "text"
     }
   }
 }

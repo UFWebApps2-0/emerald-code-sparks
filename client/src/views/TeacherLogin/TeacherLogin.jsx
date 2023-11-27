@@ -35,8 +35,14 @@ export default function TeacherLogin() {
           navigate('/ccdashboard');
         } else if (response.data.user.role.name === 'Researcher') {
           navigate('/report');
-        } else {
-          navigate('/dashboard');
+        } else if(response.data.user.role.name === 'Admin'){ //admin login added-> this is catching nothing.
+            // or it's catching too much bc when i change else back to /dashboard the teacher login still goes to /admin
+            navigate('/admin');
+        }
+        else { //admin role.name must be wrong or smth bc AdminTest is going here
+          navigate('/dashboard');         //TEMP CHANGE MADE HERE!!! FIX THIS WITH PROPER LOGIN/ROUTING!!!
+          //addition for ease               //--------------------------------------------------------------
+          //navigate('/admin');               //--------------------------------------------------------------
         }
       })
       .catch((error) => {

@@ -1,0 +1,84 @@
+@import '../../assets/style.less';
+
+
+@modal-background-color: #fefefe;
+@modal-overlay-color: rgba(0, 0, 0, 0.6);
+@modal-border-color: #888;
+@modal-close-button-color: #aaa;
+@modal-header-font-size: 24px;
+@input-border-color: #ccc;
+@submit-button-background-color: rgb(76, 160, 175);
+@submit-button-hover-color: #45a049;
+
+.modal {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: @modal-overlay-color; 
+}
+
+.modal-content {
+  background-color: @modal-background-color;
+  margin: auto; 
+  padding: 20px;
+  border: 1px solid @modal-border-color;
+  width: 50%; 
+  border-radius: 30px; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+  position: relative; 
+  outline: 5px solid rgb(76, 160, 175);
+}
+
+.close-button {
+  color: @modal-close-button-color;
+  position: absolute; 
+  top: 10px; 
+  right: 15px; 
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: black;
+}
+
+.modal-header {
+  font-size: @modal-header-font-size;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  display: inline-block;
+  border: 1px solid @input-border-color;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: @submit-button-background-color;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: @submit-button-hover-color;
+}

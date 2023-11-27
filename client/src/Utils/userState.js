@@ -28,6 +28,14 @@ export const getCurrUser = () => {
       name: result.role.name,
     };
   }
+  //added admin role
+  else if (result.role.type === 'admin') {
+    return {
+      role: 'Admin',
+      name: result.role.name,
+    };
+  }
+
 };
 
 const { setGlobalState, useGlobalState } = createGlobalState({

@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Modal, Form, Input, Select, Button, message } from 'antd';
 import './GalleryItem.less';
 import Like from './like';
 import DiscussionBoard from './DiscussionBoard';
+import { updateVisibility } from '../../Utils/requests';
 
 //Wrapper item needs to be a useState for it to get dynamically rendered
 
 const GalleryItem = (props) => {
+    const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
     const title = props.Title || 'Title';
     const creator = props.User_name || 'Creator Name';
     const likeCount = props.like_count || 0;
     const viewCount = props.view_count || 0;
     const posted = props.posted?.substr(0, 10) || 'Posted Date';
-
+    console.log(props)
     const [viewCounts, setViewCounts] = useState(viewCount);
+    const [visibility, setVisibility] = useState(props.visibility || 'Public');
 
     const showModal = () => {
         setVisible(true);
@@ -28,6 +31,26 @@ const GalleryItem = (props) => {
     const handleOk = () => {
         setVisible(false);
     };
+
+    const handleFormSubmit = async (values) => {   
+        if (values.visibility == null) {
+        values.visibility = "Public";
+        }
+        
+         try {
+            await updateVisibility(props.id, values.visibility);
+            // Optionally, you can set the updated visibility in the component state
+            // setVisibility(newVisibility);
+            message.success('Visibility updated successfully');
+        } catch (error) {
+        // Handle error if needed
+        console.error('Error updating visibility:', error);
+        message.error('Failed to update visibility');
+        }
+        
+        setVisibility(values.visibility);
+        form.resetFields();
+      }
 
     return (
         <>
@@ -62,8 +85,23 @@ const GalleryItem = (props) => {
                         <div className='flex flex-column'>
                             <DiscussionBoard />
                             <Like likeCount={likeCount}> </Like>
-                        </div>
-
+                            <Form form={form} onFinish={handleFormSubmit}>
+                            <div className="GalleryObjectForm">
+                                <Form.Item label="Visibility" name="visibility">
+                                <Select defaultValue={visibility}>
+                                    <Option value="Public">Public</Option>
+                                    <Option value="Organization">Organization</Option>
+                                    <Option value="Classroom">Classroom</Option>
+                                </Select>
+                                </Form.Item>
+                                <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    Change Visibility
+                                </Button>
+                                </Form.Item>
+                            </div>
+                            </Form> 
+                        </div>       
                     </div>
                 </Modal>
             </div>

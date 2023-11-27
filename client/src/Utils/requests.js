@@ -699,3 +699,15 @@ export const getGalleryObjects = async () =>
     auth: false,
     error: 'Unable to retrive gallery objects',
   });
+
+export const updateVisibility = async (postId, visibility) => {
+  
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    visibility: visibility,
+  },
+  error: 'Unable to update discussion board',
+});};

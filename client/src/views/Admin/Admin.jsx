@@ -63,7 +63,7 @@ export default function Admin() {
     function orgClick(id) {
         const organization = orgList.find(org => org.id === id);
         if(organization){
-            console.log("Clicked!");
+            //console.log("Clicked!");
             navigate(`/admin/${organization.id}`);
         }
     }

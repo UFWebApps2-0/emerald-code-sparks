@@ -39,6 +39,7 @@ export default function OrganizationDashboard() {
     Classrooms: ['/classes', <OrganizationClasses />],
   };
   if (value.org === undefined) {
+    console.log(value);
     return NonOrgMember();
   }
 

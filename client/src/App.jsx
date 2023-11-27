@@ -21,6 +21,7 @@ import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import Admin from './views/Admin/Admin';
 import Organization from './views/Organization/Organization';
+import OrganizationDashboard from './views/OrganizationDashboard/OrganizationDashboard';
 
 const App = () => {
   return (
@@ -42,7 +43,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        <Route path='/admin/:orgId' element={<Organization />} />
+        <Route path='/admin/:orgId' element={<OrganizationDashboard />} />
         <Route
           path='/report'
           element={

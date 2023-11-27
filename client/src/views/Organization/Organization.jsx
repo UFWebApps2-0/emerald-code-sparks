@@ -16,7 +16,7 @@ export default function Organization() {
     return (
         <div className='container nav-padding'>
             <NavBar />
-            <div id='main-header'>Sample Organization</div> {/* replace 'admin' with role.name */}
+            <div id='main-header'>Sample Organization</div> {/* replace 'sample org' with org name */}
             {/*create org button*/}
                 {/*gonna require some kind of connection to org file*/}
             {/*add custom element adminSubHeader?*/}

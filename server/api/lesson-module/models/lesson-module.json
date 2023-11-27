@@ -36,6 +36,10 @@
     },
     "link": {
       "type": "string"
+    },
+    "lesson_videos": {
+      "via": "lesson_module",
+      "collection": "lesson-videos"
     }
   }
 }

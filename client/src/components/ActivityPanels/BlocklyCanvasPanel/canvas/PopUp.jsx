@@ -6,15 +6,15 @@ import '../../ActivityLevels.less';
 Modal.setAppElement('#root'); // Set the root element for accessibility
 // This is code for the Pop-up that allows you to write code into
 const CodePopup = ({ isOpen, onClose, onSubmit }) => {
-    const [code, setCode] = useState('void foo(){\n\t// Write Here\n\t\n} foo();');
+    const [code, setCode] = useState('void custom(){\n\t// Write Here\n\t\n} custom();');
 
     const handleInputChange = (e) => {
         setCode(e.target.value);
     };
 
     const handleSubmit = () => {
-        let codeWithoutLeftStrip = code.replace(/^void foo\(\)\{/, '');
-        let finalCode = codeWithoutLeftStrip.replace(/}\s*foo\(\);$/, '');
+        let codeWithoutLeftStrip = code.replace(/^void custom\(\)\{/, '');
+        let finalCode = codeWithoutLeftStrip.replace(/}\s*custom\(\);$/, '');
         onSubmit(finalCode);
         onClose();
     };

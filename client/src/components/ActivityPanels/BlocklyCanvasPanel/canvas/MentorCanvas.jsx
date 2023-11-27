@@ -361,11 +361,11 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     <div id='horizontal-container' className='flex flex-column'>
       <div className='flex flex-row'>
         {blockPopUp ? 
-          <div>
-            <h2>Create a Custom Block</h2>
-            <form onSubmit={handleBlockCreation}>
+          <div id='block-form-container'>
+            <div>Create a Custom Block</div>
+            <form onSubmit={handleBlockCreation} id='block-form' >
               <label htmlFor='name'>Block Name: </label>
-              <div>
+              <div className='block-form-element'>
                 <input 
                 type='text' 
                 name='name'
@@ -376,7 +376,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
               </div>
 
               <label htmlFor='description'>Block Description: </label>
-              <div>
+              <div className='block-form-element'>
                 <input 
                 type='text' 
                 name='description' 
@@ -386,7 +386,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
               </div>
 
               <label htmlFor='blockDefinition'>Block Definition: </label>
-              <div>
+              <div className='block-form-element'>
                 <textarea 
                 rows='10' 
                 type='text' 
@@ -398,7 +398,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
               </div>
 
               <label htmlFor='codeStub'>Code Stub: </label>
-              <div>
+              <div className='block-form-element'>
                 <textarea 
                 rows='10' 
                 type='text' 
@@ -584,7 +584,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
           activity.toolbox &&
           activity.toolbox.map(([category, blocks]) => (
             <category name={category} is='Blockly category' key={category}>
-              {
+              { 
                 // maps out blocks in category
                 // eslint-disable-next-line
                 blocks.map((block) => {

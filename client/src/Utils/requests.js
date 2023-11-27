@@ -396,11 +396,11 @@ export const createLessonModule = async (
   export const createVideo = async (url, name, description, releaseDate) =>
   makeRequest({
     method: POST,
-    path: `${server}/videos`,
+    path: `${server}/lesson-videos`,
     data: {
-      url: url,
-      name: name,
-      description: description,
+      LessonVideoLink: url,
+      LessonVideoTitle: name,
+      LessonVideoDescription: description,
       releaseDate: releaseDate,
     },
     auth: true,

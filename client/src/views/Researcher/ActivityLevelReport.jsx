@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Table, Button, Tag } from 'antd';
+import { Table, Button, Tag, Modal, Input, Form } from 'antd';
 import './ActivityLevelReport.less';
 import { useSearchParam } from '../../Utils/useSearchParam';
 import NavBar from '../../components/NavBar/NavBar';
-
 import {
   getSessionsWithFilter,
   getSessionCountWithFilter,
@@ -13,7 +12,6 @@ import {
   getGrade,
   getClassroom,
 } from '../../Utils/requests';
-import Form from 'antd/lib/form/Form';
 
 const ActivityLevelReport = () => {
   const [sessions, setSessions] = useState([]);
@@ -27,6 +25,15 @@ const ActivityLevelReport = () => {
   const [tbUnitFilter, setTbUnitFilter] = useState([]);
   const [tbLessonFilter, setTbLessonFilter] = useState([]);
   const [tbPrevFilter, setTbPrevFilter] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -222,6 +229,7 @@ const ActivityLevelReport = () => {
         >
           Return to Dashboard
         </button>
+
       </div>
       <button id='show-filter-btn' onClick={() => setShowFilter(!showFilter)}>
         {showFilter ? (

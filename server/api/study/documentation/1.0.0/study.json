@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/grades": {
+    "/studies": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Grade"
+                    "$ref": "#/components/schemas/Study"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Grade"
+          "Study"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Grade"
+                  "$ref": "#/components/schemas/Study"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Grade"
+          "Study"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewGrade"
+                "$ref": "#/components/schemas/NewStudy"
               }
             }
           }
         }
       }
     },
-    "/grades/count": {
+    "/studies/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Grade"
+          "Study"
         ],
         "parameters": []
       }
     },
-    "/grades/{id}": {
+    "/studies/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Grade"
+                  "$ref": "#/components/schemas/Study"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Grade"
+          "Study"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Grade"
+                  "$ref": "#/components/schemas/Study"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Grade"
+          "Study"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewGrade"
+                "$ref": "#/components/schemas/NewStudy"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Grade"
+          "Study"
         ],
         "parameters": [
           {
@@ -514,17 +514,66 @@
   },
   "components": {
     "schemas": {
-      "Grade": {
+      "Study": {
         "required": [
-          "id",
-          "name"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
+          "studyID": {
+            "type": "integer"
+          },
+          "studyDescription": {
             "type": "string"
+          },
+          "students": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "enrolled"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "character": {
+                  "type": "string"
+                },
+                "classroom": {
+                  "type": "string"
+                },
+                "sessions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "enrolled": {
+                  "type": "boolean"
+                },
+                "last_logged_in": {
+                  "type": "string"
+                },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "classrooms": {
             "type": "array",
@@ -600,38 +649,45 @@
               }
             }
           },
-          "units": {
+          "researchers": {
             "type": "array",
             "items": {
               "required": [
-                "id",
-                "name",
-                "number"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "grade": {
+                "first_name": {
                   "type": "string"
                 },
-                "name": {
+                "last_name": {
                   "type": "string"
                 },
-                "standards_id": {
+                "school": {
                   "type": "string"
                 },
-                "standards_description": {
+                "users_permissions_user": {
                   "type": "string"
                 },
-                "number": {
-                  "type": "integer"
-                },
-                "lesson_modules": {
+                "classrooms": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                },
+                "researcherEmail": {
+                  "type": "string"
+                },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -641,16 +697,41 @@
                 }
               }
             }
+          },
+          "studyName": {
+            "type": "string"
+          },
+          "studyTag": {
+            "type": "string",
+            "enum": [
+              "qualitative",
+              "quantitative",
+              "design",
+              "TBD"
+            ]
+          },
+          "consentOptions": {
+            "type": "object"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewGrade": {
-        "required": [
-          "name"
-        ],
+      "NewStudy": {
         "properties": {
-          "name": {
+          "studyID": {
+            "type": "integer"
+          },
+          "studyDescription": {
             "type": "string"
+          },
+          "students": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "classrooms": {
             "type": "array",
@@ -658,11 +739,30 @@
               "type": "string"
             }
           },
-          "units": {
+          "researchers": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "studyName": {
+            "type": "string"
+          },
+          "studyTag": {
+            "type": "string",
+            "enum": [
+              "qualitative",
+              "quantitative",
+              "design",
+              "TBD"
+            ]
+          },
+          "consentOptions": {
+            "type": "object"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -676,7 +776,7 @@
   },
   "tags": [
     {
-      "name": "Grade"
+      "name": "Study"
     }
   ]
 }

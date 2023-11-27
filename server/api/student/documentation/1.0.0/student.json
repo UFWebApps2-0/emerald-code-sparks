@@ -720,6 +720,18 @@
                   "type": "string"
                 }
               },
+              "researchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "studies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -784,6 +796,67 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "studies": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "studyID": {
+                  "type": "integer"
+                },
+                "studyDescription": {
+                  "type": "string"
+                },
+                "students": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "classrooms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "researchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "studyName": {
+                  "type": "string"
+                },
+                "studyTag": {
+                  "type": "string",
+                  "enum": [
+                    "qualitative",
+                    "quantitative",
+                    "design",
+                    "TBD"
+                  ]
+                },
+                "consentOptions": {
+                  "type": "object"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -814,6 +887,12 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "studies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@strapi/data-transfer": "4.15.2",
+    "@strapi/plugin-sentry": "^4.15.4",
+    "axios": "^1.6.2",
+    "codemirror": "^6.0.1"
+  }
+}

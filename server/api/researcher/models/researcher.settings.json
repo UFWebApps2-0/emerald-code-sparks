@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "researchers",
+  "info": {
+    "name": "Researcher",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "school": {
+      "model": "school",
+      "via": "researchers"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "classrooms": {
+      "collection": "classroom",
+      "via": "researchers",
+      "dominant": true
+    },
+    "researcherEmail": {
+      "type": "email"
+    },
+    "studies": {
+      "via": "researchers",
+      "collection": "study"
+    }
+  }
+}

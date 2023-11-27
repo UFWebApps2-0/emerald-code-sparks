@@ -25,6 +25,10 @@
     "mentors": {
       "via": "school",
       "collection": "mentor"
+    },
+    "researchers": {
+      "via": "school",
+      "collection": "researcher"
     }
   }
 }

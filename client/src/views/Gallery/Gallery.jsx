@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavBar from "../../components/NavBar/NavBar";
 import GalleryItem from "./GalleryItem";
 import SearchBar from './Search';
-import FilterComponent from './FilterComponent';
+import FilterComponent from '../../components/Gallery/FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
 
@@ -23,6 +23,56 @@ const Gallery = () => {
         });
         renderInRows(filteredGalleryItems);
     }
+
+    // Check box filters
+    function applyFilters(types, visibility, loadedGalleryItems) {
+        getGalleryObjects().then((response) => { // Backend
+
+            // Go through all gallery items
+            const x = Math.min(12, galleryObjects.length);
+            let tempItems = [];
+            try {
+                for (let i = 0; i < x; i++) {
+                    const it = galleryObjects[i];
+
+                    // Logic for getting the filtered items
+                    if (
+                        ((visibility.Public == true && it.visibility == "Public") ||
+                        (visibility.Organization == true && it.visibility == "Organization") ||
+                        (visibility.Classroom == true && it.visibility == "Classroom") ||
+                        (!visibility.Public && !visibility.Organization && !visibility.Classroom)) &&
+
+                        ((types.Block == true && it.type == "Block") ||
+                        (types.Lesson == true && it.type == "Lesson") ||
+                        (types.Project == true && it.type == "Project") ||
+                        (!types.Block && !types.Lesson && !types.Project))
+
+                        ) {
+
+                        tempItems.push(
+                            <GalleryItem
+                                key={it.id}
+                                Title={it.Title}
+                                User_name={it.User_name}
+                                like_count={it.like_count}
+                                view_count={it.view_count}
+                                posted={it.updated_at}
+                            />
+                        );
+                    }
+                }
+                
+            } catch (e) {
+                console.log("FAILED");
+                console.log("Error in gallery objects");
+                console.log(e);
+                console.log(tempItems);
+            }
+
+            renderInRows(tempItems);
+    });
+}
+
 
     function renderInRows(items) {
         let rows = [];
@@ -71,7 +121,7 @@ const Gallery = () => {
                 <SearchBar filterUpdate={filterUpdate} loadedGalleryItems={loadedGalleryItems} />
                 <div className='flex flex-row'>
                     <div className='flex flex-column filterCol'>
-                        <FilterComponent />
+                        <FilterComponent onFilterChange={applyFilters} loadedGalleryItems={loadedGalleryItems}/>
                     </div>
                     <div className='flex flex-column'>
                         {renderedGalleryItems}

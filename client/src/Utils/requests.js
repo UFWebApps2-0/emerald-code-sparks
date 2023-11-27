@@ -699,3 +699,25 @@ export const getGalleryObjects = async () =>
     auth: false,
     error: 'Unable to retrive gallery objects',
   });
+
+export const updateLikeCount = async (postId, like_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    like_count: like_count,
+  },
+  error: 'Unable to update discussion board',
+});};
+
+export const updateViewCount = async (postId, view_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    view_count: view_count,
+  },
+  error: 'Unable to update discussion board',
+});};

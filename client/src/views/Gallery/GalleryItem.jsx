@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 import './GalleryItem.less';
 import Like from './like';
 import DiscussionBoard from './DiscussionBoard';
+import { updateViewCount } from '../../Utils/requests';
 
 //Wrapper item needs to be a useState for it to get dynamically rendered
 
@@ -10,7 +11,6 @@ const GalleryItem = (props) => {
     const [visible, setVisible] = useState(false);
     const title = props.Title || 'Title';
     const creator = props.User_name || 'Creator Name';
-    const likeCount = props.like_count || 0;
     const viewCount = props.view_count || 0;
     const posted = props.posted?.substr(0, 10) || 'Posted Date';
 
@@ -18,7 +18,8 @@ const GalleryItem = (props) => {
 
     const showModal = () => {
         setVisible(true);
-        setViewCounts((prevCount) => prevCount + 1);
+        updateViewCount(props.id, viewCount + 1)
+        setViewCounts(props.view_count + 1);
     };
 
     const handleCancel = () => {
@@ -61,7 +62,7 @@ const GalleryItem = (props) => {
                         </div>
                         <div className='flex flex-column'>
                             <DiscussionBoard />
-                            <Like likeCount={likeCount}> </Like>
+                            <Like likeCount={props}> </Like>
                         </div>
 
                     </div>

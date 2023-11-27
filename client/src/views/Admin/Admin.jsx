@@ -4,30 +4,76 @@ import "./Admin.less";
 import NavBar from "../../components/NavBar/NavBar";
 import LessonModal from "../../components/LessonModal/LessonModal";
 import TeacherModal from "../../components/TeacherModal/TeacherModal";
+import OrganizationModal from "../../components/OrganizationModal/OrganizationModal";
 import { useGlobalState } from "../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
+
 
 import {
     addOrganization,
     getAllOrgs,
 } from '../../Utils/requests';
+ 
+const initOrganizations = [
+    { id: "SampleOrgID", name: "Sample Organization"},
+];
+
 
 export default function Admin() {
     const [value] = useGlobalState('currUser');
     const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
     const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
-    const navigate = useNavigate();
+
+
 
     //handle click on create org button
-    async function orgCreateClick(){
-        let users = [{id: value.id, username: value.name, email: value.email}];
-        addOrganization("testcreation2", users);
+    // async function orgCreateClick(){
+    //     let users = [{id: value.id, username: value.name, email: value.email}];
+    //     addOrganization("testcreation2", users);
+    // }
+
+    // function orgClick(id) {
+    //     console.log("Clicked!")
+    //     navigate(`/admin/${id}`);
+    // }
+
+
+    const [isOrganizationModalOpen, setIsOrganizationModalOpen] = useState(false);
+    const navigate = useNavigate();
+
+//Org stuff
+    //list of orgs? make this updatable so we can add orgs (at least temporarily)
+
+    const [orgList, setOrgList] = useState(initOrganizations);
+
+    //handle click on create org button
+    function orgCreateClick(){
+        //make a create org form
+        setIsOrganizationModalOpen(true);
+    }
+    const closeOrganizationModal = () => {
+        setIsOrganizationModalOpen(false);
+    }
+    const submitOrg = (orgData) => {
+        //make another org tile with the data from this submission.
+        const newOrgList = orgList.concat({name: orgData, id: orgData});
+        setOrgList(newOrgList);
+        closeOrganizationModal();
     }
 
+    //click on an org tile
     function orgClick(id) {
-        console.log("Clicked!")
-        navigate(`/admin/${id}`);
+        const organization = orgList.find(org => org.id === id);
+        if(organization){
+            console.log("Clicked!");
+            navigate(`/admin/${organization.id}`);
+        }
     }
+
+
+
+//Lesson stuff
+    //click on create lesson button
 
     const lessonCreateClick = () => {
         setIsLessonModalOpen(true);
@@ -37,11 +83,19 @@ export default function Admin() {
         setIsLessonModalOpen(false);
     };
 
+    //click on lesson tile
+    function lessonTileClick(id) {
+        alert("you clicked the lesson tile! functionality coming soon!");
+    }
+
+    //submit data from lesson button
     const submitLesson = (lessonData) => {
         console.log(lessonData);
         closeLessonModal();
     };
 
+//Teacher stuff
+    //submit data from teacher button
     const submitTeacherTransfer = (lessonData) => {
         console.log(lessonData);
         closeTeacherModal();
@@ -52,51 +106,65 @@ export default function Admin() {
     }
 
     const teacherTransferClick = () => {
-        setIsTeacherModalOpen(true)
+        setIsTeacherModalOpen(true);
     }
+
+    //click on teacher tile
+    function teacherTileClick() {
+        alert("you clicked the teacher tile! functionality coming soon!");
+    }
+
+
 
     return (
         <div className='container nav-padding'>
             <NavBar />
-            <div id='main-header'>Welcome, {value.name}</div>
-            {/*create org button*/}
-                {/*gonna require some kind of connection to org file --> someone create a temp org page*/}
-            <button id='createOrgButton' onClick={orgCreateClick}> + </button> {/*this needs to do smth when clicked/hovered over */}
-            {/*add custom element adminSubHeader?*/}
-            <div id='cardholder'>
-                <h1>Your Orgs</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Organizations</div>
-                
-                <div onClick={()=> orgClick("SampleOrgID")}>Sample Organization</div>
-                
-            {/*generate org tiles*/}
-                {/*have them redirect to org page or org management page?*/}
+            <div className='main-header'>Welcome {value.name}</div>
 
-            {/*create lesson button. this will belong in an org management page*/}
-                {/*I think a lesson creator exists? we just have to link to it and allow access*/}
-            {/*create classroom button*/}
-            {/* */}
+            {/*org button*/}
+            <button className='createButton' title='Create Organization' onClick={orgCreateClick}> + </button>
+            <OrganizationModal
+                isOpen={isOrganizationModalOpen}
+                closeModal={closeOrganizationModal}
+                submitOrg={submitOrg}
+            />
+            <div className="adminSubHeader"><h1>Your Organizations</h1></div>
+            {/* org tiles */}
+            <div className='cardholder'>
+                {/*generate org tiles, have them redirect to org page / org management page*/}
+                <div className='tile-container'>
+                    {orgList.map(organization => (
+                         <div className='description' onClick={() => orgClick(organization.id)}
+                         >{organization.name}</div>
+                    ))}
+                </div>
+                {/* We'll run an async function to get all organizations. then map through the below div. */}
             </div>
-            <button id='createOrgButton' onClick={lessonCreateClick} style={{ marginTop: '20px' }}> + </button>
+
+            {/*create lesson button. this will belong in an org management page --> move it there if they don't already have one*/}
+            {/*I think a lesson creator exists? we just have to link to it and allow access*/}
+            {/*<button className='createOrgButton' onClick={lessonCreateClick} style={{ marginTop: '20px' }}> + </button>
             <LessonModal
                 isOpen={isLessonModalOpen}
                 closeModal={closeLessonModal}
                 submitLesson={submitLesson}
-            />            
-            <div id='cardholder'>
+            />
+            <div className='cardholder'>
                 <h1>Create Lesson</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Lessons</div>      
-            </div>
-            <button id='createOrgButton' onClick={teacherTransferClick} style={{ marginTop: '20px' }}> + </button>
+                <div className='description' onClick={lessonTileClick}>View Current Lessons</div>
+            </div>*/}
+
+            {/*teacher management. should be moved into org page*/}
+                {/*<button className='createOrgButton' onClick={teacherTransferClick} style={{ marginTop: '20px' }}> + </button>
             <TeacherModal
                 isOpen={isTeacherModalOpen}
                 closeModal={closeTeacherModal}
                 submitLesson={submitTeacherTransfer}
             />    
-            <div id='cardholder'>
+            <div className='cardholder'>
                 <h1>Teacher Management Tool</h1>
-                <div id='description' onClick={orgCreateClick}>View Current Teachers</div>      
-            </div>
+                <div className='description' onClick={teacherTileClick}>View Current Teachers</div>
+            </div> */}
         </div>
 
     );

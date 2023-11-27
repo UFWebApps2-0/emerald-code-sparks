@@ -35,30 +35,7 @@ export default function OrganizationDashboard() {
   }, [orgId]);  // Add orgId to the dependency array
 
     if (verify) {
-      console.log('sdsd')
-      return (<div className="container nav-padding">
-        <NavBar />
-        <Tabs
-          defaultActiveKey={tab ? tab : 'home'}
-          onChange={(key) => setSearchParams({ tab: key })}
-        >
-          <TabPane tab="Home" key="home">
-            <OrganizationHome />
-          </TabPane>
-          <TabPane tab="Users" key="users">
-            <OrganizationUsers />
-          </TabPane>
-          <TabPane tab="Moderation" key="moderation">
-            <OrganizationModeration />
-          </TabPane>
-          <TabPane tab="Classrooms" key="classroom">
-            <OrganizationClasses />
-          </TabPane>
-        </Tabs>
-      </div>)
-    } else {
-      return <NonOrgMember />;
-  }
+      return <NonOrgMember/>}
   
 
 

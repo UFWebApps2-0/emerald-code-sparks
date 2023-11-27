@@ -15,6 +15,7 @@ import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 import {Search} from './Search';
 import CodePopup from "./PopUp";
+import {processCodeInHelper} from "../../Utils/helpers";
 //import {window} from './Exporter';
 
 let plotId = 1;
@@ -39,10 +40,11 @@ export default function PublicCanvas({ activity, isSandbox }) {
     setIsPopupOpen(false);
   };
 
-  const [filterText,filterChange] = useState(''); //Really want access to filter text. may have to make an external prop just to export it
+  const [code,codeChange] = useState(''); //Really want access to filter text. may have to make an external prop just to export it
 
-  function filterUpdate(value) {
-    filterChange(value);
+  function codeUpdate(value) {
+    processCodeInHelper(value);
+    codeChange(value);
   }
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
@@ -341,7 +343,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
         <button className="buttonPop" onClick={openPopup}>Inject Code</button>
       </div>
       {/*Code for the pop-up window to type code into*/}
-      <CodePopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={filterUpdate}/>
+      <CodePopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={codeUpdate}/>
 
       {compileError && (
         <Alert

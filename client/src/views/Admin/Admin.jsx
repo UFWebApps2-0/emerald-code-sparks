@@ -5,13 +5,14 @@ import NavBar from "../../components/NavBar/NavBar";
 import LessonModal from "../../components/LessonModal/LessonModal";
 import TeacherModal from "../../components/TeacherModal/TeacherModal";
 import OrganizationModal from "../../components/OrganizationModal/OrganizationModal";
-import { useGlobalState } from "../../Utils/userState";
+import { useGlobalState} from "../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
 
 
 import {
     addOrganization,
     getAllOrgs,
+    getUserOrgs,
 } from '../../Utils/requests';
  
 const initOrganizations = [
@@ -23,23 +24,9 @@ export default function Admin() {
     const [value] = useGlobalState('currUser');
     const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
     const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
-
-
-
-    //handle click on create org button
-    // async function orgCreateClick(){
-    //     let users = [{id: value.id, username: value.name, email: value.email}];
-    //     addOrganization("testcreation2", users);
-    // }
-
-    // function orgClick(id) {
-    //     console.log("Clicked!")
-    //     navigate(`/admin/${id}`);
-    // }
-
-
     const [isOrganizationModalOpen, setIsOrganizationModalOpen] = useState(false);
     const navigate = useNavigate();
+
 
 //Org stuff
     //list of orgs? make this updatable so we can add orgs (at least temporarily)
@@ -54,8 +41,13 @@ export default function Admin() {
     const closeOrganizationModal = () => {
         setIsOrganizationModalOpen(false);
     }
-    const submitOrg = (orgData) => {
+
+    const submitOrg = async (orgData) => {
         //make another org tile with the data from this submission.
+        let users = [{id: value.id, username: value.name, email: value.email}];
+        let res = await addOrganization(orgData, users);
+
+
         const newOrgList = orgList.concat({name: orgData, id: orgData});
         setOrgList(newOrgList);
         closeOrganizationModal();
@@ -114,7 +106,9 @@ export default function Admin() {
         alert("you clicked the teacher tile! functionality coming soon!");
     }
 
-
+    if  (value.role !=  "Admin") {
+        return "Unauthorized";
+    }
 
     return (
         <div className='container nav-padding'>

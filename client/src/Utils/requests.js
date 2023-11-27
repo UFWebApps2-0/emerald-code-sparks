@@ -92,6 +92,14 @@ export const addOrganization = async (name, users) =>
     error: 'Could not add organization',
   });
 
+  export const getUserOrgs = async (id) =>
+    makeRequest({
+      method: GET,
+      path: `${server}/users/me/organizations`,
+      auth: true,
+      error: 'Could not get user orgs',
+    })
+
 export const getTeachers = async () =>
   makeRequest({
     method: GET,

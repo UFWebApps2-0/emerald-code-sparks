@@ -6,9 +6,11 @@ const OrganizationModal = ({ isOpen, closeModal, submitOrg }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        submitOrg(orgTitle);
-        setOrgTitle('');
-        closeModal();
+        if(orgTitle){
+            submitOrg(orgTitle);
+            setOrgTitle('');
+            closeModal();
+        }
     }
 
     if (!isOpen){

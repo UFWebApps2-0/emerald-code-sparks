@@ -6,9 +6,14 @@ const OrganizationModal = ({ isOpen, closeModal, submitOrg }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        submitOrg(orgTitle);
-        setOrgTitle('');
-        closeModal();
+        if(orgTitle !== ''){
+            submitOrg(orgTitle);
+            setOrgTitle('');
+            closeModal();
+        }
+        else{
+            alert("You must type in a title"); //probably could be done in a better way but it works for now.
+        }
     }
 
     if (!isOpen){

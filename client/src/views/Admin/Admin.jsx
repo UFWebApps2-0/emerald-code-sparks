@@ -21,7 +21,6 @@ export default function Admin() {
 
 //Org stuff
     //list of orgs? make this updatable so we can add orgs (at least temporarily)
-
     const [orgList, setOrgList] = useState(initOrganizations);
 
     //handle click on create org button

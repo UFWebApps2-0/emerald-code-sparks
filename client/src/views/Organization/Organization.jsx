@@ -5,11 +5,14 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
+import { useParams } from 'react-router-dom';
 
 
 
 export default function Organization() {
+    const { organizationID } = useParams();
+    console.log(organizationID);
+
     return (
         <div className='container nav-padding'>
             <NavBar />

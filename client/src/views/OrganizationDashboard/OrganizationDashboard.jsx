@@ -18,26 +18,48 @@ const { TabPane } = Tabs;
 export default function OrganizationDashboard() {
 
   const [value] = useGlobalState('currUser');
-  const [verify,setVerify] = useState(false)
+  const [verify, setVerify] = useState(false);
+  const { orgId } = useParams();
 
   async function isVerified() {
-    const {orgId} = useParams();
     let org = await getOrg(orgId);
-    console.log("is it verified?");
-    console.log(org.data.users.map((user) => user.id).includes(value.id));
+    console.log("ran function")
     return org.data.users.map((user) => user.id).includes(value.id);
   }
+
   useEffect(() => {
-    isVerified().then(data => setVerify(data))
-  }, []);
+    // Call isVerified with orgId and handle the promise
+    isVerified(orgId).then(verified => {
+      setVerify(verified);
+    });
+  }, [orgId]);  // Add orgId to the dependency array
 
-  if (!isVerified()) {
-    console.log("TEST 1221@$1204");
-    return NonOrgMember();
-  }else {
-    console.log("OHTER TEST");
+    if (verify) {
+      console.log('sdsd')
+      return (<div className="container nav-padding">
+        <NavBar />
+        <Tabs
+          defaultActiveKey={tab ? tab : 'home'}
+          onChange={(key) => setSearchParams({ tab: key })}
+        >
+          <TabPane tab="Home" key="home">
+            <OrganizationHome />
+          </TabPane>
+          <TabPane tab="Users" key="users">
+            <OrganizationUsers />
+          </TabPane>
+          <TabPane tab="Moderation" key="moderation">
+            <OrganizationModeration />
+          </TabPane>
+          <TabPane tab="Classrooms" key="classroom">
+            <OrganizationClasses />
+          </TabPane>
+        </Tabs>
+      </div>)
+    } else {
+      return <NonOrgMember />;
   }
-
+  
 
 
   function OrgDashboardPage() {

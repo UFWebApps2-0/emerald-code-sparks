@@ -13,7 +13,10 @@ const CodePopup = ({ isOpen, onClose, onSubmit }) => {
     };
 
     const handleSubmit = () => {
-        onSubmit(code);
+        let codeWithoutLeftStrip = code.replace(/^void foo\(\)\{/, '');
+        let finalCode = codeWithoutLeftStrip.replace(/}\s*foo\(\);$/, '');
+        onSubmit(finalCode);
+        console.log(finalCode);
         onClose();
     };
 

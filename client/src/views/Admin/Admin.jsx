@@ -5,23 +5,30 @@ import NavBar from "../../components/NavBar/NavBar";
 import LessonModal from "../../components/LessonModal/LessonModal";
 import TeacherModal from "../../components/TeacherModal/TeacherModal";
 import OrganizationModal from "../../components/OrganizationModal/OrganizationModal";
-import { useGlobalState } from "../../Utils/userState";
+import { useGlobalState} from "../../Utils/userState";
 import { useNavigate } from 'react-router-dom';
 
-const initOrganizations = [
-    { id: "SampleOrgID", name: "Sample Organization"},
-];
+
+import {
+    addOrganization,
+    getAllOrgs,
+    getUserOrgs,
+} from '../../Utils/requests';
+ 
 
 export default function Admin() {
     const [value] = useGlobalState('currUser');
     const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
     const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
     const [isOrganizationModalOpen, setIsOrganizationModalOpen] = useState(false);
+    const [orgList, setOrgList] = useState([]);
     const navigate = useNavigate();
+
 
 //Org stuff
     //list of orgs? make this updatable so we can add orgs (at least temporarily)
-    const [orgList, setOrgList] = useState(initOrganizations);
+
+
 
     //handle click on create org button
     function orgCreateClick(){
@@ -31,10 +38,24 @@ export default function Admin() {
     const closeOrganizationModal = () => {
         setIsOrganizationModalOpen(false);
     }
-    const submitOrg = (orgData) => {
-        //make another org tile with the data from this submission.
-        const newOrgList = orgList.concat({name: orgData, id: orgData});
-        setOrgList(newOrgList);
+
+    //extremely ugly workaround since getUserOrgs doesn't work; instead of querying user's orgs, looks at all orgs and filters for user
+    //(filtering in the query itself also didn't work)
+    async function getOrgs() {
+        let orgs = await getAllOrgs();
+        let userorgs = orgs.data.filter((org) => org.users.filter((user) => user.id === value.id).length > 0);
+        return userorgs;
+    }
+    useEffect(() => {
+        getOrgs().then(data => setOrgList(data))
+    }, []);
+
+
+    const submitOrg = async (orgData) => {
+        //make another org tile with the data from this submission, and the current user as a user.
+        let users = [{id: value.id, username: value.name, email: value.email}];
+        let res = await addOrganization(orgData, users);
+        setOrgList(await getOrgs());
         closeOrganizationModal();
     }
 
@@ -47,8 +68,10 @@ export default function Admin() {
         }
     }
 
+
 //Lesson stuff
     //click on create lesson button
+
     const lessonCreateClick = () => {
         setIsLessonModalOpen(true);
     };
@@ -88,7 +111,9 @@ export default function Admin() {
         alert("you clicked the teacher tile! functionality coming soon!");
     }
 
-
+    if  (value.role !=  "Admin") {
+        return "Unauthorized";
+    }
 
     return (
         <div className='container nav-padding'>
@@ -109,7 +134,7 @@ export default function Admin() {
                 <div className='tile-container'>
                     {orgList.map(organization => (
                          <div className='description' onClick={() => orgClick(organization.id)}
-                         >{organization.name}</div>
+                         >{organization.Name}</div>
                     ))}
                 </div>
                 {/* We'll run an async function to get all organizations. then map through the below div. */}

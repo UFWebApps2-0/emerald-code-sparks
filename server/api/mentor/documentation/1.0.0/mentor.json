@@ -664,6 +664,53 @@
               "role": {
                 "type": "string"
               },
+              "organizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "organization": {
+            "required": [
+              "id",
+              "Name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "classrooms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "mentors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -692,6 +739,9 @@
             }
           },
           "user": {
+            "type": "string"
+          },
+          "organization": {
             "type": "string"
           },
           "created_by": {

@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/classrooms": {
+    "/organizations": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Classroom"
+                    "$ref": "#/components/schemas/Organization"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
+          "Organization"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Classroom"
+                  "$ref": "#/components/schemas/Organization"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
+          "Organization"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewClassroom"
+                "$ref": "#/components/schemas/NewOrganization"
               }
             }
           }
         }
       }
     },
-    "/classrooms/count": {
+    "/organizations/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
+          "Organization"
         ],
         "parameters": []
       }
     },
-    "/classrooms/student": {
+    "/organizations/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,11 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Organization"
                 }
               }
             }
@@ -363,60 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
-        ],
-        "parameters": []
-      }
-    },
-    "/classrooms/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Classroom"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Classroom"
+          "Organization"
         ],
         "parameters": [
           {
@@ -440,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Classroom"
+                  "$ref": "#/components/schemas/Organization"
                 }
               }
             }
@@ -478,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
+          "Organization"
         ],
         "requestBody": {
           "description": "",
@@ -486,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewClassroom"
+                "$ref": "#/components/schemas/NewOrganization"
               }
             }
           }
@@ -552,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
+          "Organization"
         ],
         "parameters": [
           {
@@ -568,75 +511,7 @@
         ]
       }
     },
-    "/classroom/workspaces/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Retrieve classroom document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Classroom"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/classrooms/join/{code}": {
+    "/organizations/{id}/users": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -688,11 +563,11 @@
         },
         "summary": "",
         "tags": [
-          "Classroom"
+          "Organization"
         ],
         "parameters": [
           {
-            "name": "code",
+            "name": "id",
             "in": "path",
             "description": "",
             "deprecated": false,
@@ -702,141 +577,105 @@
             }
           }
         ]
-      },
-      "post": {
-        "deprecated": false,
-        "description": "Create a new record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Classroom"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     }
   },
   "components": {
     "schemas": {
-      "Classroom": {
+      "Organization": {
         "required": [
           "id",
-          "code"
+          "Name"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
+          "Name": {
             "type": "string"
           },
-          "school": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "county": {
-                "type": "string"
-              },
-              "state": {
-                "type": "string"
-              },
-              "classrooms": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "mentors": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "sessions": {
+          "users": {
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "username",
+                "email"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "classroom": {
+                "username": {
                   "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "organizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "classrooms": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "code"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "school": {
+                  "type": "string"
+                },
+                "sessions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mentors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "students": {
                   "type": "array",
@@ -844,26 +683,23 @@
                     "type": "string"
                   }
                 },
-                "submissions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "saves": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "unit": {
+                "code": {
                   "type": "string"
                 },
                 "grade": {
                   "type": "string"
                 },
-                "lesson_module": {
-                  "type": "string"
+                "selections": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "authorized_workspaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -914,125 +750,27 @@
               }
             }
           },
-          "students": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "enrolled"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "character": {
-                  "type": "string"
-                },
-                "classroom": {
-                  "type": "string"
-                },
-                "sessions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "enrolled": {
-                  "type": "boolean"
-                },
-                "last_logged_in": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "code": {
-            "type": "string"
-          },
-          "grade": {
-            "required": [
-              "id",
-              "name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "classrooms": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "units": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "selections": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "current"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "classroom": {
-                  "type": "string"
-                },
-                "lesson_module": {
-                  "type": "string"
-                },
-                "current": {
-                  "type": "boolean"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewClassroom": {
+      "NewOrganization": {
         "required": [
-          "code"
+          "Name"
         ],
         "properties": {
-          "name": {
+          "Name": {
             "type": "string"
           },
-          "school": {
-            "type": "string"
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
-          "sessions": {
+          "classrooms": {
             "type": "array",
             "items": {
               "type": "string"
@@ -1044,29 +782,9 @@
               "type": "string"
             }
           },
-          "students": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "code": {
-            "type": "string"
-          },
-          "grade": {
-            "type": "string"
-          },
-          "selections": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "authorized_workspaces": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -1080,7 +798,7 @@
   },
   "tags": [
     {
-      "name": "Classroom"
+      "name": "Organization"
     }
   ]
 }

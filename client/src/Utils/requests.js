@@ -43,7 +43,35 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
 
   return { data: res, err: err };
 };
+export const getAllOrgs = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/organizations`,
+        auth: true,
+        error: 'Faild to get list of orgs'
+    });
+export const getOrgClasses = async (id) =>
+        makeRequest({
+            method: GET,
+            path: `${server}/organizations/${id}/classes`,
+            auth: true,
+            error: 'Faild to get list of org classes'
+        });
 
+export const getOrgUsers = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations/${id}/users`,
+    auth: true,
+    error: 'Organization users could not be retrieved.'
+  })
+export const getOrgMentors = async (id) =>
+    makeRequest({
+        method: GET,
+        path: `${server}/organizations/${id}/mentors`,
+        auth: true,
+        error: 'Organization mentors could not be retrieved.'
+    })
 export const getActivities = async () =>
   makeRequest({
     method: GET,
@@ -51,6 +79,26 @@ export const getActivities = async () =>
     auth: true,
     error: 'Activities could not be retrieved.',
   });
+
+export const addOrganization = async (name, users) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/organizations`,
+    auth: true,
+    data: {
+      Name: name,
+      users: users,
+    },
+    error: 'Could not add organization',
+  });
+
+  export const getUserOrgs = async (id) =>
+    makeRequest({
+      method: GET,
+      path: `${server}/users/me?populate=*`,
+      auth: true,
+      error: 'Could not get user orgs',
+    })
 
 export const getTeachers = async () =>
   makeRequest({
@@ -672,3 +720,20 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+export const deleteClassroom = async (id) =>
+    makeRequest({
+        method: DELETE,
+        path: `${server}/classroom/${id}`,
+        auth: true,
+        error: 'Unable to remove classroom',
+    });
+export const createClassroom = async (id, title) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/classroom`,
+        auth: true,
+        data: {
+            name: title
+        },
+        error: 'Unable to create new classroom',
+    });

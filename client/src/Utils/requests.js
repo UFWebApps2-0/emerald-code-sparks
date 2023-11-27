@@ -95,7 +95,7 @@ export const addOrganization = async (name, users) =>
   export const getUserOrgs = async (id) =>
     makeRequest({
       method: GET,
-      path: `${server}/users/me/organizations`,
+      path: `${server}/users/me?populate=*`,
       auth: true,
       error: 'Could not get user orgs',
     })

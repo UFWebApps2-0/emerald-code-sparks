@@ -47,6 +47,11 @@ export default function Admin() {
         let users = [{id: value.id, username: value.name, email: value.email}];
         let res = await addOrganization(orgData, users);
 
+        //extremely ugly workaround since getUserOrgs doesn't work; instead of querying user's orgs, looks at all orgs and filters for user
+        //(filtering in the query itself also didn't work)
+        let orgs = await getAllOrgs();
+        let userorgs = orgs.data.filter((org) => org.users.filter((user) => user.id === 12).length > 0);
+        console.log(userorgs);
 
         const newOrgList = orgList.concat({name: orgData, id: orgData});
         setOrgList(newOrgList);

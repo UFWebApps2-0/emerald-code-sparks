@@ -118,6 +118,17 @@ const StudyLevelReport = () => {
       align: 'left',
     },
     {
+      title: 'Classrooms',
+      key: 'classrooms',
+      render: (text, record) => (
+        <>
+          {record.classrooms.map((classroom) => (
+            <div key={classroom.id}>{classroom.name}</div>
+          ))}
+        </>
+      ),
+    },
+    {
       title: 'Students',
       key: 'students',
       render: (text, record) => (

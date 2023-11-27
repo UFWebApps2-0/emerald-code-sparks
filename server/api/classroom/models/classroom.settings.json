@@ -23,8 +23,8 @@
       "collection": "session"
     },
     "mentors": {
-      "collection": "mentor",
-      "via": "classrooms"
+      "via": "classrooms",
+      "collection": "mentor"
     },
     "students": {
       "via": "classroom",

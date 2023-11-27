@@ -1,0 +1,62 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/organizations",
+      "handler": "organization.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/organizations/count",
+      "handler": "organization.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/organizations/:id",
+      "handler": "organization.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/organizations/:id/users",
+      "handler": "organization.findOneUsers",
+      "config": {
+        "policies": [
+          "global::isOrgMember"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/organizations",
+      "handler": "organization.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/organizations/:id",
+      "handler": "organization.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/organizations/:id",
+      "handler": "organization.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

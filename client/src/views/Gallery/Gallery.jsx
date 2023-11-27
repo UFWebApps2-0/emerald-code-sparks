@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from "../../components/NavBar/NavBar";
-import GalleryItem from "./GalleryItem";
-import SearchBar from './Search';
+import GalleryItem from "../../components/Gallery/GalleryItem";
+import SearchBar from '../../components/Gallery/Search';
 import FilterComponent from '../../components/Gallery/FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
+import './Gallery.less';
 
 
 const Gallery = () => {
@@ -90,7 +91,6 @@ const Gallery = () => {
         setRenderedGalleryItems(rows);
     }
 
-
     useEffect(() => {
         getGalleryObjects().then((response) => {
             setGalleryObjects(response.data);
@@ -115,7 +115,7 @@ const Gallery = () => {
 
     return (
         <>
-            <NavBar />
+            < NavBar />
             <div className='container nav-padding'>
                 <h1>Gallery</h1>
                 <SearchBar filterUpdate={filterUpdate} loadedGalleryItems={loadedGalleryItems} />
@@ -127,6 +127,7 @@ const Gallery = () => {
                         {renderedGalleryItems}
                     </div>
                 </div>
+
             </div>
         </>
     );

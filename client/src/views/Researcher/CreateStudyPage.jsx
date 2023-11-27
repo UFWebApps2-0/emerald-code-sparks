@@ -15,6 +15,7 @@ const CreateStudyPage =()=>{
   const [selectedClassrooms, setSelectedClassroomsData] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
   const [selectedStudyTag, setSelectedStudyTag] = useState(null);
+  const [selectedResearchers, setSelectedResearchers] = useState([]);
 
   const handleStudentChange = async (selectedValues) => {
     //console.log(selectedValues);
@@ -115,6 +116,20 @@ const CreateStudyPage =()=>{
     setIsModalVisible(true);
   };
 
+  const ResetCheckboxEffect = ({ checkboxForm, checkboxValues }) => {
+    useEffect(() => {
+      checkboxForm.setFieldsValue({
+        'Profile Info': false,
+        'Access to Code Samples': false,
+        'Messaging and Emails': false,
+        'Access to Video/Lesson Usage': false,
+        'Screen Recording': false,
+      });
+    }, [checkboxValues]);
+  
+    return null;
+  };
+
   const handleSubmitStudy = async () => {
     /*
       NewStudy{
@@ -156,13 +171,12 @@ const CreateStudyPage =()=>{
       ...studyValues,
       checkboxes: checkboxValues,
       selectedStudentsData: selectedStudentsData,
-      newResearchers: researchers,
+      newResearchers: selectedResearchers,
       selectTags: selectedStudyTag.toString(),
       classrooms: selectedClassrooms,
     };
 
     console.log(values);
-    setIsModalVisible(false);
 
 
     // Adjust the email template creation according to your form field names
@@ -226,12 +240,17 @@ const CreateStudyPage =()=>{
       sendEmail(emailTemplate);
     } 
 
+    // Clear form fields
     studyForm.resetFields();
     checkboxForm.resetFields();
     searchBarForm.resetFields();
     setSelectedStudentsData([]);
     setSelectedClassroomsData([]);
+    setSelectedStudyTag(null);
+    setSelectedResearchers([]);
     setIsModalVisible(false);
+
+  
 
     console.log("all fields cleared");
   }
@@ -311,6 +330,7 @@ const CreateStudyPage =()=>{
               mode='multiple'
               className='select'
               placeholder='Select a Researcher'
+              onChange={(value) => setSelectedResearchers(value)}
               allowClear
             >
               {researchers.map((researcher) => (
@@ -343,6 +363,7 @@ const CreateStudyPage =()=>{
             <label htmlFor="checkbox-5" className="checkbox-label">Screen Recording</label>
           </Form.Item>
         </Form>
+        <ResetCheckboxEffect checkboxForm={checkboxForm} checkboxValues={checkboxValues} />
         <Form form={searchBarForm} id={"search-bar-form"}>
         <Form.Item>
         <Select
@@ -379,6 +400,7 @@ const CreateStudyPage =()=>{
           <Modal title="Submit Study Request" visible={isModalVisible} onOk={handleSubmitStudy} onCancel={handleCancel}>
             <p>Are you sure you want to submit this study request?</p>
           </Modal>
+          
         </Form>
         
         

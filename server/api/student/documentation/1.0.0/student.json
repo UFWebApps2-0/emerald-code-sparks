@@ -784,6 +784,13 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_password": {
+            "type": "string",
+            "format": "password"
           }
         }
       },
@@ -814,6 +821,13 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_password": {
+            "type": "string",
+            "format": "password"
           },
           "created_by": {
             "type": "string"

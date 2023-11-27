@@ -675,6 +675,12 @@
               "last_logged_in": {
                 "type": "string"
               },
+              "parent_email": {
+                "type": "string"
+              },
+              "parent_password": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },

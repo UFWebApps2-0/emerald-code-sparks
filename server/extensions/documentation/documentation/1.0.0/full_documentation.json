@@ -14,9 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    
-    "x-generation-date": "11/07/2023 6:26:48 AM"
-
+    "x-generation-date": "11/18/2023 12:33:51 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -12290,6 +12288,12 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "parent_email": {
+                  "type": "string"
+                },
+                "parent_password": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -13210,6 +13214,12 @@
               "last_logged_in": {
                 "type": "string"
               },
+              "parent_email": {
+                "type": "string"
+              },
+              "parent_password": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -13687,6 +13697,12 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "parent_email": {
+                  "type": "string"
+                },
+                "parent_password": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -14076,6 +14092,13 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_password": {
+            "type": "string",
+            "format": "password"
           }
         }
       },
@@ -14106,6 +14129,13 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_password": {
+            "type": "string",
+            "format": "password"
           },
           "created_by": {
             "type": "string"

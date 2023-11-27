@@ -561,8 +561,11 @@
                 "role": {
                   "type": "string"
                 },
-                "organization": {
-                  "type": "string"
+                "organizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"

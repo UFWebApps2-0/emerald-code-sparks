@@ -3,6 +3,7 @@ import { createGlobalState } from 'react-hooks-global-state';
 // Get the role of user from the session storage
 export const getCurrUser = () => {
   const result = JSON.parse(sessionStorage.getItem('user'));
+  console.log(result);
   if (!result) {
     return {
       role: 'DefaultUser',

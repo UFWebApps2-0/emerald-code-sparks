@@ -19,7 +19,8 @@
     "users": {
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "organization"
+      "via": "organizations",
+      "dominant": true
     },
     "classrooms": {
       "collection": "classroom"

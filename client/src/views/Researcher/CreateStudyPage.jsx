@@ -229,7 +229,11 @@ const CreateStudyPage =()=>{
     studyForm.resetFields();
     checkboxForm.resetFields();
     searchBarForm.resetFields();
+    setSelectedStudentsData([]);
+    setSelectedClassroomsData([]);
     setIsModalVisible(false);
+
+    console.log("all fields cleared");
   }
   const handleCancel = () => {
 

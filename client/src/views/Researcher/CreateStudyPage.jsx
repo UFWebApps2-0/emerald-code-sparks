@@ -268,7 +268,7 @@ const CreateStudyPage =()=>{
         <div id='create-study-header'>Create New study</div>
         <button
           className='activity-level-return'
-          onClick={() => navigate('/report')}
+          onClick={() => navigate('/researcher/report')}
         >
           Return to Dashboard
         </button>

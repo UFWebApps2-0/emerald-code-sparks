@@ -1,6 +1,5 @@
 import { Alert, Button, Form, Input, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar/NavBar';
 import { forgetPassword } from '../../Utils/requests';
 import "./TeacherLogin.less"
 
@@ -33,8 +32,6 @@ const ForgetPassword = () => {
   });
 
   return (
-    <div className='container nav-padding'>
-      <NavBar/>
       <div id='forgot-pass-wrapper'>
         <div id='forgot-pass-title'>Forgot Password</div>
         <Form id='forgot-pass-form' onFinish={handleSubmit}>
@@ -66,7 +63,6 @@ const ForgetPassword = () => {
           </Form.Item>
          </Form>
       </div>
-    </div>
   );
 };
 

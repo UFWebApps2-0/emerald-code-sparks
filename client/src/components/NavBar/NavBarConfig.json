@@ -8,7 +8,7 @@
     "SignOut": "/",
     "AccountInfo": "/account",
     "ContentCreatorDashboard": "/ccdashboard",
-    "ResearcherDashboard": "/report",
+    "ResearcherDashboard": "/researcher/",
     "BugReport": "/bugreport"
   },
   "users": {

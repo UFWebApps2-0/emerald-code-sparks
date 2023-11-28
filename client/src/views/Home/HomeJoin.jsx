@@ -24,16 +24,12 @@ export default function HomeJoin(props) {
   };
 
   return (
-    <div
-      id='box'
-      onKeyPress={(e) => {
-        if (e.key === 'Enter') handleLogin();
-      }}
-    >
+    <div id='box'>
       <input
         type='text'
         value={joinCode}
         placeholder='Join Code'
+        onKeyDown={(e) => {if(e.key === "Enter"){handleLogin}}}
         onChange={(e) => setJoinCode(e.target.value)}
       />
       <input

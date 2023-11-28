@@ -1,7 +1,6 @@
 import { message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
 import { getStudentClassroom } from '../../Utils/requests';
 import './Student.less';
 
@@ -33,8 +32,6 @@ function Student() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
       <div id='activity-container'>
         <div id='header'>
           <div>Select your Activity</div>
@@ -62,7 +59,6 @@ function Student() {
           )}
         </ul>
       </div>
-    </div>
   );
 }
 

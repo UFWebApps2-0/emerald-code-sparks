@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
-import { getSession } from '../../Utils/requests';
+import { getSession } from '../../../Utils/requests';
 import './ActivityLevelReportView.less';
 
 const ActivityLevelReportView = () => {
@@ -61,8 +60,7 @@ const ActivityLevelReportView = () => {
     }
   };
   return (
-    <div className='container nav-padding'>
-      <NavBar />
+    <>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Activity Level - Student Report</div>
         <button
@@ -112,7 +110,7 @@ const ActivityLevelReportView = () => {
         <br />
         {showReplayButton()}
       </main>
-    </div>
+      </>
   );
 };
 

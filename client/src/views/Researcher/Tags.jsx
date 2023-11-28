@@ -1,76 +1,15 @@
 import React, { useState } from 'react';
 import './Tags.css';
 // StudyItem Component
-const StudyTag = ({ Study, Tag, removeItem, index }) => (
-	<li>
-	  {Tag}
-	  <button onClick={() => removeItem(Study, Tag)}>X</button>
-	</li>
-  );
-
-// StudyComponent Component
-const StudyComponent = ({ Study, items, addItem, removeItem }) => {
-	const [searchTerm, setSearchTerm] = useState('');
+const StudyTag = ({ Study, Tag, removeTagCallback, index }) => {
+	return(	
+	  <li>
+		{Tag}
+		<button onClick={() => removeTagCallback(Study, Tag)}>X</button>
+	  </li>
+	)
+};
   
-	const handleSearchChange = (e) => {
-	  setSearchTerm(e.target.value);
-	};
-  
-	const handleSearchKeyDown = (e) => {
-		if (e.key === 'Enter' && e.target.value) {
-		  const enteredTag = e.target.value;
-		  const existingTag = filteredOptions.includes(enteredTag);
-		  const alreadyAdded = items.includes(enteredTag);
-		  if (existingTag && !alreadyAdded) {
-			addItem(Study, enteredTag);
-			e.target.value = '';
-		  }
-		}
-	  };
-  
-	const filteredOptions = [
-	  'Individual',
-	  'Group',
-	  'Extra',
-	  // Add more options as needed
-	].filter((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-  
-	return (
-	  <div>
-		<h2>{Study}</h2>
-		<ul>
-		  {items.map((item, index) => (
-			<StudyTag key={index} Study={Study} Tag={item} removeItem={removeItem} />
-		  ))}
-		</ul>
-		<input
-		  type="text"
-		  placeholder="Search tags..."
-		  onChange={handleSearchChange}
-		  onKeyDown={handleSearchKeyDown}
-		/>
-		<select
-		onChange={(e) => {
-			const selectedTag = e.target.value;
-			if (selectedTag) {
-			const alreadyAdded = items.includes(selectedTag);
-			if (!alreadyAdded) {
-				addItem(Study, selectedTag);
-			}
-			}
-		}}
-		>
-		{filteredOptions.map((option) => (
-			<option key={option} value={option}>
-			{option}
-			</option>
-		))}
-		</select>
-	  </div>
-	);
-  };
-  
-
 // StudyList Component
 const StudyList = () => {
   const [studies, setStudies] = useState({
@@ -109,7 +48,7 @@ const StudyList = () => {
 					Study={Study} 
 					items={studies[Study]} 
 					addItem={addTag} 
-					removeItem={removeTag} 
+					removeTagCallback={removeTag} 
 				/>
 			))}
 		</div>

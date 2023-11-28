@@ -297,7 +297,7 @@ const StudyLevelReport = () => {
       </Link>
         <button
           className='activity-level-return'
-          onClick={() => navigate('/report')}
+          onClick={() => navigate('/researcher/report')}
         >
           Return to Dashboard
         </button>

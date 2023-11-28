@@ -495,6 +495,7 @@ export default function ContentCreatorCanvas({
           onClose={(e) => setCompileError('')}
         ></Alert>
       )}
+      <GalleryObjectForm workspaceRef={workspaceRef}/> 
     </div>
   );
 }

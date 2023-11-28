@@ -10,6 +10,8 @@ import {
 } from "../../Utils/requests"
 import { useGlobalState } from "../../Utils/userState"
 
+//TO SUBMIT TO GALLERY
+
 export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
   const [activity, setActivity] = useState({})
@@ -77,7 +79,10 @@ export default function BlocklyPage({ isSandbox }) {
       <NavBar />
       <div className="flex flex-row">
         <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
+        
       </div>
+
+
     </div>
   )
 }

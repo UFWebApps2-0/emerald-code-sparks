@@ -1,6 +1,7 @@
 import { server } from './hosts';
 import axios from 'axios';
 import { getToken } from './AuthRequests';
+import CompoundedSpace from 'antd/lib/space';
 
 const GET = 'GET';
 const PUT = 'PUT';
@@ -13,10 +14,10 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   let err = null;
   const config = auth
     ? {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
     : null;
 
   try {
@@ -504,7 +505,7 @@ export const getLessonModuleActivities = async (lsId) =>
     error: 'Activity cannot be retrived',
   });
 
-  export const getActivityLevels = async (lsId) =>
+export const getActivityLevels = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces?activities.id=${lsId}`,
@@ -672,3 +673,145 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+export const postGalleryObject = async (data, xml_text) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/gallery-posts`,
+    auth: false,
+    data: {
+      Title: data.Title,
+      User_name: data.User_name,
+      like_count: data.like_count,
+      view_count: data.view_count,
+      discussion_board: data.discussion_board,
+      visibility: data.visibility,
+      type: data.type,
+      xml_text: xml_text,
+      classroom_id: data.classroom_id,
+    },
+    error: 'Unable to post to gallery',
+  });
+
+export const getGalleryObjects = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/gallery-posts`,
+    auth: false,
+    error: 'Unable to retrive gallery objects',
+  });
+
+export const getGalleryObject = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/gallery-posts/${id}`,
+    auth: false,
+    error: 'Unable to retrive gallery object',
+  });
+
+export const updateLikeCount = async (postId, like_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    like_count: like_count,
+  },
+  error: 'Unable to update like count',
+});};
+
+export const updateViewCount = async (postId, view_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    view_count: view_count,
+  },
+  error: 'Unable to update view count',
+});};
+
+export const postUnpinnedComment = async (data) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/unpinned-comments`,
+    auth: false,
+    data:{
+      User_name: data.User_name,
+      comment_string: data.comment,
+      is_pinned: false,
+    },
+    error: 'Unable to post unpinned comment',
+  });
+
+export const getUnpinnedComments = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/unpinned-comments`,
+    auth: false,
+    error: 'Unable to get unpinned comments',
+  });
+
+export const deleteUnpinnedComment = async (comment) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/unpinned-comments/${comment}`,
+    auth: false,
+    error: 'Failed to delete unpinned comment.',
+  });
+
+export const postPinnedComment = async (data) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/pinned-comments`,
+    auth: false,
+    data:{
+      User_name: data.User_name,
+      comment_string: data.comment,
+      is_pinned: true,
+    },
+    error: 'Unable to post pinned comment',
+  });
+
+export const getPinnedComments = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/pinned-comments`,
+    auth: false,
+    error: 'Unable to get pinned comments',
+  });
+
+export const deletePinnedComment = async (comment) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/pinned-comments/${comment}`,
+    auth: false,
+    error: 'Failed to delete pinned comment.',
+  });
+
+export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
+  console.log('updatedDiscussionBoard: ', updatedDiscussionBoard );
+  console.log('postId: ', postId);
+    makeRequest({
+    method: PUT,
+    path: `${server}/gallery-posts/${postId}/`,
+    auth: false,
+    data: {
+      discussion_board: updatedDiscussionBoard,
+    },
+    error: 'Unable to update discussion board',
+  });
+  console.log('path', `${server}/gallery-posts/${postId}/`);
+};
+
+export const updateVisibility = async (postId, visibility) => {
+  
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    visibility: visibility,
+  },
+  error: 'Unable to update visibility',
+});};

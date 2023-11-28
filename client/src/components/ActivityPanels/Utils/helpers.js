@@ -6,6 +6,7 @@ import {
   createAuthorizedWorkspace,
   updateAuthorizedWorkspace,
   updateActivityTemplate,
+  postGalleryObject,
 } from '../../../Utils/requests';
 import { message } from 'antd';
 
@@ -234,7 +235,19 @@ export const handleUpdateWorkspace = async (id, workspaceRef, blocksList) => {
     blocksList = [];
   }
   let xml = window.Blockly.Xml.workspaceToDom(workspaceRef.current);
+  console.log('xml', xml);
   let xml_text = window.Blockly.Xml.domToText(xml);
 
   return await updateAuthorizedWorkspace(id, xml_text, blocksList);
+};
+
+export const handleGalleryPost = async (data, workspaceRef) => {
+  console.log(workspaceRef);
+  
+  let xml = window.Blockly.Xml.workspaceToDom(workspaceRef.current);
+  let xml_text = window.Blockly.Xml.domToText(xml);
+
+  console.log('xml_text',xml_text);
+
+  return await postGalleryObject(data, xml_text);
 };

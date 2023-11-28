@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "unpinned_comments",
+  "info": {
+    "name": "Unpinned-Comments",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "User_name": {
+      "type": "string"
+    },
+    "is_pinned": {
+      "type": "boolean"
+    },
+    "comment_string": {
+      "type": "string"
+    }
+  }
+}

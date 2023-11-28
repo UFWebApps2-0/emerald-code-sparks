@@ -290,11 +290,9 @@ const StudyLevelReport = () => {
     <div className='container nav-padding'>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Study Level Report</div>
-        <Link to={'/createStudyPage'}>
-        <Button onClick={() => navigate('/createStudyPage')} style={{ backgroundColor: 'green', color: 'white' }}>
+        <Button onClick={() => navigate('/researcher/createStudyPage')} style={{ backgroundColor: 'green', color: 'white' }}>
           Create Study
         </Button>
-      </Link>
         <button
           className='activity-level-return'
           onClick={() => navigate('/researcher/report')}

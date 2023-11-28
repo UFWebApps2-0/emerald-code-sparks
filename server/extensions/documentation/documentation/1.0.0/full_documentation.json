@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/28/2023 3:25:57 AM"
+    "x-generation-date": "11/28/2023 4:59:54 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13923,6 +13923,12 @@
                     "type": "string"
                   }
                 },
+                "saves": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -15306,6 +15312,12 @@
                   "type": "string"
                 }
               },
+              "saves": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -15886,6 +15898,12 @@
                     "type": "string"
                   }
                 },
+                "saves": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -16259,6 +16277,12 @@
                   "type": "string"
                 }
               },
+              "saves": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -16530,6 +16554,41 @@
                 }
               }
             }
+          },
+          "saves": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "workspace"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "activity": {
+                  "type": "string"
+                },
+                "student": {
+                  "type": "string"
+                },
+                "workspace": {
+                  "type": "string"
+                },
+                "replay": {
+                  "type": "object"
+                },
+                "session": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -16568,6 +16627,12 @@
             }
           },
           "student_invites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "saves": {
             "type": "array",
             "items": {
               "type": "string"
@@ -16634,6 +16699,12 @@
                   }
                 },
                 "student_invites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "saves": {
                   "type": "array",
                   "items": {
                     "type": "string"

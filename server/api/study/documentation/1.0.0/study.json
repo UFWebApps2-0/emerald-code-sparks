@@ -572,6 +572,12 @@
                     "type": "string"
                   }
                 },
+                "saves": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },

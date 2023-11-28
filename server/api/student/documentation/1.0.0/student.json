@@ -891,6 +891,41 @@
                 }
               }
             }
+          },
+          "saves": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "workspace"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "activity": {
+                  "type": "string"
+                },
+                "student": {
+                  "type": "string"
+                },
+                "workspace": {
+                  "type": "string"
+                },
+                "replay": {
+                  "type": "object"
+                },
+                "session": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -929,6 +964,12 @@
             }
           },
           "student_invites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "saves": {
             "type": "array",
             "items": {
               "type": "string"

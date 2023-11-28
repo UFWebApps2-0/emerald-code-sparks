@@ -1,5 +1,35 @@
 @import '../../assets/style.less';
 
+#org-back-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  float: left;
+  margin-left: 12px;
+  position: relative;
+  top: 8px;
+  &:focus {
+    outline: none;
+  }
+
+  i {
+    font-size: 2em;
+    color: #colors[quaternary];
+
+    &:hover {
+      color: #colors[quinary];
+      cursor: pointer;
+    }
+  }
+}
+
+.home-desc {
+  color: #e7e7e7;
+  text-align: left;
+  margin-left: 10vw;
+  margin-bottom: 2vw;
+  font-size: 1.5em;
+}
 .container {
   background-color: #colors[primary];
   height: 100%;

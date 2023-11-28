@@ -22,7 +22,7 @@
 
 /* switch-role-tag styles */
 .switch-role-tag {
-  background-color: darkblue;
+  background-color: rgb(49, 180, 180);
   color: white;
   border-radius: 5px;
   padding: 5px 10px;
@@ -33,7 +33,7 @@
 /* switch-role-btn styles */
 .switch-role-btn {
   border: 2px solid black;
-  background-color: yellow;
+  background-color:  rgb(9, 140, 140);
   color: black;
   padding: 5px 10px;
   border-radius: 5px;
@@ -73,7 +73,7 @@
 
 .settings-categories .category-item {
   cursor: pointer;
-  background-color: darkblue;
+  background-color: rgb(49, 180, 180);
   color: white;
   border-radius: 5px;
   padding: 10px;
@@ -91,7 +91,7 @@
 .settings-categories .category-item.active {
   background-color: #e7e7e7;
   border-radius: 10px;
-  background-color: yellow;
+  background-color: rgb(9, 140, 140);
   color: black;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .new-classroom {
-  background-color: darkblue;
+  background-color: rgb(49, 180, 180);
   color: white;
   border-radius: 5px;
   padding: 10px;
@@ -171,7 +171,7 @@
 
 .classroom-form-submit-btn {
   border: 2px solid black;
-  background-color: yellow;
+  background-color:  rgb(9, 140, 140);
   color: black;
   padding: 5px 10px;
   border-radius: 5px;
@@ -182,7 +182,7 @@
 
 .classroom-delete-btn {
   border: 2px solid black;
-  background-color: red;
+  background-color: rgb(255,80,80);
   color: black;
   padding: 5px 10px;
   border-radius: 5px;

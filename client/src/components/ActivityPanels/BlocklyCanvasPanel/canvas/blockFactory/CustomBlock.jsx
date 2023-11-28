@@ -38,7 +38,7 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
   const [notSelectedFeature, setNotSelectedFeature] = useState('Program your Arduino...')
   const [blockCode, setBlockCode] = useState('');
   const [generatorCode, setGeneratorCode] = useState('');
-
+  const [arduinoCode, setArduinoCode] = useState('');
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
 
@@ -65,6 +65,9 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
 
       const generatorCode = Blockly.JavaScript.workspaceToCode(workspaceRef.current);
       setGeneratorCode(generatorCode);
+
+      const arduinoCode = Blockly.Arduino.workspaceToCode(workspaceRef.current);
+      setArduinoCode(arduinoCode);
     });
   };
 
@@ -370,7 +373,7 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
             <Row id='gen-text'>Generator Stub</Row>
             <Row id='blocklyCanvasBottom'>
               {/* {Generator Stub} */}
-              {generatorCode}
+              {arduinoCode}
             </Row>
           </Spin>
         </div>

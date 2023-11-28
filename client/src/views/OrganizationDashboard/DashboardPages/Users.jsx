@@ -5,16 +5,17 @@ import { message } from 'antd';
 
 export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
-  const [rolemap, setRoleMap] = useState({});
+  const [rolemap, setRoleMap] = useState(new Map());
   console.log(props.id);
 
   useEffect(() => {
     let classroomIds = [];
-    getRoles().then((res) => {
-      let map = new Map(res.data.roles.map((role) => [role.id, role.name]));
+    const map = async () => {
+      let roles = await getRoles();
+      let map = new Map(await roles.data.roles.map((role) => [role.id, role.name]));
       setRoleMap(map);
-      console.log(rolemap);
-    })
+    }
+    map();
     getOrg(
       props.id
     ).then((res) => {
@@ -26,6 +27,13 @@ export default function OrganizationUsers(props) {
       }
     });
   }, []);
+
+  // useEffect(()=> {
+  //   console.log("tesr wfihfwoih");
+  //   console.log(roles);
+  //   let map = new Map(roles.data.roles.map((roles) => [role.id, role.name]));
+  //   setRoleMap(map);
+  // }, [roles])
 
   if (!('Name' in org)) {
     return <div id="main-header">Welcome to Loading</div>;

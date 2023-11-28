@@ -5,7 +5,7 @@ import SearchBar from './Search';
 import FilterComponent from '../../components/Gallery/FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
-
+import { useGlobalState } from '../../Utils/userState';
 
 const Gallery = () => {
 
@@ -13,6 +13,7 @@ const Gallery = () => {
     Therefore, we need to store ALL gallery objects, all which have been loaded (for searching), 
     and all which are being rendered currently (for lazy loading)
      */
+    const [value] = useGlobalState('currUser');
     const [galleryObjects, setGalleryObjects] = useState(undefined);
     const [renderedGalleryItems, setRenderedGalleryItems] = useState(undefined);
     const [loadedGalleryItems, setLoadedGalleryItems] = useState(undefined);
@@ -73,19 +74,30 @@ const Gallery = () => {
     });
 }
 
-
     function renderInRows(items) {
         let rows = [];
         let row = [];
         for (let i = 0; i < items.length; i++) {
             row.push(items[i]);
             if (row.length === 4) {
+                //Default user can only access public, others can access all
+                if(value.role !== "DefaultUser"){
                 rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
                 row = [];
+                }
+                else if(value.role === "DefaultUser" && items[i].props.visibility === "Public"){
+                    rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
+                    row = [];
+                }
             }
         }
         if (row.length > 0) {
-            rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+            if(value.role !== "DefaultUser"){
+                rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+            }
+            else if(value.role === "DefaultUser" && items[i].props.visibility === "Public"){
+                rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+            }
         }
         setRenderedGalleryItems(rows);
     }

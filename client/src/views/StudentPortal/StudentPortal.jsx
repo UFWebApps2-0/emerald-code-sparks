@@ -26,7 +26,7 @@ export default function StudentPortal() {
   return (
     <div className='container nav-padding'>
       <NavBar />
-      <div id='main-header'>Welcome {nameS}</div>
+      <div id='main-header'>Welcome, {nameS}</div>
       <div id='classrooms-container'>
         <div id='header2'>Choose an option below to start</div>
         

@@ -18,6 +18,7 @@ export default function Classroom({
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { id } = useParams();
+  console.log(id);
   const tab = searchParams.get('tab');
   const viewing = searchParams.get('viewing');
 
@@ -26,6 +27,7 @@ export default function Classroom({
 
   }, [id]);
 
+  
   return (
     <div className='container nav-padding'>
       <NavBar isMentor={true} />

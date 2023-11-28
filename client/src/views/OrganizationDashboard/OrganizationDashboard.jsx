@@ -13,7 +13,8 @@ import OrganizationUsers from './DashboardPages/Users';
 import OrganizationModeration from './DashboardPages/Moderation/Moderation';
 import OrganizationClasses from './DashboardPages/Classes';
 import OrganizationLessons from './DashboardPages/Lessons';
-import { useSearchParams, useParams } from 'react-router-dom';
+import {useSearchParams, useParams, useNavigate} from 'react-router-dom';
+
 
 const { TabPane } = Tabs;
 export default function OrganizationDashboard() {
@@ -21,6 +22,7 @@ export default function OrganizationDashboard() {
   const [value] = useGlobalState('currUser');
   const [verify, setVerify] = useState(false);
   const { orgId } = useParams();
+  const navigate = useNavigate();
 
   async function isVerified() {
     let org = await getOrg(orgId);
@@ -32,8 +34,10 @@ export default function OrganizationDashboard() {
     isVerified(orgId).then(verified => {
       setVerify(verified);
     });
-  }, [orgId]);  
-
+  }, [orgId]);  // Add orgId to the dependency array
+  const handleBack = () => {
+    navigate('/admin');
+  };
 
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get('tab');
@@ -42,22 +46,30 @@ export default function OrganizationDashboard() {
     return (
     <div className="container nav-padding">
     <NavBar />
+      <button id='org-back-btn' onClick={handleBack}>
+        <i className='fa fa-arrow-left' aria-hidden='true' />
+      </button>
     <Tabs
       defaultActiveKey={tab ? tab : 'home'}
       onChange={(key) => setSearchParams({ tab: key })}
     >
-      <TabPane tab="Home" key="home">
-        <OrganizationHome id={props.id}/>
-      </TabPane>
-      <TabPane tab="Users" key="users">
-        <OrganizationUsers id={props.id}/>
-      </TabPane>
-      <TabPane tab="Moderation" key="moderation">
-        <OrganizationModeration id={props.id}/>
-      </TabPane>
       <TabPane tab="Classrooms" key="classroom">
         <OrganizationClasses id={props.id}/>
       </TabPane>
+     
+      <TabPane tab="Users" key="users">
+        <OrganizationUsers id={props.id}/>
+      </TabPane>
+      {/*<TabPane tab="Moderation" key="moderation">
+        <OrganizationModeration id={props.id}/>
+      </TabPane>
+       <TabPane tab="Home" key="home">
+        <OrganizationHome id={props.id}/>
+      </TabPane>
+      */
+      }
+      
+    
       <TabPane tab="Lessons" key="lessons">
         <OrganizationLessons/>
       </TabPane>

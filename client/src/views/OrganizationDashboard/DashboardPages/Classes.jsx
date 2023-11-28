@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getOrgClasses, getClassrooms, createClassroom, deleteClassroom } from '../../../Utils/requests';
-import { getCurrUser } from '../../../Utils/userState';
+import {getCurrUser, useGlobalState} from '../../../Utils/userState';
 import { getOrgUsers, getOrg} from "../../../Utils/requests";
 import { message } from 'antd';
 import '../../Dashboard/Dashboard.less';
@@ -14,7 +14,7 @@ export default function OrganizationClasses(props) {
     const [classrooms, setClassrooms] = useState([]);
     const [org, setOrg] = useState({});
     const orgUsers = getOrgUsers(props.id);
-    const user = getCurrUser();
+    const [user] = useGlobalState('currUser');
     const navigate = useNavigate();
     const newName = useRef();
     const newId = useRef();
@@ -68,8 +68,8 @@ export default function OrganizationClasses(props) {
 
         return (
         <div className='container nav-padding'>
-            <NavBar isMentor={true} />
-            <div id='main-header'>Welcome {user.username}</div>
+            {/*<NavBar isMentor={true} />*/}
+            <div id='main-header'>Welcome {user.name}</div>
             <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
             <div id='classrooms-container'>
                 <div id='dashboard-card-container'>

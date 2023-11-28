@@ -955,6 +955,12 @@
                     "type": "string"
                   }
                 },
+                "student_invites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -1125,6 +1131,12 @@
                 },
                 "consentOptions": {
                   "type": "object"
+                },
+                "student_invites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "published_at": {
                   "type": "string"

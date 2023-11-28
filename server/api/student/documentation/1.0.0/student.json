@@ -846,6 +846,40 @@
                 "consentOptions": {
                   "type": "object"
                 },
+                "student_invites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "student_invites": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "study": {
+                  "type": "string"
+                },
+                "student": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -889,6 +923,12 @@
             "format": "date-time"
           },
           "studies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "student_invites": {
             "type": "array",
             "items": {
               "type": "string"

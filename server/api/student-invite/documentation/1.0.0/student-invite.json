@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/researchers": {
+    "/student-invites": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -10,9 +10,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Researcher"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Researcher"
+          "Student-invite"
         ],
         "parameters": [
           {
@@ -201,72 +202,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Researcher"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Researcher"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewResearcher"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/researchers/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "foo": {
+                      "type": "string"
                     }
                   }
                 }
@@ -306,12 +244,22 @@
         },
         "summary": "",
         "tags": [
-          "Researcher"
+          "Student-invite"
         ],
-        "parameters": []
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStudent-invite"
+              }
+            }
+          }
+        }
       }
     },
-    "/researchers/{id}": {
+    "/student-invites/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +269,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Researcher"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -359,7 +311,64 @@
         },
         "summary": "",
         "tags": [
-          "Researcher"
+          "Student-invite"
+        ],
+        "parameters": []
+      }
+    },
+    "/student-invites/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Student-invite"
         ],
         "parameters": [
           {
@@ -383,7 +392,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Researcher"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -421,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Researcher"
+          "Student-invite"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewResearcher"
+                "$ref": "#/components/schemas/NewStudent-invite"
               }
             }
           }
@@ -495,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Researcher"
+          "Student-invite"
         ],
         "parameters": [
           {
@@ -514,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Researcher": {
+      "Student-invite": {
         "required": [
           "id"
         ],
@@ -522,13 +535,7 @@
           "id": {
             "type": "string"
           },
-          "first_name": {
-            "type": "string"
-          },
-          "last_name": {
-            "type": "string"
-          },
-          "school": {
+          "study": {
             "required": [
               "id"
             ],
@@ -536,22 +543,19 @@
               "id": {
                 "type": "string"
               },
-              "name": {
+              "studyID": {
+                "type": "integer"
+              },
+              "studyDescription": {
                 "type": "string"
               },
-              "county": {
-                "type": "string"
-              },
-              "state": {
-                "type": "string"
-              },
-              "classrooms": {
+              "students": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
-              "mentors": {
+              "classrooms": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -563,6 +567,30 @@
                   "type": "string"
                 }
               },
+              "studyName": {
+                "type": "string"
+              },
+              "studyTag": {
+                "type": "string",
+                "enum": [
+                  "qualitative",
+                  "quantitative",
+                  "design",
+                  "TBD"
+                ]
+              },
+              "consentOptions": {
+                "type": "object"
+              },
+              "student_invites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -571,192 +599,53 @@
               }
             }
           },
-          "users_permissions_user": {
+          "student": {
             "required": [
               "id",
-              "username",
-              "email"
+              "enrolled"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "name": {
                 "type": "string"
               },
-              "email": {
+              "character": {
                 "type": "string"
               },
-              "provider": {
+              "classroom": {
                 "type": "string"
               },
-              "password": {
-                "type": "string"
+              "sessions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
+              "enrolled": {
                 "type": "boolean"
               },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
+              "last_logged_in": {
                 "type": "string"
+              },
+              "studies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "student_invites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
               },
               "updated_by": {
                 "type": "string"
-              }
-            }
-          },
-          "classrooms": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "code"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "school": {
-                  "type": "string"
-                },
-                "sessions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "mentors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "students": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "code": {
-                  "type": "string"
-                },
-                "grade": {
-                  "type": "string"
-                },
-                "selections": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "authorized_workspaces": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "researchers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "studies": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "researcherEmail": {
-            "type": "string"
-          },
-          "studies": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "studyID": {
-                  "type": "integer"
-                },
-                "studyDescription": {
-                  "type": "string"
-                },
-                "students": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "classrooms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "researchers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "studyName": {
-                  "type": "string"
-                },
-                "studyTag": {
-                  "type": "string",
-                  "enum": [
-                    "qualitative",
-                    "quantitative",
-                    "design",
-                    "TBD"
-                  ]
-                },
-                "consentOptions": {
-                  "type": "object"
-                },
-                "student_invites": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
               }
             }
           },
@@ -766,34 +655,13 @@
           }
         }
       },
-      "NewResearcher": {
+      "NewStudent-invite": {
         "properties": {
-          "first_name": {
+          "study": {
             "type": "string"
           },
-          "last_name": {
+          "student": {
             "type": "string"
-          },
-          "school": {
-            "type": "string"
-          },
-          "users_permissions_user": {
-            "type": "string"
-          },
-          "classrooms": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "researcherEmail": {
-            "type": "string"
-          },
-          "studies": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "published_at": {
             "type": "string",
@@ -809,9 +677,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Researcher"
-    }
-  ]
+  "tags": []
 }

@@ -1,13 +1,13 @@
 import { Button, Form, Input, message, Modal, Radio, InputNumber } from "antd";
 import React, { useState } from "react";
-import { createVideo } from "../../../Utils/requests";
+import { createQuestion } from "../../../Utils/requests";
 import "./QuestionForm.less";
 
 export default function QuestionForm({ gradeList }) {
   const [visible, setVisible] = useState(false);
   const [questionType, setQuestionType] = useState("freeResponse");
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [time, setTime] = useState("");
   const [choices, setChoices] = useState({
     A: "",
     B: "",
@@ -18,7 +18,7 @@ export default function QuestionForm({ gradeList }) {
 
   const showModal = () => {
     setTitle("");
-    setDescription("");
+    setTime("");
     setChoices({
       A: "",
       B: "",
@@ -43,7 +43,7 @@ export default function QuestionForm({ gradeList }) {
     const formData = {
       questionType,
       title,
-      description,
+      time,
       choices,
       correctAnswer,
     };
@@ -99,12 +99,11 @@ export default function QuestionForm({ gradeList }) {
               required
             />
           </Form.Item>
-          <Form.Item id="form-label" label="Description">
+          <Form.Item id="form-label" label="Time">
             <Input.TextArea
-              rows={3}
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-              placeholder="Enter question description"
+              onChange={(e) => setTime(e.target.value)}
+              value={time}
+              placeholder="Enter the time that the question will appear."
             />
           </Form.Item>
           {questionType === "multipleChoice" && (

@@ -14,14 +14,12 @@ export default function OrganizationHome(props) {
   useEffect(() => {
     let classroomIds = [];
     getOrg(
-      props.id 
+      props.id
     ).then((res) => {
-      console.log(res);
-      let users = res.data.users;
-      if (users) {
-        setOrg(users[0]);
+      if (res.data) {
+        setOrg(res.data);
       } else {
-        message.error(ress.err);
+        message.error(res.err);
       }
     });
   }, []);

@@ -58,6 +58,14 @@ export const getOrgClasses = async (id) =>
             error: 'Faild to get list of org classes'
         });
 
+export const getOrg = async(id) =>
+        makeRequest({
+          method: GET,
+          path: `${server}/organizations/${id}`,
+          auth: true,
+          error: 'Failed to get organization'
+        })
+
 export const getOrgUsers = async (id) =>
   makeRequest({
     method: GET,

@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers } from "../../../Utils/requests";
+import { getOrgUsers, getOrg } from "../../../Utils/requests";
 import { message } from 'antd';
 
-export default function OrganizationUsers() {
+export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
+  console.log(props.id);
 
   useEffect(() => {
     let classroomIds = [];
-    getOrgUsers(JSON.parse(sessionStorage.getItem("user")).organization.id).then((res) => {
+    getOrg(
+      props.id
+    ).then((res) => {
       if (res.data) {
-        // res.data.classrooms.forEach((classroom) => {
-        //   classroomIds.push(classroom.id);
-        // });
-        // getClassrooms(classroomIds).then((classrooms) => {
-        //   setClassrooms(classrooms);
-        // });
         setOrg(res.data);
-        console.log(org);
-        console.log(res.data);
       } else {
         message.error(res.err);
       }
     });
   }, []);
-  if (!("Name" in org)) {
-    return (<div id='main-header'>Welcome to Loading</div>);
+
+  if (!('Name' in org)) {
+    return <div id="main-header">Welcome to Loading</div>;
   }
   return (<>
     <div id='main-header' className='welcome-message'>Welcome to {org.Name}</div>

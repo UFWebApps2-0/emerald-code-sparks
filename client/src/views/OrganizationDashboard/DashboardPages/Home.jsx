@@ -4,22 +4,20 @@
 
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers } from '../../../Utils/requests';
+import { getOrgUsers, getOrg } from '../../../Utils/requests';
 import { message } from 'antd';
 
-export default function OrganizationHome() {
+export default function OrganizationHome(props) {
   const [org, setOrg] = useState({});
   const user = getToken();
 
   useEffect(() => {
     let classroomIds = [];
-    getOrgUsers(
-      JSON.parse(sessionStorage.getItem('user')).organization.id
+    getOrg(
+      props.id
     ).then((res) => {
       if (res.data) {
         setOrg(res.data);
-        console.log(org);
-        console.log(res.data);
       } else {
         message.error(res.err);
       }

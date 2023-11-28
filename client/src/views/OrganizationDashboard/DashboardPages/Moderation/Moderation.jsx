@@ -3,7 +3,7 @@ import '../Moderation/Moderation.css';
 import TeacherRole from './ModerationTeacher';
 import AdminRole from './ModerationAdmin';
 
-export default function OrganizationModeration() {
+export default function OrganizationModeration(props) {
   const [role, setRole] = useState('teacher'); // teacher or Admin
 
   const toggleRole = () => {

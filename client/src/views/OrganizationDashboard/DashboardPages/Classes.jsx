@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getOrgClasses, getClassrooms, createClassroom, deleteClassroom } from '../../../Utils/requests';
 import { getCurrUser } from '../../../Utils/userState';
-import { getOrgUsers } from "../../../Utils/requests";
+import { getOrgUsers, getOrg } from "../../../Utils/requests";
 import { message } from 'antd';
 import '../../Dashboard/Dashboard.less';
 import DashboardDisplayCodeModal from '../../Mentor/Dashboard/DashboardDisplayCodeModal';
@@ -10,7 +10,7 @@ import NavBar from '../../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 //import { org } from '../Home';
 
-export default function OrganizationClasses() {
+export default function OrganizationClasses(props) {
     const [classrooms, setClassrooms] = useState([]);
     const [org, setOrg] = useState({});
     const orgUsers = getOrgUsers();
@@ -21,7 +21,7 @@ export default function OrganizationClasses() {
     
     useEffect(() => {
         let classroomIds = [];
-        getOrgUsers(JSON.parse(sessionStorage.getItem("user")).organization.id).then((res) => {
+        getOrg(props.id).then((res) => {
             if (res.data) {
                  res.data.classrooms.forEach((classroom) => {
                   classroomIds.push(classroom.id);
@@ -54,7 +54,7 @@ export default function OrganizationClasses() {
         return (
             <div className='container nav-padding'>
                 <NavBar isMentor={true} />
-                <div id='main-header'>Hello {user.username}</div>
+                <div id='main-header'>Hello {user.name}</div>
                 <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
                 <div id='classrooms=container'>
                     <h1 id='card-title'> Add Class </h1>

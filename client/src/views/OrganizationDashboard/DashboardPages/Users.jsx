@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
 import { getOrgUsers, getOrg, getRoles, getOrgMentors, updateOrganizationUsers, getUsers} from "../../../Utils/requests";
 import { message } from 'antd';
+import AddUserModal from "../../../components/AddUserModal/AddUserModal";
+
 
 export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
@@ -41,6 +43,25 @@ export default function OrganizationUsers(props) {
       }
     });
   }, []);
+
+
+  //when call button, call AddUserModal and define isOpen, closeModal, submitUser as functions from here
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
+//onClick of button, set the model to open
+
+//close modal function = set model to false
+
+//submitUser (async function)
+
+
+
+// useEffect(()=> {
+//   console.log("tesr wfihfwoih");
+//   console.log(roles);
+//   let map = new Map(roles.data.roles.map((roles) => [role.id, role.name]));
+//   setRoleMap(map);
+// }, [roles])
+
 
   // useEffect(()=> {
   //   console.log("tesr wfihfwoih");

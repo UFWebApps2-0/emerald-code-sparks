@@ -53,7 +53,7 @@ export default function OrganizationClasses(props) {
 
         return (
             <div className='container nav-padding'>
-                <NavBar isMentor={true} />
+                {/*<NavBar isMentor={true} />*/}
                 <div id='main-header'>Hello {user.name}</div>
                 <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
                 <div id='classrooms=container'>

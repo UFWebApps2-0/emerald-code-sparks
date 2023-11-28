@@ -53,18 +53,23 @@ export default function OrganizationDashboard() {
       defaultActiveKey={tab ? tab : 'home'}
       onChange={(key) => setSearchParams({ tab: key })}
     >
-      <TabPane tab="Home" key="home">
-        <OrganizationHome id={props.id}/>
+      <TabPane tab="Classrooms" key="classroom">
+        <OrganizationClasses id={props.id}/>
       </TabPane>
+     
       <TabPane tab="Users" key="users">
         <OrganizationUsers id={props.id}/>
       </TabPane>
       {/*<TabPane tab="Moderation" key="moderation">
         <OrganizationModeration id={props.id}/>
-      </TabPane>*/}
-      <TabPane tab="Classrooms" key="classroom">
-        <OrganizationClasses id={props.id}/>
       </TabPane>
+       <TabPane tab="Home" key="home">
+        <OrganizationHome id={props.id}/>
+      </TabPane>
+      */
+      }
+      
+    
       <TabPane tab="Lessons" key="lessons">
         <OrganizationLessons/>
       </TabPane>

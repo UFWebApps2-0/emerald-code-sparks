@@ -574,6 +574,7 @@ export default function StudentCanvas({ activity }) {
       {/* This xml is for the blocks' menu we will provide. Here are examples on how to include categories and subcategories */}
       <xml id='toolbox' is='Blockly workspace'>
         {
+
           // Maps out block categories
           activity &&
             activity.toolbox &&
@@ -589,6 +590,7 @@ export default function StudentCanvas({ activity }) {
                         is='Blockly block'
                         key={block.name}
                       />
+                      
                     );
                   })
                 }

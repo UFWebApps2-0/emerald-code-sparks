@@ -15,7 +15,7 @@ import {
   handleCloseConnection,
   handleOpenConnection,
 } from '../../Utils/consoleHelpers';
-import { getAuthorizedWorkspace } from '../../../../Utils/requests';
+import { getAuthorizedWorkspace, createBlock, getAuthorizedWorkspaceToolbox, getBlocks } from '../../../../Utils/requests';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 
@@ -41,11 +41,38 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
   const activityRef = useRef(null);
   const navigate = useNavigate();
 
+  // for create block popup
+  const [blockPopUp, setBlockPopUp] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    blockDefinition: '',
+    codeStub: '',
+  });
+  let initializedBlocks = false;
+
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
       toolbox: document.getElementById('toolbox'),
     });
   };
+
+  const initBlocks = async () => {
+    if (!initializedBlocks) {
+      try {
+        const res = await getBlocks(14);
+        // console.log(res.data.blocks); 
+        res.data.blocks.forEach((block) => {
+          eval(block.block_definition);
+          eval(block.code_stub);
+        })
+      } catch (error) {
+        console.error(error);
+      }
+      initializedBlocks = true;
+    }
+  };
+  initBlocks();
 
   useEffect(() => {
     // once the activity state is set, set the workspace and save
@@ -55,10 +82,10 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
       activityRef.current = activity;
       if (!workspaceRef.current && activity && Object.keys(activity).length !== 0) {
         setWorkspace();
-        // if (activity.template) {
-        //   let xml = window.Blockly.Xml.textToDom(activity.template);
-        //   window.Blockly.Xml.domToWorkspace(xml, workspaceRef.current);
-        // }
+        if (activity.template) {
+          let xml = window.Blockly.Xml.textToDom(activity.template);
+          window.Blockly.Xml.domToWorkspace(xml, workspaceRef.current);
+        }
         let xml = isMentorActivity
         ? window.Blockly.Xml.textToDom(activity.activity_template)
         : window.Blockly.Xml.textToDom(activity.template);
@@ -101,6 +128,43 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
         setStudentToolbox(tempToolBox);
       }
     }
+  };
+
+  // following function definitions for handling block creation
+
+  const openBlockMenu = () => {
+    console.log('clicked');
+    setBlockPopUp(true);
+  };
+
+  const closeBlockMenu = () => {
+    setBlockPopUp(false);
+  };
+
+  const handleBlockCreation = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await createBlock(formData.name, formData.description, '14', '', formData.blockDefinition, formData.codeStub);
+      //console.log(formData.name + " " + formData.description);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setFormData({
+      name: '',
+      description: '',
+      blockDefinition: '',
+      codeStub: '',
+    });
+  };
+
+  const handleFormChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleSave = async () => {
@@ -298,6 +362,61 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
   return (
     <div id='horizontal-container' className='flex flex-column'>
       <div className='flex flex-row'>
+        {blockPopUp ? 
+          <div id='block-form-container'>
+            <div>Create a Custom Block</div>
+            <form onSubmit={handleBlockCreation} id='block-form' >
+              <label htmlFor='name'>Block Name: </label>
+              <div className='block-form-element'>
+                <input 
+                type='text' 
+                name='name'
+                value={formData.name}
+                onChange={handleFormChange}
+                required>
+                </input>
+              </div>
+
+              <label htmlFor='description'>Block Description: </label>
+              <div className='block-form-element'>
+                <input 
+                type='text' 
+                name='description' 
+                value={formData.description} 
+                onChange={handleFormChange}>
+                </input>
+              </div>
+
+              <label htmlFor='blockDefinition'>Block Definition: </label>
+              <div className='block-form-element'>
+                <textarea 
+                rows='10' 
+                type='text' 
+                name='blockDefinition'
+                value={formData.blockDefinition}
+                onChange={handleFormChange}
+                required>
+                </textarea>
+              </div>
+
+              <label htmlFor='codeStub'>Code Stub: </label>
+              <div className='block-form-element'>
+                <textarea 
+                rows='10' 
+                type='text' 
+                name='codeStub'
+                value={formData.codeStub}
+                onChange={handleFormChange}
+                required>
+                </textarea>
+              </div>
+              <div>
+                <input type='submit' value='Create Block'></input>
+                <button onClick={closeBlockMenu}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        : null}
         <div
           id='bottom-container'
           className='flex flex-column vertical-container overflow-visible'
@@ -329,6 +448,14 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
                   </Col>
                   <Col flex='auto' />
                   <Row id='right-icon-container'>
+                    {!isSandbox ? (
+                      <Col 
+                        className='flex flex-row'
+                        id='create-block-button'
+                      >
+                        <button onClick={openBlockMenu} style={{'height': 50 + 'px', 'width': 50 + 'px'}}><img src="../Icons/add-button.png"/></button>
+                      </Col>
+                    ) : null}
                     {!isSandbox ? (
                       <Col
                         className='flex flex-row'
@@ -456,24 +583,24 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
         {
           // Maps out block categories
           activity &&
-            activity.toolbox &&
-            activity.toolbox.map(([category, blocks]) => (
-              <category name={category} is='Blockly category' key={category}>
-                {
-                  // maps out blocks in category
-                  // eslint-disable-next-line
-                  blocks.map((block) => {
-                    return (
-                      <block
-                        type={block.name}
-                        is='Blockly block'
-                        key={block.name}
-                      />
-                    );
-                  })
-                }
-              </category>
-            ))
+          activity.toolbox &&
+          activity.toolbox.map(([category, blocks]) => (
+            <category name={category} is='Blockly category' key={category}>
+              { 
+                // maps out blocks in category
+                // eslint-disable-next-line
+                blocks.map((block) => {
+                  return (
+                    <block
+                      type={block.name}
+                      is='Blockly block'
+                      key={block.name}
+                    />
+                  );
+                })
+              }
+            </category>
+          ))
         }
       </xml>
 
@@ -484,7 +611,8 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
           closable
           onClose={(e) => setCompileError('')}
         ></Alert>
-      )}
+      )
+    }
     </div>
   );
 }

@@ -64,9 +64,15 @@ export default function TeacherLogin() {
       });
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = (res) => {
     setLoading(true);
-    let body = { identifier: 'teacher', password: 'easypassword' };
+    //console.log(res.googleId);
+    //console.log(res.profileObj.givenName);
+    let name = res.profileObj.givenName;
+    let pass = res.googleId;
+    name = 'teacher';
+    pass = 'easypassword';
+    let body = { identifier: name, password: pass };
 
     postUser(body)
       .then((response) => {
@@ -82,13 +88,13 @@ export default function TeacherLogin() {
       })
       .catch((error) => {
         setLoading(false);
-        message.error('Login failed. Please input a valid email and password.');
+        message.error('Google account does not exist, creating one for you. Please login again.'); //teacher creation happens here.
       });
   };
 
   const onSucc = (res) => {
     console.log(res);
-    handleGoogleLogin();
+    handleGoogleLogin(res);
   };
   
   const onFail = (res) => {

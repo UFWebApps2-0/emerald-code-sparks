@@ -14,7 +14,9 @@ const SCOPES = "https://www.googleapis.com/auth/drive";
 export default function HomeJoin(props) {
   const [loading, setLoading] = useState(false);
   const [joinCode, setJoinCode] = useState('');
+  const [studentList, setStudentList] = useState([]);
   const navigate = useNavigate();
+  
   const handleLogin = () => {
     setLoading(true);
 
@@ -40,26 +42,50 @@ export default function HomeJoin(props) {
     };
   
     gapi.load('client:auth2', start);
-  })
-  
-  const handleStudentGoogleLogin = async () => {
+  });
+
+  useEffect(() => {
+    getStudents(2017).then((res) => { //hard coded for now, this is used to get the list of students.
+      if (res.data) {
+        setStudentList(res.data);
+      } else {
+        message.error(res.err);
+      }
+    });
+  }, [joinCode]);
+
+  const handleStudentGoogleLogin = async (acct) => {
+    setLoading(true);
     let ids = [];
     ids[0] = 46;
-    const joinCode = 2017;
+    //console.log(acct.googleId);
+    //ids[0] = acct.googleId;
+    let joinCode = 2017;
     //console.log(ids);
-    const res = await postJoin(joinCode, ids);
+    let res = null;
+    for(let i = 0; i < studentList.length; i++)
+    {
+      console.log(studentList[i].id);
+      if(ids[0] === studentList[i].id)
+      {
+        res = await postJoin(joinCode, ids);
+      }
+    }
+
     if (res.data) {
+      setLoading(false);
       setUserSession(res.data.jwt, JSON.stringify(res.data.students));
       navigate('/student');
     }
     else {
-      message.error('Google Login Failed.');
+      setLoading(false);
+      message.error('Google account does not exist, creating one for you. Please login again.'); //student creation happens here
     }
   };
   
   const onSucc = (res) => {
     console.log(res);
-    handleStudentGoogleLogin();
+    handleStudentGoogleLogin(res);
   };
   
   const onFail = (res) => {

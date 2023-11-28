@@ -123,6 +123,12 @@ const handleCommentSubmit = async () => {
   const handleDelete = async (post, props) => {
     try {
       //delete the comment
+      if(props.is_pinned == true){
+        deletePinnedComment(props.id);
+      }
+      else{
+        deleteUnpinnedComment(props.id)
+      }
       const discussionBoard = post.discussion_board || [];
       const updatedDiscussionBoard = discussionBoard.filter(comment => comment.id !== props.id);
       await updateDiscussionBoard(post.id, updatedDiscussionBoard);

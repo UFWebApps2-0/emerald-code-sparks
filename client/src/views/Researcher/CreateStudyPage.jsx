@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
-import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
 import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStudent, getAllClassrooms, getClassroom} from '../../Utils/requests';
 
@@ -261,9 +260,7 @@ const CreateStudyPage =()=>{
 
   
 
-  return (
-    <div className='container nav-padding'>
-      <NavBar/>
+  return (<>
       <div className='menu-bar'>
         <div id='create-study-header'>Create New study</div>
         <button
@@ -273,7 +270,6 @@ const CreateStudyPage =()=>{
           Return to Dashboard
         </button>
       </div>
-
       <div id='button-container'>
       <Form form={studyForm} id={"study-form"}>
           <h1 id="new-study-header">Study Information</h1>
@@ -402,14 +398,8 @@ const CreateStudyPage =()=>{
           </Modal>
           
         </Form>
-        
-        
-        
       </div>
-    </div>
-    
-  )
-
+  </>)
 };
 
 export default CreateStudyPage;

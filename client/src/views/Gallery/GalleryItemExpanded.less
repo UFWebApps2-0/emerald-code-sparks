@@ -109,6 +109,12 @@ div.pageHeader {
     margin-left: 5%;
     max-height: 75vh;
     height: auto;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        //hide the scrollbar
+        width: 0;
+    }
 }
 
 div.buttons-row>div {

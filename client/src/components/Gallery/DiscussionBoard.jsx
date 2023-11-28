@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './DiscussionBoard.less';
-import { deletePinnedComment, deleteUnpinnedComment, postPinnedComment, postUnpinnedComment , updateDiscussionBoard} from '../../Utils/requests';
+import { deletePinnedComment, deleteUnpinnedComment, postPinnedComment, postUnpinnedComment, updateDiscussionBoard } from '../../Utils/requests';
+import TextArea from 'antd/lib/input/TextArea';
 
-const DiscussionBoard = ( {post} ) => {
+const DiscussionBoard = ({ post }) => {
 
   // State to hold comments
   const [sortedComments, setSortedComments] = useState([]);
@@ -14,7 +15,7 @@ const DiscussionBoard = ( {post} ) => {
     const fetchComments = async () => {
       try {
         refreshComments();
-      } 
+      }
       catch (error) {
         console.error('Error fetching comments:', error.message);
       }
@@ -23,7 +24,7 @@ const DiscussionBoard = ( {post} ) => {
   }, [post]);
 
   const handleCommentSubmit = async () => {
-  try {
+    try {
       // Check if the comment input is not empty
       if (commentInput.trim() !== '') {
         // Post an unpinned comment
@@ -61,12 +62,12 @@ const DiscussionBoard = ( {post} ) => {
       }
     } catch (error) {
       console.error('Error submitting comment:', error.message);
-  }
+    }
   };
   //these props is the actual comment object
   const handlePinning = async (props) => {
     try {
-      if(props.pinned === true){
+      if (props.pinned === true) {
         // Post an unpinned comment
         await postUnpinnedComment({
           User_name: props.User_name, // Replace with the actual username or get it from your authentication system
@@ -78,7 +79,7 @@ const DiscussionBoard = ( {post} ) => {
         await deletePinnedComment(props.id);
       }
 
-      else{
+      else {
         // Post a pinned comment
         await postPinnedComment({
           User_name: props.User_name,
@@ -92,7 +93,7 @@ const DiscussionBoard = ( {post} ) => {
 
       await refreshComments();
 
-    } 
+    }
     catch (error) {
       console.error('Error pinning comment:', error.message);
     }
@@ -123,7 +124,7 @@ const DiscussionBoard = ( {post} ) => {
       //update the comment
       const discussionBoard = post.discussion_board || [];
       const updatedDiscussionBoard = discussionBoard.map(comment => {
-        if(comment.id === props.id){
+        if (comment.id === props.id) {
           comment.comment_string = props.comment_string;
         }
         return comment;
@@ -135,25 +136,25 @@ const DiscussionBoard = ( {post} ) => {
       console.error('Error updating comment:', error.message);
     }
   }
-  
+
   return (
     <div className='discussion-board'>
       <h3>Discussion</h3>
       <div className='comments'>
         {sortedComments.map((comment, index) => (
           <div key={index} className='comment-box'>
-          <label className='comment-username'>{comment.User_name}</label>
-          <textarea className='comment-textarea' rows='4' cols='50' value={comment.comment_string} readOnly />
-          <div className='comment-buttons'>
-              <button onClick={() => handleUpdate(comment)}>Edit</button>
-              <button onClick={() => handleDelete(post, comment)}>Delete</button>
-              <button onClick={() => handlePinning(comment)}>{comment.is_pinned ? 'Unpin' : 'Pin'}</button>
-          </div>
+            <label className='comment-username'>{comment.User_name}</label>
+            <textarea className='comment-textarea' rows='4' cols='50' value={comment.comment_string} readOnly />
+            <div className='comment-buttons'>
+              <button onClick={() => handleUpdateComment(post, comment)}><i className='fa fa-pencil-alt' /></button>
+              <button onClick={() => handleDelete(post, comment)}><i className='fa fa-trash' /></button>
+              <button onClick={() => handlePinning(comment)}>{comment.is_pinned ? <i className='fa fa-thumbtack' /> : <i style={{ color: 'green' }} className='fa fa-thumbtack' />}</button>
+            </div>
           </div>
         ))}
       </div>
       <div className='comment-input'>
-        <input
+        <TextArea
           type='text'
           placeholder='Add a comment...'
           value={commentInput}

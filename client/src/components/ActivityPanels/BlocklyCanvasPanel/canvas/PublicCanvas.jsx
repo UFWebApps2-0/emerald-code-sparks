@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import '../../ActivityLevels.less';
 import { compileArduinoCode } from '../../Utils/helpers';
-import { message, Spin, Row, Col, Alert, Menu, Dropdown } from 'antd';
+import { message, Spin, Row, Col, Alert, Menu, Dropdown, Button } from 'antd';
 import CodeModal from '../modals/CodeModal';
 import ConsoleModal from '../modals/ConsoleModal';
 import PlotterModal from '../modals/PlotterModal';
@@ -19,6 +19,7 @@ import {processCodeInHelper} from "../../Utils/helpers";
 //import {window} from './Exporter';
 
 let plotId = 1;
+
 export default function PublicCanvas({ activity, isSandbox }) {
   const [hoverUndo, setHoverUndo] = useState(false);
   const [hoverRedo, setHoverRedo] = useState(false);
@@ -71,6 +72,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const handleUndo = () => {
     if (workspaceRef.current.undoStack_.length > 0)
       workspaceRef.current.undo(false);
+
   };
 
   const handleRedo = () => {
@@ -79,6 +81,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
   };
 
   const handleConsole = async () => {
+
+    console.log("Something happened!");
+
     if (showPlotter) {
       message.warning('Close serial plotter before openning serial monitor');
       return;
@@ -189,6 +194,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
             size='large'
             spinning={selectedCompile}
           >
+             
             <Row id='icon-control-panel'>
 
               <Col flex='none' id='section-header'>
@@ -282,16 +288,20 @@ export default function PublicCanvas({ activity, isSandbox }) {
                         onMouseEnter={() => setHoverConsole(true)}
                         onMouseLeave={() => setHoverConsole(false)}
                       />
+                      
                       {hoverConsole && (
                         <div className='popup ModalCompile'>
                           Show Serial Monitor
                         </div>
                       )}
                       <Dropdown overlay={menu}>
+                        
                         <i className='fas fa-ellipsis-v'></i>
                       </Dropdown>
+                      
                     </div>
                   </Col>
+                  
                 </Row>
               </Col>
             </Row>
@@ -321,6 +331,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
           activity &&
             activity.toolbox &&
             activity.toolbox.map(([category, blocks]) => (
+              isSandbox && category == 'Custom' ? null :
               <category name={category} is='Blockly category' key={category}>
                 {
                   // maps out blocks in category
@@ -345,6 +356,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
       {/*Code for the pop-up window to type code into*/}
       <CodePopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={codeUpdate}/>
 
+
       {compileError && (
         <Alert
           message={compileError}
@@ -353,7 +365,6 @@ export default function PublicCanvas({ activity, isSandbox }) {
           onClose={(e) => setCompileError('')}
         ></Alert>
       )}
-
     </div>
 
   );

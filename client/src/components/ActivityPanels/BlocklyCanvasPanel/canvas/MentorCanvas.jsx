@@ -357,6 +357,8 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
     </Menu>
   );
 
+
+
   return (
     <div id='horizontal-container' className='flex flex-column'>
       <div className='flex flex-row'>

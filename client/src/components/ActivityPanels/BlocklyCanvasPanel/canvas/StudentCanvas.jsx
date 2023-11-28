@@ -349,6 +349,62 @@ export default function StudentCanvas({ activity }) {
     </Menu>
   );
 
+
+  var toolBoxActive = true;
+  var id = null;
+  function toggleToolBox(){
+
+    //message.info("Triggered collapse!");
+
+    var toolBox = document.getElementsByClassName("blocklyToolboxDiv");
+
+    //message.info(toolBox);
+
+    clearInterval(id);
+    id = setInterval(frame, .5);
+    var width = 0;
+
+    if(toolBoxActive){
+      width = 115;
+      //need to retract the toolbox into the left side of the screen
+      //toolBox.style.left = 
+    }
+    else{
+      width = 0;
+      //need to extend the toolbox into the screen
+    }
+
+    function frame(){
+      //message.info(width);
+    if(toolBoxActive){
+      if(width <= 0){
+
+        toolBoxActive = false;
+
+        clearInterval(id);
+      }
+        
+      width -= 2;
+      toolBox[0].style.width = width + 'px';
+      //need to retract the toolbox into the left side of the screen
+      //toolBox.style.left = 
+      
+    }
+    else{
+      if(width >= 115){
+        toolBoxActive = true;
+        clearInterval(id);
+      }
+        
+      width += 2;
+      toolBox[0].style.width = width + 'px';
+      //need to extend the toolbox into the screen
+      
+    }
+  }
+
+  }
+
   return (
     <div id='horizontal-container' className='flex flex-column'>
       <div className='flex flex-row'>
@@ -467,6 +523,7 @@ export default function StudentCanvas({ activity }) {
                         setHoverCompile={setHoverCompile}
                         handleCompile={handleCompile}
                       />
+                      <button onClick={toggleToolBox}>TB</button>
                       {hoverCompile && (
                         <div className='popup ModalCompile'>
                           Upload to Arduino

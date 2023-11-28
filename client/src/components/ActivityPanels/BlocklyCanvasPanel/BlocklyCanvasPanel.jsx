@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PublicCanvas from './canvas/PublicCanvas';
 import StudentCanvas from './canvas/StudentCanvas';
 import MentorCanvas from './canvas/MentorCanvas';
@@ -9,10 +9,13 @@ const BlocklyCanvasPanel = ({ activity, isSandbox, setActivity }) => {
   const [value] = useGlobalState('currUser');
 
   const userRole = value.role;
+ 
 
   switch (userRole) {
     case 'DefaultUser':
-      return <PublicCanvas activity={activity} isSandbox={isSandbox} />;
+      return (
+      <PublicCanvas activity={activity} isSandbox={isSandbox} />
+      );
     case 'Student':
       return <StudentCanvas activity={activity} />;
     case 'Mentor':

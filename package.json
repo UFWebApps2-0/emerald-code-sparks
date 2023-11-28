@@ -5,5 +5,15 @@
     "@strapi/plugin-sentry": "^4.15.4",
     "axios": "^1.6.2",
     "codemirror": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0"
   }
 }
+
+
+

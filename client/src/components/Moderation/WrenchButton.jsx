@@ -17,7 +17,7 @@ const Sidebar = ({ handleClose }) => {
 
 export default function WrenchButton({uniqueKey}) {
   const [showSidebar, setSidebar] = useState(false);
-  //let [status, setStatus] = useState("Unclicked");
+  let [status, setStatus] = useState("Unclicked");
   //let [clicked, setClicked] = useState(false);
 
   /*function Wrench() {
@@ -48,8 +48,14 @@ export default function WrenchButton({uniqueKey}) {
 
   return (
     <span className="WrenchButton">
+      <div className = "relative-container">
         <Button className={'wrench'} onClick={ toggleSidebar }> </Button>
-        {showSidebar && <Sidebar handleClose={toggleSidebar} />}
+        {showSidebar && (
+          <div className="sidebar-wrapper">
+            <Sidebar handleClose={() => setSidebar(false)} />
+          </div>
+        )}
+        </div>
     </span>
   );
 }

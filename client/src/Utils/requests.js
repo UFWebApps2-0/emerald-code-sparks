@@ -781,3 +781,10 @@ export const createClassroom = async (id, title) =>
         error: 'Unable to submit lesson data',
       });
     
+      export const getLessonData = async (id) =>
+        makeRequest({
+            method: GET,
+            path: `${server}/lessons`,
+            auth: true,
+            error: 'Failed to get Lessons'
+        });

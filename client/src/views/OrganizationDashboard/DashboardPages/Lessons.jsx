@@ -1,11 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import {useParams } from 'react-router-dom';
-import { submitLessonData } from '../../../Utils/requests';
+import { getLessonData, submitLessonData } from '../../../Utils/requests';
 import './Lessons.less';
 
 
 function LessonForm() {
     const { orgId } = useParams();
+    const [lessonData,setLessonData] = useState([])
     const [lesson, setLesson] = useState({
         title: '',
         standards: '',
@@ -19,6 +20,21 @@ function LessonForm() {
         ]
       });
 
+      useEffect(() => {
+        const getLData = async () => {
+          try {
+            let lData = await getLessonData();
+            lData = lData.data;
+            setLessonData(lData);
+          } catch (error) {
+            console.error('Error fetching lesson data:', error);
+          }
+        };
+    
+        getLData();
+      }, []);
+
+      console.log(lessonData)
       const handleChange = (e) => {
         const { name, value } = e.target;
         if (name.startsWith('question') || name.startsWith('answer')) {
@@ -76,6 +92,7 @@ function LessonForm() {
         }
       };
 
+      
   return (
     <div className="lesson-form-container">
       <h1 id="main-header">Create a Lesson Plan</h1>

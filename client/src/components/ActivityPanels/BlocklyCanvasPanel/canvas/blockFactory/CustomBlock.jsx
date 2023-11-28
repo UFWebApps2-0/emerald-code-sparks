@@ -18,8 +18,6 @@ import { getActivityToolbox } from '../../../../../Utils/requests';
 import PublicCanvas from '../PublicCanvas';
 import './blocks';
 
-
-
 let plotId = 1;
 
 export default function CustomBlock({ activity, isSandbox, workspace}) {
@@ -48,6 +46,18 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
 
   /* ADDED */ const blockMap = new Map(); // IMPORTANT
   /* ADDED */ const descriptionMap = new Map(); // IMPORTANT
+
+  // NEED TO STORE
+  /* 
+  BLOCK NAME [Add to Custom Block bar] [blockMap, descriptionMap]
+  BLOCK DESCRIPTION [descriptionMap]
+  BLOCK DEFINITION [JavaScript] [blockMap]
+  GENERATOR STUB [ArduinoCode] [blockMap]
+  (one after another!, can be used as one unit)
+
+
+
+  */
 
 
   const setWorkspace = () => {
@@ -228,11 +238,13 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
     </button>
   );
 
-
     /* ADDED */ const askBlockName = (generatorCode) => {
       const blockName = window.prompt('Enter a name for your custom block: ');
       if (blockName) {
         console.log(`Name: ${blockName}`);
+      }
+      else {
+        return '-1';
       }
       return blockName;
     };
@@ -247,26 +259,29 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
 
    /* ADDED */   const blockSaveProcess = () => { // saves blocks to maps
 
-    // 1. Ask Name
+    // 1. Ask if Name is Final
     let blockName = askBlockName();
+    if (blockName != '-1') {
+      /* let blockName = genCode.name;
+      console.log(`Name: ${blockName}`); */
 
-    // 2. Add Name & Block to blockMap
-
-    while (blockMap.has(blockName)) {
-      blockName = window.prompt('Name already exists in database. Enter a new name for your custom block: ');
-      if (blockName) {
-        console.log(`Name: ${blockName}`);
+      // 2. Add Name & Block to blockMap
+      while (blockMap.has(blockName)) {
+        blockName = window.prompt('The name "' + blockName + '" already exists in database. Enter a new name for your custom block: ');
+        if (blockName) {
+          console.log(`Name: ${blockName}`);
+        }
       }
-    }
 
-    blockMap.set(blockName, 'block');
+      blockMap.set(blockName, 'block');
 
-    // 3. Ask Description
-    const blockDescription = askBlockDescription();
+      // 3. Ask Description
+      const blockDescription = askBlockDescription();
 
-    // 4. Add Name & Description To descriptionMap
-    descriptionMap.set(blockName, blockDescription);
-  
+      // 4. Add Name & Description To descriptionMap
+      descriptionMap.set(blockName, blockDescription);
+  }
+
   // include method to DELETE blocks in 'Program your arduino'
   }
 
@@ -348,7 +363,7 @@ function xmlToBlocklyJs(xmlCode) { // UNUSED 1
   } else {
     return ''; // Return an empty string if no block is found.
   }
-} // UNUSED 1
+}
 
 function updateLanguage(xmlCode, varToChange) {
   var xmlDoc = new DOMParser().parseFromString(xmlCode, 'text/xml');

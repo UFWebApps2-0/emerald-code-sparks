@@ -58,9 +58,9 @@ export default function OrganizationDashboard() {
       <TabPane tab="Users" key="users">
         <OrganizationUsers id={props.id}/>
       </TabPane>
-      <TabPane tab="Moderation" key="moderation">
+      {/*<TabPane tab="Moderation" key="moderation">
         <OrganizationModeration id={props.id}/>
-      </TabPane>
+      </TabPane>*/}
       <TabPane tab="Classrooms" key="classroom">
         <OrganizationClasses id={props.id}/>
     </TabPane>

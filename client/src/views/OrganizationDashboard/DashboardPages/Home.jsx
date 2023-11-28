@@ -30,7 +30,8 @@ export default function OrganizationHome(props) {
   return (
     <>
       <div id="main-header">Welcome to {org.Name}</div>
-      <div></div>
+      <div className='home-desc'>To manage users within the organization, go to the users tab</div>
+      <div className='home-desc'>To manage the classrooms within the organizataion, go to the classrooms tab</div>
       {/* <p>{sessionStorage.getItem("user")}</p>
     {orgs.map((organization) => (
       <div key={organization.id} id='dashboard-class-card'>

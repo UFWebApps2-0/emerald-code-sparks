@@ -34,58 +34,35 @@ export default function OrganizationDashboard() {
     });
   }, [orgId]);  // Add orgId to the dependency array
 
-    if (verify) {
-      return <NonOrgMember/>}
-  
-
-
-  function OrgDashboardPage() {
-    let list1 = [];
-    Object.keys(OrgPages).forEach((page) => {
-      if (pagename === OrgPages[page][0]) {
-        list1.push(<>{OrgPages[page][1]}</>);
-      }
-    });
-    if (list1.length === 0) {
-      list1.push(OrgPages['Home'][1]);
-    }
-    return <div className="org-content">{list1}</div>;
-  }
-
-  const pagename = window.location.pathname.substring(
-    '/organizationdashboard'.length
-  );
-  const OrgPages = {
-    Home: ['', <OrganizationHome />],
-    Users: ['/users', <OrganizationUsers />],
-    Moderation: ['/moderation', <OrganizationModeration />],
-    Classrooms: ['/classes', <OrganizationClasses />],
-  };
 
   const [searchParams, setSearchParams] = useSearchParams();
-
   const tab = searchParams.get('tab');
 
-  return (
+  function Page(props) {
     <div className="container nav-padding">
-      <NavBar />
-      <Tabs
-        defaultActiveKey={tab ? tab : 'home'}
-        onChange={(key) => setSearchParams({ tab: key })}
-      >
-        <TabPane tab="Home" key="home">
-          <OrganizationHome />
-        </TabPane>
-        <TabPane tab="Users" key="users">
-          <OrganizationUsers />
-        </TabPane>
-        <TabPane tab="Moderation" key="moderation">
-          <OrganizationModeration />
-        </TabPane>
-        <TabPane tab="Classrooms" key="classroom">
-          <OrganizationClasses />
-        </TabPane>
-      </Tabs>
-    </div>
-  );
+    <NavBar />
+    <Tabs
+      defaultActiveKey={tab ? tab : 'home'}
+      onChange={(key) => setSearchParams({ tab: key })}
+    >
+      <TabPane tab="Home" key="home">
+        <OrganizationHome id={props.id}/>
+      </TabPane>
+      {/* <TabPane tab="Users" key="users">
+        <OrganizationUsers id={orgId}/>
+      </TabPane> */}
+      {/* <TabPane tab="Moderation" key="moderation">
+        <OrganizationModeration />
+      </TabPane>
+      <TabPane tab="Classrooms" key="classroom">
+        <OrganizationClasses />
+      </TabPane> */}
+    </Tabs>
+  </div>
+  }
+
+  const renderedPage = <Page id={orgId}/>;
+
+  if (!verify) return <NonOrgMember/>
+  else return renderedPage;
 }

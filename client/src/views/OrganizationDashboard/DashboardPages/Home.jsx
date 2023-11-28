@@ -7,20 +7,23 @@ import { getToken } from '../../../Utils/AuthRequests';
 import { getOrgUsers } from '../../../Utils/requests';
 import { message } from 'antd';
 
-export default function OrganizationHome() {
+export default function OrganizationHome(props) {
+  console.log(props.id)
   const [org, setOrg] = useState({});
   const user = getToken();
 
   useEffect(() => {
     let classroomIds = [];
     getOrgUsers(
-      JSON.parse(sessionStorage.getItem('user')).organization.id
+      props.id
     ).then((res) => {
       if (res.data) {
+        console.log(res.data);
         setOrg(res.data);
         console.log(org);
         console.log(res.data);
       } else {
+        console.log(res.data);
         message.error(res.err);
       }
     });
@@ -32,7 +35,7 @@ export default function OrganizationHome() {
   return (
     <>
       <div id="main-header">Welcome to {org.Name}</div>
-      {/* <p>{sessionStorage.getItem("user")}</p>
+      <p>{sessionStorage.getItem("user")}</p>
     {orgs.map((organization) => (
       <div key={organization.id} id='dashboard-class-card'>
         <div id='card-left-content-container'>
@@ -52,7 +55,7 @@ export default function OrganizationHome() {
           </div>
         </div>
       </div>
-    ))} */}
+    ))}
     </>
   );
 }

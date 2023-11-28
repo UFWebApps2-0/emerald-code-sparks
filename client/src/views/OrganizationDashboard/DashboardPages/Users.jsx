@@ -3,12 +3,13 @@ import { getToken } from '../../../Utils/AuthRequests';
 import { getOrgUsers } from "../../../Utils/requests";
 import { message } from 'antd';
 
-export default function OrganizationUsers() {
+export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
+  console.log(props.id);
 
   useEffect(() => {
     let classroomIds = [];
-    getOrgUsers(JSON.parse(sessionStorage.getItem("user")).organization.id).then((res) => {
+    getOrgUsers(props.id).then((res) => {
       if (res.data) {
         // res.data.classrooms.forEach((classroom) => {
         //   classroomIds.push(classroom.id);

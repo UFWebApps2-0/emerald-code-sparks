@@ -21,6 +21,8 @@ import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import VideoEditor from './views/ContentCreator/VideoEditor/VideoEditor';
 import VideoDisplay from './views/ContentCreator/VideoEditor/VideoDisplay';
+import VideoPage from './views/Video/VideoPage';
+import TestVideo from './views/Video/TestVideo';
 
 const App = () => {
   return (
@@ -34,6 +36,8 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
+        <Route path='video-player' element={<VideoPage />} />
+        <Route path='test-video' element={<TestVideo />} />
         <Route
           path='/report'
           element={

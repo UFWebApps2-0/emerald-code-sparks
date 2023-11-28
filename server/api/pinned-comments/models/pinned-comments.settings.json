@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pinned_comments",
+  "info": {
+    "name": "Pinned-Comments",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "User_name": {
+      "type": "string"
+    },
+    "comment_string": {
+      "type": "string"
+    },
+    "is_pinned": {
+      "type": "boolean"
+    }
+  }
+}

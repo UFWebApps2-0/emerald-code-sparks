@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gallery_posts",
+  "info": {
+    "name": "Gallery-Post",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "User_name": {
+      "type": "string"
+    },
+    "like_count": {
+      "type": "integer"
+    },
+    "view_count": {
+      "type": "integer"
+    },
+    "discussion_board": {
+      "type": "json"
+    },
+    "visibility": {
+      "type": "enumeration",
+      "enum": [
+        "Public",
+        "Organization",
+        "Classroom"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Project",
+        "Block",
+        "Lesson"
+      ]
+    },
+    "xml_text": {
+      "type": "text"
+    }
+  }
+}

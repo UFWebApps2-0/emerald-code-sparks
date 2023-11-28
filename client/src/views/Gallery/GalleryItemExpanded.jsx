@@ -11,7 +11,7 @@ import './GalleryItemExpanded.less';
 const GalleryItemExpanded = () => {
     const path = window.location.pathname;
     const galleryId = path.substring(path.lastIndexOf("/item/") + 6).replace(/\D/g, '');
-    const [galleryObject, setGalleryObject] = useState(undefined);
+    const [galleryObject, setGalleryObject] = useState({});
     const [render, setRender] = useState(<p>Loading...</p>);
     const [titleHeading, setTitleHeading] = useState("Gallery Item Expanded");
     const notFoundMessage = (
@@ -20,13 +20,13 @@ const GalleryItemExpanded = () => {
                 <p id='notFound'>Could not find that item. Why not <a href="/gallery/">return to Gallery</a>?</p>
             </div>
         </div>);
-
     async function fetchObject() {
         const response = await getGalleryObject(galleryId);
-        if (response.data === undefined || response.data === null) {
+        if (!response.data|| response.data === null) {
             setRender(notFoundMessage);
             return;
         }
+        console.log('response', response.data)
         setGalleryObject(response.data);
         setTitleHeading(response.data.Title);
         setRender(
@@ -37,7 +37,7 @@ const GalleryItemExpanded = () => {
                 <div className='flex flex-column discussion-col'>
                     <div className='flex flex-row' style={{ height: 80 + "%" }}>
                         <div className='flex flex-column'>
-                            <DiscussionBoard />
+                            <DiscussionBoard post={galleryObject} />
                         </div>
                     </div>
                     <div className='flex flex-row justify-end buttons-row'>

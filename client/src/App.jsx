@@ -52,7 +52,7 @@ const App = () => {
         <Route path='report' element={<Report />}/>
         <Route path='createStudyPage' element={<CreateStudyPage/>}/>
         <Route path='studyLevel' element={<StudyLevelReport />}/>
-        <Route path='studyLevel/:id' element={<StudyLevelReportView />}/>
+        <Route path='studyLevel/:id' element={<StudyLevelReportView/>}/>
         <Route path='activityLevel' element={<ActivityLevelReport />}/>
         <Route path='activityLevel/:id' element={<ActivityLevelReportView/>}/>
         <Route path='group-report' element={<GroupReport />}/>

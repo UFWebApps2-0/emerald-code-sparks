@@ -765,6 +765,15 @@ export const getResearchers = async () =>
     error: 'Studies could not be deleted.',
   });
 
+  export const getStudy = async(id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/studies/${id}`,
+    data: undefined,
+    auth: true,
+    error: 'Study could not be retrieved.',
+  });
+
   export const createStudentInvite = async (json) => 
    await makeRequest({
       method: POST,

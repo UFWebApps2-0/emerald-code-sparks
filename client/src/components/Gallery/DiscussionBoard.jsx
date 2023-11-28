@@ -7,8 +7,8 @@ const DiscussionBoard = ({ post }) => {
 
   // State to hold comments
   const [sortedComments, setSortedComments] = useState([]);
-  const [commentInput, setCommentInput] = useState(''); // Define commentInput state
-
+  const [commentInput, setCommentInput] = useState(''); // Define commentInput state 
+  const maxPinCount = 3;
 
   useEffect(() => {
     // Fetch comments when the component mounts
@@ -23,8 +23,9 @@ const DiscussionBoard = ({ post }) => {
     fetchComments();
   }, [post]);
 
-  const handleCommentSubmit = async () => {
-    try {
+const handleCommentSubmit = async () => {
+    console.log(post)
+  try {
       // Check if the comment input is not empty
       if (commentInput.trim() !== '') {
         // Post an unpinned comment
@@ -66,10 +67,11 @@ const DiscussionBoard = ({ post }) => {
   };
   //these props is the actual comment object
   const handlePinning = async (props) => {
+    console.log("handle pinning: ", props)
     try {
-      if (props.pinned === true) {
+      if (props.is_pinned === true) {
         // Post an unpinned comment
-        await postUnpinnedComment({
+        const response = await postUnpinnedComment({
           User_name: props.User_name, // Replace with the actual username or get it from your authentication system
           comment: props.comment_string,
           is_pinned: false,
@@ -77,18 +79,37 @@ const DiscussionBoard = ({ post }) => {
 
         //delete the pinned comment from pinned comment backend and from gallery-post attribute backend
         await deletePinnedComment(props.id);
+        const discussionBoard = post.discussion_board || [];
+        const updatedDiscussionBoard = discussionBoard.filter(comment => comment.id !== props.id);
+        updatedDiscussionBoard.push(response.data);
+        await updateDiscussionBoard(post.id, updatedDiscussionBoard);
+        message.success('Unpinned comment successfully!');
+        console.log(props);
       }
 
       else {
         // Post a pinned comment
-        await postPinnedComment({
-          User_name: props.User_name,
-          comment: props.comment_string,
-          is_pinned: true,
-        });
-        //delete the unpinned comment from unpinned comment backend and from gallery-post attribute backend
-        await deleteUnpinnedComment(props.id);
-        await deleteDiscussionBoard(post.id, props.id);
+        const discussionBoard0 = post.discussion_board || [];
+        const updatedDiscussionBoard0 = discussionBoard0.filter(comment => comment.is_pinned == true);
+        let x = updatedDiscussionBoard0.length;
+        console.log(x);
+        if(x + 1 <= maxPinCount){
+          const response = await postPinnedComment({
+            User_name: props.User_name,
+            comment: props.comment_string,
+            is_pinned: true,
+          });
+          //delete the unpinned comment from unpinned comment backend and from gallery-post attribute backend
+          await deleteUnpinnedComment(props.id);
+          const discussionBoard = post.discussion_board || [];
+          const updatedDiscussionBoard = discussionBoard.filter(comment => comment.id !== props.id);
+          updatedDiscussionBoard.push(response.data);
+          await updateDiscussionBoard(post.id, updatedDiscussionBoard);
+          message.success('Pinned comment successfully!');
+        }
+        else{
+          message.error('Cannot pin more than 3 comments!');
+        }
       }
 
       await refreshComments();
@@ -115,8 +136,8 @@ const DiscussionBoard = ({ post }) => {
     const discussionBoard = post.discussion_board || [];
     const pinnedComments = discussionBoard.filter(comment => comment.is_pinned === true);
     const unpinnedComments = discussionBoard.filter(comment => comment.is_pinned !== true);
-    const sortedComments = [...pinnedComments, ...unpinnedComments];
-    setSortedComments(sortedComments);
+    const updatedSortedComments = [...pinnedComments, ...unpinnedComments];
+    setSortedComments(updatedSortedComments);
   };
 
   const handleUpdateComment = async (post, props) => {

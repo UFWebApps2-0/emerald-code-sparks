@@ -39,6 +39,7 @@ export default function OrganizationDashboard() {
   const tab = searchParams.get('tab');
 
   function Page(props) {
+    return (
     <div className="container nav-padding">
     <NavBar />
     <Tabs
@@ -48,17 +49,17 @@ export default function OrganizationDashboard() {
       <TabPane tab="Home" key="home">
         <OrganizationHome id={props.id}/>
       </TabPane>
-      {/* <TabPane tab="Users" key="users">
-        <OrganizationUsers id={orgId}/>
-      </TabPane> */}
-      {/* <TabPane tab="Moderation" key="moderation">
-        <OrganizationModeration />
+      <TabPane tab="Users" key="users">
+        <OrganizationUsers id={props.id}/>
+      </TabPane>
+      <TabPane tab="Moderation" key="moderation">
+        <OrganizationModeration id={props.id}/>
       </TabPane>
       <TabPane tab="Classrooms" key="classroom">
-        <OrganizationClasses />
-      </TabPane> */}
+        <OrganizationClasses id={props.id}/>
+    </TabPane>
     </Tabs>
-  </div>
+  </div>)
   }
 
   const renderedPage = <Page id={orgId}/>;

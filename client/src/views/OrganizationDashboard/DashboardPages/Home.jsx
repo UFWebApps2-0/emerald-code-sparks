@@ -4,27 +4,24 @@
 
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers } from '../../../Utils/requests';
+import { getOrgUsers, getOrg } from '../../../Utils/requests';
 import { message } from 'antd';
 
 export default function OrganizationHome(props) {
-  console.log(props.id)
   const [org, setOrg] = useState({});
   const user = getToken();
 
   useEffect(() => {
     let classroomIds = [];
-    getOrgUsers(
-      props.id
+    getOrg(
+      props.id 
     ).then((res) => {
-      if (res.data) {
-        console.log(res.data);
-        setOrg(res.data);
-        console.log(org);
-        console.log(res.data);
+      console.log(res);
+      let users = res.data.users;
+      if (users) {
+        setOrg(users[0]);
       } else {
-        console.log(res.data);
-        message.error(res.err);
+        message.error(ress.err);
       }
     });
   }, []);
@@ -35,7 +32,7 @@ export default function OrganizationHome(props) {
   return (
     <>
       <div id="main-header">Welcome to {org.Name}</div>
-      <p>{sessionStorage.getItem("user")}</p>
+      {/* <p>{sessionStorage.getItem("user")}</p>
     {orgs.map((organization) => (
       <div key={organization.id} id='dashboard-class-card'>
         <div id='card-left-content-container'>
@@ -55,7 +52,7 @@ export default function OrganizationHome(props) {
           </div>
         </div>
       </div>
-    ))}
+    ))} */}
     </>
   );
 }

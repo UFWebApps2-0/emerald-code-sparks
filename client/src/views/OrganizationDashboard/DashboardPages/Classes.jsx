@@ -10,7 +10,7 @@ import NavBar from '../../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 //import { org } from '../Home';
 
-export default function OrganizationClasses() {
+export default function OrganizationClasses(props) {
     const [classrooms, setClassrooms] = useState([]);
     const [org, setOrg] = useState({});
     const orgUsers = getOrgUsers();
@@ -21,7 +21,7 @@ export default function OrganizationClasses() {
     
     useEffect(() => {
         let classroomIds = [];
-        getOrgUsers(JSON.parse(sessionStorage.getItem("user")).organization.id).then((res) => {
+        getOrgUsers(props.id).then((res) => {
             if (res.data) {
                  res.data.classrooms.forEach((classroom) => {
                   classroomIds.push(classroom.id);

@@ -57,6 +57,7 @@ export const getActivities = async () =>
   makeRequest({
     method: GET,
     path: `${server}/activities`,
+    data: undefined,
     auth: true,
     error: 'Activities could not be retrieved.',
   });
@@ -65,6 +66,7 @@ export const getTeachers = async () =>
   makeRequest({
     method: GET,
     path: `${server}/mentors`,
+    data: undefined,
     auth: true,
     error: 'Teachers could not be retrieved.',
   });
@@ -73,6 +75,7 @@ export const getAllClassrooms = async () =>
   makeRequest({
     method: GET,
     path: `${server}/classrooms`,
+    data: undefined,
     auth: true,
     error: 'Classrooms could not be retrieved.',
   });
@@ -80,6 +83,7 @@ export const getAllClassrooms = async () =>
 export const getAllStudents = async () =>
   makeRequest({
     method: GET,
+    data: undefined,
     path: `${server}/students`,
     auth: true,
     error: 'Students could not be retrieved.',
@@ -88,6 +92,7 @@ export const getAllStudents = async () =>
 export const getActivityToolboxAll = async () =>
   makeRequest({
     method: GET,
+    data: undefined,
     path: `${server}/sandbox/toolbox`,
     error: 'Toolbox could not be retrieved.',
   });
@@ -109,6 +114,7 @@ export const getActivityToolbox = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/activities/toolbox/${id}`,
+    data: undefined,
     auth: true,
     error: 'Toolbox could not be retrieved.',
   });
@@ -117,6 +123,7 @@ export const getMentor = async () =>
   makeRequest({
     method: GET,
     path: `${server}/classroom-managers/me`,
+    data: undefined,
     auth: true,
     error: 'Your classroom manager information could not be retrieved.',
   });
@@ -125,6 +132,7 @@ export const getClassroom = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/classrooms/${id}`,
+    data: undefined,
     auth: true,
     error: 'Classroom information could not be retrieved',
   });
@@ -133,6 +141,7 @@ export const getStudentClassroom = async () =>
   makeRequest({
     method: GET,
     path: `${server}/classrooms/student`,
+    data: undefined,
     auth: true,
     error: 'Classroom information could not be retrieved',
   });
@@ -144,6 +153,7 @@ export const getStudents = async (code) =>
   makeRequest({
     method: GET,
     path: `${server}/classrooms/join/${code}`,
+    data: undefined,
     error: 'Student info could not be retrieved.',
   });
 
@@ -151,6 +161,7 @@ export const getStudent = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/students/${id}`,
+    data: undefined,
     auth: true,
     error: 'Student info could not be retrieved.',
   });
@@ -202,6 +213,7 @@ export const getUnits = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/units?grade=${id}`,
+    data: undefined,
     auth: true,
     error: 'Failed to retrieve units.',
   });
@@ -210,6 +222,7 @@ export const getLessonModule = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/lesson-modules/${id}`,
+    data: undefined,
     auth: true,
     error: 'Failed to retrieve learning standard.',
   });
@@ -218,7 +231,7 @@ export const getUnit = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/units/${id}`,
-    auth: true,
+    data: undefined,
     error: 'Failed to retrieve learning standard.',
   });
 
@@ -226,6 +239,7 @@ export const getAllUnits = async () =>
   makeRequest({
     method: GET,
     path: `${server}/units`,
+    data: undefined,
     auth: true,
     error: 'Failed to retrieve learning standard.',
   });
@@ -234,6 +248,7 @@ export const getLessonModulecount = async () =>
   makeRequest({
     method: GET,
     path: `${server}/lesson-modules/count`,
+    data: undefined,
     auth: true,
     error: 'Failed to retrieve learning standard.',
   });
@@ -242,6 +257,7 @@ export const getLessonModuleAll = async () =>
   makeRequest({
     method: GET,
     path: `${server}/lesson-modules?_sort=unit.name:ASC,name:ASC`,
+    data: undefined,
     auth: true,
     error: 'Failed to retrieve learning standard.',
   });
@@ -275,6 +291,7 @@ export const getSaves = async (activity) =>
   makeRequest({
     method: GET,
     path: `${server}/saves/activity/${activity}`,
+    data: undefined,
     auth: true,
     error: 'Past saves could not be retrieved.',
   });
@@ -283,6 +300,7 @@ export const getSave = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/saves/${id}`,
+    data: undefined,
     auth: true,
     error: 'Save could not be retrieved.',
   });
@@ -305,6 +323,7 @@ export const getSubmission = async (submissionId, path, isAuth) =>
   makeRequest({
     method: GET,
     path: `${server}${path}/${submissionId}`,
+    data: undefined,
     auth: isAuth,
     error: 'Failed to retrieve submission status',
   });
@@ -335,6 +354,7 @@ export const deleteStudent = async (student) =>
   makeRequest({
     method: DELETE,
     path: `${server}/students/${student}`,
+    data: undefined,
     auth: true,
     error: 'Failed to delete student.',
   });
@@ -367,6 +387,7 @@ export const deleteActivity = async (id) =>
   makeRequest({
     method: DELETE,
     path: `${server}/activities/${id}`,
+    data: undefined,
     auth: true,
     error: 'Failed to delete activity.',
   });
@@ -375,6 +396,7 @@ export const deleteLessonModule = async (id) =>
   makeRequest({
     method: DELETE,
     path: `${server}/lesson-modules/${id}`,
+    data: undefined,
     auth: true,
     error: 'Failed to delete student.',
   });
@@ -443,6 +465,7 @@ export const getGrades = async () =>
   makeRequest({
     method: GET,
     path: `${server}/grades`,
+    data: undefined,
     auth: true,
     error: 'Grades could not be retrieved',
   });
@@ -451,6 +474,7 @@ export const getGrade = async (grade) =>
   makeRequest({
     method: GET,
     path: `${server}/grades/${grade}`,
+    data: undefined,
     auth: true,
     error: 'Grade could not be retrieved',
   });
@@ -509,6 +533,7 @@ export const getLessonModuleActivities = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/activities?lesson_module.id=${lsId}`,
+    data: undefined,
     auth: true,
     error: 'Activity cannot be retrived',
   });
@@ -517,6 +542,7 @@ export const getLessonModuleActivities = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces?activities.id=${lsId}`,
+    data: undefined,
     auth: true,
     error: 'Activities cannot be retrieved',
   });
@@ -525,6 +551,7 @@ export const getActivity = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/activities/${id}`,
+    data: undefined,
     auth: true,
     error: 'Activity cannot be retrived',
   });
@@ -556,6 +583,7 @@ export const getSessions = async () =>
   makeRequest({
     method: GET,
     path: `${server}/sessions`,
+    data: undefined,
     auth: true,
     error: 'Sessions could not be retrieved.',
   });
@@ -564,6 +592,7 @@ export const getSessionsWithFilter = async (filterOptions) =>
   makeRequest({
     method: GET,
     path: `${server}/sessions?${filterOptions}`,
+    data: undefined,
     auth: true,
     error: 'Sessions could not be retrieved.',
   });
@@ -572,6 +601,7 @@ export const getSessionCount = async () =>
   makeRequest({
     method: GET,
     path: `${server}/sessions/count`,
+    data: undefined,
     auth: true,
     error: 'Session count could not be retrieved.',
   });
@@ -580,6 +610,7 @@ export const getSessionCountWithFilter = async (filterOptions) =>
   makeRequest({
     method: GET,
     path: `${server}/sessions/count?${filterOptions}`,
+    data: undefined,
     auth: true,
     error: 'Session count could not be retrieved.',
   });
@@ -588,6 +619,7 @@ export const getSession = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/sessions/${id}`,
+    data: undefined,
     auth: true,
     error: 'Sessions could not be retrieved.',
   });
@@ -615,6 +647,7 @@ export const getAuthorizedWorkspaces = async () =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces`,
+    data: undefined,
     auth: true,
     error: 'Unable to retrive cc worksapces',
   });
@@ -623,6 +656,7 @@ export const getAuthorizedWorkspace = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces/${id}`,
+    data: undefined,
     auth: true,
     error: 'Unable to retrive cc workspace',
   });
@@ -651,6 +685,7 @@ export const getAuthorizedWorkspaceToolbox = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces/toolbox/${id}`,
+    data: undefined,
     auth: true,
     error: 'Toolbox could not be retrieved.',
   });
@@ -670,6 +705,7 @@ export const deleteAuthorizedWorkspace = async (id) =>
   makeRequest({
     method: DELETE,
     path: `${server}/authorized-workspaces/${id}`,
+    data: undefined,
     auth: true,
     error: 'Unable to delete cc workspace',
   });
@@ -678,6 +714,7 @@ export const getClassroomWorkspace = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/classroom/workspaces/${id}`,
+    data: undefined,
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
@@ -696,6 +733,7 @@ export const getStudies = async () =>
   makeRequest({
     method: GET,
     path: `${server}/studies`,
+    data: undefined,
     auth: true,
     error: 'Studies could not be retrieved.',
   });
@@ -704,6 +742,7 @@ export const getResearchers = async () =>
   makeRequest({
     method: GET,
     path: `${server}/researchers`,
+    data: undefined,
     auth: true,
     error: 'Researchers could not be retrieved.',
   });
@@ -721,6 +760,16 @@ export const getResearchers = async () =>
   makeRequest({
     method: DELETE,
     path: `${server}/studies/${id}`,
+    data: undefined,
     auth: true,
     error: 'Studies could not be deleted.',
   });
+
+  export const createStudentInvite = async (json) => 
+    makeRequest({
+      method: POST,
+      path: `${server}/student-invites`,
+      data: json,
+      auth: true,
+      error: 'Student could not be invited.'
+    })

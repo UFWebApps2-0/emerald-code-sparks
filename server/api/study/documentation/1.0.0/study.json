@@ -741,6 +741,9 @@
                 "student": {
                   "type": "string"
                 },
+                "Consent": {
+                  "type": "boolean"
+                },
                 "published_at": {
                   "type": "string"
                 },

@@ -655,6 +655,9 @@
               }
             }
           },
+          "Consent": {
+            "type": "boolean"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -668,6 +671,9 @@
           },
           "student": {
             "type": "string"
+          },
+          "Consent": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",

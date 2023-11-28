@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "student_invites",
   "info": {
-    "name": "Student Invite"
+    "name": "Student Invite",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -17,6 +18,9 @@
     "student": {
       "model": "student",
       "via": "student_invites"
+    },
+    "Consent": {
+      "type": "boolean"
     }
   }
 }

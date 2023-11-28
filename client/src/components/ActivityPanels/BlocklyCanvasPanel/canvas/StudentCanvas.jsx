@@ -8,6 +8,7 @@ import ConsoleModal from '../modals/ConsoleModal';
 import PlotterModal from '../modals/PlotterModal';
 import DisplayDiagramModal from '../modals/DisplayDiagramModal'
 import VersionHistoryModal from '../modals/VersionHistoryModal';
+import StudentRubricModal from '../modals/StudentRuBricModal';
 import {
   connectToPort,
   handleCloseConnection,
@@ -345,6 +346,9 @@ export default function StudentCanvas({ activity }) {
       </Menu.Item>
       <Menu.Item>
         <CodeModal title={'Arduino Code'} workspaceRef={workspaceRef.current} />
+      </Menu.Item>
+      <Menu.Item>
+        <StudentRubricModal title={'Rubric'} workspaceRef={workspaceRef.current} act={activity}/>
       </Menu.Item>
     </Menu>
   );

@@ -53,7 +53,7 @@ export const getAllOrgs = async () =>
 export const getOrgClasses = async (id) =>
         makeRequest({
             method: GET,
-            path: `${server}/organizations/${id}/classes`,
+            path: `${server}/organizations/${id}/classrooms`,
             auth: true,
             error: 'Faild to get list of org classes'
         });
@@ -171,7 +171,7 @@ export const getMentor = async () =>
 export const getClassroom = async (id) =>
   makeRequest({
     method: GET,
-    path: `${server}/classrooms/${id}`,
+    path: `${server}/classrooms/${id}?populate=*`,
     auth: true,
     error: 'Classroom information could not be retrieved',
   });
@@ -181,7 +181,7 @@ export const getStudentClassroom = async () =>
     method: GET,
     path: `${server}/classrooms/student`,
     auth: true,
-    error: 'Classroom information could not be retrieved',
+    error: 'Classroom information (student) could not be retrieved',
   });
 
 export const getClassrooms = async (ids) =>

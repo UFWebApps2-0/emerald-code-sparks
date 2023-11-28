@@ -40,16 +40,16 @@ const Gallery = () => {
                     // Logic for getting the filtered items
                     if (
                         ((visibility.Public == true && it.visibility == "Public") ||
-                        (visibility.Organization == true && it.visibility == "Organization") ||
-                        (visibility.Classroom == true && it.visibility == "Classroom") ||
-                        (!visibility.Public && !visibility.Organization && !visibility.Classroom)) &&
+                            (visibility.Organization == true && it.visibility == "Organization") ||
+                            (visibility.Classroom == true && it.visibility == "Classroom") ||
+                            (!visibility.Public && !visibility.Organization && !visibility.Classroom)) &&
 
                         ((types.Block == true && it.type == "Block") ||
-                        (types.Lesson == true && it.type == "Lesson") ||
-                        (types.Project == true && it.type == "Project") ||
-                        (!types.Block && !types.Lesson && !types.Project))
+                            (types.Lesson == true && it.type == "Lesson") ||
+                            (types.Project == true && it.type == "Project") ||
+                            (!types.Block && !types.Lesson && !types.Project))
 
-                        ) {
+                    ) {
 
                         tempItems.push(
                             <GalleryItem
@@ -63,7 +63,7 @@ const Gallery = () => {
                         );
                     }
                 }
-                
+
             } catch (e) {
                 console.log("FAILED");
                 console.log("Error in gallery objects");
@@ -72,33 +72,24 @@ const Gallery = () => {
             }
 
             renderInRows(tempItems);
-    });
-}
+        });
+    }
 
     function renderInRows(items) {
         let rows = [];
         let row = [];
         for (let i = 0; i < items.length; i++) {
-            row.push(items[i]);
-            if (row.length === 4) {
+            if (value.role !== "Default User" || items[i].props.visibility === "Public") {
                 //Default user can only access public, others can access all
-                if(value.role !== "DefaultUser"){
+                row.push(items[i]);
+            }
+            if (row.length === 4) {
                 rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
                 row = [];
-                }
-                else if(value.role === "DefaultUser" && items[i].props.visibility === "Public"){
-                    rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
-                    row = [];
-                }
             }
         }
         if (row.length > 0) {
-            if(value.role !== "DefaultUser"){
-                rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
-            }
-            else if(value.role === "DefaultUser" && items[i].props.visibility === "Public"){
-                rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
-            }
+            rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
         }
         setRenderedGalleryItems(rows);
     }
@@ -113,7 +104,7 @@ const Gallery = () => {
             try {
                 for (let i = 0; i < x; i++) {
                     const it = response.data[i];
-                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board} visibility={it.visibility}/>);
+                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board} visibility={it.visibility} />);
                 }
             } catch (e) {
                 console.log("Error in gallery objects");
@@ -133,7 +124,7 @@ const Gallery = () => {
                 <SearchBar filterUpdate={filterUpdate} loadedGalleryItems={loadedGalleryItems} />
                 <div className='flex flex-row'>
                     <div className='flex flex-column filterCol'>
-                        <FilterComponent onFilterChange={applyFilters} loadedGalleryItems={loadedGalleryItems}/>
+                        <FilterComponent onFilterChange={applyFilters} loadedGalleryItems={loadedGalleryItems} />
                     </div>
                     <div className='flex flex-column'>
                         {renderedGalleryItems}

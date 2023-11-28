@@ -66,6 +66,14 @@ export const getOrg = async(id) =>
           error: 'Failed to get organization'
         })
 
+export const getRoles = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/users-permissions/roles`,
+    auth: true,
+    error: "Roles could not be found",
+  })
+
 export const getOrgUsers = async (id) =>
   makeRequest({
     method: GET,

@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers, getOrg } from "../../../Utils/requests";
+import { getOrgUsers, getOrg, getRoles} from "../../../Utils/requests";
 import { message } from 'antd';
 
 export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
+  const [rolemap, setRoleMap] = useState({});
   console.log(props.id);
 
   useEffect(() => {
     let classroomIds = [];
+    getRoles().then((res) => {
+      let map = new Map(res.data.roles.map((role) => [role.id, role.name]));
+      setRoleMap(map);
+      console.log(rolemap);
+    })
     getOrg(
       props.id
     ).then((res) => {
@@ -37,7 +43,7 @@ export default function OrganizationUsers(props) {
     {org.users.map((user) => (
       <tr key={user.username}>
         <td className='user-username'>{user.username}</td>
-        <td className='user-role'>{user.role}</td>
+        <td className='user-role'>{rolemap.get(user.role)}</td>
       </tr>
     ))}
   </tbody>

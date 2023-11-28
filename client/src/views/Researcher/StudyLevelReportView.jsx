@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { getSession, getSessions, getStudent, getStudy } from '../../Utils/requests';
+import { getSessions, getStudent, getStudy } from '../../Utils/requests';
 import './StudyLevelReportView.less';
 
 const StudyLevelReportView = () => {

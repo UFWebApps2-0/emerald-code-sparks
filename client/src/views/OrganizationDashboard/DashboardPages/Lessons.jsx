@@ -7,6 +7,7 @@ import './Lessons.less';
 function LessonForm() {
     const { orgId } = useParams();
     const [lessonData,setLessonData] = useState([])
+    const [submit, didSubmit] = useState(0)
     const [lesson, setLesson] = useState({
         title: '',
         standards: '',
@@ -96,6 +97,30 @@ function LessonForm() {
   return (
     <div className="lesson-form-container">
       <h1 id="main-header">Create a Lesson Plan</h1>
+      <div>
+        {lessonData.map((lesson, index) => {
+            if (orgId.toString() === lesson.identification) {
+            return (
+                <div key={index}>
+                <h1>{lesson.title}</h1>
+                <p><strong>Standards:</strong> {lesson.standards}</p>
+                <p><strong>Description:</strong> {lesson.description}</p>
+                <p><strong>Classroom Materials:</strong> {lesson.classroom}</p>
+                <p><strong>Student Materials:</strong> {lesson.student}</p>
+                <p><strong>Question 1:</strong> {lesson.question1}</p>
+                <p><strong>Question 2:</strong> {lesson.question2}</p>
+                <p><strong>Question 3:</strong> {lesson.question3}</p>
+                <p><strong>Answer 1:</strong> {lesson.answer1}</p>
+                <p><strong>Answer 2:</strong> {lesson.answer2}</p>
+                <p><strong>Answer 3:</strong> {lesson.answer3}</p>
+                <p><strong>Created At:</strong> {lesson.created_at}</p>
+                <p><strong>Published At:</strong> {lesson.published_at}</p>
+                </div>
+            );
+            }
+            return null; 
+        })}
+        </div>
       <div id="cardholder">
         <form onSubmit={handleSubmit} className="lesson-form">
           <label>

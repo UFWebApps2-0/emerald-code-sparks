@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers, getOrg, getRoles} from "../../../Utils/requests";
+import { getOrgUsers, getOrg, getRoles, getOrgMentors} from "../../../Utils/requests";
 import { message } from 'antd';
 
 export default function OrganizationUsers(props) {
@@ -20,6 +20,7 @@ export default function OrganizationUsers(props) {
     ).then((res) => {
       if (res.data) {
         setOrg(res.data);
+        console.log(org);
       } else {
         message.error(res.err);
       }
@@ -45,6 +46,12 @@ export default function OrganizationUsers(props) {
         <td className='user-username'>{user.username}</td>
         <td className='user-role'>{rolemap.get(user.role)}</td>
       </tr>
+    ))}
+    {org.mentors.map((mentor) => (
+        <tr key={mentor.username}>
+          <td className='user-username'>{mentor.last_name}</td>
+          <td className='user-role'>{mentor.user}</td>
+        </tr>
     ))}
   </tbody>
 </table>

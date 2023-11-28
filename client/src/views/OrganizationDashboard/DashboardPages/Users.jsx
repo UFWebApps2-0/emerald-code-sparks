@@ -45,7 +45,7 @@ export default function OrganizationUsers(props) {
   <thead>
     <tr>
       <th>Username</th>
-      <th>Roles</th>
+      <th>Role</th>
     </tr>
   </thead>
   <tbody>
@@ -58,7 +58,7 @@ export default function OrganizationUsers(props) {
     {org.mentors.map((mentor) => (
         <tr key={mentor.username}>
           <td className='user-username'>{mentor.last_name}</td>
-          <td className='user-role'>{mentor.user}</td>
+          <td className='user-role'>Mentor</td>
         </tr>
     ))}
   </tbody>
@@ -71,12 +71,15 @@ export default function OrganizationUsers(props) {
       color: #333;
     }
     .user-table {
+      margin-left: auto;
+      margin-right: auto;
       border-collapse: collapse;
-      width: 100%;
+      width: 80%;
       margin-top: 20px;
+      background-color: #ddd;
     }
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #000;
       padding: 8px;
       text-align: left;
     }

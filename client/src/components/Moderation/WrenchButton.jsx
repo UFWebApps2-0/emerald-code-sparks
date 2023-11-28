@@ -17,7 +17,7 @@ const Sidebar = ({ handleClose }) => {
 
 export default function WrenchButton({uniqueKey}) {
   const [showSidebar, setSidebar] = useState(false);
-  let [status, setStatus] = useState("Unclicked");
+  //let [status, setStatus] = useState("Unclicked");
   //let [clicked, setClicked] = useState(false);
 
   /*function Wrench() {

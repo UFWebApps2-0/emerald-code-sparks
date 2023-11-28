@@ -748,7 +748,7 @@ export const getResearchers = async () =>
   });
 
   export const addStudy = async(json) =>
-  makeRequest({
+  await makeRequest({
     method: POST,
     path: `${server}/studies`,
     data: json,
@@ -766,7 +766,7 @@ export const getResearchers = async () =>
   });
 
   export const createStudentInvite = async (json) => 
-    makeRequest({
+   await makeRequest({
       method: POST,
       path: `${server}/student-invites`,
       data: json,

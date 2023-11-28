@@ -82,6 +82,17 @@ const StudyLevelReport = () => {
       align: 'left',
     },
     {
+      title: '🔍',
+      key: 'openStudy',
+      width: '4%',
+      align: 'center',
+      render: (text, record) => (
+        <button>
+          <Link to={`/researcher/studyLevel/:${record.studyID}`}>Details</Link>
+        </button>
+      ),
+    },
+    {
       title: 'Study Name',
       key: 'studyName',
       dataIndex: 'studyName',

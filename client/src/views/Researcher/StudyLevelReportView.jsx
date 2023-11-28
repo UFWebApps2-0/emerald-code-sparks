@@ -59,7 +59,8 @@ const StudyLevelReportView = () => {
       );
     }
   };
-  return (<>
+  return (
+    <>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Study Level Report</div>
         <button
@@ -109,7 +110,7 @@ const StudyLevelReportView = () => {
         <br />
         {showReplayButton()}
       </main>
-      </>
+    </>
   );
 };
 

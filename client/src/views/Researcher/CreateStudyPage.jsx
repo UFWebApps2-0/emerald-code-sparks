@@ -249,6 +249,7 @@ const CreateStudyPage =()=>{
       studyName: values['Study name'],
       studyTag: values.selectTags,
       consentOptions: consentOptionsReformat,
+      student_invites: []
     }
     console.log(studyData);
 
@@ -263,15 +264,17 @@ const CreateStudyPage =()=>{
       }
       sendEmail(emailTemplate);
     }
-
+    await setTimeout(async () =>{
     for(let student of consentingStudents){
       let invite = {
-        study: parseInt(values['Study ID']),
+        study: parseInt(studyData.studyID),
         student: student.id,
         Consent: false,
       }
       await createStudentInvite(invite).then(x => console.log(x))
-    }
+    }}, 1000)
+
+    console.log("DONEDONE🚨")
     
 
     // Clear form fields

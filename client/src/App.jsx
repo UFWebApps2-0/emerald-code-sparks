@@ -116,7 +116,7 @@ const App = () => {
         />
         <Route path='/bugreport' element={<BugReport />} />
         <Route path='*' element={<NotFound/>} />
-        <Route path='/videoedit' element={<VideoEditor />}/>
+        <Route path='/videoedit' element={<PrivateRoute> <VideoEditor /> </PrivateRoute>}/>
         <Route path='/videodisplay/:title/:videoId' element={<VideoDisplay />} />
       </Routes>
     </div>

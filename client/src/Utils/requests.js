@@ -407,6 +407,25 @@ export const createLessonModule = async (
     error: 'Fail to create new video.',
   });
 
+  export const createQuestion = async (url, name, description, releaseDate) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/interactiveq`,
+    data: {
+      Question: title, 
+      Correctanswer: correctAnswer,
+      Answer1: choices.A,
+      Answer2: choices.B,
+      Answer3: choices.C,
+      Answer4: choices.D,
+    },
+    auth: true,
+    error: 'Failed to add question.',
+  });
+
+
+
+
 export const createUnit = async (number, name, standardsID, standardsDescrip, grade) =>
   makeRequest({
     method: POST,

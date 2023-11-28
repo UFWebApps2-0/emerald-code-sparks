@@ -48,7 +48,10 @@ export default function StudentLogin() {
     let authList = [];
     for (let i = 0; i < ids.length; i++) {
       for (let j = 0; j < studentList.length; j++) {
-        if (ids[i] === studentList[j].id) authList.push(studentList[j]);
+        if (ids[i] === studentList[j].id) {
+          authList.push(studentList[j]);
+          localStorage.setItem('studentName', studentList[j].name);
+        }
       }
     }
     let fails = [...authFail];
@@ -72,7 +75,7 @@ export default function StudentLogin() {
       const res = await postJoin(joinCode, ids);
       if (res.data) {
         setUserSession(res.data.jwt, JSON.stringify(res.data.students));
-        navigate('/student');
+        navigate('/student-portal');
       } else {
         message.error('Name or Animal not selected.');
       }

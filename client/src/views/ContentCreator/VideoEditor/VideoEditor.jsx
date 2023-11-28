@@ -14,8 +14,7 @@ export default function VideoEditor(props) {
       <NavBar />
       <div id="content-container">
         <div>
-        <h2 style={{ textDecoration: 'underline' }}>Add lessons to your videos</h2>
-
+        <h2 style={{ textDecoration: 'underline' }}>Add questions to your videos</h2>
           <QuestionForm />
         </div>
         <table>

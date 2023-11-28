@@ -717,7 +717,7 @@ export const updateLikeCount = async (postId, like_count) => {
   data: {
     like_count: like_count,
   },
-  error: 'Unable to update discussion board',
+  error: 'Unable to update like count',
 });};
 
 export const updateViewCount = async (postId, view_count) => {
@@ -728,7 +728,7 @@ export const updateViewCount = async (postId, view_count) => {
   data: {
     view_count: view_count,
   },
-  error: 'Unable to update discussion board',
+  error: 'Unable to update view count',
 });};
 
 export const postUnpinnedComment = async (data) =>
@@ -741,7 +741,7 @@ export const postUnpinnedComment = async (data) =>
       comment_string: data.comment,
       is_pinned: false,
     },
-    error: 'Unable to post to gallery',
+    error: 'Unable to post unpinned comment',
   });
 
 export const getUnpinnedComments = async () =>
@@ -757,7 +757,7 @@ export const deleteUnpinnedComment = async (comment) =>
     method: DELETE,
     path: `${server}/unpinned-comments/${comment}`,
     auth: true,
-    error: 'Failed to unpinned comment student.',
+    error: 'Failed to delete unpinned comment.',
   });
 
 export const postPinnedComment = async (data) =>
@@ -770,7 +770,7 @@ export const postPinnedComment = async (data) =>
       comment_string: data.comment,
       is_pinned: true,
     },
-    error: 'Unable to post to gallery',
+    error: 'Unable to post pinned comment',
   });
 
 export const getPinnedComments = async () =>
@@ -781,12 +781,12 @@ export const getPinnedComments = async () =>
     error: 'Unable to get pinned comments',
   });
 
-  export const deletePinnedComment = async (comment) =>
+export const deletePinnedComment = async (comment) =>
   makeRequest({
     method: DELETE,
     path: `${server}/pinned-comments/${comment}`,
     auth: false,
-    error: 'Failed to pinned comment student.',
+    error: 'Failed to delete pinned comment.',
   });
 
 export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
@@ -804,8 +804,6 @@ export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
   console.log('path', `${server}/gallery-posts/${postId}/`);
 };
 
-
-
 export const updateVisibility = async (postId, visibility) => {
   
   makeRequest({
@@ -815,5 +813,5 @@ export const updateVisibility = async (postId, visibility) => {
   data: {
     visibility: visibility,
   },
-  error: 'Unable to update discussion board',
+  error: 'Unable to update visibility',
 });};

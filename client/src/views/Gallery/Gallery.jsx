@@ -6,7 +6,7 @@ import FilterComponent from '../../components/Gallery/FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
 import './Gallery.less';
-
+import { useGlobalState } from '../../Utils/userState';
 
 const Gallery = () => {
 
@@ -14,6 +14,7 @@ const Gallery = () => {
     Therefore, we need to store ALL gallery objects, all which have been loaded (for searching), 
     and all which are being rendered currently (for lazy loading)
      */
+    const [value] = useGlobalState('currUser');
     const [galleryObjects, setGalleryObjects] = useState(undefined);
     const [renderedGalleryItems, setRenderedGalleryItems] = useState(undefined);
     const [loadedGalleryItems, setLoadedGalleryItems] = useState(undefined);
@@ -74,19 +75,30 @@ const Gallery = () => {
     });
 }
 
-
     function renderInRows(items) {
         let rows = [];
         let row = [];
         for (let i = 0; i < items.length; i++) {
             row.push(items[i]);
             if (row.length === 4) {
+                //Default user can only access public, others can access all
+                if(value.role !== "DefaultUser"){
                 rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
                 row = [];
+                }
+                else if(value.role === "DefaultUser" && items[i].props.visibility === "Public"){
+                    rows.push(<div key={"row" + i} className="flex flex-row galleryRows">{row}</div>);
+                    row = [];
+                }
             }
         }
         if (row.length > 0) {
-            rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+            if(value.role !== "DefaultUser"){
+                rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+            }
+            else if(value.role === "DefaultUser" && items[i].props.visibility === "Public"){
+                rows.push(<div key={"row" + items.length} className="flex flex-row galleryRows">{row}</div>);
+            }
         }
         setRenderedGalleryItems(rows);
     }
@@ -101,7 +113,7 @@ const Gallery = () => {
             try {
                 for (let i = 0; i < x; i++) {
                     const it = response.data[i];
-                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board}/>);
+                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board} visibility={it.visibility}/>);
                 }
             } catch (e) {
                 console.log("Error in gallery objects");

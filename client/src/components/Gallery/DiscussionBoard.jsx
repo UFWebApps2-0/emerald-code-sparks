@@ -3,7 +3,6 @@ import './DiscussionBoard.less';
 import { deletePinnedComment, deleteUnpinnedComment, postPinnedComment, postUnpinnedComment , updateDiscussionBoard} from '../../Utils/requests';
 
 const DiscussionBoard = ( {post} ) => {
-  console.log('post123', post);
 
   // State to hold comments
   const [sortedComments, setSortedComments] = useState([]);

@@ -7,6 +7,7 @@ import Share from '../../components/Gallery/Share';
 import Fork from '../../components/Gallery/Fork';
 import DiscussionBoard from '../../components/Gallery/DiscussionBoard';
 import './GalleryItemExpanded.less';
+import UpdateVisibilityForm from '../../components/Gallery/UpdateVisibilityForm';
 
 const GalleryItemExpanded = () => {
     const path = window.location.pathname;
@@ -20,13 +21,13 @@ const GalleryItemExpanded = () => {
                 <p id='notFound'>Could not find that item. Why not <a href="/gallery/">return to Gallery</a>?</p>
             </div>
         </div>);
+
     async function fetchObject() {
         const response = await getGalleryObject(galleryId);
-        if (!response.data|| response.data === null) {
+        if (!response.data || response.data === null) {
             setRender(notFoundMessage);
             return;
         }
-        console.log('response', response.data)
         setGalleryObject(response.data);
         setTitleHeading(response.data.Title);
         setRender(
@@ -38,6 +39,7 @@ const GalleryItemExpanded = () => {
                     <div className='flex flex-row' style={{ height: 80 + "%" }}>
                         <div className='flex flex-column'>
                             <DiscussionBoard post={galleryObject} />
+                            <UpdateVisibilityForm />
                         </div>
                     </div>
                     <div className='flex flex-row justify-end buttons-row'>

@@ -804,3 +804,16 @@ export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
   console.log('path', `${server}/gallery-posts/${postId}/`);
 };
 
+
+
+export const updateVisibility = async (postId, visibility) => {
+  
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    visibility: visibility,
+  },
+  error: 'Unable to update discussion board',
+});};

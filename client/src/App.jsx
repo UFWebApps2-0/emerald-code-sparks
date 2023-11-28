@@ -19,7 +19,13 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import ParentSignup from './views/ParentAccount/ParentSignup';
+import RestrictAccess from './views/ParentAccount/RestrictAccess'
+import ParentLogin from  './views/ParentAccount/ParentLogin';
 import MissedClass from './views/MissedClass/MissedClass';
+import StudentPortal from './views/StudentPortal/StudentPortal';
+import ShareProgram from './views/ShareProgram/ShareProgram';
+
 
 const App = () => {
   return (
@@ -28,6 +34,10 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/teacherlogin' element={<TeacherLogin />} />
+        <Route path='/parent-signup' element={<ParentSignup />} />
+        <Route path='/restrict-access' element={<RestrictAccess />} />
+        <Route path='/ParentLogin' element={<ParentLogin />} />
+        <Route path='/share-program' element={<ShareProgram />} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/login' element={<StudentLogin />} />
@@ -74,6 +84,14 @@ const App = () => {
           }
         />
         <Route
+          path="/student-portal" 
+          element={
+            <PrivateRoute>
+              <StudentPortal />
+            </PrivateRoute>
+          } 
+        />
+        <Route
           path='/student'
           element={
             <PrivateRoute>
@@ -82,7 +100,7 @@ const App = () => {
           }
         />
         <Route 
-          path='missed-class'
+          path='/missed-class'
           element={
             <PrivateRoute>
               <MissedClass />

@@ -8,6 +8,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { removeUserSession } from '../../Utils/AuthRequests';
 import { useGlobalState } from '../../Utils/userState';
 
+
 export default function NavBar() {
   const [value] = useGlobalState('currUser');
   let currentRoute = window.location.pathname;
@@ -99,6 +100,26 @@ export default function NavBar() {
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
+      {shouldShowRoute('ParentLogin') ? (
+        value.id % 2 == 0 ? (
+          <Menu.Item key='9' onClick={() => handleRouteChange(routes.ParentLogin)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Parent Login
+        </Menu.Item>
+        ) : (
+          <Menu.Item key='10' onClick={() => handleRouteChange(routes.ParentSignUp)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Parent Sign Up
+        </Menu.Item>
+        )
+      ) : null}
+      {shouldShowRoute('StudentPortal') ? (
+        <Menu.Item key='11' onClick={() => handleRouteChange(routes.StudentPortal)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Student Portal
+        </Menu.Item>
+      ) : null}
+      
     </Menu>
   );
 
@@ -112,7 +133,7 @@ export default function NavBar() {
             : value.role === 'Mentor'
             ? '/dashboard'
             : value.role === 'Student'
-            ? '/student'
+            ? '/student-portal'
             : value.role === 'Researcher'
             ? '/report'
             : '/'

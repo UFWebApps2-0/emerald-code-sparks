@@ -5,6 +5,7 @@ import { message, Spin, Row, Col, Alert, Dropdown, Menu } from 'antd';
 import { getSaves } from '../../../../Utils/requests';
 import CodeModal from '../modals/CodeModal';
 import ConsoleModal from '../modals/ConsoleModal';
+import { Modal, Button } from 'antd';
 import PlotterModal from '../modals/PlotterModal';
 import DisplayDiagramModal from '../modals/DisplayDiagramModal'
 import VersionHistoryModal from '../modals/VersionHistoryModal';
@@ -40,6 +41,8 @@ export default function StudentCanvas({ activity }) {
   const navigate = useNavigate();
   const workspaceRef = useRef(null);
   const activityRef = useRef(null);
+
+  const [isShareProgramModalVisible, setShareProgramModalVisible] = useState(false);
 
   const replayRef = useRef([]);
   const clicks = useRef(0);
@@ -210,6 +213,16 @@ export default function StudentCanvas({ activity }) {
     setUp();
   }, [activity]);
 
+  const handleShareProgram = () => {
+    setShareProgramModalVisible(true);
+    // TODO: route to another screen or display list of selectable students
+  };
+
+  // close out modal if student chooses not to share
+  const handleCancelShareProgram = () => {
+    setShareProgramModalVisible(false);
+  };
+
   const handleManualSave = async () => {
     // save workspace then update load save options
     pushEvent('save');
@@ -345,6 +358,9 @@ export default function StudentCanvas({ activity }) {
       </Menu.Item>
       <Menu.Item>
         <CodeModal title={'Arduino Code'} workspaceRef={workspaceRef.current} />
+      </Menu.Item>
+      <Menu.Item onClick={handleShareProgram}>
+         &nbsp; Share Program
       </Menu.Item>
     </Menu>
   );
@@ -511,7 +527,25 @@ export default function StudentCanvas({ activity }) {
           plotData={plotData}
           setPlotData={setPlotData}
           plotId={plotId}
-        />          
+        />
+
+        {/* once parent accounts are linked with students, change pop-up to conditionally display "share enabled" or "share disabled" */}
+        {/* For now, a confirm share feature pop up displays */}
+        <Modal
+          title="Share Program"
+          visible={isShareProgramModalVisible}
+          onCancel={() => setShareProgramModalVisible(false)}
+          footer={[
+            <Button key="no" onClick={handleCancelShareProgram}>
+              No, cancel share request
+            </Button>,
+            <Button key="yes" type="primary" onClick={handleShareProgram}>
+              Yes, confirm share request
+            </Button>,
+          ]}
+        >
+          <p>Are you sure you want to share this program?</p>
+        </Modal>
       </div>
 
       {/* This xml is for the blocks' menu we will provide. Here are examples on how to include categories and subcategories */}

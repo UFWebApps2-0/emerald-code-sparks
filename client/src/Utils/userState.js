@@ -11,6 +11,7 @@ export const getCurrUser = () => {
   if (!result.role) {
     return {
       role: 'Student',
+      id: result,
     };
   } else if (result.role.type === 'content_creator') {
     return {

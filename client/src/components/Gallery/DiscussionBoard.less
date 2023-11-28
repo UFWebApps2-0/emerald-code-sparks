@@ -1,5 +1,37 @@
-div.discussion-board {
-    max-height: 100%;
+div.comment-box {
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #3498db; /* Blue border color */
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+  /* Styling for the textarea inside the comment box */
+textarea.comment-textarea {
     width: 100%;
-    overflow-y: scroll;
+    height: 100px;
+    resize: none; /* Prevent textarea from being resized by the user */
 }
+
+/* Styling for the buttons in the bottom right corner */
+div.comment-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 5px;
+}
+
+div.comment-buttons button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+label.comment-username {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 5px;
+    font-weight: bold;
+  }

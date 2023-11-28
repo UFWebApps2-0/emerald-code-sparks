@@ -18,8 +18,7 @@ import {
 import { getAuthorizedWorkspace } from '../../../../Utils/requests';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
-import  GalleryObjectForm  from "../../../../views/Gallery/GalleryObjectForm"
-
+import  GalleryObjectForm from '../../../Gallery/GalleryObjectForm';
 let plotId = 1;
 
 export default function MentorCanvas({ activity, isSandbox, setActivity,  isMentorActivity }) {

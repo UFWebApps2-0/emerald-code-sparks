@@ -16,7 +16,7 @@ import {
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 import { useNavigate } from 'react-router-dom';
-import  GalleryObjectForm  from "../../../../views/Gallery/GalleryObjectForm"
+import  GalleryObjectForm  from '../../../Gallery/GalleryObjectForm';
 
 let plotId = 1;
 

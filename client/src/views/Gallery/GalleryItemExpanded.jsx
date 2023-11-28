@@ -38,7 +38,7 @@ const GalleryItemExpanded = () => {
                 <div className='flex flex-column discussion-col'>
                     <div className='flex flex-row' style={{ height: 80 + "%" }}>
                         <div className='flex flex-column'>
-                            <DiscussionBoard post={galleryObject} />
+                            <DiscussionBoard post={response.data} />
                             <UpdateVisibilityForm />
                         </div>
                     </div>

@@ -8,7 +8,6 @@ const DiscussionBoard = ( {post} ) => {
   const [sortedComments, setSortedComments] = useState([]);
   const [commentInput, setCommentInput] = useState(''); // Define commentInput state
 
-  console.log('post', post);
 
   useEffect(() => {
     // Fetch comments when the component mounts
@@ -24,7 +23,6 @@ const DiscussionBoard = ( {post} ) => {
   }, [post]);
 
   const handleCommentSubmit = async () => {
-    console.log(post)
   try {
       // Check if the comment input is not empty
       if (commentInput.trim() !== '') {

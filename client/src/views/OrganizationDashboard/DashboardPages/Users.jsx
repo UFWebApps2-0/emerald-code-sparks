@@ -8,20 +8,18 @@ import AddUserModal from "../../../components/AddUserModal/AddUserModal";
 export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
   const [rolemap, setRoleMap] = useState(new Map());
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
 
   async function addUser(email){
 
     let users = (await getUsers()).data;
-    let user = users.filter((data) => data.email === "mrpoet@dps.com");
+    let user = users.filter((data) => data.email === email);
 
     let orgUsers = (await getOrg(props.id)).data.users;
     orgUsers.push(user[0]);
 
     let res = await updateOrganizationUsers(props.id, orgUsers);
-    console.log((await getOrg(props.id)).data.users);
-    // let temp = await updateOrganizationUsers(props.id, users);
-    // let users2 = (await getOrg(props.id)).data.users;
-    // console.log(users2);
+    setOrg((await getOrg(props.id)).data);
   }
 
   useEffect(() => {
@@ -44,9 +42,11 @@ export default function OrganizationUsers(props) {
     });
   }, []);
 
+  // useEffect(() => {
+  //   setOrg(org);
+  // }, [isAddUserModalOpen]);
 
-  //when call button, call AddUserModal and define isOpen, closeModal, submitUser as functions from here
-  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
+
 //onClick of button, set the model to open
 
 //close modal function = set model to false
@@ -85,10 +85,10 @@ export default function OrganizationUsers(props) {
   </thead>
   <tbody>
     {org.users.map((user) => (
-      <tr key={user.username}>
-        <td className='user-username'>{user.username}</td>
-        <td className='user-role'>{rolemap.get(user.role)}</td>
-      </tr>
+        <tr key={user.username}>
+          <td className='user-username'>{user.username}</td>
+          <td className='user-role'>{rolemap.get(user.role)}</td>
+        </tr>
     ))}
     {org.mentors.map((mentor) => (
         <tr key={mentor.username}>
@@ -98,7 +98,12 @@ export default function OrganizationUsers(props) {
     ))}
   </tbody>
 </table>
-<button onClick={addUser}>
+<AddUserModal 
+  isOpen = {isAddUserModalOpen}
+  submitUser = {addUser}
+  closeModal = {() => setIsAddUserModalOpen(false)}
+/>
+<button onClick={() => setIsAddUserModalOpen(true)}>
   +
 </button>
 <style>

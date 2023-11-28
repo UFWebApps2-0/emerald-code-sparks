@@ -10,6 +10,7 @@ const AddUserModal = ({ isOpen, closeModal, submitUser }) => {
             submitUser(userEmail);
             setUserEmail('');
             closeModal();
+            //window.location.reload(false);
         }
     }
 

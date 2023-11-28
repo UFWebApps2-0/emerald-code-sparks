@@ -108,6 +108,24 @@ export const addOrganization = async (name, users) =>
     error: 'Could not add organization',
   });
 
+  export const updateOrganizationUsers = async(id, users) =>
+    makeRequest({
+      method: PUT,
+      path: `${server}/organizations/${id}`,
+      auth: true,
+      data: {
+        users: users,
+      }
+    })
+
+  export const getUsers = async () =>
+    makeRequest({
+      method: GET,
+      path: `${server}/users`,
+      auth: true,
+      error: "could not get account!",
+    })
+
   export const getUserOrgs = async (id) =>
     makeRequest({
       method: GET,

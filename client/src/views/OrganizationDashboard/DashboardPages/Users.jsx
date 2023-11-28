@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers, getOrg, getRoles, getOrgMentors} from "../../../Utils/requests";
+import { getOrgUsers, getOrg, getRoles, getOrgMentors, updateOrganizationUsers, getUsers} from "../../../Utils/requests";
 import { message } from 'antd';
 
 export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
   const [rolemap, setRoleMap] = useState(new Map());
-  console.log(props.id);
+
+  async function addUser(email){
+
+    let users = (await getUsers()).data;
+    let user = users.filter((data) => data.email === "mrpoet@dps.com");
+
+    let orgUsers = (await getOrg(props.id)).data.users;
+    orgUsers.push(user[0]);
+
+    let res = await updateOrganizationUsers(props.id, orgUsers);
+    console.log((await getOrg(props.id)).data.users);
+    // let temp = await updateOrganizationUsers(props.id, users);
+    // let users2 = (await getOrg(props.id)).data.users;
+    // console.log(users2);
+  }
 
   useEffect(() => {
     let classroomIds = [];
@@ -63,6 +77,9 @@ export default function OrganizationUsers(props) {
     ))}
   </tbody>
 </table>
+<button onClick={addUser}>
+  +
+</button>
 <style>
   {`
     .welcome-message {

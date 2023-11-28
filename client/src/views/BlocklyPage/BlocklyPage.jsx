@@ -9,7 +9,6 @@ import {
   getActivityToolboxAll,
 } from "../../Utils/requests"
 import { useGlobalState } from "../../Utils/userState"
-import  GalleryObjectForm  from "../Gallery/GalleryObjectForm"
 
 //TO SUBMIT TO GALLERY
 
@@ -82,6 +81,7 @@ export default function BlocklyPage({ isSandbox }) {
         <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
         
       </div>
+
 
     </div>
   )

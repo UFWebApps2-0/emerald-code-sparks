@@ -1,6 +1,7 @@
 import { server } from './hosts';
 import axios from 'axios';
 import { getToken } from './AuthRequests';
+import CompoundedSpace from 'antd/lib/space';
 
 const GET = 'GET';
 const PUT = 'PUT';
@@ -699,6 +700,111 @@ export const getGalleryObjects = async () =>
     auth: false,
     error: 'Unable to retrive gallery objects',
   });
+
+export const getGalleryObject = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/gallery-posts/${id}`,
+    auth: false,
+    error: 'Unable to retrive gallery object',
+  });
+
+export const updateLikeCount = async (postId, like_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    like_count: like_count,
+  },
+  error: 'Unable to update discussion board',
+});};
+
+export const updateViewCount = async (postId, view_count) => {
+  makeRequest({
+  method: PUT,
+  path: `${server}/gallery-posts/${postId}/`,
+  auth: false,
+  data: {
+    view_count: view_count,
+  },
+  error: 'Unable to update discussion board',
+});};
+
+export const postUnpinnedComment = async (data) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/unpinned-comments`,
+    auth: false,
+    data:{
+      User_name: data.User_name,
+      comment_string: data.comment,
+      is_pinned: false,
+    },
+    error: 'Unable to post to gallery',
+  });
+
+export const getUnpinnedComments = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/unpinned-comments`,
+    auth: false,
+    error: 'Unable to get unpinned comments',
+  });
+
+export const deleteUnpinnedComment = async (comment) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/unpinned-comments/${comment}`,
+    auth: true,
+    error: 'Failed to unpinned comment student.',
+  });
+
+export const postPinnedComment = async (data) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/pinned-comments`,
+    auth: false,
+    data:{
+      User_name: data.User_name,
+      comment_string: data.comment,
+      is_pinned: true,
+    },
+    error: 'Unable to post to gallery',
+  });
+
+export const getPinnedComments = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/pinned-comments`,
+    auth: false,
+    error: 'Unable to get pinned comments',
+  });
+
+  export const deletePinnedComment = async (comment) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/pinned-comments/${comment}`,
+    auth: false,
+    error: 'Failed to pinned comment student.',
+  });
+
+export const updateDiscussionBoard = async (postId, updatedDiscussionBoard) => {
+  console.log('updatedDiscussionBoard: ', updatedDiscussionBoard );
+  console.log('postId: ', postId);
+    makeRequest({
+    method: PUT,
+    path: `${server}/gallery-posts/${postId}/`,
+    auth: false,
+    data: {
+      discussion_board: updatedDiscussionBoard,
+    },
+    error: 'Unable to update discussion board',
+  });
+  console.log('path', `${server}/gallery-posts/${postId}/`);
+};
+
+
 
 export const updateVisibility = async (postId, visibility) => {
   

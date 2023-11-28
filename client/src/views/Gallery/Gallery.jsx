@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from "../../components/NavBar/NavBar";
-import GalleryItem from "./GalleryItem";
-import SearchBar from './Search';
+import GalleryItem from "../../components/Gallery/GalleryItem";
+import SearchBar from '../../components/Gallery/Search';
 import FilterComponent from '../../components/Gallery/FilterComponent';
 //testing GalleryItems
 import { getGalleryObjects } from '../../Utils/requests';
+import './Gallery.less';
 import { useGlobalState } from '../../Utils/userState';
 
 const Gallery = () => {
@@ -102,7 +103,6 @@ const Gallery = () => {
         setRenderedGalleryItems(rows);
     }
 
-
     useEffect(() => {
         getGalleryObjects().then((response) => {
             setGalleryObjects(response.data);
@@ -113,7 +113,7 @@ const Gallery = () => {
             try {
                 for (let i = 0; i < x; i++) {
                     const it = response.data[i];
-                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} visibility={it.visibility} />);
+                    tempItems.push(<GalleryItem id={it.id} Title={it.Title} User_name={it.User_name} like_count={it.like_count} view_count={it.view_count} posted={it.updated_at} discussion_board={it.discussion_board} visibility={it.visibility}/>);
                 }
             } catch (e) {
                 console.log("Error in gallery objects");
@@ -127,7 +127,7 @@ const Gallery = () => {
 
     return (
         <>
-            <NavBar />
+            < NavBar />
             <div className='container nav-padding'>
                 <h1>Gallery</h1>
                 <SearchBar filterUpdate={filterUpdate} loadedGalleryItems={loadedGalleryItems} />
@@ -139,6 +139,7 @@ const Gallery = () => {
                         {renderedGalleryItems}
                     </div>
                 </div>
+
             </div>
         </>
     );

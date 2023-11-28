@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import '../../ActivityLevels.less';
 import { compileArduinoCode } from '../../Utils/helpers';
-import { message, Spin, Row, Col, Alert, Menu, Dropdown } from 'antd';
+import { message, Spin, Row, Col, Alert, Menu, Dropdown, Button } from 'antd';
 import CodeModal from '../modals/CodeModal';
 import ConsoleModal from '../modals/ConsoleModal';
 import PlotterModal from '../modals/PlotterModal';
@@ -13,6 +13,10 @@ import {
 } from '../../Utils/consoleHelpers';
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
+import {Search} from './Search';
+import CodePopup from "./PopUp";
+import {processCodeInHelper} from "../../Utils/helpers";
+//import {window} from './Exporter';
 
 let plotId = 1;
 
@@ -27,6 +31,22 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const [connectionOpen, setConnectionOpen] = useState(false);
   const [selectedCompile, setSelectedCompile] = useState(false);
   const [compileError, setCompileError] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  const [code,codeChange] = useState(''); //Really want access to filter text. may have to make an external prop just to export it
+
+  function codeUpdate(value) {
+    processCodeInHelper(value);
+    codeChange(value);
+  }
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const workspaceRef = useRef(null);
@@ -52,6 +72,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const handleUndo = () => {
     if (workspaceRef.current.undoStack_.length > 0)
       workspaceRef.current.undo(false);
+
   };
 
   const handleRedo = () => {
@@ -60,6 +81,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
   };
 
   const handleConsole = async () => {
+
+    console.log("Something happened!");
+
     if (showPlotter) {
       message.warning('Close serial plotter before openning serial monitor');
       return;
@@ -156,6 +180,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
 
   return (
     <div id='horizontal-container' className='flex flex-column'>
+      <Col>
+
+      </Col>
       <div className='flex flex-row'>
         <div
           id='bottom-container'
@@ -167,7 +194,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
             size='large'
             spinning={selectedCompile}
           >
+             
             <Row id='icon-control-panel'>
+
               <Col flex='none' id='section-header'>
                 Program your Arduino...
               </Col>
@@ -186,6 +215,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
 
                   <Col flex={'200px'}>
                     <Row>
+
                       <Col className='flex flex-row'>
                         <button
                           onClick={handleUndo}
@@ -233,7 +263,9 @@ export default function PublicCanvas({ activity, isSandbox }) {
                         </button>
                       </Col>
                     </Row>
+
                   </Col>
+
                   <Col flex={'230px'}>
                     <div
                       id='action-btn-container'
@@ -256,16 +288,20 @@ export default function PublicCanvas({ activity, isSandbox }) {
                         onMouseEnter={() => setHoverConsole(true)}
                         onMouseLeave={() => setHoverConsole(false)}
                       />
+                      
                       {hoverConsole && (
                         <div className='popup ModalCompile'>
                           Show Serial Monitor
                         </div>
                       )}
                       <Dropdown overlay={menu}>
+                        
                         <i className='fas fa-ellipsis-v'></i>
                       </Dropdown>
+                      
                     </div>
                   </Col>
+                  
                 </Row>
               </Col>
             </Row>
@@ -277,6 +313,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
           connectionOpen={connectionOpen}
           setConnectionOpen={setConnectionOpen}
         ></ConsoleModal>
+
         <PlotterModal
           show={showPlotter}
           connectionOpen={connectionOpen}
@@ -294,6 +331,7 @@ export default function PublicCanvas({ activity, isSandbox }) {
           activity &&
             activity.toolbox &&
             activity.toolbox.map(([category, blocks]) => (
+              isSandbox && category == 'Custom' ? null :
               <category name={category} is='Blockly category' key={category}>
                 {
                   // maps out blocks in category
@@ -312,6 +350,12 @@ export default function PublicCanvas({ activity, isSandbox }) {
             ))
         }
       </xml>
+      <div>
+        <button className="buttonPop" onClick={openPopup}>Inject Code</button>
+      </div>
+      {/*Code for the pop-up window to type code into*/}
+      <CodePopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={codeUpdate}/>
+
 
       {compileError && (
         <Alert
@@ -322,5 +366,6 @@ export default function PublicCanvas({ activity, isSandbox }) {
         ></Alert>
       )}
     </div>
+
   );
 }

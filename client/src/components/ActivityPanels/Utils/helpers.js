@@ -8,6 +8,7 @@ import {
   updateActivityTemplate,
 } from '../../../Utils/requests';
 import { message } from 'antd';
+//import {}
 
 const AvrboyArduino = window.AvrgirlArduino;
 
@@ -39,13 +40,24 @@ export const getJS = (workspaceRef) => {
 };
 
 // Generates Arduino code from blockly canvas
+let custom_code = '';
 export const getArduino = (workspaceRef, shouldAlert = true) => {
   window.Blockly.Arduino.INFINITE_LOOP_TRAP = null;
   let code = window.Blockly.Arduino.workspaceToCode(workspaceRef);
+  code = "void customcode(){}\n" + code.replace("void setup() {","void setup() {\n  customcode();");
+  //custom_code = "pinMode(12, OUTPUT); digitalWrite(12, HIGH);delay(1000);digitalWrite(12, LOW);delay(1000);"
+  code = code.replace("{}","{\n" + custom_code + "\n}")
   if (shouldAlert) alert(code);
+  console.log(code);
+  console.log(typeof(code));
   return code;
+
 };
 
+export function processCodeInHelper(code) {
+  console.log('Code in helper.js:', code);
+  custom_code = code;
+}
 let intervalId;
 const compileFail = (setSelectedCompile, setCompileError, msg) => {
   setSelectedCompile(false);

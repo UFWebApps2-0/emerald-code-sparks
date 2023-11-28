@@ -1,0 +1,20 @@
+void uart_initialize(int tx_pin,int baud_rate)
+{
+  pinMode(tx_pin,OUTPUT);
+  Serial.begin(baud_rate);
+}
+
+void uart_send_char(char send)
+{
+  Serial.write(send);
+}
+//would theoretically not need anything below this kinda?
+//https://www.youtube.com/watch?v=tsD_3xQ5lpI
+void setup() {
+  uart_initialize(1,9600);
+}
+
+void loop() {
+  uart_send_char("h");
+  delay(1000);
+}

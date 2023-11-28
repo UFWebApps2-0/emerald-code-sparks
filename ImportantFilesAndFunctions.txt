@@ -1,0 +1,13 @@
+./server/api/block/services/block.js
+
+    -BlocksToToolBox() this function loads the blockly toolbox with the proper blocks that are defined by the workspace or the assignment
+
+    -FindByActivity() the server passes in the correct id of the activity which is used as a key to retrieve the correct blocks that were
+    assigned to that specific activity
+    [returned to server\api\activity\controllers\activity.js]
+
+    -FindByWorkspace() same thing as FindByActivity except now it looks for a workspace and not an assignment
+    [returned to server\api\authorized-workspace\controllers\authorized-workspace.js]
+
+
+//still looking for where the blocks are added into the 

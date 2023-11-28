@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Select, Modal } from "antd";
-import createGalleryObject from "../Gallery/CreateGalleryObject";
+import createGalleryObject from "../../views/Gallery/CreateGalleryObject";
 import "./GalleryObjectForm.less";
 import { useGlobalState } from '../../Utils/userState';
 
@@ -16,7 +16,7 @@ function GalleryObjectForm() {
 
   const handleFormSubmit = async (values) => {
     //NEED TO CHECK FOR IF LOGGED IN
-    
+
     //const [value] = useGlobalState('currUser');
     //const userName = value.name;
 
@@ -35,7 +35,7 @@ function GalleryObjectForm() {
       <Button onClick={handleCreateGalleryObject}>Publish to Gallery</Button>
       <Modal
         title="Publish to Gallery"
-        visible={modalVisible}
+        open={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}
       >

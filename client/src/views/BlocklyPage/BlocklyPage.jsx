@@ -80,7 +80,7 @@ export default function BlocklyPage({ isSandbox }) {
       <NavBar />
       <div className="flex flex-row">
         <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
-        <GalleryObjectForm />
+        
       </div>
 
 

@@ -16,6 +16,7 @@ import {
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 import { useNavigate } from 'react-router-dom';
+import  GalleryObjectForm  from "../../../../views/Gallery/GalleryObjectForm"
 
 let plotId = 1;
 
@@ -211,6 +212,7 @@ export default function StudentCanvas({ activity }) {
   }, [activity]);
 
   const handleManualSave = async () => {
+    console.log('workspace from student', workspaceRef);
     // save workspace then update load save options
     pushEvent('save');
     const res = await handleSave(activity.id, workspaceRef, replayRef.current);
@@ -548,6 +550,7 @@ export default function StudentCanvas({ activity }) {
           onClose={(e) => setCompileError('')}
         ></Alert>
       )}
+      <GalleryObjectForm workspaceRef={workspaceRef} /> 
     </div>
   );
 }

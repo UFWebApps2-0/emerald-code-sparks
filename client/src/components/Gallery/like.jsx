@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import likeImage from './like.png';
-import unlikedImage from './unlike.png';
 
 const Like = (props) => {
     const inital_like_count = props.like_count || 0;
     const [like_count, set_like_count] = useState(inital_like_count);
     const [liked, set_liked] = useState(false);
+    const [heart, setHeart] = useState(<i className='fa fa-heart' />);
 
     function like_feature(e) {
         e.stopPropagation();
 
         if (!liked) {
             set_like_count(like_count + 1);
+            setHeart(<i style={{ color: "red" }} className='fa fa-heart' />);
         } else {
             set_like_count(like_count - 1);
+            setHeart(<i className='fa fa-heart' />);
         }
         set_liked(!liked); // Toggle the liked state
     }
@@ -21,9 +22,9 @@ const Like = (props) => {
     return (
         <>
             <button className="like-button" onClick={(e) => { like_feature(e) }}>
-                <img src={liked ? likeImage : unlikedImage} alt="Like" />
+                {heart}
             </button>
-            <p>Like count:{like_count}</p>
+            <p>Likes: {like_count}</p>
         </>
     );
 }

@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lessons",
+  "info": {
+    "name": "Lessons",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "standards": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "classroom": {
+      "type": "text"
+    },
+    "student": {
+      "type": "text"
+    },
+    "question1": {
+      "type": "text"
+    },
+    "question2": {
+      "type": "text"
+    },
+    "question3": {
+      "type": "text"
+    },
+    "answer1": {
+      "type": "text"
+    },
+    "answer2": {
+      "type": "text"
+    },
+    "answer3": {
+      "type": "text"
+    },
+    "identification": {
+      "type": "text"
+    }
+  }
+}

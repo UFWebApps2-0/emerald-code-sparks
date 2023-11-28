@@ -23,6 +23,7 @@ export default function OrganizationUsers(props) {
   if (!('Name' in org)) {
     return <div id="main-header">Welcome to Loading</div>;
   }
+  console.log(org.users)
   return (<>
     <div id='main-header' className='welcome-message'>Welcome to {org.Name}</div>
 
@@ -38,7 +39,7 @@ export default function OrganizationUsers(props) {
       <tr key={user.username}>
         <td className='user-username'>{user.username}</td>
         <td className='user-role'>{user.role}</td>
-      </tr>
+      </tr>      
     ))}
   </tbody>
 </table>

@@ -12,6 +12,7 @@ import OrganizationHome from './DashboardPages/Home';
 import OrganizationUsers from './DashboardPages/Users';
 import OrganizationModeration from './DashboardPages/Moderation/Moderation';
 import OrganizationClasses from './DashboardPages/Classes';
+import OrganizationLessons from './DashboardPages/Lessons';
 import { useSearchParams, useParams } from 'react-router-dom';
 
 const { TabPane } = Tabs;
@@ -28,11 +29,10 @@ export default function OrganizationDashboard() {
   }
 
   useEffect(() => {
-    // Call isVerified with orgId and handle the promise
     isVerified(orgId).then(verified => {
       setVerify(verified);
     });
-  }, [orgId]);  // Add orgId to the dependency array
+  }, [orgId]);  
 
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -57,8 +57,11 @@ export default function OrganizationDashboard() {
       </TabPane>
       <TabPane tab="Classrooms" key="classroom">
         <OrganizationClasses id={props.id}/>
-    </TabPane>
-    </Tabs>
+      </TabPane>
+      <TabPane tab="Lessons" key="lessons">
+        <OrganizationLessons/>
+      </TabPane>
+      </Tabs>
   </div>)
   }
 

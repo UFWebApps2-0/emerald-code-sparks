@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import VideoPage from './views/Video/VideoPage';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';

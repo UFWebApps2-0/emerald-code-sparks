@@ -5,7 +5,7 @@ import QuestionForm from "./QuestionForm";
 import "./VideoEditor.less";
 
 export default function VideoEditor(props) {
-  const videoID = "ohuD_7RfAS8"
+  const videoID = "ohuD_7RfAS8";
   const videoUrl = "https://www.youtube.com/watch?v=ohuD_7RfAS8"; // Example video URL
   const videoTitle = "yeah"; // Example video title
 
@@ -13,25 +13,25 @@ export default function VideoEditor(props) {
     <div id="video-editor-container" className="container nav-padding">
       <NavBar />
       <div id="content-container">
+        <div>
+        <h2 style={{ textDecoration: 'underline' }}>Add questions to your videos</h2>
+          <QuestionForm />
+        </div>
         <table>
           <thead>
             <tr>
-              <th>URL</th>
               <th>Name</th>
-              <th>Edit</th>
+              <th>URL</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{videoUrl}</td>
               <td>
                 <Link to={`/videodisplay/${encodeURIComponent(videoTitle)}/${encodeURIComponent(videoID)}`}>
-                {videoTitle}
+                  {videoTitle}
                 </Link>
               </td>
-              <td>
-                <QuestionForm />
-              </td>
+              <td>{videoUrl}</td>
             </tr>
             {/* Add more rows here */}
           </tbody>

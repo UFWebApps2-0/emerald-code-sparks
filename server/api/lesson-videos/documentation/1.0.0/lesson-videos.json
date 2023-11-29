@@ -541,9 +541,6 @@
           "LessonVideoDescription": {
             "type": "string"
           },
-          "LessonVideoLink": {
-            "type": "string"
-          },
           "interactive_qs": {
             "type": "array",
             "items": {
@@ -635,6 +632,9 @@
               }
             }
           },
+          "VideoLink": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -649,9 +649,6 @@
           "LessonVideoDescription": {
             "type": "string"
           },
-          "LessonVideoLink": {
-            "type": "string"
-          },
           "interactive_qs": {
             "type": "array",
             "items": {
@@ -659,6 +656,9 @@
             }
           },
           "lesson_module": {
+            "type": "string"
+          },
+          "VideoLink": {
             "type": "string"
           },
           "published_at": {

@@ -664,9 +664,6 @@
                 "LessonVideoDescription": {
                   "type": "string"
                 },
-                "LessonVideoLink": {
-                  "type": "string"
-                },
                 "interactive_qs": {
                   "type": "array",
                   "items": {
@@ -674,6 +671,9 @@
                   }
                 },
                 "lesson_module": {
+                  "type": "string"
+                },
+                "VideoLink": {
                   "type": "string"
                 },
                 "published_at": {

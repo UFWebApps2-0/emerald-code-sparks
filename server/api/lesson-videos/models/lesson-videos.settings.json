@@ -17,15 +17,15 @@
     "LessonVideoDescription": {
       "type": "text"
     },
-    "LessonVideoLink": {
-      "type": "richtext"
-    },
     "interactive_qs": {
       "collection": "interactive-q"
     },
     "lesson_module": {
       "model": "lesson-module",
       "via": "lesson_videos"
+    },
+    "VideoLink": {
+      "type": "string"
     }
   }
 }

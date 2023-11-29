@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/28/2023 12:47:43 PM"
+    "x-generation-date": "11/29/2023 7:15:50 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -14027,9 +14027,6 @@
                 "LessonVideoDescription": {
                   "type": "string"
                 },
-                "LessonVideoLink": {
-                  "type": "string"
-                },
                 "interactive_qs": {
                   "type": "array",
                   "items": {
@@ -14037,6 +14034,9 @@
                   }
                 },
                 "lesson_module": {
+                  "type": "string"
+                },
+                "VideoLink": {
                   "type": "string"
                 },
                 "published_at": {
@@ -14109,9 +14109,6 @@
             "type": "string"
           },
           "LessonVideoDescription": {
-            "type": "string"
-          },
-          "LessonVideoLink": {
             "type": "string"
           },
           "interactive_qs": {
@@ -14205,6 +14202,9 @@
               }
             }
           },
+          "VideoLink": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -14219,9 +14219,6 @@
           "LessonVideoDescription": {
             "type": "string"
           },
-          "LessonVideoLink": {
-            "type": "string"
-          },
           "interactive_qs": {
             "type": "array",
             "items": {
@@ -14229,6 +14226,9 @@
             }
           },
           "lesson_module": {
+            "type": "string"
+          },
+          "VideoLink": {
             "type": "string"
           },
           "published_at": {

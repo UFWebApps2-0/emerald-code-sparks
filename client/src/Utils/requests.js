@@ -393,6 +393,36 @@ export const createLessonModule = async (
     error: 'Login failed.',
   });
 
+  export const createVideo = async (url, name, description, releaseDate) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/lesson-videos`,
+    data: {
+      LessonVideoLink: url,
+      LessonVideoTitle: name,
+      LessonVideoDescription: description,
+      releaseDate: releaseDate,
+    },
+    auth: true,
+    error: 'Fail to create new video.',
+  });
+
+  export const createQuestion = async (url, name, description, releaseDate) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/interactiveq`,
+    data: {
+      Question: title, 
+      Correctanswer: correctAnswer,
+      Answer1: choices.A,
+      Answer2: choices.B,
+      Answer3: choices.C,
+      Answer4: choices.D,
+    },
+    auth: true,
+    error: 'Failed to add question.',
+  });
+  
 export const createUnit = async (number, name, standardsID, standardsDescrip, grade) =>
   makeRequest({
     method: POST,

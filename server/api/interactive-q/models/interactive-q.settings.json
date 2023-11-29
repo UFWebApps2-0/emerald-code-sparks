@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "interactive_qs",
+  "info": {
+    "name": "InteractiveQ",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Question": {
+      "type": "string"
+    },
+    "CorrectAnswer": {
+      "type": "string"
+    },
+    "Time": {
+      "type": "time"
+    },
+    "Answer1": {
+      "type": "string"
+    },
+    "Answer2": {
+      "type": "string"
+    },
+    "Answer3": {
+      "type": "string"
+    },
+    "Answer4": {
+      "type": "string"
+    }
+  }
+}

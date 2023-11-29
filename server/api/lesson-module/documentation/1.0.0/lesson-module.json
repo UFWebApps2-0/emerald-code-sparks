@@ -647,6 +647,46 @@
           },
           "link": {
             "type": "string"
+          },
+          "lesson_videos": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "LessonVideoTitle": {
+                  "type": "string"
+                },
+                "LessonVideoDescription": {
+                  "type": "string"
+                },
+                "LessonVideoLink": {
+                  "type": "string"
+                },
+                "interactive_qs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "lesson_module": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -679,6 +719,12 @@
           },
           "link": {
             "type": "string"
+          },
+          "lesson_videos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

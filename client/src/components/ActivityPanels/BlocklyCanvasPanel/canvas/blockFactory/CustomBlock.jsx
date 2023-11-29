@@ -38,7 +38,6 @@ export default function CustomBlock({activity}) {
 
   //  useStates for Program your Arduino... / Custom Blocks
   const [selectedFeature, setSelectedFeature] = useState('Custom Blocks');
-  const [notSelectedFeature, setNotSelectedFeature] = useState('Program your Arduino...')
   const [blockCode, setBlockCode] = useState('');
   const [generatorCode, setGeneratorCode] = useState('');
 
@@ -49,6 +48,8 @@ export default function CustomBlock({activity}) {
   // const activity = null;
   const activityRef = useRef(null);
 
+  /* ADDED */ const blockMap = new Map(); // IMPORTANT
+  /* ADDED */ const descriptionMap = new Map(); // IMPORTANT
 
 
   
@@ -101,6 +102,7 @@ export default function CustomBlock({activity}) {
       media: '../../media/',
       scrollbars: true,
     });
+
     const block = previewWorkspace.newBlock('math_number');
     block.moveBy(50, 50);
     block.initSvg();
@@ -115,17 +117,6 @@ export default function CustomBlock({activity}) {
       updatePreview(genCode, previewWorkspace);
     });
   };
-  
-
-
-  //Testing
-    // useEffect(() => {
-    //   setInitialWorkspace();
-    // }, [workspace]);
-
-
-  
-
 
     useEffect(() => {
       const setUp = async () => {
@@ -243,10 +234,57 @@ export default function CustomBlock({activity}) {
     </Menu>
   );
 
-  //Program you Arduino... / Custom Blocks | switch
-  const featureList = (buttonText, newFeature) => (
+
+    /* ADDED */ const askBlockName = (generatorCode) => {
+      const blockName = window.prompt('Enter a name for your custom block: ');
+      if (blockName) {
+        console.log(`Name: ${blockName}`);
+      }
+      else {
+        return '-1';
+      }
+      return blockName;
+    };
+
+    /* ADDED */ const askBlockDescription = (generatorCode) => {
+    const blockDescription = window.prompt('Enter a description for your custom block: ');
+    if (blockDescription) {
+      console.log(`Description: ${blockDescription}`);
+    }
+    return blockDescription;
+  };
+
+   /* ADDED */   const blockSaveProcess = () => { // saves blocks to maps
+
+    // 1. Ask if Name is Final
+    let blockName = askBlockName();
+    if (blockName != '-1') {
+      /* let blockName = genCode.name;
+      console.log(`Name: ${blockName}`); */
+
+      // 2. Add Name & Block to blockMap
+      while (blockMap.has(blockName)) {
+        blockName = window.prompt('The name "' + blockName + '" already exists in database. Enter a new name for your custom block: ');
+        if (blockName) {
+          console.log(`Name: ${blockName}`);
+        }
+      }
+
+      blockMap.set(blockName, 'block');
+
+      // 3. Ask Description
+      const blockDescription = askBlockDescription();
+
+      // 4. Add Name & Description To descriptionMap
+      descriptionMap.set(blockName, blockDescription);
+  }
+
+  // include method to DELETE blocks in 'Program your arduino'
+  }
+
+  /* ADDED LINE */ const saveBlock = (buttonText) => (
+
     <button
-      onClick={() => {setNotSelectedFeature(selectedFeature);setSelectedFeature(newFeature)}}
       style={{
         backgroundColor: 'teal',
         color: 'white',
@@ -258,26 +296,7 @@ export default function CustomBlock({activity}) {
       onMouseLeave={(e) => {
         e.target.style.backgroundColor = 'teal';
       }}
-    >
-      {buttonText}
-    </button>
-  );
-
-  const saveBlock = (buttonText) => (
-
-    <button
-      //onClick={() => {}}
-      style={{
-        backgroundColor: 'teal',
-        color: 'white',
-        transition: 'background-color 0.3s',
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.backgroundColor = 'lightblue';
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.backgroundColor = 'teal';
-      }}
+      onClick={blockSaveProcess} // add block to map
     >
       {buttonText}
     </button>
@@ -622,7 +641,9 @@ function updatePreview(jsonCode, prevWorkspace) {
     }
 
     // Look for a block on Blockly.Blocks that does not match the backup.
+
     var blockType = 'math_number';
+
     for (var type in Blockly.Blocks) {
       if (typeof Blockly.Blocks[type].init == 'function' &&
           Blockly.Blocks[type] != backupBlocks[type]) {
@@ -642,6 +663,7 @@ function updatePreview(jsonCode, prevWorkspace) {
     previewBlock.setDeletable(false);
     previewBlock.moveBy(15, 10);
     previewWorkspace.clearUndo();
+
 
     //updateGenerator(previewBlock);
   } finally {
@@ -674,10 +696,6 @@ function createWorkspaceInPreview() {
 }
 
 
-  //if(selectedFeature === 'Program your Arduino...'){
-    //return <PublicCanvas activity={activity} isSandbox={isSandbox}/>;
-  //}
-
   // Get the root block and start parsing.
   
 
@@ -699,7 +717,7 @@ function createWorkspaceInPreview() {
             <Row id='icon-control-panel'>
               <Col flex='none' id='section-header'>
                 {/* Program your Arduino... / Custom Blocks */}
-                {selectedFeature}
+                Custom Block
               </Col>
               <Col flex='auto'>
                 <Row align='middle' justify='end' id='description-container'>
@@ -709,96 +727,11 @@ function createWorkspaceInPreview() {
                         <Link id='link' to={'/'} className='flex flex-column'>
                           <i className='fa fa-home fa-lg' />
                         </Link>
-                        {/* Custom Blocks / Program your Arduino... */}
-                        <Row flex='auto' id='tb-feature-bg'>
-                          {featureList(notSelectedFeature, notSelectedFeature)}
-                        </Row>
                       </Col>
                     </Row>
                   </Col>
                   <Col flex='auto' />
-
-                  <Col flex={'200px'}>
-                    <Row>
-                      <Col className='flex flex-row'>
-                        <button
-                          onClick={handleUndo}
-                          id='link'
-                          className='flex flex-column'
-                        >
-                          <i
-                            id='icon-btn'
-                            className='fa fa-undo-alt'
-                            style={
-                              workspaceRef.current
-                                ? workspaceRef.current.undoStack_.length < 1
-                                  ? { color: 'grey', cursor: 'default' }
-                                  : null
-                                : null
-                            }
-                            onMouseEnter={() => setHoverUndo(true)}
-                            onMouseLeave={() => setHoverUndo(false)}
-                          />
-                          {hoverUndo && (
-                            <div className='popup ModalCompile4'>Undo</div>
-                          )}
-                        </button>
-                        <button
-                          onClick={handleRedo}
-                          id='link'
-                          className='flex flex-column'
-                        >
-                          <i
-                            id='icon-btn'
-                            className='fa fa-redo-alt'
-                            style={
-                              workspaceRef.current
-                                ? workspaceRef.current.redoStack_.length < 1
-                                  ? { color: 'grey', cursor: 'default' }
-                                  : null
-                                : null
-                            }
-                            onMouseEnter={() => setHoverRedo(true)}
-                            onMouseLeave={() => setHoverRedo(false)}
-                          />
-                          {hoverRedo && (
-                            <div className='popup ModalCompile4'>Redo</div>
-                          )}
-                        </button>
-                      </Col>
-                    </Row>
-                  </Col>
                   <Col flex={'230px'}>
-                    <div
-                      id='action-btn-container'
-                      className='flex space-around'
-                    >
-                      <ArduinoLogo
-                        setHoverCompile={setHoverCompile}
-                        handleCompile={handleCompile}
-                      />
-                      {hoverCompile && (
-                        <div className='popup ModalCompile'>
-                          Upload to Arduino
-                        </div>
-                      )}
-
-                      <i
-                        onClick={() => handleConsole()}
-                        className='fas fa-terminal hvr-info'
-                        style={{ marginLeft: '6px' }}
-                        onMouseEnter={() => setHoverConsole(true)}
-                        onMouseLeave={() => setHoverConsole(false)}
-                      />
-                      {hoverConsole && (
-                        <div className='popup ModalCompile'>
-                          Show Serial Monitor
-                        </div>
-                      )}
-                      <Dropdown overlay={menu}>
-                        <i className='fas fa-ellipsis-v'></i>
-                      </Dropdown>
-                    </div>
                   </Col>
                 </Row>
               </Col>

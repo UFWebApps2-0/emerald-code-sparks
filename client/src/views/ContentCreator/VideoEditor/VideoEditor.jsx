@@ -38,7 +38,7 @@ export default function VideoEditor(props) {
             {videos.map((video) => (
               <tr key={video.id}> {/* Replace 'video.id' with the appropriate key */}
                 <td>
-                  <Link to={`/videodisplay/${encodeURIComponent(video.LessonVideoTitle)}/${encodeURIComponent(video.id)}`}>
+                  <Link to={`/video/?id=${encodeURIComponent(video.id)}`}>
                     {video.LessonVideoTitle}
                   </Link>
                 </td>

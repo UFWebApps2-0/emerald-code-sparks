@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import './Home.less';
-import { getStudents, postJoin, addGoogleStudent, getAllClassrooms } from '../../Utils/requests';
+import { getStudents, postJoin, addStudent, getAllClassrooms } from '../../Utils/requests';
 import { setUserSession } from '../../Utils/AuthRequests';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
@@ -77,7 +77,7 @@ export default function HomeJoin(props) {
 
     for(let i = 0; i < studentList.length; i++)
     {
-      console.log(studentList[i].name);
+      //console.log(studentList[i].name);
       if(name === studentList[i].name)
       {
         ids[0] = studentList[i].id;
@@ -94,7 +94,7 @@ export default function HomeJoin(props) {
 
       for(let j = 0; j < classroomList.length; j++)
       {
-        //console.log(classroomList[j].code);
+        console.log(classroomList[j].code);
         if(joinCode === classroomList[j].code)
         {
           console.log(classroomList[j]);
@@ -102,7 +102,7 @@ export default function HomeJoin(props) {
         }
       }
 
-      const newstudent = await addGoogleStudent(name, character, classroom);
+      const newstudent = await addStudent(name, character, classroom);
       console.log(newstudent);
     }
     else if (res.data) {

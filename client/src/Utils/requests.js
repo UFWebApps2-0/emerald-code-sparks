@@ -422,12 +422,12 @@ export const createLessonModule = async (
     path: `${server}/interactive-qs`,
     data: {
       Question: question, 
-      Correctanswer: correctAnswer,
+      CorrectAnswer: correctAnswer,
       Answer1: A,
       Answer2: B,
       Answer3: C,
       Answer4: D,
-      time: intime
+      Time: intime
     },
     auth: true,
     error: 'Failed to add question.',

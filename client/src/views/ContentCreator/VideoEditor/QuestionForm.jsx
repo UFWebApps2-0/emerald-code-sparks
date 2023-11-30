@@ -48,7 +48,7 @@ export default function QuestionForm({ id }) {
 
     return (
       <div>
-      <button onClick={showModal} id="add-video-btn">
+      <button onClick={showModal} id="add-question-btn">
         + Add Question
       </button>
         <Modal

@@ -20,7 +20,6 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import VideoEditor from './views/ContentCreator/VideoEditor/VideoEditor';
-import VideoDisplay from './views/ContentCreator/VideoEditor/VideoDisplay';
 import VideoPage from './views/Video/VideoPage';
 
 const App = () => {
@@ -119,7 +118,6 @@ const App = () => {
         <Route path='/bugreport' element={<BugReport />} />
         <Route path='*' element={<NotFound/>} />
         <Route path='/videoedit' element={<PrivateRoute> <VideoEditor /> </PrivateRoute>}/>
-        <Route path='/videodisplay/:title/:videoId' element={<VideoDisplay />} />
       </Routes>
     </div>
   );

@@ -8,7 +8,5 @@ export default function VideoPlayer({ url, title }) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen>
             </iframe>
-        
-      
     );
 }

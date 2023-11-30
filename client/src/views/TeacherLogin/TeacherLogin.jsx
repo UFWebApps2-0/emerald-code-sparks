@@ -70,8 +70,8 @@ export default function TeacherLogin() {
     //console.log(res.profileObj.givenName);
     let name = res.profileObj.givenName;
     let pass = res.googleId;
-    //name = 'teacher';
-    //pass = 'easypassword';
+    name = 'teacher';
+    pass = 'easypassword';
     let body = { identifier: name, password: pass };
 
     postUser(body)
@@ -89,6 +89,9 @@ export default function TeacherLogin() {
       .catch((error) => {
         setLoading(false);
         message.error('Google account does not exist, creating one for you. Please login again.'); //teacher creation happens here.
+        //a request would need to be added to requests.js of type post that accepts a teacher's username & password,
+        //and creates an account in the database, and the mentor model would need to be updated to contain the username and password
+        //for support for teacher accounts to not be "manually" added in the strapi admin panel.
       });
   };
 

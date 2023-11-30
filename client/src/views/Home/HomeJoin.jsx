@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import './Home.less';
-import { getStudents, postJoin, addStudent, getAllClassrooms } from '../../Utils/requests';
+import { getStudents, postJoin, addStudents, getAllClassrooms } from '../../Utils/requests';
 import { setUserSession } from '../../Utils/AuthRequests';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
@@ -70,39 +70,62 @@ export default function HomeJoin(props) {
     let ids = [];
     //console.log(acct.googleId);
     let name = acct.profileObj.givenName;
-    name = 'test';
-    let joinCode = 2017;
+    let joinCode = '1997';
     //console.log(ids);
     let res = null;
 
     for(let i = 0; i < studentList.length; i++)
     {
-      //console.log(studentList[i].name);
+      console.log(studentList[i].name + ' ' + name);
       if(name === studentList[i].name)
       {
         ids[0] = studentList[i].id;
-        res = await postJoin(joinCode, ids);
+        console.log(joinCode + ' ' + ids);
+        
+        res = await postJoin(joinCode, ids).catch((error) => {
+          res = null;
+        });
       }
     }
 
-    if (res === null)
+    console.log(res);
+
+    if (res === null || res.data === null)
     {
       setLoading(false);
       message.error('Google account does not exist, creating one for you. Please login again.'); //student creation happens here
-      let character = acct.googleId;
-      let classroom = null;
 
+      let tempStudent = null;
+      //console.log(studentList[0]);
+      tempStudent = studentList[0];
+      tempStudent.name = name;
+      tempStudent.id = acct.googleId;
+      tempStudent.character = null;
+      console.log(tempStudent);
+
+      let classroom = null;
+      let classroomId = 8;
       for(let j = 0; j < classroomList.length; j++)
       {
-        console.log(classroomList[j].code);
+        //console.log(classroomList[j].code);
+        //console.log(joinCode);
+
         if(joinCode === classroomList[j].code)
         {
           console.log(classroomList[j]);
+          //console.log(classroomList[j].id);
+          //console.log(classroomId);
           classroom = classroomList[j];
+          //classroomId = classroomList[j].id;
         }
       }
+      tempStudent.classroom = classroom;
+      let students = [];
+      students[0] = tempStudent;
+      //students[1] = tempStudent;
+      console.log(students);
 
-      const newstudent = await addStudent(name, character, classroom);
+      const newstudent = await addStudents(students, classroomId);
       console.log(newstudent);
     }
     else if (res.data) {

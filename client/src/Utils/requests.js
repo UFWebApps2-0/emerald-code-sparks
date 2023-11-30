@@ -309,25 +309,16 @@ export const addStudent = async (name, character, classroom) =>
       character: character,
       classroom: classroom,
     },
-    auth: false,
+    auth: true,
     error: 'Failed to add student.',
   });
-  
-/*export const addMentor = async () =>
-  makeRequest({
-    method: POST,
-    path: `${server}/mentors`,
-    data: {
-    },
-    error: 'Failed to add mentor',
-  });*/
 
 export const addStudents = async (students, classroom) =>
   makeRequest({
     method: POST,
     path: `${server}/students`,
     data: { students: students, classroom: classroom },
-    auth: true,
+    auth: false,
     error: 'Failed to add students.',
   });
 

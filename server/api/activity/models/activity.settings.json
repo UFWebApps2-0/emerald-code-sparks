@@ -47,9 +47,8 @@
       "type": "text",
       "required": false
     },
-    "rubric": {
-      "model": "rubric",
-      "via": "activity"
+    "autoGrading": {
+      "type": "boolean"
     }
   }
 }

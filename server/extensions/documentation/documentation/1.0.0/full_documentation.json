@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/07/2023 10:29:02 PM"
+    "x-generation-date": "11/17/2023 5:57:56 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -12385,33 +12385,8 @@
           "activity_template": {
             "type": "string"
           },
-          "rubric": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Criteria": {
-                "type": "integer"
-              },
-              "Rating": {
-                "type": "integer"
-              },
-              "activity": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "autoGrading": {
+            "type": "boolean"
           }
         }
       },
@@ -12457,8 +12432,8 @@
           "activity_template": {
             "type": "string"
           },
-          "rubric": {
-            "type": "string"
+          "autoGrading": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"
@@ -13239,8 +13214,8 @@
                 "activity_template": {
                   "type": "string"
                 },
-                "rubric": {
-                  "type": "string"
+                "autoGrading": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"
@@ -13378,8 +13353,8 @@
                 "activity_template": {
                   "type": "string"
                 },
-                "rubric": {
-                  "type": "string"
+                "autoGrading": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"
@@ -13671,68 +13646,17 @@
           "id": {
             "type": "string"
           },
-          "Criteria": {
+          "DigitalInputPin": {
             "type": "integer"
           },
-          "Rating": {
+          "InterruptPin": {
             "type": "integer"
           },
-          "activity": {
-            "required": [
-              "id",
-              "number",
-              "template"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lesson_module": {
-                "type": "string"
-              },
-              "number": {
-                "type": "integer"
-              },
-              "template": {
-                "type": "string"
-              },
-              "blocks": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "description": {
-                "type": "string"
-              },
-              "StandardS": {
-                "type": "string"
-              },
-              "images": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "learning_components": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "activity_template": {
-                "type": "string"
-              },
-              "rubric": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "DigitalOutputPin": {
+            "type": "integer"
+          },
+          "PWMOutput": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -13742,14 +13666,17 @@
       },
       "NewRubric": {
         "properties": {
-          "Criteria": {
+          "DigitalInputPin": {
             "type": "integer"
           },
-          "Rating": {
+          "InterruptPin": {
             "type": "integer"
           },
-          "activity": {
-            "type": "string"
+          "DigitalOutputPin": {
+            "type": "integer"
+          },
+          "PWMOutput": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -13818,8 +13745,8 @@
               "activity_template": {
                 "type": "string"
               },
-              "rubric": {
-                "type": "string"
+              "autoGrading": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -14898,8 +14825,8 @@
               "activity_template": {
                 "type": "string"
               },
-              "rubric": {
-                "type": "string"
+              "autoGrading": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"

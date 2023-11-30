@@ -15,14 +15,13 @@ const SCIENCE = 1
 const MAKING = 2
 const COMPUTATION = 3
 
-const MentorActivityDetailModal = ({
+const SetStandard = ({
   learningStandard,
   selectActivity,
   setActivities,
   open,
   autoGrading
 }) => {
-  
   const [description, setDescription] = useState("")
   const [template, setTemplate] = useState("")
   const [activity_template, setActivityTemplate] = useState("")
@@ -48,6 +47,8 @@ const MentorActivityDetailModal = ({
   const [pWMOutputs, setPWMOutputs] = useState(0);
   const [analogInput, setAnalogInput] = useState(0);
   const [expectedOutput, setExpectOutput] = useState("");
+  const [DOPFrequency, setDOPFrequency] = useState(0);
+  const [expectedFrequency, setExpextedFrequency] = useState(0);
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {
@@ -94,6 +95,7 @@ const MentorActivityDetailModal = ({
     }
     return n
   }
+
   const handleViewActivityLevelTemplate = async activity => {
     const allToolBoxRes = await getActivityToolboxAll()
     const selectedToolBoxRes = await getActivityToolbox(activity.id)
@@ -293,51 +295,81 @@ const data = Array.from({ length: criteriaNum }, (_, i) => {
             placeholder="Enter mentor code template"
           ></Input.TextArea>
         </Form.Item> */}
-        {/* <h3 id="subtitile">autoGrading</h3>
-        <Form.Item id="form-label" label="This activity will be:"  >
-          <Radio.Group onChange={handleOptionChange} value={autoGrading}>
-            <Radio value={false}>The activity will be manually graded.</Radio>
-            <Radio value={true}>The activity will be autograded.</Radio>
-          </Radio.Group>
-        </Form.Item> */}
-        <h3 id="subtitle">Manual Grading up</h3>
-          <Form.Item
-            id="form-label"
-            label="Number of Rubric Criteria"
-          >
-            <Input
-              onChange={e => {
-              setCriteriaNum(e.target.value)
-            }}
-            type="number"
-            className="input"
-            value={criteriaNum}
-            placeholder="Enter Criteria number"
-            ></Input> 
-        </Form.Item>
-  {enterCriteriaName}
-  <Form.Item
-    id="form-label"
-    label="Number of Rubric Rating"
-  >
-    <Input
-      onChange={e => {
-        setRatingNum(e.target.value)
-      }}
-      type="number"
-      className="input"
-      value={ratingNum}
-      placeholder="Enter Rating number"
-    ></Input> 
+        <h3 id="subtitle">Auto Grading Components</h3>
+        <Form.Item id="form label" label = "Number of Digital Input Pins">
+      <Select onChange = {(value)=> setDigitalPin(value)} style={{width:120, marginTop:10}} defaultValue={digitalPin}
+        required
+      >
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(number => (
+        <Option key={number} value={number}>
+          {number}
+        </Option>
+      ))}
+      </Select>
     </Form.Item>
-    {enterRatingName}
-    <Table 
-      columns={columns} 
-      dataSource={data} 
-      pagination={false} 
-      bordered size="small" 
-      scroll={{x: 700,}} 
+    <Form.Item id="form label" label = "Number of Interrupt Pins">
+      <Select onChange = {(value)=> setInterruptPin(value)} style={{width:120, marginTop:10}} defaultValue={interruptPin} 
+        required
+      >
+        <Select.Option value={0}>0</Select.Option>
+        <Select.Option value={1}>1</Select.Option>
+        <Select.Option value={2}>2</Select.Option>
+      </Select>
+    </Form.Item>
+    <Form.Item id="form label" label = "Number of Digital Onput Pins">
+      <Select onChange = {(value)=> setDigitalOutputPin(value)} style={{width:120, marginTop:10}} defaultValue={digitalOutputPin}
+      required
+      >
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(number => (
+        <Option key={number} value={number}>
+          {number}
+        </Option>
+      ))}
+      </Select>
+    </Form.Item>
+    <Form.Item id="form label" label = "Number of PWM Outputs">
+      <Select onChange = {(value)=> setPWMOutputs(value)} style={{width:120, marginTop:10}} defaultValue={pWMOutputs}
+        required
+      >
+      {[0, 1, 2, 3, 4, 5, 6].map(number => (
+        <Option key={number} value={number}>
+          {number}
+        </Option>
+      ))}
+      </Select>
+    </Form.Item>
+    <Form.Item id="form label" label = "Number of Analog Input Pins">
+      <Select onChange = {(value)=> setAnalogInput(value)} style={{width:120, marginTop:10}} defaultValue={analogInput}
+        required
+      >
+      {[0, 1, 2, 3, 4, 5, 6].map(number => (
+        <Option key={number} value={number}>
+          {number}
+        </Option>
+      ))}
+      </Select>
+    </Form.Item>
+    <Form.Item id="form-label" label="Expected Console Output(optional)">
+      <Input.TextArea
+      onChange={e=>setExpectOutput(e.target.value)} value={expectedOutput}></Input.TextArea>
+    </Form.Item>
+    <Form.Item id="form label" label = "Number of Digital Onput Pins">
+      <Select onChange = {(value)=> setDOPFrequency(value)} style={{width:120, marginTop:10}} defaultValue={DOPFrequency}
+      required
+      >
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(number => (
+        <Option key={number} value={number}>
+          {number}
+        </Option>
+      ))}
+      </Select>
+    </Form.Item>
+    <Form.Item id="form label" label = "Expected Frequency">
+      <Input addonAfter="HZ" defaultValue={expectedFrequency} 
+        onChange={e => setExpextedFrequency(e.target.value)}
+        value={expectedFrequency} size="small"
       />
+    </Form.Item>
         <h3 id="subtitle">Lesson Materials</h3>
         <Form.Item id="form-label" label="Classroom Materials">
           <ActivityComponentTags
@@ -415,4 +447,4 @@ const data = Array.from({ length: criteriaNum }, (_, i) => {
   )
 }
 
-export default MentorActivityDetailModal
+export default SetStandard

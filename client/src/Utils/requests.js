@@ -476,7 +476,8 @@ export const updateActivityDetails = async (
   link,
   scienceComponents,
   makingComponents,
-  computationComponents
+  computationComponents,
+  autoGrading
 ) =>
   makeRequest({
     method: PUT,
@@ -491,6 +492,7 @@ export const updateActivityDetails = async (
       scienceComponents,
       makingComponents,
       computationComponents,
+      autoGrading
     },
     auth: true,
     error: 'Failed to update unit',

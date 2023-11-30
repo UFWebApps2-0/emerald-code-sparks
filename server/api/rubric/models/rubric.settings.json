@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "rubrics",
   "info": {
-    "name": "Rubric"
+    "name": "AutoGrading Component",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -10,15 +11,17 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Criteria": {
+    "DigitalInputPin": {
       "type": "integer"
     },
-    "Rating": {
+    "InterruptPin": {
       "type": "integer"
     },
-    "activity": {
-      "via": "rubric",
-      "model": "activity"
+    "DigitalOutputPin": {
+      "type": "integer"
+    },
+    "PWMOutput": {
+      "type": "integer"
     }
   }
 }

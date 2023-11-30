@@ -9,8 +9,10 @@ import MentorSubHeader from '../../../../components/MentorSubHeader/MentorSubHea
 import DisplayCodeModal from './DisplayCodeModal';
 import MentorActivityDetailModal from './MentorActivityDetailModal';
 import LessonModuleModal from './LessonModuleSelect/LessonModuleModal';
-import { message, Tag } from 'antd';
+import { message, Tag, Radio } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import setStandard from './SetStandard';
+import SetStandard from './SetStandard';
 
 export default function Home({ classroomId, viewing }) {
   const [classroom, setClassroom] = useState({});
@@ -18,6 +20,7 @@ export default function Home({ classroomId, viewing }) {
   const [gradeId, setGradeId] = useState(null);
   const [activeLessonModule, setActiveLessonModule] = useState(null);
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
+  const [autoGradingValues, setAutoGradingValues] = useState({});
   const navigate = useNavigate();
 
   const SCIENCE = 1;
@@ -41,6 +44,14 @@ export default function Home({ classroomId, viewing }) {
               message.error(lsRes.err);
             }
             const activityRes = await getLessonModuleActivities(lsRes.data.id);
+            activityRes.data.map((activity) => {
+              setAutoGradingValues((prevAutoGradingValues) => ({
+                ...prevAutoGradingValues,
+                [activity.id]: activity.autoGrading,
+              }));
+              console.log(autoGradingValues[activity.id])
+              return null; // Make sure to include a return statement in the map function
+            });
             if (activityRes) setActivities(activityRes.data);
             else {
               message.error(activityRes.err);
@@ -53,6 +64,10 @@ export default function Home({ classroomId, viewing }) {
     };
     fetchData();
   }, [classroomId]);
+
+useEffect(()=>{
+  console.log()
+})
 
   const handleViewActivity = (activity, name) => {
     activity.lesson_module_name = name;
@@ -153,6 +168,15 @@ export default function Home({ classroomId, viewing }) {
                             Demo Template
                           </button>
                         )}
+                        {autoGradingValues[activity.id] ? <SetStandard
+                          learningStandard={activeLessonModule}
+                          selectActivity={activity}
+                          activityDetailsVisible={false}
+                          setActivityDetailsVisible={false}
+                          setActivities={setActivities}
+                          viewing={false}
+                          autoGrading={autoGradingValues[activity.id] || true}
+                          /> : 
                         <MentorActivityDetailModal
                           learningStandard={activeLessonModule}
                           selectActivity={activity}
@@ -160,7 +184,8 @@ export default function Home({ classroomId, viewing }) {
                           setActivityDetailsVisible={false}
                           setActivities={setActivities}
                           viewing={false}
-                        />
+                          autoGrading={autoGradingValues[activity.id] || false}
+                        />}
                       </div>
                       <div id='view-activity-info'>
                         <p>
@@ -225,6 +250,20 @@ export default function Home({ classroomId, viewing }) {
                                 </Tag>
                               );
                             })}
+                        </p>
+                        <p>
+                        <Radio.Group
+                              onChange={(e) => {
+                              const newAutoGradingValues = { ...autoGradingValues };
+                              newAutoGradingValues[activity.id] = e.target.value;
+                              setAutoGradingValues(newAutoGradingValues);
+                              
+                      }}
+                        value={autoGradingValues[activity.id]}
+                      >
+                        <Radio value={false}>The activity will be manually graded.</Radio>
+                        <Radio value={true}>The activity will be autograded.</Radio>
+                      </Radio.Group>
                         </p>
                         {activity.link ? (
                           <p>

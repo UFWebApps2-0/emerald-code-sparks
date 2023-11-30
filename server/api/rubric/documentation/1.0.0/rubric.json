@@ -522,68 +522,17 @@
           "id": {
             "type": "string"
           },
-          "Criteria": {
+          "DigitalInputPin": {
             "type": "integer"
           },
-          "Rating": {
+          "InterruptPin": {
             "type": "integer"
           },
-          "activity": {
-            "required": [
-              "id",
-              "number",
-              "template"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lesson_module": {
-                "type": "string"
-              },
-              "number": {
-                "type": "integer"
-              },
-              "template": {
-                "type": "string"
-              },
-              "blocks": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "description": {
-                "type": "string"
-              },
-              "StandardS": {
-                "type": "string"
-              },
-              "images": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "learning_components": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "activity_template": {
-                "type": "string"
-              },
-              "rubric": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "DigitalOutputPin": {
+            "type": "integer"
+          },
+          "PWMOutput": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -593,14 +542,17 @@
       },
       "NewRubric": {
         "properties": {
-          "Criteria": {
+          "DigitalInputPin": {
             "type": "integer"
           },
-          "Rating": {
+          "InterruptPin": {
             "type": "integer"
           },
-          "activity": {
-            "type": "string"
+          "DigitalOutputPin": {
+            "type": "integer"
+          },
+          "PWMOutput": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",

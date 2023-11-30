@@ -887,33 +887,8 @@
           "activity_template": {
             "type": "string"
           },
-          "rubric": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Criteria": {
-                "type": "integer"
-              },
-              "Rating": {
-                "type": "integer"
-              },
-              "activity": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "autoGrading": {
+            "type": "boolean"
           }
         }
       },
@@ -959,8 +934,8 @@
           "activity_template": {
             "type": "string"
           },
-          "rubric": {
-            "type": "string"
+          "autoGrading": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"

@@ -637,8 +637,8 @@
               "activity_template": {
                 "type": "string"
               },
-              "rubric": {
-                "type": "string"
+              "autoGrading": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"

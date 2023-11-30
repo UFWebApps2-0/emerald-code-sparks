@@ -70,8 +70,8 @@ export default function TeacherLogin() {
     //console.log(res.profileObj.givenName);
     let name = res.profileObj.givenName;
     let pass = res.googleId;
-    name = 'teacher';
-    pass = 'easypassword';
+    //name = 'teacher';
+    //pass = 'easypassword';
     let body = { identifier: name, password: pass };
 
     postUser(body)

@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import './Home.less';
-import { getStudents, postJoin } from '../../Utils/requests';
+import { getStudents, postJoin, addGoogleStudent, getAllClassrooms } from '../../Utils/requests';
 import { setUserSession } from '../../Utils/AuthRequests';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
@@ -15,6 +15,7 @@ export default function HomeJoin(props) {
   const [loading, setLoading] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   const [studentList, setStudentList] = useState([]);
+  const [classroomList, setClassroomList] = useState([]);
   const navigate = useNavigate();
   
   const handleLogin = () => {
@@ -54,32 +55,64 @@ export default function HomeJoin(props) {
     });
   }, [joinCode]);
 
+  useEffect(() => {
+    getAllClassrooms().then((res) => {
+      if(res.data) {
+        setClassroomList(res.data);
+      } else {
+        message.error(res.err);
+      }
+    });
+  }, [joinCode]);
+
   const handleStudentGoogleLogin = async (acct) => {
     setLoading(true);
     let ids = [];
-    ids[0] = 46;
     //console.log(acct.googleId);
-    //ids[0] = acct.googleId;
+    let name = acct.profileObj.givenName;
+    name = 'test';
     let joinCode = 2017;
     //console.log(ids);
     let res = null;
+
     for(let i = 0; i < studentList.length; i++)
     {
-      console.log(studentList[i].id);
-      if(ids[0] === studentList[i].id)
+      console.log(studentList[i].name);
+      if(name === studentList[i].name)
       {
+        ids[0] = studentList[i].id;
         res = await postJoin(joinCode, ids);
       }
     }
 
-    if (res.data) {
+    if (res === null)
+    {
+      setLoading(false);
+      message.error('Google account does not exist, creating one for you. Please login again.'); //student creation happens here
+      let character = acct.googleId;
+      let classroom = null;
+
+      for(let j = 0; j < classroomList.length; j++)
+      {
+        //console.log(classroomList[j].code);
+        if(joinCode === classroomList[j].code)
+        {
+          console.log(classroomList[j]);
+          classroom = classroomList[j];
+        }
+      }
+
+      const newstudent = await addGoogleStudent(name, character, classroom);
+      console.log(newstudent);
+    }
+    else if (res.data) {
       setLoading(false);
       setUserSession(res.data.jwt, JSON.stringify(res.data.students));
       navigate('/student');
     }
     else {
       setLoading(false);
-      message.error('Google account does not exist, creating one for you. Please login again.'); //student creation happens here
+      message.error('Error. Please try again.');
     }
   };
   

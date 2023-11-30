@@ -31,6 +31,9 @@
     },
     "Time": {
       "type": "string"
+    },
+    "VideoId": {
+      "type": "string"
     }
   }
 }

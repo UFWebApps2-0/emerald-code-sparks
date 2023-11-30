@@ -44,7 +44,7 @@ export default function VideoEditor(props) {
                 </td>
                 <td>{video.LessonVideoLink}</td>
                 <td>
-                  <QuestionForm />
+                  <QuestionForm id={video.id}/>
                 </td>
               </tr>
             ))}

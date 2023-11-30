@@ -398,7 +398,7 @@ export const createLessonModule = async (
     method: POST,
     path: `${server}/lesson-videos`,
     data: {
-      LessonVideoLink: url,
+      VideoLink: url,
       LessonVideoTitle: name,
       LessonVideoDescription: description,
       releaseDate: releaseDate,
@@ -416,7 +416,7 @@ export const createLessonModule = async (
   });
 
 
-  export const createQuestion = async (question, intime, A, B, C, D, correctAnswer) =>
+  export const createQuestion = async (question, intime, A, B, C, D, correctAnswer, id) =>
   makeRequest({
     method: POST,
     path: `${server}/interactive-qs`,
@@ -427,7 +427,8 @@ export const createLessonModule = async (
       Answer2: B,
       Answer3: C,
       Answer4: D,
-      Time: intime
+      Time: intime,
+      VideoId: id
     },
     auth: true,
     error: 'Failed to add question.',

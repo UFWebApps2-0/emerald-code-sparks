@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/29/2023 7:15:50 PM"
+    "x-generation-date": "11/30/2023 6:39:57 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13632,9 +13632,6 @@
           "CorrectAnswer": {
             "type": "string"
           },
-          "Time": {
-            "type": "string"
-          },
           "Answer1": {
             "type": "string"
           },
@@ -13645,6 +13642,12 @@
             "type": "string"
           },
           "Answer4": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
+          },
+          "VideoId": {
             "type": "string"
           },
           "published_at": {
@@ -13661,9 +13664,6 @@
           "CorrectAnswer": {
             "type": "string"
           },
-          "Time": {
-            "type": "string"
-          },
           "Answer1": {
             "type": "string"
           },
@@ -13674,6 +13674,12 @@
             "type": "string"
           },
           "Answer4": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
+          },
+          "VideoId": {
             "type": "string"
           },
           "published_at": {
@@ -14127,9 +14133,6 @@
                 "CorrectAnswer": {
                   "type": "string"
                 },
-                "Time": {
-                  "type": "string"
-                },
                 "Answer1": {
                   "type": "string"
                 },
@@ -14140,6 +14143,12 @@
                   "type": "string"
                 },
                 "Answer4": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "VideoId": {
                   "type": "string"
                 },
                 "published_at": {

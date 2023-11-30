@@ -541,9 +541,6 @@
           "CorrectAnswer": {
             "type": "string"
           },
-          "Time": {
-            "type": "string"
-          },
           "Answer1": {
             "type": "string"
           },
@@ -554,6 +551,12 @@
             "type": "string"
           },
           "Answer4": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
+          },
+          "VideoId": {
             "type": "string"
           },
           "published_at": {
@@ -570,9 +573,6 @@
           "CorrectAnswer": {
             "type": "string"
           },
-          "Time": {
-            "type": "string"
-          },
           "Answer1": {
             "type": "string"
           },
@@ -583,6 +583,12 @@
             "type": "string"
           },
           "Answer4": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
+          },
+          "VideoId": {
             "type": "string"
           },
           "published_at": {

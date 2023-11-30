@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {createQuestion} from "../../../Utils/requests";
 import "./QuestionForm.less";
 
-export default function QuestionForm({ gradeList }) {
+export default function QuestionForm({ id }) {
   const [visible, setVisible] = useState(false);
   const [question, setQuestion] = useState("");
   const [intime, setIntime] = useState("");
@@ -30,7 +30,7 @@ export default function QuestionForm({ gradeList }) {
 
   const handleSubmit = async (e) => {
     try {
-      const res = await createQuestion(question, intime, A, B, C, D, correctAnswer);
+      const res = await createQuestion(question, intime, A, B, C, D, correctAnswer, id);
       if (res.err) {
         // Handle the specific error here if possible
         message.error("Failed to add questions");

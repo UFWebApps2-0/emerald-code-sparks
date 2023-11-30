@@ -676,6 +676,9 @@
                 "VideoLink": {
                   "type": "string"
                 },
+                "ReleaseDate": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },

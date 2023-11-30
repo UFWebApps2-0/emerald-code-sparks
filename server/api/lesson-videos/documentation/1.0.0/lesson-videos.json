@@ -638,6 +638,10 @@
           "VideoLink": {
             "type": "string"
           },
+          "ReleaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -663,6 +667,10 @@
           },
           "VideoLink": {
             "type": "string"
+          },
+          "ReleaseDate": {
+            "type": "string",
+            "format": "date-time"
           },
           "published_at": {
             "type": "string",

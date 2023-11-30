@@ -17,9 +17,6 @@
     "CorrectAnswer": {
       "type": "string"
     },
-    "Time": {
-      "type": "time"
-    },
     "Answer1": {
       "type": "string"
     },
@@ -30,6 +27,9 @@
       "type": "string"
     },
     "Answer4": {
+      "type": "string"
+    },
+    "Time": {
       "type": "string"
     }
   }

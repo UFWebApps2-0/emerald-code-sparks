@@ -407,17 +407,27 @@ export const createLessonModule = async (
     error: 'Fail to create new video.',
   });
 
-  export const createQuestion = async (url, name, description, releaseDate) =>
+  export const getAllVideos = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/lesson-videos`, 
+    auth: true,
+    error: 'Failed to retrieve videos.' 
+  });
+
+
+  export const createQuestion = async (question, intime, A, B, C, D, correctAnswer) =>
   makeRequest({
     method: POST,
-    path: `${server}/interactiveq`,
+    path: `${server}/interactive-qs`,
     data: {
-      Question: title, 
+      Question: question, 
       Correctanswer: correctAnswer,
-      Answer1: choices.A,
-      Answer2: choices.B,
-      Answer3: choices.C,
-      Answer4: choices.D,
+      Answer1: A,
+      Answer2: B,
+      Answer3: C,
+      Answer4: D,
+      time: intime
     },
     auth: true,
     error: 'Failed to add question.',

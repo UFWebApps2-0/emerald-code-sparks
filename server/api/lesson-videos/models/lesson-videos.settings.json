@@ -26,6 +26,9 @@
     },
     "VideoLink": {
       "type": "string"
+    },
+    "ReleaseDate": {
+      "type": "datetime"
     }
   }
 }

@@ -401,7 +401,7 @@ export const createLessonModule = async (
       VideoLink: url,
       LessonVideoTitle: name,
       LessonVideoDescription: description,
-      releaseDate: releaseDate,
+      ReleaseDate: releaseDate,
     },
     auth: true,
     error: 'Fail to create new video.',

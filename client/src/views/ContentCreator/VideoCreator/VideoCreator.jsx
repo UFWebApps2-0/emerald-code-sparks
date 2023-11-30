@@ -23,11 +23,11 @@ export default function VideoCreator({ gradeList }) {
   }
 
   const handleSubmit = async e => {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    var match = url.match(regExp);
-    url = (match&&match[7].length==11)? match[7] : false; 
+    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    let match = url.match(regExp);
+    let video_id = (match && match[7].length==11) ? match[7] : false; 
 
-    const res = await createVideo(url, name, description, releaseDate)
+    const res = await createVideo(video_id, name, description, releaseDate)
     if (res.err) {
       message.error("Fail to create a new video")
     } else {

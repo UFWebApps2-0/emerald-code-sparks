@@ -84,6 +84,7 @@ export default function QuestionForm({ id }) {
             <Form.Item id="form-label" label="Time">
               <Input
                 onChange={e => setIntime(e.target.value)}
+                type="number"
                 value={intime}
                 placeholder=""
                 required

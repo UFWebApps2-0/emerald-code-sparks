@@ -428,7 +428,7 @@ export const createLessonModule = async (
       Answer3: C,
       Answer4: D,
       Time: intime,
-      VideoId: id
+      VideoId: id + ""
     },
     auth: true,
     error: 'Failed to add question.',

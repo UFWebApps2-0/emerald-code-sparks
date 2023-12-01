@@ -33,6 +33,7 @@ export default function HomeJoin(props) {
     });
   };
 
+  //connect to google API
   useEffect(() => {
     function start() {
       gapi.client.init({
@@ -45,8 +46,9 @@ export default function HomeJoin(props) {
     gapi.load('client:auth2', start);
   });
 
+  //get a list of all students in a classroom according to the join code
   useEffect(() => {
-    getStudents(2017).then((res) => { //hard coded for now, this is used to get the list of students.
+    getStudents(joinCode).then((res) => {
       if (res.data) {
         setStudentList(res.data);
       } else {
@@ -55,6 +57,7 @@ export default function HomeJoin(props) {
     });
   }, [joinCode]);
 
+  //get all classrooms, so we can return the one the join code is for
   useEffect(() => {
     getAllClassrooms().then((res) => {
       if(res.data) {
@@ -69,32 +72,36 @@ export default function HomeJoin(props) {
     setLoading(true);
     let ids = [];
     //console.log(acct.googleId);
-    let name = acct.profileObj.givenName;
-    let joinCode = '1997';
+    let name = acct.profileObj.givenName; //get the google profile's name to search the classroom for it
     //console.log(ids);
     let res = null;
 
+
+    //if the name is found, return the corresponding id, then log in.
     for(let i = 0; i < studentList.length; i++)
     {
-      console.log(studentList[i].name + ' ' + name);
+      //console.log(studentList[i].name + ' ' + name);
       if(name === studentList[i].name)
       {
         ids[0] = studentList[i].id;
-        console.log(joinCode + ' ' + ids);
+        //console.log(joinCode + ' ' + ids);
         
+        //attempt to log the user in, otherwise return a null value
         res = await postJoin(joinCode, ids).catch((error) => {
           res = null;
         });
       }
     }
+    //console.log(res);
 
-    console.log(res);
-
+    //handle if a new account should be made if null
     if (res === null || res.data === null)
     {
       setLoading(false);
       message.error('Google account does not exist, creating one for you. Please login again.'); //student creation happens here
 
+      //create a temporary student object, based off the first item in the student list to get the formatting correct.
+      //then, edit the values to create an account based off the google account
       let tempStudent = null;
       //console.log(studentList[0]);
       tempStudent = studentList[0];
@@ -103,51 +110,49 @@ export default function HomeJoin(props) {
       tempStudent.character = null;
       console.log(tempStudent);
 
+      //get the classroom and id
       let classroom = null;
-      let classroomId = 8;
+      let classroomId = null;
       for(let j = 0; j < classroomList.length; j++)
       {
         //console.log(classroomList[j].code);
         //console.log(joinCode);
 
-        if(joinCode === classroomList[j].code)
+        if(joinCode === classroomList[j].code) //if found, set the classroom & id
         {
-          console.log(classroomList[j]);
-          //console.log(classroomList[j].id);
-          //console.log(classroomId);
           classroom = classroomList[j];
-          //classroomId = classroomList[j].id;
+          classroomId = classroomList[j].id;
         }
       }
-      tempStudent.classroom = classroom;
-      let students = [];
-      students[0] = tempStudent;
-      //students[1] = tempStudent;
-      console.log(students);
+      tempStudent.classroom = classroom;//set the classroom in the student object
+      let students = [];                //create an array to pass the student into the addStudents function
+      students[0] = tempStudent;        //which posts the student to the server.
+      //console.log(students);
 
       const newstudent = await addStudents(students, classroomId);
-      console.log(newstudent);
+      console.log(newstudent);          //output the new student object to the console to confirm it was created correctly.
     }
-    else if (res.data) {
+    else if (res.data) { //otherwise, login to the session
       setLoading(false);
       setUserSession(res.data.jwt, JSON.stringify(res.data.students));
       navigate('/student');
     }
-    else {
+    else { //should not error, but just in case handle it
       setLoading(false);
       message.error('Error. Please try again.');
     }
   };
   
   const onSucc = (res) => {
-    console.log(res);
+    console.log(res); //if google auth was successful, login
     handleStudentGoogleLogin(res);
   };
   
   const onFail = (res) => {
-    console.log(res);
+    console.log(res); //if not successful, do nothing
   };
   
+  //login component to be returned to the website
   function Login() {
     return (
         <div id="signInButton">

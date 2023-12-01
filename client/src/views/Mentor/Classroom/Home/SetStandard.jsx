@@ -353,8 +353,8 @@ const data = Array.from({ length: criteriaNum }, (_, i) => {
       <Input.TextArea
       onChange={e=>setExpectOutput(e.target.value)} value={expectedOutput}></Input.TextArea>
     </Form.Item>
-    <h3 id="subtitle">Lesson Materials</h3>
-    <Form.Item id="form label" label = "Expected Output Frequncy">
+    <h3 id="subtitle">Expected Output Frequency</h3>
+    <Form.Item id="form label" label = "Expected Output Frequncies:">
       <Select onChange = {(value)=> setDOPFrequency(value)} style={{width:120, marginTop:10}} defaultValue={DOPFrequency}
       required
       >

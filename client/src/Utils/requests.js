@@ -415,6 +415,14 @@ export const createLessonModule = async (
     error: 'Failed to retrieve videos.' 
   });
 
+export const getVideo = async (id) =>
+    makeRequest({
+        method: GET,
+        path: `${server}/lesson-videos/${id}`,
+        auth: true,
+        error: 'Failed to retrieve video.'
+    });
+
 
   export const createQuestion = async (question, intime, A, B, C, D, correctAnswer, id) =>
   makeRequest({

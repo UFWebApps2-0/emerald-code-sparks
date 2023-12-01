@@ -1,18 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VideoPlayer from './VideoPlayer';
 import NavBar from "../../components/NavBar/NavBar";
 import "./VideoPage.less";
+import { getVideo } from "../../Utils/requests";
+import { useLocation } from "react-router-dom";
 // use dis: http://localhost:3000/test-video
 
 export default function VideoPage({ thisID, thisTitle }) {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [videoID, setVideoID] = useState(null);
+    const [videoTitle, setVideoTitle] = useState(null);
 
     function HandleClick() {
         // Handle logic for navigating back
         navigate(-1);
     }
+
+    let id = new URLSearchParams(useLocation().search).get('id');
+    
+
+    useEffect(() => {
+        const fetchVideo = async () => {
+            try {
+                const response = await getVideo(id);
+                console.log(response.data);
+                // Update state with fetched videos
+                setVideoID(response.data.VideoLink);
+                setVideoTitle(response.data.LessonVideoTitle);
+            } catch (error) {
+                console.error("Failed to fetch video", error);
+            }
+        };
+
+        fetchVideo();
+    }, []);
 
     function handleAnswerSelection(answer) {
         setSelectedAnswer(answer);
@@ -32,9 +55,9 @@ export default function VideoPage({ thisID, thisTitle }) {
     return (
         <div className='container nav-padding'>
             <NavBar /><br/>
-            <h1 id="VideoPage-h1" style={{margin: "auto", color: "white"} }>{"Crab Rave"}</h1>
+            <h1 id="VideoPage-h1" style={{margin: "auto", color: "white"} }>{videoTitle}</h1>
 
-            <VideoPlayer url={"https://www.youtube.com/embed/-50NdPawLVY?si=8p9J11fE5zXSIFm2"} title={"Crab Rave"} />
+            <VideoPlayer url={"https://www.youtube.com/embed/" + videoID + "?si=-p81AZFLaVBX2uJK"} title={{ videoTitle }} />
 
             <div className="quiz-container" style={{ margin: "auto", color: "white" }}>
                 <h2>{quizQuestion}</h2>

@@ -24,19 +24,31 @@ const useFormInput = (initialValue) => {
   };
 };
 
+
+//begin placeholder login
+const placeholderLogin = () =>
+{
+  setLoading(true);
+  //identifier = name/email
+  let placeholderBody = { identifier: 'teacher', password: 'easypassword' };
+
+  postUser(placeholderBody)
+    .then((response) => {
+      setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+      setLoading(false);
+      //navigate('/sandbox');
+      navigate('/dashboard');
+      //navigate('/ccdashboard');
+      //navigate('/report');
+    })
+    .catch((error) => {
+      setLoading(false);
+      message.error('Google Login Failed.');
+    });
+};
+//end placeholder login
+
 export default function TeacherLogin() {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        scope: SCOPES
-      })
-    };
-
-    gapi.load('client:auth2', start);
-  })
-
   const email = useFormInput('');
   const password = useFormInput('');
   const [loading, setLoading] = useState(false);
@@ -152,6 +164,7 @@ export default function TeacherLogin() {
             onClick={handleLogin}
             disabled={loading}
           />
+          <p/>
         </form>
         <Login/>
       </div>

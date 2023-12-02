@@ -670,5 +670,13 @@ export const getClassroomWorkspace = async (id) =>
     method: GET,
     path: `${server}/classroom/workspaces/${id}`,
     auth: true,
-    error: 'Unable to retrive classroom workspaces',
+    error: 'Unable to retreive classroom workspaces',
+  });
+
+export const getMissedContent = async () => 
+  makeRequest({
+    method: GET, 
+    path: `${server}/missed-contents`, 
+    auth: true,
+    error: 'Unable to retrieve missed content'
   });

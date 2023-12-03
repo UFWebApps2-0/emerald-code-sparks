@@ -2,7 +2,7 @@ import { message } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
-import { postUser, setUserSession } from '../../Utils/AuthRequests';
+import { studentMe } from '../../Utils/requests';
 import './ParentLogin.less';
 
 const useFormInput = (initialValue) => {
@@ -18,31 +18,29 @@ const useFormInput = (initialValue) => {
 };
 
 export default function ParentLogin() {
-  const email = useFormInput('');
   const password = useFormInput('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
-    let body = { identifier: email.value, password: password.value };
-
-    postUser(body)
-      .then((response) => {
-        setUserSession(response.data.jwt, JSON.stringify(response.data.user));
-        setLoading(false);
-        if (response.data.user.role.name === 'Content Creator') {
-          navigate('/ccdashboard');
-        } else if (response.data.user.role.name === 'Researcher') {
-          navigate('/report');
-        } else {
-          navigate('/dashboard');
+    try{
+      const res = await studentMe();
+      setLoading(false);
+      if(res.data.students[0].parent_key){
+        if(res.data.students[0].parent_key == password.value){
+          navigate('/restrict-access');
+        }else{
+          message.error('Login failed. Password is incorrect.');
         }
-      })
-      .catch((error) => {
-        setLoading(false);
-        message.error('Login failed. Please input a valid email and password.');
-      });
+      }else{
+        message.error('Something went wrong.')
+      }
+    } catch(error){
+      setLoading(false);
+      message.error('Login failed. Please input a valid password.');
+    }
+    
   };
 
   return (
@@ -52,7 +50,10 @@ export default function ParentLogin() {
         <form
           id='box'
           onKeyPress={(e) => {
-            if (e.key === 'Enter') handleLogin();
+            if (e.key === 'Enter'){ 
+              e.preventDefault();
+              handleLogin();
+            }
           }}
         >
           <div id='box-title'>Parental Controls</div>
@@ -60,7 +61,6 @@ export default function ParentLogin() {
             type='password'
             {...password}
             placeholder='Password'
-            autoComplete='current-password'
           />
           <p id='forgot-password' onClick={() => navigate('/forgot-password')}>
             Forgot Password?

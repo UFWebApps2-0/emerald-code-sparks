@@ -38,8 +38,8 @@
     "parent_email": {
       "type": "email"
     },
-    "parent_password": {
-      "type": "password"
+    "parent_key": {
+      "type": "string"
     }
   }
 }

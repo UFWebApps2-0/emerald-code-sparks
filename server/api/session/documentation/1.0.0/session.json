@@ -616,7 +616,7 @@
                 "parent_email": {
                   "type": "string"
                 },
-                "parent_password": {
+                "parent_key": {
                   "type": "string"
                 },
                 "created_by": {

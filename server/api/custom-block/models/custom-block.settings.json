@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custom_blocks",
+  "info": {
+    "name": "Custom Block"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "arduinoCode": {
+      "type": "string"
+    },
+    "blockDefinition": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

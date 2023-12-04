@@ -35,7 +35,7 @@
     {
       "method": "PUT",
       "path": "/mentors/:id",
-      "handler": "mentor.update",
+      "handler": "mentor.addtoinbox",
       "config": {
         "policies": []
       }

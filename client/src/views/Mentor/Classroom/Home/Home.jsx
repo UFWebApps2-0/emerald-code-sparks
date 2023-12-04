@@ -6,6 +6,7 @@ import {
   getLessonModuleActivities,
 } from '../../../../Utils/requests';
 import MentorSubHeader from '../../../../components/MentorSubHeader/MentorSubHeader';
+import '../../Dashboard/Dashboard.less'
 import DisplayCodeModal from './DisplayCodeModal';
 import MentorActivityDetailModal from './MentorActivityDetailModal';
 import LessonModuleModal from './LessonModuleSelect/LessonModuleModal';
@@ -17,7 +18,6 @@ export default function Home({ classroomId, viewing }) {
   const [activities, setActivities] = useState([]);
   const [gradeId, setGradeId] = useState(null);
   const [activeLessonModule, setActiveLessonModule] = useState(null);
-  const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const navigate = useNavigate();
 
   const SCIENCE = 1;
@@ -32,7 +32,7 @@ export default function Home({ classroomId, viewing }) {
         setClassroom(classroom);
         setGradeId(classroom.grade.id);
         classroom.selections.forEach(async (selection) => {
-          if (selection.current) {
+          if (selection.current ) {
             const lsRes = await getLessonModule(
               selection.lesson_module
             );
@@ -53,6 +53,7 @@ export default function Home({ classroomId, viewing }) {
     };
     fetchData();
   }, [classroomId]);
+  
 
   const handleViewActivity = (activity, name) => {
     activity.lesson_module_name = name;
@@ -102,6 +103,7 @@ export default function Home({ classroomId, viewing }) {
                 <h3>{`Learning Standard - ${activeLessonModule.name}`}</h3>
                 <LessonModuleModal
                   setActiveLessonModule={setActiveLessonModule}
+                  activeLessonModule={activeLessonModule}
                   classroomId={classroomId}
                   gradeId={gradeId}
                   viewing={viewing}

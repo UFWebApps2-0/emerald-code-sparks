@@ -54,4 +54,28 @@ module.exports = {
 
     return await strapi.services.unit.update({ id }, ctx.request.body);
   },
+  // async find(){
+  //   const { grade } = ctx.query;
+
+  //   // If grade is provided, filter units by grade
+  //   if (grade) {
+  //     // Ensure the provided grade is a positive integer
+  //     if (!strapi.services.validator.isPositiveInt(grade)) {
+  //       return ctx.badRequest('Invalid grade parameter!', {
+  //         id: 'Unit.find.grade.invalid',
+  //         error: 'ValidationError',
+  //       });
+  //     }
+
+  //     // Find units by grade
+  //     const units = await strapi.services.unit.find({ grade });
+  //     return ctx.send(units);
+  //   }
+
+  //   // If grade is not provided, perform the default find operation
+  //   console.log('Finding');
+  //   // You can customize this part based on your actual find logic
+  //   const allUnits = await strapi.services.unit.allUnits;
+  //   return ctx.send(allUnits);
+  // }
 };

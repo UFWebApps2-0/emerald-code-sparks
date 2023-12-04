@@ -7,6 +7,7 @@ import BugReport from './views/BugReport/BugReport';
 import ContentCreator from './views/ContentCreator/ContentCreator';
 import Home from './views/Home/Home';
 import Classroom from './views/Mentor/Classroom/Classroom';
+import Inbox from './views/Mentor/Inbox/inbox';
 import Dashboard from './views/Mentor/Dashboard/Dashboard';
 import NotFound from './views/NotFound';
 import Replay from './views/Replay/Replay';
@@ -85,6 +86,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Classroom />
+            </PrivateRoute>
+          }
+        />
+          <Route
+          path='/inbox'
+          element={
+            <PrivateRoute>
+              <Inbox />
             </PrivateRoute>
           }
         />

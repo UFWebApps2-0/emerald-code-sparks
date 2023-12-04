@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/12/2023 1:28:43 PM"
+    "x-generation-date": "11/17/2023 4:54:46 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -5784,7 +5784,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Mentor"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -5830,7 +5834,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMentor"
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
@@ -11779,6 +11787,9 @@
               "link": {
                 "type": "string"
               },
+              "lessons": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -12246,6 +12257,12 @@
                 },
                 "user": {
                   "type": "string"
+                },
+                "inbox": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -12886,6 +12903,46 @@
           },
           "link": {
             "type": "string"
+          },
+          "lessons": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "school": {
+                "type": "string"
+              },
+              "classrooms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "user": {
+                "type": "string"
+              },
+              "inbox": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -12917,6 +12974,9 @@
             "type": "string"
           },
           "link": {
+            "type": "string"
+          },
+          "lessons": {
             "type": "string"
           },
           "created_by": {
@@ -13084,6 +13144,54 @@
                 "type": "string"
               }
             }
+          },
+          "inbox": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "number",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "expectations": {
+                  "type": "string"
+                },
+                "activities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "standards": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "lessons": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -13106,6 +13214,12 @@
           },
           "user": {
             "type": "string"
+          },
+          "inbox": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"
@@ -13405,6 +13519,12 @@
                 "user": {
                   "type": "string"
                 },
+                "inbox": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -13547,6 +13667,9 @@
                 "type": "string"
               },
               "link": {
+                "type": "string"
+              },
+              "lessons": {
                 "type": "string"
               },
               "created_by": {
@@ -13892,6 +14015,9 @@
                 "type": "string"
               },
               "link": {
+                "type": "string"
+              },
+              "lessons": {
                 "type": "string"
               },
               "created_by": {
@@ -14403,6 +14529,9 @@
                   "type": "string"
                 },
                 "link": {
+                  "type": "string"
+                },
+                "lessons": {
                   "type": "string"
                 },
                 "created_by": {

@@ -30,12 +30,14 @@ export default function HomeJoin(props) {
         if (e.key === 'Enter') handleLogin();
       }}
     >
+      
       <input
         type='text'
         value={joinCode}
         placeholder='Join Code'
         onChange={(e) => setJoinCode(e.target.value)}
       />
+      
       <input
         type='button'
         value={loading ? 'Loading...' : 'Join'}

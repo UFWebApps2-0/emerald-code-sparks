@@ -5,6 +5,8 @@ import './Classroom.less';
 import NavBar from '../../../components/NavBar/NavBar';
 import Roster from './Roster/Roster';
 import Home from './Home/Home';
+import Lesson from './lesson/lesson';
+import Unit from './Unit/unitCreation';
 import SavedWorkSpaceTab from '../../../components/Tabs/SavedWorkspaceTab';
 import { useSearchParams, useParams } from 'react-router-dom';
 
@@ -50,6 +52,12 @@ export default function Classroom({
             setSearchParams={setSearchParams}
             classroomId={id}
           />
+        </TabPane>
+        <TabPane tab='Create lesson' key='lesson'>
+          <Lesson classroomId={id}/>
+        </TabPane>
+        <TabPane tab='Create Unit' key='unit'>
+          <Unit classroomId={id}/>
         </TabPane>
       </Tabs>
     </div>

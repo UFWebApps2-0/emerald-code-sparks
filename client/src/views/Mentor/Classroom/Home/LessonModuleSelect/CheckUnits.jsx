@@ -25,6 +25,7 @@ export default function CheckUnits(props) {
     };
 
     const getOptions = (value) => {
+        
         return plainOptions.find(option => option.number === parseInt(value))
     };
 

@@ -1,0 +1,61 @@
+/* #AddActivity.css */
+
+/* Colors */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --border-radius: 5px;
+  --padding: 10px;
+}
+
+/* Form Container */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Form Input */
+.form-input {
+  width: 100%;
+  padding: var(--padding);
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+/* Form Textarea */
+.form-textarea {
+  width: 100%;
+  padding: var(--padding);
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+/* Form Button */
+.form-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: var(--padding);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: darken(var(--primary-color), 10%);
+}
+
+/* Form Cancel Button */
+.form-cancel-button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: var(--padding);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.form-cancel-button:hover {
+  background-color: darken(var(--secondary-color), 10%);
+}

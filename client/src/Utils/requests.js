@@ -64,7 +64,7 @@ export const getAllClassrooms = async () =>
   makeRequest({
     method: GET,
     path: `${server}/classrooms`,
-    auth: false,
+    auth: true,
     error: 'Classrooms could not be retrieved.',
   });
 
@@ -318,7 +318,7 @@ export const addStudents = async (students, classroom) =>
     method: POST,
     path: `${server}/students`,
     data: { students: students, classroom: classroom },
-    auth: false,
+    auth: true,
     error: 'Failed to add students.',
   });
 

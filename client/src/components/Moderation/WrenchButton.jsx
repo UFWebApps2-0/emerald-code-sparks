@@ -1,14 +1,32 @@
 import React, {useState} from 'react';
 import './WrenchButton.less';
+//import './ActionButtons.jsx';
+//import './ActionButtons.less';
+
 //import { <-- Import database getter/setters necessary for button function
-//  deleteActivity
+
 import { Button } from 'antd';
 
-const Sidebar = ({ handleClose }) => {
+const Sidebar = ({uniqueKey, handleClose }) => {
+  function Approve(){
+    alert('The content has been approved! Unique Key = '+ uniqueKey);
+    handleClose();
+  }
+
+  function Reject(){
+    alert('The content has been rejected! Unique Key = '+ uniqueKey);
+    handleClose();
+  }
+
   return (
     <div className="sidebar">
       <div className="sidebar-content">
-        <p>Approve or deny post</p>
+        
+        <button onClick={Approve}>Approve</button>
+        <button onClick={Reject}>Reject</button>
+        <p>
+
+        </p>
         <button onClick={handleClose}>Close</button>
       </div>
     </div>
@@ -25,11 +43,8 @@ export default function WrenchButton({uniqueKey}) {
     alert("The content has been approved! Unique key: " + uniqueKey);
     //can I have just one click, but the click makes the approve/reject buttons pop up?
     // Use setter from requests.js to update status column as approved
-
     // Remove hidden status from gallery, if hidden
-
   }*/
-
   /*  I don't know if I need an unwrench function, so we'll see.
   function UnWrench() {
     // Mark content as inappropriate and restrict it from being displayed publically
@@ -52,7 +67,7 @@ export default function WrenchButton({uniqueKey}) {
         <Button className={'wrench'} onClick={ toggleSidebar }> </Button>
         {showSidebar && (
           <div className="sidebar-wrapper">
-            <Sidebar handleClose={() => setSidebar(false)} />
+            <Sidebar uniqueKey = {uniqueKey} handleClose={() => setSidebar(false)} />
           </div>
         )}
         </div>

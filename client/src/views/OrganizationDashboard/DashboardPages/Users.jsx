@@ -15,11 +15,21 @@ export default function OrganizationUsers(props) {
     let users = (await getUsers()).data;
     let user = users.filter((data) => data.email === email);
 
+    if (user.length === 0) {
+      message.error("No users found with this email");
+      return false;
+    }
+
     let orgUsers = (await getOrg(props.id)).data.users;
+    if (orgUsers.map((data) => data.email).includes(user[0].email)) {
+      message.error("User already a part of organization");
+      return false;
+    }
     orgUsers.push(user[0]);
 
     let res = await updateOrganizationUsers(props.id, orgUsers);
     setOrg((await getOrg(props.id)).data);
+    return true;
   }
 
   useEffect(() => {

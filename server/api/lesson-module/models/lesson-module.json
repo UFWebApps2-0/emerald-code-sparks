@@ -36,6 +36,10 @@
     },
     "link": {
       "type": "string"
+    },
+    "lessons": {
+      "via": "inbox",
+      "model": "mentor"
     }
   }
 }

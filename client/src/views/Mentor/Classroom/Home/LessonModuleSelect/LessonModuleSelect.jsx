@@ -42,6 +42,7 @@ export default function LessonModuleSelect({
             name: unitData.name,
           };
         });
+        console.log(options);
         setPlainOptions(options);
         setCheckedList(options);
       } else {
@@ -166,7 +167,7 @@ export default function LessonModuleSelect({
           {visibleStandardsByUnit.map((unit) => {
             return checkedList.find((checked) => checked.id === unit.id) ? (
               <div key={unit.id}>
-                <Divider orientation='left'>{`Unit ${unit.number}- ${unit.name}`}</Divider>
+                <Divider orientation='left'> {`Unit ${unit.number}- ${unit.name}`}</Divider>
                 {unit.lesson_modules.map((ls) => (
                   <div
                     key={ls.id}

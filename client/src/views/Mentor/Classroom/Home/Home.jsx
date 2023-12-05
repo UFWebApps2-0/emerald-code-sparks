@@ -4,8 +4,10 @@ import {
   getClassroom,
   getLessonModule,
   getLessonModuleActivities,
+  deleteActivity,
 } from '../../../../Utils/requests';
 import MentorSubHeader from '../../../../components/MentorSubHeader/MentorSubHeader';
+import '../../Dashboard/Dashboard.less'
 import DisplayCodeModal from './DisplayCodeModal';
 import MentorActivityDetailModal from './MentorActivityDetailModal';
 import LessonModuleModal from './LessonModuleSelect/LessonModuleModal';
@@ -17,8 +19,11 @@ export default function Home({ classroomId, viewing }) {
   const [activities, setActivities] = useState([]);
   const [gradeId, setGradeId] = useState(null);
   const [activeLessonModule, setActiveLessonModule] = useState(null);
-  const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
+  const [forceRender, setForceRender] = useState(false);
+  const [display, setDisplay] = useState(false);
+
   const navigate = useNavigate();
+  
 
   const SCIENCE = 1;
   const MAKING = 2;
@@ -32,13 +37,14 @@ export default function Home({ classroomId, viewing }) {
         setClassroom(classroom);
         setGradeId(classroom.grade.id);
         classroom.selections.forEach(async (selection) => {
-          if (selection.current) {
+          if (selection.current ) {
             const lsRes = await getLessonModule(
               selection.lesson_module
             );
             if (lsRes.data) setActiveLessonModule(lsRes.data);
             else {
               message.error(lsRes.err);
+              setDisplay(false);
             }
             const activityRes = await getLessonModuleActivities(lsRes.data.id);
             if (activityRes) setActivities(activityRes.data);
@@ -53,6 +59,7 @@ export default function Home({ classroomId, viewing }) {
     };
     fetchData();
   }, [classroomId]);
+  
 
   const handleViewActivity = (activity, name) => {
     activity.lesson_module_name = name;
@@ -72,6 +79,30 @@ export default function Home({ classroomId, viewing }) {
   const handleBack = () => {
     navigate('/dashboard');
   };
+
+  const removeAcitivty = async (selectedAct) => {
+    const newActivities = activities;
+
+    var i = newActivities.length;
+
+    while(i--){
+
+      if(activities[i].id == selectedAct.id){
+        newActivities.splice(i, 1);
+        break;
+
+      }
+    }
+
+    setActivities(newActivities);
+
+    const res = await deleteActivity(selectedAct.id);
+    if(res){
+      message.success("Activity Deleted");
+      setForceRender((prev) => !prev);
+
+    }
+  }
 
   const color = [
     'magenta',
@@ -102,6 +133,7 @@ export default function Home({ classroomId, viewing }) {
                 <h3>{`Learning Standard - ${activeLessonModule.name}`}</h3>
                 <LessonModuleModal
                   setActiveLessonModule={setActiveLessonModule}
+                  activeLessonModule={activeLessonModule}
                   classroomId={classroomId}
                   gradeId={gradeId}
                   viewing={viewing}
@@ -153,6 +185,7 @@ export default function Home({ classroomId, viewing }) {
                             Demo Template
                           </button>
                         )}
+                        <button className='removal-btn' onClick={() => removeAcitivty(activity)}>Remove</button>
                         <MentorActivityDetailModal
                           learningStandard={activeLessonModule}
                           selectActivity={activity}

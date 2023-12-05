@@ -47,6 +47,11 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
               {student.enrolled.enrolled ? 'Enrolled' : 'Unenrolled'}
             </p>
           </div>
+          <div id='description-container'>
+            <p id='label'>Progress:</p>
+            {/* list student progress here */}
+            <p id='label-info'>---------------</p>
+          </div>
         </div>
       </Modal>
     </div>

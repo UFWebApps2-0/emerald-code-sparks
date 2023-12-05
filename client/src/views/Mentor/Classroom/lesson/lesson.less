@@ -1,0 +1,129 @@
+#c_lesson{
+    width: 80%;
+    padding-top: 5vh;
+    margin: 2vh auto 0 auto;
+    background-color: rgb(246, 246, 246);
+    padding: 20px;
+    padding-top: 50px;
+    border: 2px solid rgb(98, 172, 222);
+    margin-bottom: 50px;
+}
+
+hr{
+    width: 80%;
+}
+#c_lesson form hr{
+    width: 55%;
+}
+
+h3{
+    font-size: 20px;
+}
+
+#c_lesson form{
+    margin-top: 15px;
+    display: grid;
+    gap: 20px;
+}
+
+#c_lesson form div{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: fit-content;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+#c_lesson form .fst h4{
+    margin: auto;
+    font-size: 20px;
+}
+
+.fst #units{
+    margin: auto;
+    font-size: 20px;
+}
+
+#c_lesson form .textbox, #c_lesson form .dtextbox{
+    background-color: transparent;
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 5px;
+    min-width: 400px;
+    font-size: 16px;
+    padding: 3px;
+    padding-inline: 8px;
+}
+#c_lesson form .dtextbox{
+    max-height: 80px;
+    min-width: 500px;
+}
+
+#c_lesson form .submitbtn{
+    margin-top: 20px;
+    width: fit-content;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: rgb(98, 172, 222);
+    color: white;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-inline: auto;
+    transition: 300ms;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 6px black;
+    cursor: pointer;
+
+    &:hover{
+        padding-inline: 20px;
+        box-shadow: 0px 0px 3px black;
+    }
+}
+
+.selection h4{
+    font-size: 20px;
+    display: flex;
+    margin: auto;
+}
+
+.selection #units{
+    appearance: none;
+    /*  safari  */
+    -webkit-appearance: none;
+    /*  other styles for aesthetics */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100%;
+    color:white;
+    font-weight: 600;
+    font-size: 1.15rem;
+    padding-inline:10px;
+    padding-block: 5px;
+    background-color: rgba(98, 172, 222, 0.777);
+    border: none;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &:focus{
+        outline:none;
+        border: 2px solid white;
+    }
+}
+
+.all{
+    display: grid;
+}
+
+.ms{
+    align-items: center;
+    display: grid;
+}
+
+.ms h4{
+    font-size: 15px;
+    margin-inline-end: 0px;
+    margin-top: 12px;
+}

@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Form, Input, Popconfirm, Switch, Table } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import StudentModal from './StudentModal';
+import MoveStudent from './MoveStudent';
 import Picker from 'emoji-picker-react';
 
-export default function ListView(props) {
+export default function ListView(props, classIds) {
+  const {classroomId, addStudentsToTable} = props;
+
   const {
     studentData,
     handleDelete,
@@ -214,6 +217,23 @@ export default function ListView(props) {
             <button id='link-btn'> Delete</button>
           </Popconfirm>
         ) : null,
+    },
+    {
+      title: 'Move',
+      dataIndex: 'move',
+      key: 'move',
+      width: '10%',
+      align: 'right',
+      render: (_, record) => (
+        <MoveStudent
+          student={record}
+          linkBtn={true}
+          //classIds={classIds}
+          //getFormattedDate={getFormattedDate}
+          //addStudentsToTable={addStudentsToTable}
+
+        />
+      ),
     },
     {
       title: 'Enrolled',

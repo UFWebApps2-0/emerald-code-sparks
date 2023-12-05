@@ -11,12 +11,18 @@ import { useNavigate } from 'react-router-dom';
 export default function Dashboard() {
   const [classrooms, setClassrooms] = useState([]);
   const [value] = useGlobalState('currUser');
+  const[inboxSize, setInboxSize] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     let classroomIds = [];
     getMentor().then((res) => {
       if (res.data) {
+        setInboxSize(res.data.inbox.length)
+        if(res.data.inbox.length > 0){
+          const banner = document.querySelector('.inbox-notification');
+          banner.style.display = 'block';
+        }
         res.data.classrooms.forEach((classroom) => {
           classroomIds.push(classroom.id);
         });
@@ -34,10 +40,15 @@ export default function Dashboard() {
     navigate(`/classroom/${classroomId}`);
   };
 
+  function viewInbox() {
+    navigate(`/inbox`);
+  };
+
+
   return (
     <div className='container nav-padding'>
       <NavBar />
-      <div id='main-header'>Welcome {value.name}</div>
+      <div id='main-header'>Welcome {value.name} <button id='share' onClick={viewInbox}> Shared Lessons <div className='inbox-notification'><p>{inboxSize}</p></div> </button> </div>
       <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
       <div id='classrooms-container'>
         <div id='dashboard-card-container'>

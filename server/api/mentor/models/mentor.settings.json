@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "mentors",
   "info": {
-    "name": "Mentor"
+    "name": "Mentor",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "first_name": {
@@ -27,6 +29,10 @@
     "user": {
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "inbox": {
+      "collection": "lesson-module",
+      "via": "lessons"
     }
   }
 }

@@ -647,6 +647,46 @@
           },
           "link": {
             "type": "string"
+          },
+          "lessons": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "school": {
+                "type": "string"
+              },
+              "classrooms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "user": {
+                "type": "string"
+              },
+              "inbox": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -678,6 +718,9 @@
             "type": "string"
           },
           "link": {
+            "type": "string"
+          },
+          "lessons": {
             "type": "string"
           },
           "created_by": {

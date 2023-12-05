@@ -383,7 +383,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Mentor"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -429,7 +433,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMentor"
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
@@ -497,6 +505,89 @@
         "tags": [
           "Mentor"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/mentors/remove/{id}": {
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Mentor"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
         "parameters": [
           {
             "name": "id",
@@ -671,6 +762,54 @@
                 "type": "string"
               }
             }
+          },
+          "inbox": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "number",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "expectations": {
+                  "type": "string"
+                },
+                "activities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "standards": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "lessons": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -693,6 +832,12 @@
           },
           "user": {
             "type": "string"
+          },
+          "inbox": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

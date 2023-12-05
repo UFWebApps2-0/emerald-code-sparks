@@ -33,3 +33,5 @@ node_modules/
 build/
 server/public/client/*
 !server/public/client/.gitkeep
+
+client/package-lock.json

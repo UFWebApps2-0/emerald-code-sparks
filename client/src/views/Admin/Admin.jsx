@@ -24,12 +24,6 @@ export default function Admin() {
     const [orgList, setOrgList] = useState([]);
     const navigate = useNavigate();
 
-
-//Org stuff
-    //list of orgs? make this updatable so we can add orgs (at least temporarily)
-
-
-
     //handle click on create org button
     function orgCreateClick(){
         //make a create org form
@@ -44,6 +38,7 @@ export default function Admin() {
     async function getOrgs() {
         let orgs = await getAllOrgs();
         let userorgs = orgs.data.filter((org) => org.users.filter((user) => user.id === value.id).length > 0);
+        console.log(orgs);
         return userorgs;
     }
     useEffect(() => {
@@ -67,7 +62,7 @@ export default function Admin() {
         }
     }
 
-
+/*
 //Lesson stuff
     //click on create lesson button
 
@@ -113,7 +108,7 @@ export default function Admin() {
     if  (value.role !=  "Admin") {
         return "Unauthorized";
     }
-
+*/
     return (
         <div className='container nav-padding'>
             <NavBar />
@@ -132,37 +127,28 @@ export default function Admin() {
                 {/*generate org tiles, have them redirect to org page / org management page*/}
                 <div className='tile-container'>
                     {orgList.map(organization => (
-                         <div className='description' onClick={() => orgClick(organization.id)}
-                         >{organization.Name}</div>
+                         <div key={organization.id} id='dashboard-org-card'>
+                             <div id='card-left-content-container'>
+                                 <h1 id='card-title'>{organization.Name}</h1>
+                                 <div id='card-button-container' className='flex flex-row'>
+                                     <button onClick={() => orgClick(organization.id)}>View</button>
+                                 </div>
+                             </div>
+                             <div id='card-right-content-container'>
+                                 <div id='dashboard-display-code-modal'>
+                                     <h1 id='number'>{organization.users.length}</h1>
+                                     <p id='label'>Members</p>
+                                 </div>
+                                 <div id='divider' />
+                                 <div id={'classroom-number-container'}>
+                                     <h1 id='number'>{organization.classrooms.length}</h1>
+                                     <p id='label'>Classes</p>
+                                 </div>
+                             </div>
+                         </div>
                     ))}
                 </div>
-                {/* We'll run an async function to get all organizations. then map through the below div. */}
             </div>
-
-            {/*create lesson button. this will belong in an org management page --> move it there if they don't already have one*/}
-            {/*I think a lesson creator exists? we just have to link to it and allow access*/}
-            {/*<button className='createOrgButton' onClick={lessonCreateClick} style={{ marginTop: '20px' }}> + </button>
-            <LessonModal
-                isOpen={isLessonModalOpen}
-                closeModal={closeLessonModal}
-                submitLesson={submitLesson}
-            />
-            <div className='cardholder'>
-                <h1>Create Lesson</h1>
-                <div className='description' onClick={lessonTileClick}>View Current Lessons</div>
-            </div>*/}
-
-            {/*teacher management. should be moved into org page*/}
-                {/*<button className='createOrgButton' onClick={teacherTransferClick} style={{ marginTop: '20px' }}> + </button>
-            <TeacherModal
-                isOpen={isTeacherModalOpen}
-                closeModal={closeTeacherModal}
-                submitLesson={submitTeacherTransfer}
-            />    
-            <div className='cardholder'>
-                <h1>Teacher Management Tool</h1>
-                <div className='description' onClick={teacherTileClick}>View Current Teachers</div>
-            </div> */}
         </div>
 
     );

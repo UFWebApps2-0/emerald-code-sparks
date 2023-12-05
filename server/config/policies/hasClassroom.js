@@ -2,6 +2,11 @@
 // Check if the current user belongs to this classroom
 //
 module.exports = async (ctx, next) => {
+  //TEMPORARY FIX TO AVOID BOTTLENECKING GROUP
+  if (ctx.state.user && ctx.state.user.role.name === 'Admin') {
+    return await next();
+  }
+
   if (ctx.state.user && ctx.state.user.role.name === 'Researcher') {
     return await next();
   }
@@ -19,6 +24,7 @@ module.exports = async (ctx, next) => {
   const { classrooms } = (
     await strapi.services['classroom-manager'].findById(id)
   ).classroomManager;
+
 
   // check if the target classroom is one of the user's classrooms
   if (classrooms.length && classrooms.find((cr) => cr.id === classroom)) {

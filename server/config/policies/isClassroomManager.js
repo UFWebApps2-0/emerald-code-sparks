@@ -4,7 +4,7 @@
 module.exports = async (ctx, next) => {
   if (
     (ctx.state.user && ctx.state.user.role.name === 'Classroom Manager') ||
-    ctx.state.user.role.name === 'Researcher'
+    ctx.state.user.role.name === 'Researcher' || ctx.state.user.role.name === 'Admin'
   ) {
     // Go to next policy or controller
     return await next();

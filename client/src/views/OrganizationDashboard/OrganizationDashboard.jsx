@@ -24,7 +24,7 @@ export default function OrganizationDashboard() {
   const { orgId } = useParams();
   const navigate = useNavigate();
 
-  async function isVerified() {
+  async function isVerified(orgId) {
     let org = await getOrg(orgId);
     console.log("ran function")
     return org.data.users.map((user) => user.id).includes(value.id);

@@ -1,0 +1,84 @@
+@import '../../../assets/style.less';
+
+.welcome-message {
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  color: #333;
+}
+
+.addUserButton {
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: #FFFFFF;
+  font-size: 3em;
+  font-weight: bolder;
+  position: relative;
+  float: right;
+  left: -12vw;
+  top: -1.75vw;
+  cursor: pointer;
+
+  &:hover {
+    color: #colors[secondary];
+  }
+
+}
+
+#userSubHeader{
+  width: 80vw;
+  margin: 0 auto 45px auto;
+  padding-bottom: 2vh;
+
+  h1{
+    position: relative;
+    display: flex;
+    float: left;
+    background-color: #colors[secondary];
+    border-color: #000000;
+    color: #colors[text-secondary];
+    font-size: 1.2em;
+    align-items: center;
+    justify-content: center;
+    width: 34%;
+    height: auto;
+    padding: 10px 5px;
+    border-radius: 80px;
+    //top: 4vh;
+    left: -2vw;
+    z-index: 1;
+  }
+}
+
+.userTable{
+  width: 80%;
+  padding-top: 5vh;
+  margin: 2vh auto 0 auto;
+  border-collapse: collapse;
+  border-radius: 4px;
+  border: solid 2px;
+  border-color: #colors[secondary];
+
+  position: relative;
+  top: -2vw;
+
+  th, td {
+    height: 50px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    padding-left: 2vw;
+  }
+  th {
+    background-color: #colors[tertiary];
+  }
+  td {
+    background-color: #e7e7e7;
+  }
+  tr:hover td{
+    background-color: #colors[tertiary];
+  }
+}
+
+#edit-options-span {
+  white-space: nowrap;
+}

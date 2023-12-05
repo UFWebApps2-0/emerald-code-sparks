@@ -20,7 +20,6 @@ import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import Admin from './views/Admin/Admin';
-import Organization from './views/Organization/Organization';
 import OrganizationDashboard from './views/OrganizationDashboard/OrganizationDashboard';
 
 const App = () => {

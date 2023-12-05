@@ -36,6 +36,7 @@ export const getCurrUser = () => {
       name: result.username,
       id: result.id,
       email: result.email,
+      //org: result.org,
     };
   }
 

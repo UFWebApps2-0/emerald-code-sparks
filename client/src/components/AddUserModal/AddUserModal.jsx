@@ -4,13 +4,14 @@ import "./AddUserModal.less"
 const AddUserModal = ({ isOpen, closeModal, submitUser }) => {
     const [userEmail, setUserEmail] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if(userEmail){
-            submitUser(userEmail);
+            let status = await submitUser(userEmail);
             setUserEmail('');
-            closeModal();
-            //window.location.reload(false);
+            if (status === true) {
+                closeModal();
+            }
         }
     }
 

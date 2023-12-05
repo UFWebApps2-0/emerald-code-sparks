@@ -1,4 +1,4 @@
-# CaSMM
+https://github.com/Software-Eng-9e/Emerald-Project06-9e.git# CaSMM
 
 > Computation and Science Modeling through Making
 
@@ -37,7 +37,7 @@ The development environment is composed of five servers. The first one is run wi
 
 * `casmm-server-dev` - localhost:1337/admin
 
-* `casmm-compile-dev` 
+* `casmm-compile-dev` - small change, more change
 
 * `casmm-db-dev` - localhost:5432
 

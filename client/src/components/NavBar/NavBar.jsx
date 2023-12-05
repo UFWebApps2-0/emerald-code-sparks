@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './NavBar.less';
 import config from './NavBarConfig.json';
 import Logo from '../../assets/casmm_logo.png';
@@ -7,13 +7,17 @@ import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { removeUserSession } from '../../Utils/AuthRequests';
 import { useGlobalState } from '../../Utils/userState';
+import { studentMe } from '../../Utils/requests';
+
 
 
 export default function NavBar() {
   const [value] = useGlobalState('currUser');
+  const [hasParent, setHasParent] = useState(false);
   let currentRoute = window.location.pathname;
   let navigate = useNavigate();
   let routes = config.routes;
+
 
   const handleLogout = () => {
     removeUserSession();
@@ -28,6 +32,22 @@ export default function NavBar() {
     if (currentRoute === routes[route]) return false;
     return config.users[value.role].includes(route);
   };
+
+  // Fetch student data to check for parent email
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await studentMe();
+        if(res.data.students[0].parent_email){
+          setHasParent(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+  
 
   const menu = (
     <Menu>
@@ -101,7 +121,7 @@ export default function NavBar() {
         </Menu.Item>
       ) : null}
       {shouldShowRoute('ParentLogin') ? (
-        value.id % 2 == 0 ? (
+       (hasParent) ? (
           <Menu.Item key='9' onClick={() => handleRouteChange(routes.ParentLogin)}>
           <i className='fa fa-sign-in-alt' />
           &nbsp; Parent Login
@@ -109,7 +129,7 @@ export default function NavBar() {
         ) : (
           <Menu.Item key='10' onClick={() => handleRouteChange(routes.ParentSignUp)}>
           <i className='fa fa-sign-in-alt' />
-          &nbsp; Parent Sign Up
+          &nbsp; Parent Sign-Up
         </Menu.Item>
         )
       ) : null}

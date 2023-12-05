@@ -14,9 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-
-    "x-generation-date": "11/17/2023 7:30:00 PM"
-
+    "x-generation-date": "12/03/2023 10:11:08 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -14365,6 +14363,12 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "parent_email": {
+                  "type": "string"
+                },
+                "parent_key": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -15488,6 +15492,12 @@
               "last_logged_in": {
                 "type": "string"
               },
+              "parent_email": {
+                "type": "string"
+              },
+              "parent_key": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -15965,6 +15975,12 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "parent_email": {
+                  "type": "string"
+                },
+                "parent_key": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -16354,6 +16370,12 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_key": {
+            "type": "string"
           }
         }
       },
@@ -16384,6 +16406,12 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_key": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

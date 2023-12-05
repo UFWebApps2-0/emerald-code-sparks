@@ -784,6 +784,12 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_key": {
+            "type": "string"
           }
         }
       },
@@ -814,6 +820,12 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "parent_email": {
+            "type": "string"
+          },
+          "parent_key": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

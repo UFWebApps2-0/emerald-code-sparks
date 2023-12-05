@@ -3,7 +3,7 @@ import { getToken } from '../../../Utils/AuthRequests';
 import { getOrgUsers, getOrg, getRoles, getOrgMentors, updateOrganizationUsers, getUsers} from "../../../Utils/requests";
 import { message } from 'antd';
 import AddUserModal from "../../../components/AddUserModal/AddUserModal";
-
+import './Users.less';
 
 export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
@@ -84,10 +84,19 @@ export default function OrganizationUsers(props) {
     return <div id="main-header">Welcome to Loading</div>;
   }
   console.log(org.users)
-  return (<>
-    <div id='main-header' className='welcome-message'>Welcome to {org.Name}</div>
+  return (<div>
+    <div id='main-header' className='welcome-message'>Welcome to {org.Name} Users</div>
+    <button className='addUserButton' onClick={() => setIsAddUserModalOpen(true)}>
+      +
+    </button>
+    <AddUserModal
+        isOpen = {isAddUserModalOpen}
+        submitUser = {addUser}
+        closeModal = {() => setIsAddUserModalOpen(false)}
+    />
+    <div id='userSubHeader'><h1>Organization Members</h1></div>
 
-<table className='user-table'>
+<table className='userTable'>
   <thead>
     <tr>
       <th>Username</th>
@@ -109,89 +118,9 @@ export default function OrganizationUsers(props) {
     ))}
   </tbody>
 </table>
-<AddUserModal 
-  isOpen = {isAddUserModalOpen}
-  submitUser = {addUser}
-  closeModal = {() => setIsAddUserModalOpen(false)}
-/>
-<button onClick={() => setIsAddUserModalOpen(true)}>
-  +
-</button>
-<style>
-  {`
-    .welcome-message {
-      font-family: 'Arial', sans-serif;
-      font-size: 24px;
-      color: #333;
-    }
-    .user-table {
-      margin-left: auto;
-      margin-right: auto;
-      border-collapse: collapse;
-      width: 80%;
-      margin-top: 20px;
-      background-color: #ddd;
-    }
-    th, td {
-      border: 1px solid #000;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    .user-username {
-      font-weight: bold;
-    }
-    .user-role {
-      font-weight: bold;
-      color: #000; /* black */
-    }
-    
-    #table-container {
-      width: 80%;
-      padding-top: 5vh;
-      margin: 2vh auto 0 auto;
-    }
 
-    .ant-table {
-      border-radius: 4px;
-      border: solid 2px;
-      border-color: #colors[secondary];
-    }
 
-    .ant-table-row {
-      background-color: #colors[tertiary];
-    }
 
-    .ant-modal .ant-modal-content {
-      border-radius: 4px;
-      border: solid 4px;
-      border-color: #colors[secondary];
-    }
-
-    #link-btn {
-      background: none !important;
-      border: none;
-      padding: 0 !important;
-      color: #colors[primary];
-
-      &:hover {
-        cursor: pointer;
-        opacity: 0.9;
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    #edit-options-span {
-      white-space: nowrap;
-    }
-
-  `}
-</style>
     {/* <p>{sessionStorage.getItem("user")}</p> */}
     {/* {orgs.map((organization) => (
       <div key={organization.id} id='dashboard-class-card'>
@@ -213,5 +142,5 @@ export default function OrganizationUsers(props) {
         </div>
       </div>
     ))} */}
-  </>);
+  </div>);
 }

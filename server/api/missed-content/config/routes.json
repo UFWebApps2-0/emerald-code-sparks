@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/missed-contents",
+      "handler": "missed-content.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/missed-contents/count",
+      "handler": "missed-content.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/missed-contents/:id",
+      "handler": "missed-content.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/missed-contents",
+      "handler": "missed-content.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/missed-contents/:id",
+      "handler": "missed-content.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/missed-contents/:id",
+      "handler": "missed-content.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

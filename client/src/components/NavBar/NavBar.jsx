@@ -132,8 +132,12 @@ export default function NavBar() {
           &nbsp; Parent Sign-Up
         </Menu.Item>
         )
-        
-          
+      ) : null}
+      {shouldShowRoute('StudentPortal') ? (
+        <Menu.Item key='11' onClick={() => handleRouteChange(routes.StudentPortal)}>
+          <i className='fa fa-sign-in-alt' />
+          &nbsp; Student Portal
+        </Menu.Item>
       ) : null}
       
     </Menu>
@@ -149,7 +153,7 @@ export default function NavBar() {
             : value.role === 'Mentor'
             ? '/dashboard'
             : value.role === 'Student'
-            ? '/student'
+            ? '/student-portal'
             : value.role === 'Researcher'
             ? '/report'
             : '/'

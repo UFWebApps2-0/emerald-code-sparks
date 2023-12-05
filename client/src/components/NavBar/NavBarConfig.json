@@ -11,12 +11,13 @@
     "ResearcherDashboard": "/report",
     "BugReport": "/bugreport",
     "ParentSignUp": "/parent-signup",
-    "ParentLogin": "/parentlogin"
+    "ParentLogin": "/parentlogin",
+    "StudentPortal": "/student-portal"
   },
   "users": {
     "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About"],
     "Mentor": ["Dashboard", "AccountInfo", "SignOut", "Sandbox", "BugReport"],
-    "Student": ["SignOut", "ParentSignUp", "ParentLogin"],
+    "Student": ["StudentPortal", "ParentSignUp", "ParentLogin","SignOut"],
     "ContentCreator": [
       "ContentCreatorDashboard",
       "AccountInfo",

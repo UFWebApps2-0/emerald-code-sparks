@@ -46,6 +46,9 @@
     "activity_template": {
       "type": "text",
       "required": false
+    },
+    "date_of_creation": {
+      "type": "date"
     }
   }
 }

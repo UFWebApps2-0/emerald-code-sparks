@@ -89,7 +89,6 @@
 }
 
 .settings-categories .category-item.active {
-  background-color: #e7e7e7;
   border-radius: 10px;
   background-color: rgb(9, 140, 140);
   color: black;

@@ -12,7 +12,6 @@ const AddUserModal = ({ isOpen, closeModal, submitUser }) => {
             if (status === true) {
                 closeModal();
             }
-            //window.location.reload(false);
         }
     }
 

@@ -44,7 +44,6 @@ export default function Admin() {
         getOrgs().then(data => setOrgList(data))
     }, []);
 
-
     const submitOrg = async (orgData) => {
         //make another org tile with the data from this submission, and the current user as a user.
         let users = [{id: value.id, username: value.name, email: value.email}];
@@ -112,7 +111,6 @@ export default function Admin() {
         <div className='container nav-padding'>
             <NavBar />
             <div className='main-header'>Welcome {value.name}</div>
-
             {/*org button*/}
             <button className='createButton' title='Create Organization' onClick={orgCreateClick}> + </button>
             <OrganizationModal
@@ -123,7 +121,7 @@ export default function Admin() {
             <div className="adminSubHeader"><h1>Your Organizations</h1></div>
             {/* org tiles */}
             <div className='cardholder'>
-                {/*generate org tiles, have them redirect to org page / org management page*/}
+                {/*generate org tiles, redirects to org management page*/}
                 <div className='tile-container'>
                     {orgList.map(organization => (
                          <div key={organization.id} id='dashboard-org-card'>

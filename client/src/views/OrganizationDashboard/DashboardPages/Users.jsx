@@ -52,28 +52,6 @@ export default function OrganizationUsers(props) {
     });
   }, []);
 
-  // useEffect(() => {
-  //   setOrg(org);
-  // }, [isAddUserModalOpen]);
-
-
-
-
-// useEffect(()=> {
-//   console.log("tesr wfihfwoih");
-//   console.log(roles);
-//   let map = new Map(roles.data.roles.map((roles) => [role.id, role.name]));
-//   setRoleMap(map);
-// }, [roles])
-
-
-  // useEffect(()=> {
-  //   console.log("tesr wfihfwoih");
-  //   console.log(roles);
-  //   let map = new Map(roles.data.roles.map((roles) => [role.id, role.name]));
-  //   setRoleMap(map);
-  // }, [roles])
-
   if (!('Name' in org)) {
     return <div id="main-header">Welcome to Loading</div>;
   }
@@ -90,51 +68,27 @@ export default function OrganizationUsers(props) {
     />
     <div id='userSubHeader'><h1>Organization Members</h1></div>
 
-<table className='userTable'>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Role</th>
-    </tr>
-  </thead>
-  <tbody>
-    {org.users.map((user) => (
-        <tr key={user.username}>
-          <td className='user-username'>{user.username}</td>
-          <td className='user-role'>{rolemap.get(user.role)}</td>
+    <table className='userTable'>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
         </tr>
-    ))}
-    {org.mentors.map((mentor) => (
-        <tr key={mentor.username}>
-          <td className='user-username'>{mentor.last_name}</td>
-          <td className='user-role'>Mentor</td>
-        </tr>
-    ))}
-  </tbody>
-</table>
-
-
-
-    {/* <p>{sessionStorage.getItem("user")}</p> */}
-    {/* {orgs.map((organization) => (
-      <div key={organization.id} id='dashboard-class-card'>
-        <div id='card-left-content-container'>
-          <h1 id='card-title'>{organization.name}</h1>
-          <div id='card-button-container' className='flex flex-row'>
-            <button>
-              View
-            </button>
-          </div>
-        </div>
-        <div id='card-right-content-container'>
-          <DashboardDisplayCodeModal code={organization.code} />
-          <div id='divider' />
-          <div id='student-number-container'>
-            <h1 id='number'>{organization.students.length}</h1>
-            <p id='label'>Students</p>
-          </div>
-        </div>
-      </div>
-    ))} */}
+      </thead>
+      <tbody>
+        {org.users.map((user) => (
+          <tr key={user.username}>
+            <td className='user-username'>{user.username}</td>
+            <td className='user-role'>{rolemap.get(user.role)}</td>
+          </tr>
+        ))}
+        {org.mentors.map((mentor) => (
+          <tr key={mentor.username}>
+            <td className='user-username'>{mentor.last_name}</td>
+            <td className='user-role'>Mentor</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </div>);
 }

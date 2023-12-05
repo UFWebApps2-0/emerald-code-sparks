@@ -46,6 +46,7 @@ import { Link } from 'react-router-dom'
                       />
                     </a>
                 )}
+                <hr />
                 </div>
               </>
             ) : (
@@ -76,7 +77,8 @@ import { Link } from 'react-router-dom'
         {announcements.map((announcement, index) => (
           <div key={index} className="announcement-item"> 
             <p> <span className="info-label"> PLEASE READ: </span> </p>
-            <p>{announcement.Content}</p>
+            <p>Title: {announcement.Title}</p>
+            <p>Content: {announcement.Content}</p>
             <p> <span className="info-label"> Urgency:  </span>
               <span 
                 style={{
@@ -90,6 +92,7 @@ import { Link } from 'react-router-dom'
               />
           </p>
             <p> <span className="info-label">Last updated: </span> {formatDate(announcement.updated_at)}</p>
+            <hr />
           </div>
         ))}
       </div>

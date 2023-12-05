@@ -57,12 +57,6 @@ export default function OrganizationUsers(props) {
   // }, [isAddUserModalOpen]);
 
 
-//onClick of button, set the model to open
-
-//close modal function = set model to false
-
-//submitUser (async function)
-
 
 
 // useEffect(()=> {

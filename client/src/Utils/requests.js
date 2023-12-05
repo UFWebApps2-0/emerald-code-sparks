@@ -197,7 +197,7 @@ export const getMentor = async () =>
 export const getClassroom = async (id) =>
   makeRequest({
     method: GET,
-    path: `${server}/classrooms/${id}?populate=*`,
+    path: `${server}/classrooms/${id}`,
     auth: true,
     error: 'Classroom information could not be retrieved',
   });

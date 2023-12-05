@@ -24,17 +24,41 @@ import { Link } from 'react-router-dom'
     const [learningStandard, setLessonModule] = useState({});
     return (
       <div className="missed-materials-container">
-        <h2>Missed Materials</h2>
         {resources.map((resource, index) => (
           <div key={index} className="resource-item">
             {resource.url ? (
-              // This is for videos
-              <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.Title}</a>
+              <>
+                <h2>Videos to watch</h2>
+                <div>
+                <a href={resource.url} target="_blank" rel="noopener noreferrer" className="resource-title" style={{ fontWeight: 'bold' }}>{resource.Title}</a>
+
+                <p>
+                  <span className="info-label">Teacher Notes:</span> {resource.teacher_notes}
+                </p>
+                <p>
+                  <span className="info-label">Last updated:</span> {formatDate(resource.updated_at)}
+                </p>
+                  {resource.url.includes("youtube.com/watch?v=") && (
+                    <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                      <img 
+                      src={`https://img.youtube.com/vi/${resource.url.split("v=")[1].split("&")[0]}/0.jpg`} 
+                      alt={`Thumbnail for ${resource.Title}`}
+                      />
+                    </a>
+                )}
+                <hr />
+                </div>
+              </>
             ) : (
               // This is for activities
-              <p>{resource.description}</p>
+              <>
+              <h2>Missed Activities</h2>
+              <p> <span className="info-label"> Topic:</span> {resource.StandardS}</p>
+              <p> <span className="info-label"> Activity Description:</span> {resource.description}</p>
+              <p> <span className="info-label"> Last updated:</span> {formatDate(resource.updated_at)}</p>
+              <hr />
+              </>
             )}
-            <p>Last updated: {formatDate(resource.updated_at)}</p>
           </div>
         ))}
       </div>
@@ -51,9 +75,24 @@ import { Link } from 'react-router-dom'
       <div className="announcements-container">
         <h2>Announcements</h2>
         {announcements.map((announcement, index) => (
-          <div key={index} className="announcement-item">
-            <p>{announcement.Content}</p>
-            <p>Last updated: {formatDate(announcement.updated_at)}</p>
+          <div key={index} className="announcement-item"> 
+            <p> <span className="info-label"> PLEASE READ: </span> </p>
+            <p>Title: {announcement.Title}</p>
+            <p>Content: {announcement.Content}</p>
+            <p> <span className="info-label"> Urgency:  </span>
+              <span 
+                style={{
+                display: 'inline-block',
+                width: '15px',
+                height: '15px',
+                borderRadius: '50%',
+                backgroundColor: announcement.urgency,
+                marginLeft: '5px',
+              }}
+              />
+          </p>
+            <p> <span className="info-label">Last updated: </span> {formatDate(announcement.updated_at)}</p>
+            <hr />
           </div>
         ))}
       </div>

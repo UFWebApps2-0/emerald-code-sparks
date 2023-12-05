@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import './StudentPortal.less';
 import NavBar from '../../components/NavBar/NavBar';
 import { useGlobalState } from '../../Utils/userState';
@@ -9,6 +9,10 @@ export default function StudentPortal() {
   const [value] = useGlobalState('currUser');
   const navigate = useNavigate();
   let nameS = localStorage.getItem('studentName');
+
+  const [showMissedClassPrompt, setShowMissedClassPrompt] = useState(
+    !sessionStorage.getItem('missedClassPromptDismissed')
+  );
 
   const handleClassroomActivitiesClick = () => {
     navigate('/student');
@@ -23,9 +27,35 @@ export default function StudentPortal() {
     navigate('/share-program');
   };
 
+  const dismissPrompt = () => {
+    setShowMissedClassPrompt(false);
+    sessionStorage.setItem('missedClassPromptDismissed', 'true');
+  };
+
   return (
     <div className='container nav-padding'>
       <NavBar />
+
+      {showMissedClassPrompt && (
+      <Modal
+        title="Missed Class?"
+        visible={showMissedClassPrompt}
+        onOk={() => {
+          dismissPrompt();
+          navigate('/missed-class');
+        }}
+        onCancel={() => {
+          dismissPrompt();
+        }}
+        okText = "Yes"
+        cancelText="No"
+      >
+        <p>Did you miss yesterday's class?</p>
+      </Modal>
+      )}
+
+
+
       <div id='main-header'>Welcome, {nameS}</div>
       <div id='classrooms-container'>
         <div id='header2'>Choose an option below to start</div>

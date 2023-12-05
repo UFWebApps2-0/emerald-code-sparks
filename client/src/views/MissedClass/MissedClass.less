@@ -32,6 +32,10 @@
   margin: 0 20px;
 }
 
+.info-label {
+  font-weight: bold;
+}
+
 #header {
     width: 50%;
     min-height: 4vh;
@@ -52,15 +56,4 @@
     flex-direction: column; // Lay out children in a 
     flex: 1; // Allow it to fill the available space
     height: calc(100% - 4vh);
-}
-
-#class-content::after {
-  content: '';  // Required for the pseudo-element to work
-  display: block;  // Makes it a block element
-  height: 1px;  // Height of the divider line
-  width: 100%;  // Full width of the container
-  background-color: black;  // Color of the divider
-  position: absolute;  // Absolute positioning
-  left: 0;  // Starts at the left edge of the container
-  top: 50%;  // Position it in the middle of the container vertically
 }

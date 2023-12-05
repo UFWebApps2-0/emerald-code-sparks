@@ -33,7 +33,7 @@ function LessonForm() {
         };
     
         getLData();
-      }, []);
+      }, [submit]);
 
       console.log(lessonData)
       const handleChange = (e) => {
@@ -70,6 +70,8 @@ function LessonForm() {
         const answer2 = questions[1].answer
         const answer3 = questions[2].answer
 
+        didSubmit(submit + 1)
+
       
         try {
           await submitLessonData(
@@ -91,6 +93,19 @@ function LessonForm() {
         } catch (error) {
           console.error('Error submitting lesson:', error);
         }
+
+        setLesson({
+            title: '',
+            standards: '',
+            description: '',
+            classroomMaterials: '',
+            studentMaterials: '',
+            questions: [
+              { question: '', answer: '' },
+              { question: '', answer: '' },
+              { question: '', answer: '' }
+            ]
+          })
       };
 
       

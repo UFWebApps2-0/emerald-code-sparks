@@ -4,7 +4,7 @@ import NavBar from "../../components/NavBar/NavBar";
 export default function NonOrgMember() {
   function handleReturnHome(e) {
     e.preventDefault();
-    navigate("/");
+    navigate("/admin");
   }
   const navigate = useNavigate();
   return (

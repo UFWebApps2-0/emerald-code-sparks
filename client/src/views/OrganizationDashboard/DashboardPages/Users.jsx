@@ -1,32 +1,89 @@
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
-import { getOrgUsers } from "../../../Utils/requests";
+import { getOrgUsers, getOrg, getRoles, getOrgMentors, updateOrganizationUsers, getUsers} from "../../../Utils/requests";
 import { message } from 'antd';
+import AddUserModal from "../../../components/AddUserModal/AddUserModal";
 
-export default function OrganizationUsers() {
+
+export default function OrganizationUsers(props) {
   const [org, setOrg] = useState({});
+  const [rolemap, setRoleMap] = useState(new Map());
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
+
+  async function addUser(email){
+
+    let users = (await getUsers()).data;
+    let user = users.filter((data) => data.email === email);
+
+    if (user.length === 0) {
+      message.error("No users found with this email");
+      return false;
+    }
+
+    let orgUsers = (await getOrg(props.id)).data.users;
+    if (orgUsers.map((data) => data.email).includes(user[0].email)) {
+      message.error("User already a part of organization");
+      return false;
+    }
+    orgUsers.push(user[0]);
+
+    let res = await updateOrganizationUsers(props.id, orgUsers);
+    setOrg((await getOrg(props.id)).data);
+    return true;
+  }
 
   useEffect(() => {
     let classroomIds = [];
-    getOrgUsers(JSON.parse(sessionStorage.getItem("user")).organization.id).then((res) => {
+    const map = async () => {
+      let roles = await getRoles();
+      let map = new Map(await roles.data.roles.map((role) => [role.id, role.name]));
+      setRoleMap(map);
+    }
+    map();
+    getOrg(
+      props.id
+    ).then((res) => {
       if (res.data) {
-        // res.data.classrooms.forEach((classroom) => {
-        //   classroomIds.push(classroom.id);
-        // });
-        // getClassrooms(classroomIds).then((classrooms) => {
-        //   setClassrooms(classrooms);
-        // });
         setOrg(res.data);
         console.log(org);
-        console.log(res.data);
       } else {
         message.error(res.err);
       }
     });
   }, []);
-  if (!("Name" in org)) {
-    return (<div id='main-header'>Welcome to Loading</div>);
+
+  // useEffect(() => {
+  //   setOrg(org);
+  // }, [isAddUserModalOpen]);
+
+
+//onClick of button, set the model to open
+
+//close modal function = set model to false
+
+//submitUser (async function)
+
+
+
+// useEffect(()=> {
+//   console.log("tesr wfihfwoih");
+//   console.log(roles);
+//   let map = new Map(roles.data.roles.map((roles) => [role.id, role.name]));
+//   setRoleMap(map);
+// }, [roles])
+
+
+  // useEffect(()=> {
+  //   console.log("tesr wfihfwoih");
+  //   console.log(roles);
+  //   let map = new Map(roles.data.roles.map((roles) => [role.id, role.name]));
+  //   setRoleMap(map);
+  // }, [roles])
+
+  if (!('Name' in org)) {
+    return <div id="main-header">Welcome to Loading</div>;
   }
+  console.log(org.users)
   return (<>
     <div id='main-header' className='welcome-message'>Welcome to {org.Name}</div>
 
@@ -34,18 +91,32 @@ export default function OrganizationUsers() {
   <thead>
     <tr>
       <th>Username</th>
-      <th>Roles</th>
+      <th>Role</th>
     </tr>
   </thead>
   <tbody>
     {org.users.map((user) => (
-      <tr key={user.username}>
-        <td className='user-username'>{user.username}</td>
-        <td className='user-role'>{user.role}</td>
-      </tr>
+        <tr key={user.username}>
+          <td className='user-username'>{user.username}</td>
+          <td className='user-role'>{rolemap.get(user.role)}</td>
+        </tr>
+    ))}
+    {org.mentors.map((mentor) => (
+        <tr key={mentor.username}>
+          <td className='user-username'>{mentor.last_name}</td>
+          <td className='user-role'>Mentor</td>
+        </tr>
     ))}
   </tbody>
 </table>
+<AddUserModal 
+  isOpen = {isAddUserModalOpen}
+  submitUser = {addUser}
+  closeModal = {() => setIsAddUserModalOpen(false)}
+/>
+<button onClick={() => setIsAddUserModalOpen(true)}>
+  +
+</button>
 <style>
   {`
     .welcome-message {
@@ -54,12 +125,15 @@ export default function OrganizationUsers() {
       color: #333;
     }
     .user-table {
+      margin-left: auto;
+      margin-right: auto;
       border-collapse: collapse;
-      width: 100%;
+      width: 80%;
       margin-top: 20px;
+      background-color: #ddd;
     }
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #000;
       padding: 8px;
       text-align: left;
     }

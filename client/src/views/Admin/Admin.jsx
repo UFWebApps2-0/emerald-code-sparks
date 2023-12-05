@@ -26,7 +26,6 @@ export default function Admin() {
 
     //handle click on create org button
     function orgCreateClick(){
-        //make a create org form
         setIsOrganizationModalOpen(true);
     }
     const closeOrganizationModal = () => {

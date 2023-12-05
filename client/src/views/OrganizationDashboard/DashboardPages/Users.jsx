@@ -147,6 +147,49 @@ export default function OrganizationUsers(props) {
       font-weight: bold;
       color: #000; /* black */
     }
+    
+    #table-container {
+      width: 80%;
+      padding-top: 5vh;
+      margin: 2vh auto 0 auto;
+    }
+
+    .ant-table {
+      border-radius: 4px;
+      border: solid 2px;
+      border-color: #colors[secondary];
+    }
+
+    .ant-table-row {
+      background-color: #colors[tertiary];
+    }
+
+    .ant-modal .ant-modal-content {
+      border-radius: 4px;
+      border: solid 4px;
+      border-color: #colors[secondary];
+    }
+
+    #link-btn {
+      background: none !important;
+      border: none;
+      padding: 0 !important;
+      color: #colors[primary];
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    #edit-options-span {
+      white-space: nowrap;
+    }
+
   `}
 </style>
     {/* <p>{sessionStorage.getItem("user")}</p> */}

@@ -57,6 +57,20 @@ export default function LessonModuleCreator({
   }
 
   const handleSubmit = async () => {
+    const releaseDateObj = new Date(releaseDate);
+    const closingDateObj = new Date(closingDate);
+    const currentDate = new Date();
+
+    if(releaseDateObj >= closingDateObj) {
+      message.error("Closing date must be after the opening date", 4);
+      return;
+    }
+
+    if(releaseDateObj < currentDate || closingDateObj < currentDate) {
+      message.error("Dates cannot be in the past.", 4);
+      return;
+    }
+
     if (link) {
       const goodLink = checkURL(link)
       if (!goodLink) {

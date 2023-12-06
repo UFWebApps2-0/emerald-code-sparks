@@ -93,6 +93,11 @@ export default function ContentCreator() {
       key: 'dates',
       width: '26.5%',
       align: 'left'
+      // render: (_, key) => (
+      //   <LessonModuleCreator
+
+      //   />
+      // ),
     },
     // {
     //   title: 'Lesson',

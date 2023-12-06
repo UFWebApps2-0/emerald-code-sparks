@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import {useParams } from 'react-router-dom';
 import { getLessonData, submitLessonData } from '../../../Utils/requests';
+import LessonCard from './LessonCard';
 import './Lessons.less';
 
 
@@ -14,12 +15,8 @@ function LessonForm() {
         description: '',
         classroomMaterials: '',
         studentMaterials: '',
-        questions: [
-          { question: '', answer: '' },
-          { question: '', answer: '' },
-          { question: '', answer: '' }
-        ]
-      });
+        arduinoMaterials: '',}
+        );
 
       useEffect(() => {
         const getLData = async () => {
@@ -36,43 +33,22 @@ function LessonForm() {
       }, [submit]);
 
       console.log(lessonData)
+
+      
       const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name.startsWith('question') || name.startsWith('answer')) {
-          const index = parseInt(name.split('-')[1], 10);
-          const field = name.split('-')[0];
-          setLesson(prevLesson => ({
-            ...prevLesson,
-            questions: prevLesson.questions.map((item, i) => {
-              if (i === index) {
-                return { ...item, [field]: value };
-              }
-              return item;
-            })
-          }));
-        } else {
+        
           setLesson(prevLesson => ({
             ...prevLesson,
             [name]: value
           }));
-        }
       };
 
       const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const { title, standards, description, classroomMaterials, studentMaterials, questions } = lesson;
-        const question1 = questions[0].question
-        const question2 = questions[1].question
-        const question3 = questions[2].question
-
-        const answer1 = questions[0].answer
-        const answer2 = questions[1].answer
-        const answer3 = questions[2].answer
-
-        didSubmit(submit + 1)
-
-      
+        const { title, standards, description, classroomMaterials, studentMaterials, arduinoMaterials } = lesson;
+        
         try {
           await submitLessonData(
             title,
@@ -80,62 +56,66 @@ function LessonForm() {
             description,
             classroomMaterials,
             studentMaterials,
-            question1,
-            question2,
-            question3,
-            answer1,
-            answer2,
-            answer3,
+            arduinoMaterials,
             orgId
           );
-          
           console.log('Lesson submitted successfully');
+          updateLessonData();
         } catch (error) {
           console.error('Error submitting lesson:', error);
         }
-
+      
         setLesson({
-            title: '',
-            standards: '',
-            description: '',
-            classroomMaterials: '',
-            studentMaterials: '',
-            questions: [
-              { question: '', answer: '' },
-              { question: '', answer: '' },
-              { question: '', answer: '' }
-            ]
-          })
+          title: '',
+          standards: '',
+          description: '',
+          classroomMaterials: '',
+          studentMaterials: '',
+          arduinoMaterials: '',
+        })
       };
+      
+      const updateLessonData = async () => {
+        try {
+          let lData = await getLessonData();
+          lData = lData.data;
+          setLessonData(lData);
+        } catch (error) {
+          console.error('Error fetching updated lesson data:', error);
+        }
+      }
+
+      console.log(lessonData)
+      
+
 
       
   return (
-    <div className="lesson-form-container">
-      <h1 id="main-header">Create a Lesson Plan</h1>
-      <div>
-        {lessonData.map((lesson, index) => {
-            if (orgId.toString() === lesson.identification) {
-            return (
-                <div key={index}>
-                <h1>{lesson.title}</h1>
-                <p><strong>Standards:</strong> {lesson.standards}</p>
-                <p><strong>Description:</strong> {lesson.description}</p>
-                <p><strong>Classroom Materials:</strong> {lesson.classroom}</p>
-                <p><strong>Student Materials:</strong> {lesson.student}</p>
-                <p><strong>Question 1:</strong> {lesson.question1}</p>
-                <p><strong>Question 2:</strong> {lesson.question2}</p>
-                <p><strong>Question 3:</strong> {lesson.question3}</p>
-                <p><strong>Answer 1:</strong> {lesson.answer1}</p>
-                <p><strong>Answer 2:</strong> {lesson.answer2}</p>
-                <p><strong>Answer 3:</strong> {lesson.answer3}</p>
-                <p><strong>Created At:</strong> {lesson.created_at}</p>
-                <p><strong>Published At:</strong> {lesson.published_at}</p>
-                </div>
-            );
-            }
-            return null; 
-        })}
+    <>
+      <h1 id="main-header" >Lesson Plans</h1>
+      <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', // Adjust the 250px value to match the width of the LessonCard components
+          gridGap: '150px',
+          marginRight: '100px',
+          marginLeft: '70px',
+          padding: '0'
+        }}>
+            {
+                lessonData && lessonData.length > 0 ? (
+                  lessonData.map((lesson) => (
+                    <LessonCard key={lesson.id} activities={lesson} />
+                  ))
+                ) : (
+                  <div>
+                    No lesson plans available.
+                  </div>
+                )
+              }
         </div>
+      <h1 id="main-header">Create a Lesson Plan</h1>
+
+      
       <div id="cardholder">
         <form onSubmit={handleSubmit} className="lesson-form">
           <label>
@@ -145,6 +125,7 @@ function LessonForm() {
               name="title"
               value={lesson.title}
               onChange={handleChange}
+              required
             />
           </label>
 
@@ -155,15 +136,17 @@ function LessonForm() {
               name="standards"
               value={lesson.standards}
               onChange={handleChange}
+              required
             />
           </label>
 
           <label>
-            Description (paragraph format):
+            Description:
             <textarea
               name="description"
               value={lesson.description}
               onChange={handleChange}
+              required
             />
           </label>
 
@@ -174,6 +157,7 @@ function LessonForm() {
               name="classroomMaterials"
               value={lesson.classroomMaterials}
               onChange={handleChange}
+              required
             />
           </label>
 
@@ -184,36 +168,27 @@ function LessonForm() {
               name="studentMaterials"
               value={lesson.studentMaterials}
               onChange={handleChange}
+              required
             />
           </label>
 
-            {lesson.questions.map((item, index) => (
-            <div key={index} className="question-answer-pair">
-                <label>
-                Question {index + 1}:
-                <input
-                    type="text"
-                    name={`question-${index}`}
-                    value={item.question}
-                    onChange={handleChange}
-                />
-                </label>
-                <label>
-                Answer {index + 1}:
-                <input
-                    type="text"
-                    name={`answer-${index}`}
-                    value={item.answer}
-                    onChange={handleChange}
-                />
-                </label>
-            </div>
-            ))}
+          <label>
+            Arduino Materials:
+            <input
+              type="text"
+              name="arduinoMaterials"
+              value={lesson.arduinoMaterials}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+            
 
           <button type="submit" className="submit-btn">Submit</button>
         </form>
       </div>
-    </div>
+    </>
   );
 }
 

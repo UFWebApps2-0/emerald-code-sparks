@@ -778,39 +778,30 @@ export const createClassroom = async (id, title) =>
       description,
       classroomMaterials,
       studentMaterials,
-      question1,
-      question2,
-      question3,
-      answer1,
-      answer2,
-      answer3,
+      arduinoMaterials,
       identification
     ) =>
       makeRequest({
         method: 'POST',
-        path: `${server}/lessons`,
+        path: `${server}/class-lessons`,
         data: {
           title: title,
           standards: standards,
           description: description,
           classroom: classroomMaterials,
           student: studentMaterials,
-          question1: question1,
-          question2: question2,
-          question3: question3,
-          answer1: answer1,
-          answer2: answer2,
-          answer3: answer3,
+          arduinoMaterials: arduinoMaterials,
           identification: identification
         },
         auth: true,
         error: 'Unable to submit lesson data',
       });
     
+
       export const getLessonData = async (id) =>
         makeRequest({
             method: GET,
-            path: `${server}/lessons`,
+            path: `${server}/class-lessons`,
             auth: true,
             error: 'Failed to get Lessons'
         });

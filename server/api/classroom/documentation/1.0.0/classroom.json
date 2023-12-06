@@ -949,6 +949,9 @@
                 "parent_key": {
                   "type": "string"
                 },
+                "share_feature": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },

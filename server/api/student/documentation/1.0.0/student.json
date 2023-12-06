@@ -790,6 +790,10 @@
           },
           "parent_key": {
             "type": "string"
+          },
+          "share_feature": {
+            "type": "boolean",
+            "default": true
           }
         }
       },
@@ -826,6 +830,10 @@
           },
           "parent_key": {
             "type": "string"
+          },
+          "share_feature": {
+            "type": "boolean",
+            "default": true
           },
           "created_by": {
             "type": "string"

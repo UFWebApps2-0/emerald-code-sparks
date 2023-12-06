@@ -17,12 +17,12 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   let err = null;
   const config = auth
     ? {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
     : null;
-console.log(config);
+  console.log(config);
   try {
     switch (method) {
       case GET:
@@ -439,6 +439,22 @@ export const updateUnit = async (
     error: 'Failed to update unit',
   });
 
+export const updateStudy = async (
+  id,
+  studyName,
+  studyDescription,
+) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/studies/${id}`,
+    data: {
+      studyName: studyName,
+      studyDescription: studyDescription,
+    },
+    auth: true,
+    error: 'Failed to update unit',
+  });
+
 export const getGrades = async () =>
   makeRequest({
     method: GET,
@@ -513,7 +529,7 @@ export const getLessonModuleActivities = async (lsId) =>
     error: 'Activity cannot be retrived',
   });
 
-  export const getActivityLevels = async (lsId) =>
+export const getActivityLevels = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces?activities.id=${lsId}`,
@@ -681,16 +697,16 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
-  export const sendEmail = async (
-    body
-  ) =>
-    makeRequest({
-      method: POST,
-      path: `${server}/bug-report`,
-      data: body,
-      error: 'Unable to submit bug-report',
-    });
-  
+export const sendEmail = async (
+  body
+) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/bug-report`,
+    data: body,
+    error: 'Unable to submit bug-report',
+  });
+
 //get studies for researcher
 export const getStudies = async () =>
   makeRequest({
@@ -699,7 +715,15 @@ export const getStudies = async () =>
     auth: true,
     error: 'Studies could not be retrieved.',
   });
-  
+
+export const getStudy = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/studies/${id}`,
+    auth: true,
+    error: 'Failed to retrieve learning standard.',
+  });
+
 export const getResearchers = async () =>
   makeRequest({
     method: GET,
@@ -708,7 +732,7 @@ export const getResearchers = async () =>
     error: 'Researchers could not be retrieved.',
   });
 
-  export const addStudy = async(json) =>
+export const addStudy = async (json) =>
   makeRequest({
     method: POST,
     path: `${server}/studies`,
@@ -717,7 +741,7 @@ export const getResearchers = async () =>
     error: 'Studies could not be added.',
   });
 
-  export const deleteStudy = async(id) =>
+export const deleteStudy = async (id) =>
   makeRequest({
     method: DELETE,
     path: `${server}/studies/${id}`,

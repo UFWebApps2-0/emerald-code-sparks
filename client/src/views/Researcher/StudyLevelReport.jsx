@@ -4,10 +4,12 @@ import './StudyLevelReport.less';
 import { useNavigate } from 'react-router-dom';
 import { sendEmail, getResearchers, getStudies, deleteStudy} from '../../Utils/requests';
 import { Link } from 'react-router-dom';
+import EditStudy from './EditStudy';
 
 const StudyLevelReport = () => {
   const [studies, setStudies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
@@ -26,6 +28,10 @@ const StudyLevelReport = () => {
   const showModal = () => {
     setIsModalVisible(true);
   };
+
+  const showEditModal = () => {
+    setIsEditModalVisible(true);
+  }
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -77,9 +83,13 @@ const StudyLevelReport = () => {
     {
       title: 'Study ID',
       key: 'studyID',
+      editable: true,
       dataIndex: 'studyID',
       width: '2%',
       align: 'left',
+      /* render: (text, record) => (
+        <EditStudy id={record.id} dess={record.studyDescription} unitName={record.studyID} linkBtn={true} />
+      ), */
     },
     {
       title: 'Study Name',
@@ -205,6 +215,33 @@ const StudyLevelReport = () => {
           ))}
         </>
       ),
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search Classroom"
+            value={selectedKeys[0]}
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="primary"
+              onClick={() => confirm()}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+              Reset
+            </Button>
+          </Space>
+        </div>
+      ),
+      onFilter: (value, record) => record.students.some((classroom) => classroom.name.toLowerCase().includes(value.toLowerCase())),
+      width: '3%',
+      align: 'left',
       width: '3%',
       align: 'left',
     },
@@ -273,13 +310,20 @@ const StudyLevelReport = () => {
               </Form.Item>
           </Form>
         </Modal>
+        <div className="button">
           <Button type="primary" onClick={showModal}>
             Add Researcher
           </Button>
-          
+          {/* <Button type="primary" onClick={showEditModal} >
+            Edit Study
+          </Button>  */}
+
+          <EditStudy id={record.id} unitName={record.studyName}/>
           <Button type="danger" onClick={() => handleDeleteStudy(record)}>
             Delete
           </Button>
+        </div>
+          
         </>
       ),
       width: '1%',
@@ -291,8 +335,8 @@ const StudyLevelReport = () => {
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Study Level Report</div>
         <Link to={'/createStudyPage'}>
-        <Button onClick={() => navigate('/createStudyPage')} style={{ backgroundColor: 'green', color: 'white' }}>
-          Create Study
+        <Button onClick={() => navigate('/createStudyPage')} id="create-study-btn">
+          + Create Study
         </Button>
       </Link>
         <button

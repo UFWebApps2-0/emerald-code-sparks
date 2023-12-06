@@ -23,10 +23,9 @@ export default function EditStudy({ id }) {
   const showModal = async () => {
     setVisible(true);
     const res = await getStudy(id);
-    setGradeId(res.data.grade.id);
     setStudyName(res.data.studyName);
     setStudyDescription(res.data.studyDescription);
-    setStandard(res.data.standards_id);
+    setStudentList(res.data.students)
   };
 
 

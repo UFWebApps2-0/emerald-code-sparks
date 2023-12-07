@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Input, Form, message} from 'antd';
-import { getStudies, updateStudy, getStudy } from '../../Utils/requests';
+import { updateStudy, getStudy } from '../../Utils/requests';
 import './EditStudy.less';
 
 

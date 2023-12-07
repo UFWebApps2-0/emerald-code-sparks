@@ -9,7 +9,6 @@ import EditStudy from './EditStudy';
 const StudyLevelReport = () => {
   const [studies, setStudies] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
@@ -29,9 +28,6 @@ const StudyLevelReport = () => {
     setIsModalVisible(true);
   };
 
-  const showEditModal = () => {
-    setIsEditModalVisible(true);
-  }
 
   const handleCancel = () => {
     setIsModalVisible(false);

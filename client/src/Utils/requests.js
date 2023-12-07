@@ -452,7 +452,7 @@ export const updateStudy = async (
       studyDescription: studyDescription,
     },
     auth: true,
-    error: 'Failed to update unit',
+    error: 'Failed to update study',
   });
 
 export const getGrades = async () =>

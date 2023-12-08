@@ -22,6 +22,7 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import EditStudy from './views/Researcher/EditStudy';
 
 
 const App = () => {
@@ -50,6 +51,12 @@ const App = () => {
             //<PrivateRoute>
               <CreateStudyPage />
             //</PrivateRoute>
+          }
+        />
+        <Route
+          path='/editStudyPage'
+          element={
+            <EditStudy/>
           }
         />
         <Route

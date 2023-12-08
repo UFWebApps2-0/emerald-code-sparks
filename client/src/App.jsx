@@ -22,6 +22,9 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import CodeTemplatePage from './views/Researcher/CodeTemplatePage';
+import StudentConsentPage from "./views/Student/studentconsent";
+import StudyViewerPage from "./views/Researcher/StudyViewerPage";
 import EditStudy from './views/Researcher/EditStudy';
 
 
@@ -37,6 +40,9 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
+        <Route path='/studentsplash' element={<StudentConsentPage />} />
+        <Route path = '/codetemplate' element={<CodeTemplatePage />} />
+        <Route path = '/studyviewpopups' element={<StudyViewerPage />} />
         <Route
           path='/report'
           element={

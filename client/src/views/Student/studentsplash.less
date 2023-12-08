@@ -1,0 +1,63 @@
+@import '../../assets/style.less';
+; // Importing your style file
+
+// Header style for the notification page
+#notification-study-header {
+  color: #colors[text-secondary];
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-left: 5%;
+  margin-bottom: 1%;
+  text-align: left;
+  padding-top: 20px;
+}
+
+// Styles for the researcher profiles
+.researcher-profiles {
+  .researcher-profile {
+    border: 1px solid #colors[senary];
+    padding: 10px;
+    margin-bottom: 10px;
+    h3 {
+      color: #colors[primary];
+      font-weight: bold;
+    }
+    p {
+      color: #colors[text-primary];
+    }
+  }
+}
+
+// Style for the study description
+.study-description {
+  margin-bottom: 20px;
+  font-size: 1em;
+  color: #colors[text-primary];
+}
+
+// Styling for the privacy permissions section
+.privacy-permissions {
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    input[type='checkbox'] {
+      margin-right: 10px;
+    }
+
+    label {
+      color: #colors[text-primary];
+    }
+  }
+}
+
+// Style for the submit button
+.submit-button {
+  background-color: #colors[primary];
+  color: #colors[text-secondary];
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 20px;
+}

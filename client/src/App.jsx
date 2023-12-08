@@ -12,6 +12,9 @@ import NotFound from './views/NotFound';
 import Replay from './views/Replay/Replay';
 import ActivityLevelReport from './views/Researcher/ActivityLevelReport';
 import ActivityLevelReportView from './views/Researcher/ActivityLevelReportView';
+import StudyLevelReportView from './views/Researcher/StudyLevelReportView';
+import StudyLevelReport from './views/Researcher/StudyLevelReport';
+import CreateStudyPage from './views/Researcher/CreateStudyPage';
 import GroupReport from './views/Researcher/GroupReport';
 import Report from './views/Researcher/Report';
 import Student from './views/Student/Student';
@@ -19,6 +22,11 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
+import CodeTemplatePage from './views/Researcher/CodeTemplatePage';
+import StudentConsentPage from "./views/Student/studentconsent";
+import StudyViewerPage from "./views/Researcher/StudyViewerPage";
+import EditStudy from './views/Researcher/EditStudy';
+
 
 const App = () => {
   return (
@@ -32,12 +40,29 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
+        <Route path='/studentsplash' element={<StudentConsentPage />} />
+        <Route path = '/codetemplate' element={<CodeTemplatePage />} />
+        <Route path = '/studyviewpopups' element={<StudyViewerPage />} />
         <Route
           path='/report'
           element={
-            <PrivateRoute>
+            //<PrivateRoute>
               <Report />
-            </PrivateRoute>
+            //</PrivateRoute>
+          }
+        />
+        <Route
+          path='/createStudyPage'
+          element={
+            //<PrivateRoute>
+              <CreateStudyPage />
+            //</PrivateRoute>
+          }
+        />
+        <Route
+          path='/editStudyPage'
+          element={
+            <EditStudy/>
           }
         />
         <Route
@@ -49,10 +74,26 @@ const App = () => {
           }
         />
         <Route
+          path='/studyLevel'
+          element={
+            <PrivateRoute>
+              <StudyLevelReport />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path='/activityLevel/:id'
           element={
             <PrivateRoute>
               <ActivityLevelReportView />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/studyLevel/:id'
+          element={
+            <PrivateRoute>
+              <StudyLevelReportView />
             </PrivateRoute>
           }
         />

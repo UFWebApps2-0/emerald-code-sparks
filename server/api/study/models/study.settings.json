@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "studies",
+  "info": {
+    "name": "Study",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "studyID": {
+      "type": "integer"
+    },
+    "studyDescription": {
+      "type": "text"
+    },
+    "students": {
+      "collection": "student",
+      "via": "studies",
+      "dominant": true
+    },
+    "classrooms": {
+      "collection": "classroom",
+      "via": "studies",
+      "dominant": true
+    },
+    "researchers": {
+      "collection": "researcher",
+      "via": "studies",
+      "dominant": true
+    },
+    "studyName": {
+      "type": "string"
+    },
+    "studyTag": {
+      "type": "enumeration",
+      "enum": [
+        "qualitative",
+        "quantitative",
+        "design",
+        "TBD"
+      ]
+    },
+    "consentOptions": {
+      "type": "json"
+    }
+  }
+}

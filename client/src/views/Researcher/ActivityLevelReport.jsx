@@ -4,7 +4,6 @@ import { Table, Button, Tag, Modal, Input, Form } from 'antd';
 import './ActivityLevelReport.less';
 import { useSearchParam } from '../../Utils/useSearchParam';
 import NavBar from '../../components/NavBar/NavBar';
-
 import {
   getSessionsWithFilter,
   getSessionCountWithFilter,
@@ -34,24 +33,6 @@ const ActivityLevelReport = () => {
   
   const handleCancel = () => {
     setIsModalVisible(false);
-  };
-
-  const handleAddResearcher = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        // You can handle the researcher data and send it to your server here
-        console.log('Received values:', values);
-  
-        // Close the modal
-        setIsModalVisible(false);
-  
-        // Reset the form fields
-        form.resetFields();
-      })
-      .catch((errorInfo) => {
-        console.log('Failed:', errorInfo);
-      });
   };
 
   useEffect(() => {
@@ -248,58 +229,6 @@ const ActivityLevelReport = () => {
         >
           Return to Dashboard
         </button>
-
-        <Button className='activity-level-return' onClick={showModal}>
-          Add Researcher 
-        </Button>
-        <Modal
-          title="Add Researcher"
-          visible={isModalVisible}
-          onOk={handleAddResearcher}
-          onCancel={handleCancel}>
-          <Form form={form} name="addResearcherForm">
-            <Form.Item
-              name="username"
-              label="Researcher Username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter the researcher username',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="email"
-              label="Email"
-              rules={[
-                {
-                  type: 'email',
-                  message: 'Please enter a valid email address',
-                },
-                {
-                  required: true,
-                  message: 'Please enter the email address',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="studyID"
-              label="Study ID"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter the study ID',
-                },
-              ]}
-              >
-                <Input />
-              </Form.Item>
-          </Form>
-        </Modal>
 
       </div>
       <button id='show-filter-btn' onClick={() => setShowFilter(!showFilter)}>

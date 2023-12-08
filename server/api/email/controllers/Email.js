@@ -18,10 +18,94 @@ module.exports = {
 
     // ensure the request has the right number of params
     const params = Object.keys(ctx.request.body).length;
-    if (params !== 5)
+    if (params == 3) {
+      console.log('params == 3');
+      console.log(ctx.request.body);
+      const { name, email, studyID } = ctx.request.body;
+      if (!name || !email || !studyID) {
+        console.log('!name || !email || !studyID');
+        return ctx.badRequest(
+          'A name, email and studyID must be provided!',
+          { error: 'ValidationError' }
+        ); 
+      } else {
+        console.log('else');
+        try {
+          console.log('try');
+          const emailOptions = {
+            to: email,
+            subject: 'Invitation to participate in a study',
+            html: `
+            <h3>Dear Researcher ${name}, </h3>
+            <p>You have been invited to participate in study ${studyID}.</p>
+            <p>Please visit <a href='https://casmm.org'>casmm.org</a> to download the app and enter the study ID to participate.</p>
+            <p>Thank you!</p>
+            <p>CASMM Team</p>
+            `,
+          };
+          console.log('emailOptions');
+          console.log(emailOptions);
+          await strapi.plugins['email'].services.email.send(emailOptions);
+          strapi.log.debug(`Email sent to ${email}`);
+          ctx.send({ message: 'Email sent' });
+        } catch (err) {
+          strapi.log.error(`Error sending email to ${email}, `, err);
+          ctx.send({ error: 'Error sending email' });
+        }
+      } 
+    } else if (params == 6) {
+      console.log('params == 6');
+      console.log(ctx.request.body);
+      const { name, studyID, description, studentEmail, checkboxes, searchBar} = ctx.request.body;
+      if (!name || !studyID || !description || !studentEmail) {
+        console.log('!name || !studyID || !description || !studentEmail');
+        return ctx.badRequest(
+          'A name, studyID, description, studentEmail, checkboxex and searchBar must be provided!',
+          { error: 'ValidationError' }
+        ); 
+      }
+      try {
+        console.log('try');
+        //iterate through checkboxes and add to html if true
+        let checkboxHTML = '';
+        for (const [key, value] of Object.entries(checkboxes)) {
+          if (value) {
+            checkboxHTML += `<li>${key}</li>`;
+          }
+        }
+
+        const emailOptions = {
+          to: studentEmail,
+          subject: 'Invitation to participate in a study',
+          html: `
+          <h3>Dear Student, </h3>
+          <p>You have been invited to participate in the study: ${name} #${studyID}.</p>
+          <p>Please visit <a href='https://casmm.org'>casmm.org</a> to complete your enrollment.</p>
+          <p>The following data will be collected: </p>
+          <ul>
+            ${checkboxHTML}
+          </ul>
+          <p>Thank you!</p>
+          <p>CASMM Team</p>
+          `,
+        };
+        console.log('emailOptions');
+        console.log(emailOptions);
+        await strapi.plugins['email'].services.email.send(emailOptions);
+        strapi.log.debug(`Email sent to ${studentEmail}`);
+        ctx.send({ message: 'Email sent' });
+
+      } catch (err) {
+        strapi.log.error(`Error sending email to ${email}, `, err);
+        ctx.send({ error: 'Error sending email' });
+      }
+
+
+    } else if (params !== 5)
       return ctx.badRequest('Invalid number of params!', {
         error: 'ValidationError',
       });
+
 
     // validate the request
     const { description, steps, name, email, systemInfo } = ctx.request.body;
@@ -33,7 +117,7 @@ module.exports = {
 
     try {
       const emailOptions = {
-        to: 'casmm.help@gmail.com',
+        to: 'chaitra2304@icloud.com',
         subject: 'Bug Report',
         html: `
         <h3>Description of the bug: </h3>
@@ -53,5 +137,5 @@ module.exports = {
       strapi.log.error(`Error sending email to casmm.help@gmail.com, `, err);
       ctx.send({ error: 'Error sending email' });
     }
-  },
+  }
 };

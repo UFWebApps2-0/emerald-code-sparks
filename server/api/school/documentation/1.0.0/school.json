@@ -584,6 +584,18 @@
                     "type": "string"
                   }
                 },
+                "researchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -629,6 +641,55 @@
                 }
               }
             }
+          },
+          "researchers": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "school": {
+                  "type": "string"
+                },
+                "users_permissions_user": {
+                  "type": "string"
+                },
+                "classrooms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "researcherEmail": {
+                  "type": "string"
+                },
+                "studies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -650,6 +711,12 @@
             }
           },
           "mentors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "researchers": {
             "type": "array",
             "items": {
               "type": "string"

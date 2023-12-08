@@ -5,6 +5,12 @@
       "path": "/bug-report",
       "handler": "Email.send",
       "config": {}
+    }, 
+    {
+      "method": "POST",
+      "path": "/add-researcher",
+      "handler": "Email.send",
+      "config": {}
     }
   ]
 }

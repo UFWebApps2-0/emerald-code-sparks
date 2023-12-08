@@ -8,6 +8,20 @@ import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStu
 
 const { Option } = Select;
 
+const fetchData = async (getDataFunction, setDataFunction, errorMessage) => {
+  try {
+    const dataRes = await getDataFunction();
+    if (dataRes.error) {
+      console.error(errorMessage);
+    } else {
+      console.log(dataRes.data);
+      setDataFunction(dataRes.data);
+    }
+  } catch (error) {
+    console.error(`Error fetching data: ${errorMessage}`, error);
+  }
+};
+
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
   const [classrooms, setClassrooms] = useState([]);
@@ -27,20 +41,7 @@ const CreateStudyPage =()=>{
     setSelectedStudentsData(studentsData);
   };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const studentsRes = await getAllStudents();
-        if (studentsRes.error) {
-          console.error('Failed to retrieve students');
-        } else {
-          console.log(studentsRes.data);
-          setStudents(studentsRes.data);
-        }
-      } catch (error) {
-        console.error('Error fetching students:', error);
-      }
-    };
-    fetchData();
+    fetchData(getAllStudents, setStudents, 'Failed to retrieve students');
   }, []);
 
   const handleClassroomChange = async (selectedValues) => {
@@ -57,20 +58,7 @@ const CreateStudyPage =()=>{
 
   }
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const classroomsRes = await getAllClassrooms();
-        if (classroomsRes.error) {
-          console.error('Failed to retrieve classrooms');
-        } else {
-          console.log(classroomsRes.data);
-          setClassrooms(classroomsRes.data);
-        }
-      } catch (error) {
-        console.error('Error fetching classrooms:', error);
-      }
-    };
-    fetchData();
+    fetchData(getAllStudents, setStudents, 'Failed to retrieve students');
   }, []);
 
 

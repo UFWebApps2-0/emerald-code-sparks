@@ -2,6 +2,7 @@ import { Form, Input, Button, message } from 'antd';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { resetPassword } from '../../Utils/requests';
+import NavBar from '../../components/NavBar/NavBar';
 import "./TeacherLogin.less";
 
 const ResetPassword = () => {
@@ -31,6 +32,8 @@ const ResetPassword = () => {
   };
 
   return (
+    <div className='container nav-padding'>
+      <NavBar />
       <div id='reset-pass-wrapper'>
         <div id='reset-pass-title'>Reset Password</div>
         <Form id='reset-pass-form' onFinish={handleSubmit} layout="vertical">
@@ -68,6 +71,7 @@ const ResetPassword = () => {
           </Form.Item>
         </Form>
       </div>
+    </div>
   );
 };
 

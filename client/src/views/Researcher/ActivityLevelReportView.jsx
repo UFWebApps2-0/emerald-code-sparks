@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { getSession } from '../../../Utils/requests';
+import NavBar from '../../components/NavBar/NavBar';
+import { getSession } from '../../Utils/requests';
 import './ActivityLevelReportView.less';
 
 const ActivityLevelReportView = () => {
   const { id } = useParams();
   const [session, setSession] = useState({});
-  const [studentsName, setStudentsName] = useState([]);
-  const [studentsPartner, setStudentsPartner] = useState([]);
+  const [studentName, setStudentsName] = useState([]);
+  const [studentPartner, setStudentsPartner] = useState([]);
   const [className, setClassName] = useState([]);
   const [clicks, setClicks] = useState(0);
   const navigate = useNavigate();
@@ -60,7 +61,8 @@ const ActivityLevelReportView = () => {
     }
   };
   return (
-    <>
+    <div className='container nav-padding'>
+      <NavBar />
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Activity Level - Student Report</div>
         <button
@@ -78,11 +80,11 @@ const ActivityLevelReportView = () => {
           <section id='student-report-section'>
             <p>
               <strong>Student Name: </strong>
-              {studentsName}
+              {studentName}
             </p>
             <p>
               <strong>Partner Name: </strong>
-              {studentsPartner.length > 0 ? studentsPartner.join(', ') : ''}
+              {studentPartner.length > 0 ? studentPartner.join(', ') : ''}
             </p>
             <p>
               <strong>Class Name: </strong>
@@ -110,7 +112,7 @@ const ActivityLevelReportView = () => {
         <br />
         {showReplayButton()}
       </main>
-      </>
+    </div>
   );
 };
 

@@ -15,8 +15,7 @@
       "model": "activity"
     },
     "student": {
-      "model": "student",
-      "via": "saves"
+      "model": "student"
     },
     "workspace": {
       "type": "text",

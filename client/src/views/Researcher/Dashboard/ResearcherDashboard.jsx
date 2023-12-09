@@ -16,9 +16,6 @@ import './ResearcherDashboard.less';
 //import FormItem from 'antd/es/form/FormItem';
 
 const ResearcherDashboard =()=>{
-  const navigate = useNavigate();
-  const [form] = Form.useForm();
-
   return (
     <div className='container nav-padding'>
       <div id='main-header'>Welcome Researcher!</div>
@@ -29,7 +26,7 @@ const ResearcherDashboard =()=>{
       </Button>
       
       <Button>
-        <Link to='/createstudy'>Create Study</Link>
+        <Link to='/researcher/createStudyPage'>Create Study</Link>
       </Button>
 
     </div>

@@ -5,10 +5,6 @@ import { useSearchParam } from '../../../Utils/useSearchParam';
 import {
   getSessionsWithFilter,
   getSessionCountWithFilter,
-  getGrades,
-  getUnit,
-  getGrade,
-  getClassroom,
 } from '../../../Utils/requests';
 import { ReportFilter as Filter } from './ReportFilter';
 import './ActivityLevelReport.less';
@@ -25,15 +21,6 @@ const ActivityLevelReport = () => {
   const [tbUnitFilter, setTbUnitFilter] = useState([]);
   const [tbLessonFilter, setTbLessonFilter] = useState([]);
   const [tbPrevFilter, setTbPrevFilter] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   useEffect(() => {
     const fetchData = async () => {

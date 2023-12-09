@@ -24,7 +24,6 @@ const fetchData = async (getDataFunction, setDataFunction, errorMessage) => {
 
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
-  const [sessions, setSessions] = useState([]);
   const [classrooms, setClassrooms] = useState([]);
   const [selectedStudentsData, setSelectedStudentsData] = useState([]);
   const [selectedClassrooms, setSelectedClassroomsData] = useState([]);

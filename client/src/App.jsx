@@ -31,7 +31,7 @@ import StudyViewerPage from "./views/Researcher/StudyViewerPage"
 import StudyNotificationPage from './views/Student/studentsplash';
 
 const App = () => {
-  return (<>
+  return (
     <Routes>
       <Route path='/' element={<AppLayout/>}>
         <Route index element={<Home />} />
@@ -71,8 +71,7 @@ const App = () => {
       <Route path='/classroom/:id' element={ <PrivateRoute> <Classroom handleLogout={undefined} selectedActivity={undefined} setSelectedActivity={undefined}/> </PrivateRoute> }/>
       {/* No Navbar */}
       <Route path='*' element={<NotFound/>} />
-    </Routes>
-  </>);
+    </Routes>);
 };
 
 export default App;

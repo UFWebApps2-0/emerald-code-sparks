@@ -25,6 +25,10 @@ import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import StudyLevelReportView from './views/Researcher/StudyLevelReportView';
 import StudyLevelReport from './views/Researcher/StudyLevelReport';
 import CreateStudyPage from './views/Researcher/CreateStudyPage';
+import EditStudy from './views/Researcher/EditStudy';
+import CodeTemplatePage from "../src/views/Researcher/CodeTemplatePage"
+import StudyViewerPage from "./views/Researcher/StudyViewerPage"
+import StudyNotificationPage from './views/Student/studentsplash';
 
 const App = () => {
   return (<>
@@ -44,18 +48,23 @@ const App = () => {
         <Route path='activity' element={ <PrivateRoute> <BlocklyPage isSandbox={false} /> </PrivateRoute> }/>
         <Route path='ccdashboard' element={ <PrivateRoute> <ContentCreator /> </PrivateRoute> }/>
         <Route path='bugreport' element={<BugReport />} />
+        <Route path='studentsplash' element={< StudyNotificationPage />} />
+        
       </Route>
       {/* Researcher Layout / Nested Navbar */}
       {/* Routes beneath here will render their elements into the ResearcherLayout component allowing a nested navbar */}
       <Route path='/researcher/' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
         <Route index element={<ResearcherDashboard/>}/>
         <Route path='report' element={<Report />}/>
+        <Route path = '/codetemplate' element={<CodeTemplatePage />} />
+        <Route path = '/studyviewpopups' element={<StudyViewerPage />} />
         <Route path='createStudyPage' element={<CreateStudyPage/>}/>
         <Route path='studyLevel' element={<StudyLevelReport />}/>
         <Route path='studyLevel/:id' element={<StudyLevelReportView/>}/>
         <Route path='activityLevel' element={<ActivityLevelReport />}/>
         <Route path='activityLevel/:id' element={<ActivityLevelReportView/>}/>
         <Route path='group-report' element={<GroupReport />}/>
+        <Route path='editStudyPage' element={ <EditStudy id={undefined}/>} />
       </Route>
       {/* mentor navbar variant */}
       {/* TODO: Add mentor navbar variant */}

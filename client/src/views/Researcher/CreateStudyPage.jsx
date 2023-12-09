@@ -8,6 +8,20 @@ import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStu
 const { Option } = Select;
 const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
 
+const fetchData = async (getDataFunction, setDataFunction, errorMessage) => {
+  try {
+    const dataRes = await getDataFunction();
+    if (dataRes.error) {
+      console.error(errorMessage);
+    } else {
+      console.log(dataRes.data);
+      setDataFunction(dataRes.data);
+    }
+  } catch (error) {
+    console.error(`Error fetching data: ${errorMessage}`, error);
+  }
+};
+
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
   const [sessions, setSessions] = useState([]);

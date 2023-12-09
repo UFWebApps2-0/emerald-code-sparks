@@ -4,6 +4,7 @@ import './StudyLevelReport.less';
 import { useNavigate } from 'react-router-dom';
 import { sendEmail, getResearchers, getStudies, deleteStudy} from '../../Utils/requests';
 import { Link } from 'react-router-dom';
+import EditStudy from './EditStudy';
 
 const StudyLevelReport = () => {
   const [studies, setStudies] = useState([]);
@@ -26,6 +27,7 @@ const StudyLevelReport = () => {
   const showModal = () => {
     setIsModalVisible(true);
   };
+
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -77,9 +79,13 @@ const StudyLevelReport = () => {
     {
       title: 'Study ID',
       key: 'studyID',
+      editable: true,
       dataIndex: 'studyID',
       width: '2%',
       align: 'left',
+      /* render: (text, record) => (
+        <EditStudy id={record.id} dess={record.studyDescription} unitName={record.studyID} linkBtn={true} />
+      ), */
     },
     {
       title: '🔍',
@@ -284,13 +290,20 @@ const StudyLevelReport = () => {
               </Form.Item>
           </Form>
         </Modal>
+        <div className="button">
           <Button type="primary" onClick={showModal}>
             Add Researcher
           </Button>
-          
+          {/* <Button type="primary" onClick={showEditModal} >
+            Edit Study
+          </Button>  */}
+
+          <EditStudy id={record.id} unitName={record.studyName}/>
           <Button type="danger" onClick={() => handleDeleteStudy(record)}>
             Delete
           </Button>
+        </div>
+          
         </>
       ),
       width: '1%',

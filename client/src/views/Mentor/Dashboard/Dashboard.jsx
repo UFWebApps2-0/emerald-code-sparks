@@ -4,6 +4,7 @@ import { message } from 'antd';
 import './Dashboard.less';
 import DashboardDisplayCodeModal from './DashboardDisplayCodeModal';
 import MentorSubHeader from '../../../components/MentorSubHeader/MentorSubHeader';
+import NavBar from '../../../components/NavBar/NavBar';
 import { useGlobalState } from '../../../Utils/userState';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,7 +35,8 @@ export default function Dashboard() {
   };
 
   return (
-    <>
+    <div className='container nav-padding'>
+      <NavBar />
       <div id='main-header'>Welcome {value.name}</div>
       <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
       <div id='classrooms-container'>
@@ -61,6 +63,6 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

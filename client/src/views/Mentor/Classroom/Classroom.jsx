@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {React, useEffect} from 'react';
 import { Tabs } from 'antd';
 import './Classroom.less';
 
@@ -7,7 +7,6 @@ import Roster from './Roster/Roster';
 import Home from './Home/Home';
 import SavedWorkSpaceTab from '../../../components/Tabs/SavedWorkspaceTab';
 import { useSearchParams, useParams } from 'react-router-dom';
-
 
 const { TabPane } = Tabs;
 

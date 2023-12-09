@@ -34,4 +34,3 @@ build/
 server/public/client/*
 !server/public/client/.gitkeep
 client/pnpm-lock.yaml
-server/config/plugins.js

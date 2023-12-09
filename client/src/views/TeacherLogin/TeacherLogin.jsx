@@ -1,6 +1,7 @@
 import { message } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../../components/NavBar/NavBar';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import './TeacherLogin.less';
 
@@ -33,7 +34,7 @@ export default function TeacherLogin() {
         if (response.data.user.role.name === 'Content Creator') {
           navigate('/ccdashboard');
         } else if (response.data.user.role.name === 'Researcher') {
-          navigate('/researcher/report');
+          navigate('/report');
         } else {
           navigate('/dashboard');
         }
@@ -45,6 +46,8 @@ export default function TeacherLogin() {
   };
 
   return (
+    <div className='container nav-padding'>
+      <NavBar />
       <div id='content-wrapper'>
         <form
           id='box'
@@ -76,5 +79,6 @@ export default function TeacherLogin() {
           />
         </form>
       </div>
+    </div>
   );
 }

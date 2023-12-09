@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Tabs, Table, Popconfirm, message } from 'antd';
+import Navbar from '../../components/NavBar/NavBar';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import SavedWorkSpaceTab from '../../components/Tabs/SavedWorkspaceTab';
 import UnitCreator from './UnitCreator/UnitCreator';
@@ -150,8 +151,10 @@ export default function ContentCreator() {
   };
 
   return (
-    <>
+    <div className='container nav-padding'>
+      <Navbar />
       <div id='main-header'>Welcome Content Creator</div>
+
       <Tabs
         onChange={(activeKey) => {
           setTab(activeKey);
@@ -202,6 +205,6 @@ export default function ContentCreator() {
           />
         </TabPane>
       </Tabs>
-      </>
+    </div>
   );
 }

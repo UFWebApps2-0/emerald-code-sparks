@@ -88,17 +88,6 @@ const StudyLevelReport = () => {
       ), */
     },
     {
-      title: '🔍',
-      key: 'openStudy',
-      width: '4%',
-      align: 'center',
-      render: (text, record) => (
-        <button>
-          <Link to={`/researcher/studyLevel/:${record.studyID}`}>Details</Link>
-        </button>
-      ),
-    },
-    {
       title: 'Study Name',
       key: 'studyName',
       dataIndex: 'studyName',
@@ -314,12 +303,14 @@ const StudyLevelReport = () => {
     <div className='container nav-padding'>
       <div className='menu-bar'>
         <div id='activity-level-report-header'>Study Level Report</div>
-        <Button onClick={() => navigate('/researcher/createStudyPage')} style={{ backgroundColor: 'green', color: 'white' }}>
-          Create Study
+        <Link to={'/createStudyPage'}>
+        <Button onClick={() => navigate('/createStudyPage')} id="create-study-btn">
+          + Create Study
         </Button>
+      </Link>
         <button
           className='activity-level-return'
-          onClick={() => navigate('/researcher/report')}
+          onClick={() => navigate('/report')}
         >
           Return to Dashboard
         </button>

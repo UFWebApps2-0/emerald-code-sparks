@@ -24,8 +24,8 @@
       "collection": "submission"
     },
     "saves": {
-      "via": "session",
-      "collection": "save"
+      "collection": "save",
+      "via": "session"
     },
     "unit": {
       "model": "unit"

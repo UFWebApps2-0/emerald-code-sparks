@@ -56,8 +56,8 @@ const App = () => {
       <Route path='/researcher/' element={<PrivateRoute><ResearcherLayout/></PrivateRoute>}>
         <Route index element={<ResearcherDashboard/>}/>
         <Route path='report' element={<Report />}/>
-        <Route path = '/codetemplate' element={<CodeTemplatePage />} />
-        <Route path = '/studyviewpopups' element={<StudyViewerPage />} />
+        <Route path='codetemplate' element={<CodeTemplatePage />} />
+        <Route path='studyviewpopups' element={<StudyViewerPage />} />
         <Route path='createStudyPage' element={<CreateStudyPage/>}/>
         <Route path='studyLevel' element={<StudyLevelReport />}/>
         <Route path='studyLevel/:id' element={<StudyLevelReportView/>}/>

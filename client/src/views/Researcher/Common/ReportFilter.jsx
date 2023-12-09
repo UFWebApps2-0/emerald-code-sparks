@@ -17,11 +17,11 @@ export const ReportFilter = ({ setSearchParam, paramObj }) => {
     const [classrooms, setClassrooms] = useState([]);
     const [students, setStudents] = useState([]);
   
-    const [selectedGrade, setselectedGrade] = useState('');
+    const [selectedGrade, setSelectedGrade] = useState('');
     const [selectedLessons, setSelectedLessons] = useState('');
-    const [selectedUnit, setselectedUnit] = useState('');
-    const [selectedClassroom, setselectedClassroom] = useState('');
-    const [selectedStudent, setselectedStudent] = useState('');
+    const [selectedUnit, setSelectedUnit] = useState('');
+    const [selectedClassroom, setSelectedClassroom] = useState('');
+    const [selectedStudent, setSelectedStudent] = useState('');
   
     useEffect(() => {
       const fetchData = async () => {
@@ -35,10 +35,10 @@ export const ReportFilter = ({ setSearchParam, paramObj }) => {
     }, []);
   
     const onGradeChange = async (e) => {
-      setselectedUnit('');
+      setSelectedUnit('');
       setSelectedLessons('');
-      setselectedClassroom('');
-      setselectedStudent('');
+      setSelectedClassroom('');
+      setSelectedStudent('');
       setClassrooms([]);
       setLessons([]);
       setStudents([]);
@@ -46,12 +46,12 @@ export const ReportFilter = ({ setSearchParam, paramObj }) => {
       const grade = e.target.value;
       
       if (grade) {
-        setselectedGrade(grade);
+        setSelectedGrade(grade);
         const gradeRes = await getGrade(grade);
         setUnits(gradeRes.data.units);
         setClassrooms(gradeRes.data.classrooms);
       } else {
-        setselectedGrade('');
+        setSelectedGrade('');
         setUnits([]);
       }
     };
@@ -60,24 +60,24 @@ export const ReportFilter = ({ setSearchParam, paramObj }) => {
       setSelectedLessons('');
       const unit = e.target.value;
       if (unit) {
-        setselectedUnit(unit);
+        setSelectedUnit(unit);
         const unitRes = await getUnit(unit);
         setLessons(unitRes.data.lesson_modules);
       } else {
-        setselectedUnit('');
+        setSelectedUnit('');
         setLessons([]);
       }
     };
   
     const onClassroomChange = async (e) => {
-      setselectedStudent('');
+      setSelectedStudent('');
       const classroom = e.target.value;
       if (classroom) {
-        setselectedClassroom(classroom);
+        setSelectedClassroom(classroom);
         const classroomRes = await getClassroom(classroom);
         setStudents(classroomRes.data.students);
       } else {
-        setselectedClassroom('');
+        setSelectedClassroom('');
         setStudents([]);
       }
     };
@@ -162,7 +162,7 @@ export const ReportFilter = ({ setSearchParam, paramObj }) => {
             placeholder='Select a student'
             disabled={students.length === 0}
             onChange={(e) => {
-              setselectedStudent(e.target.value);
+              setSelectedStudent(e.target.value);
             }}
           >
             <option key='empty' value=''>

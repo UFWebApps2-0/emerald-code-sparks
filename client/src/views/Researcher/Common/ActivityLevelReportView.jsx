@@ -6,8 +6,8 @@ import './ActivityLevelReportView.less';
 const ActivityLevelReportView = () => {
   const { id } = useParams();
   const [session, setSession] = useState({});
-  const [studentName, setStudentsName] = useState([]);
-  const [studentPartner, setStudentsPartner] = useState([]);
+  const [studentsName, setStudentsName] = useState([]);
+  const [studentsPartner, setStudentsPartner] = useState([]);
   const [className, setClassName] = useState([]);
   const [clicks, setClicks] = useState(0);
   const navigate = useNavigate();
@@ -78,11 +78,11 @@ const ActivityLevelReportView = () => {
           <section id='student-report-section'>
             <p>
               <strong>Student Name: </strong>
-              {studentName}
+              {studentsName}
             </p>
             <p>
               <strong>Partner Name: </strong>
-              {studentPartner.length > 0 ? studentPartner.join(', ') : ''}
+              {studentsPartner.length > 0 ? studentsPartner.join(', ') : ''}
             </p>
             <p>
               <strong>Class Name: </strong>

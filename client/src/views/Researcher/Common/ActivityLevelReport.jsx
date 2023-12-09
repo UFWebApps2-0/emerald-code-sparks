@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Table, Form } from 'antd';
+import { Table } from 'antd';
 import { useSearchParam } from '../../../Utils/useSearchParam';
 import {
   getSessionsWithFilter,
@@ -107,7 +107,6 @@ const ActivityLevelReport = () => {
         key.students.forEach((student) => {
           if (student.name.indexOf(value) === 0) {
             result = true;
-            return;
           }
         });
         return result;

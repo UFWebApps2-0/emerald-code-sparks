@@ -11,9 +11,7 @@ import {
 
 export default function SavedWorkSpaceTab({searchParams, setSearchParams, classroomId}){
     const [workspaceList, setWorkspaceList] = useState([]);
-    const [tab, setTab] = useState(
-      searchParams.has('tab') ? searchParams.get('tab') : 'home'
-    );
+    const tab = searchParams.has('tab') ? searchParams.get('tab') : 'home';
     const [page, setPage] = useState(
       searchParams.has('page') ? parseInt(searchParams.get('page')) : 1
     );

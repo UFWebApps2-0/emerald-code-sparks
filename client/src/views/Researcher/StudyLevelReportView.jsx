@@ -45,7 +45,7 @@ const StudyLevelReportView = () => {
   }, []);
 
   const timeConverter = (timestamp) => {
-    var dateVal = new Date(timestamp).toLocaleString();
+    let dateVal = new Date(timestamp).toLocaleString();
     return dateVal;
   };
   

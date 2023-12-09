@@ -9,9 +9,9 @@
 [Search tag] --> search bar to search for studies by tag TODO
 
 */
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Table, Modal, Button, Tag, Form, Input } from 'antd';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
 import './ResearcherDashboard.less';
 //import FormItem from 'antd/es/form/FormItem';
 

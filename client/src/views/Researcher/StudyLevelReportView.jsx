@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getSessions, getStudent, getStudy } from '../../Utils/requests';
 import './StudyLevelReportView.less';
 
 const StudyLevelReportView = () => {
   const { id } = useParams();
-  const [study, setStudy] = useState({});
   const [students, setStudents] = useState([])
   const navigate = useNavigate();
-  const [usableSessions, setUsableSessions] = useState([])
 
   useEffect(function () {
     const getData = async () => {
       const study = await getStudy(id).then(x => x.data);
-      setStudy(study);
       console.log(study)
 
       const consentingStudents = []
@@ -33,7 +30,6 @@ const StudyLevelReportView = () => {
         }
       }
 
-      setUsableSessions(usableSessions);
       console.log(usableSessions)
 
       
@@ -43,11 +39,6 @@ const StudyLevelReportView = () => {
     };
     getData();
   }, []);
-
-  const timeConverter = (timestamp) => {
-    let dateVal = new Date(timestamp).toLocaleString();
-    return dateVal;
-  };
   
   return (
     <>

@@ -1,68 +1,68 @@
 import './StudyBrowser.less';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './ActivityLevelReport.less';
 
 const StudyBrowser = () => {
   const navigate = useNavigate();
-  const columns = [
-    {
-      title: 'Study ID',
-      key: 'reportid',
-      width: '2%',
-      align: 'left',
-      render: (_, key) => <div>{key.students[0].name}</div>,
-    }, {
-      title: 'Classroom',
-      key: 'classroom',
-      dataIndex: ['classroom', 'name'],
-      width: '6%',
-      align: 'left',
-      onFilter: (value, key) => key.classroom?.name.indexOf(value) === 0,
-    }, {
-      title: 'Grade',
-      dataIndex: ['grade', 'name'],
-      key: 'grade',
-      width: '2%',
-      align: 'left',
-      onFilter: (value, key) => key.grade?.name.indexOf(value) === 0,
-    }, {
-      title: 'Unit',
-      dataIndex: ['unit', 'name'],
-      key: 'unit',
-      width: '4%',
-      align: 'left',
-      onFilter: (value, key) => key.unit?.name.indexOf(value) === 0,
-    }, {
-      title: 'Lesson',
-      dataIndex: ['lesson_module', 'name'],
-      key: 'lesson_module',
-      width: '3%',
-      align: 'left',
-      onFilter: (value, key) =>
-        key.lesson_module?.name.indexOf(value) === 0,
-    }, {
-      title: 'Session Started',
-      dataIndex: 'created_at',
-      key: 'sessionStart',
-      width: '4%',
-      align: 'left',
-      sorter: true,
-    }, {
-      title: 'Partners',
-      key: 'hasPartners',
-      width: '2%',
-      align: 'left',
-      render: (_, key) => (<div>{key.students.slice(1).map((student) => student.name).join(', ')}</div>),
-    }, {
-      title: 'View Report',
-      dataIndex: 'enrolled',
-      key: 'enrolled',
-      width: '2%',
-      align: 'right',
-      render: (_, session) => (<Link to={`/activityLevel/${session.id}`}>View Report</Link>),
-    },
-  ];
+  // const columns = [
+  //   {
+  //     title: 'Study ID',
+  //     key: 'reportid',
+  //     width: '2%',
+  //     align: 'left',
+  //     render: (_, key) => <div>{key.students[0].name}</div>,
+  //   }, {
+  //     title: 'Classroom',
+  //     key: 'classroom',
+  //     dataIndex: ['classroom', 'name'],
+  //     width: '6%',
+  //     align: 'left',
+  //     onFilter: (value, key) => key.classroom?.name.indexOf(value) === 0,
+  //   }, {
+  //     title: 'Grade',
+  //     dataIndex: ['grade', 'name'],
+  //     key: 'grade',
+  //     width: '2%',
+  //     align: 'left',
+  //     onFilter: (value, key) => key.grade?.name.indexOf(value) === 0,
+  //   }, {
+  //     title: 'Unit',
+  //     dataIndex: ['unit', 'name'],
+  //     key: 'unit',
+  //     width: '4%',
+  //     align: 'left',
+  //     onFilter: (value, key) => key.unit?.name.indexOf(value) === 0,
+  //   }, {
+  //     title: 'Lesson',
+  //     dataIndex: ['lesson_module', 'name'],
+  //     key: 'lesson_module',
+  //     width: '3%',
+  //     align: 'left',
+  //     onFilter: (value, key) =>
+  //       key.lesson_module?.name.indexOf(value) === 0,
+  //   }, {
+  //     title: 'Session Started',
+  //     dataIndex: 'created_at',
+  //     key: 'sessionStart',
+  //     width: '4%',
+  //     align: 'left',
+  //     sorter: true,
+  //   }, {
+  //     title: 'Partners',
+  //     key: 'hasPartners',
+  //     width: '2%',
+  //     align: 'left',
+  //     render: (_, key) => (<div>{key.students.slice(1).map((student) => student.name).join(', ')}</div>),
+  //   }, {
+  //     title: 'View Report',
+  //     dataIndex: 'enrolled',
+  //     key: 'enrolled',
+  //     width: '2%',
+  //     align: 'right',
+  //     render: (_, session) => (<Link to={`/activityLevel/${session.id}`}>View Report</Link>),
+  //   },
+  // ];
 
   return (
     <>

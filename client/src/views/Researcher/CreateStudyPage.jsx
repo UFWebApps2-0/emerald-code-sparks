@@ -3,24 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStudent, getAllClassrooms, getClassroom, getSessions, getSession, createStudentInvite} from '../../Utils/requests';
+import { sendEmail, getAllStudents, getResearchers, addStudy, getStudent, getAllClassrooms, getSession, createStudentInvite} from '../../Utils/requests';
 
 const { Option } = Select;
 const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
 
-const fetchData = async (getDataFunction, setDataFunction, errorMessage) => {
-  try {
-    const dataRes = await getDataFunction();
-    if (dataRes.error) {
-      console.error(errorMessage);
-    } else {
-      console.log(dataRes.data);
-      setDataFunction(dataRes.data);
-    }
-  } catch (error) {
-    console.error(`Error fetching data: ${errorMessage}`, error);
-  }
-};
+//Out of concern for it working, though TODO: Use the below function to deduplicate useEffect bloat below
+// const fetchData = async (getDataFunction, setDataFunction, errorMessage) => {
+//   try {
+//     const dataRes = await getDataFunction();
+//     if (dataRes.error) {
+//       console.error(errorMessage);
+//     } else {
+//       console.log(dataRes.data);
+//       setDataFunction(dataRes.data);
+//     }
+//   } catch (error) {
+//     console.error(`Error fetching data: ${errorMessage}`, error);
+//   }
+// };
 
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);

@@ -5,7 +5,6 @@ import { getStudents, postJoin } from '../../Utils/requests';
 import StudentLoginForm from './StudentLoginForm';
 import { setUserSession } from '../../Utils/AuthRequests';
 import { message } from 'antd';
-import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 export default function StudentLogin() {
@@ -147,8 +146,7 @@ export default function StudentLogin() {
   };
 
   return (
-    <div className='container nav-padding'>
-      <NavBar />
+    <>
       <img src={Logo} alt='logo' id='login-logo' />
       <div id='form-container'>
         {setForms().map((form) => form)}
@@ -165,6 +163,6 @@ export default function StudentLogin() {
           Enter
         </button>
       </div>
-    </div>
+      </>
   );
 }

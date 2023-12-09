@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "student_invites",
+  "info": {
+    "name": "Student Invite",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "study": {
+      "model": "study",
+      "via": "student_invites"
+    },
+    "student": {
+      "model": "student",
+      "via": "student_invites"
+    },
+    "Consent": {
+      "type": "boolean"
+    }
+  }
+}

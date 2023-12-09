@@ -2,7 +2,6 @@ import { message } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import BlocklyCanvasPanel from "../../components/ActivityPanels/BlocklyCanvasPanel/BlocklyCanvasPanel"
-import NavBar from "../../components/NavBar/NavBar"
 import {
   getAuthorizedWorkspaceToolbox,
   getActivityToolbox,
@@ -73,11 +72,8 @@ export default function BlocklyPage({ isSandbox }) {
   }, [isSandbox, navigate, value.role])
 
   return (
-    <div className="container nav-padding">
-      <NavBar />
       <div className="flex flex-row">
         <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
       </div>
-    </div>
   )
 }

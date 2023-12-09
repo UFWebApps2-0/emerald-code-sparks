@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Table, Modal, Button, Tag, Form, Input, Select } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Modal, Button, Tag, Form, Input, Select } from 'antd';
 import './CreateStudyPage.less';
-import NavBar from '../../components/NavBar/NavBar';
 //import FormItem from 'antd/es/form/FormItem';
-import { sendEmail, getAllStudents, getStudies, getResearchers, addStudy, getStudent, getAllClassrooms, getClassroom} from '../../Utils/requests';
+import { sendEmail, getAllStudents, getResearchers, addStudy, getStudent, getAllClassrooms, getSession, createStudentInvite} from '../../Utils/requests';
 
 const { Option } = Select;
+const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
+
+//Out of concern for it working, though TODO: Use the below function to deduplicate useEffect bloat below
+// const fetchData = async (getDataFunction, setDataFunction, errorMessage) => {
+//   try {
+//     const dataRes = await getDataFunction();
+//     if (dataRes.error) {
+//       console.error(errorMessage);
+//     } else {
+//       console.log(dataRes.data);
+//       setDataFunction(dataRes.data);
+//     }
+//   } catch (error) {
+//     console.error(`Error fetching data: ${errorMessage}`, error);
+//   }
+// };
 
 const CreateStudyPage =()=>{
   const [students, setStudents] = useState([]);
@@ -16,16 +31,14 @@ const CreateStudyPage =()=>{
   const [checkboxValues, setCheckboxValues] = useState({});
   const [selectedStudyTag, setSelectedStudyTag] = useState(null);
   const [selectedResearchers, setSelectedResearchers] = useState([]);
+  const [researchers, setResearchers] = useState([]);
+  const navigate = useNavigate();
+  const [studyForm] = Form.useForm();
+  const [checkboxForm] = Form.useForm();
+  const [searchBarForm] = Form.useForm();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleStudentChange = async (selectedValues) => {
-    //console.log(selectedValues);
-    const studentsData = [];
-    for (const studentID of selectedValues) {
-      const student = await getStudent(studentID);
-      studentsData.push(student.data);
-    }
-    setSelectedStudentsData(studentsData);
-  };
+  //=== Fetch All Data === 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,7 +46,6 @@ const CreateStudyPage =()=>{
         if (studentsRes.error) {
           console.error('Failed to retrieve students');
         } else {
-          console.log(studentsRes.data);
           setStudents(studentsRes.data);
         }
       } catch (error) {
@@ -43,19 +55,6 @@ const CreateStudyPage =()=>{
     fetchData();
   }, []);
 
-  const handleClassroomChange = async (selectedValues) => {
-    //console.log(selectedValues);
-    const classroomData = [];
-    for (const classroomID of selectedValues) {
-      //instead of getting classroom by id, search from the list of all classrooms
-      const allClasses = await getAllClassrooms();
-      const classroom = allClasses.data.find((classroom) => classroom.id === classroomID);
-      //append to classroomData
-      classroomData.push(classroom);
-    }
-    setSelectedClassroomsData(classroomData);
-
-  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,7 +62,6 @@ const CreateStudyPage =()=>{
         if (classroomsRes.error) {
           console.error('Failed to retrieve classrooms');
         } else {
-          console.log(classroomsRes.data);
           setClassrooms(classroomsRes.data);
         }
       } catch (error) {
@@ -73,11 +71,6 @@ const CreateStudyPage =()=>{
     fetchData();
   }, []);
 
-
-
-  const studyTagsDefault = ["qualitative", "quantitative", "design", "TBD"];
-
-  const [researchers, setResearchers] = useState([]);
   useEffect(() => {
     const fetchResearchers = async () => {
       console.log('Fetching researchers');
@@ -86,7 +79,6 @@ const CreateStudyPage =()=>{
         if (researchersRes.error) {
           console.error('Failed to retrieve researchers');
         } else {
-          console.log(researchersRes.data);
           //send email to researcher
           setResearchers(researchersRes.data);
         }
@@ -97,6 +89,26 @@ const CreateStudyPage =()=>{
     fetchResearchers();
   }, []);
 
+  const handleStudentChange = async (selectedValues) => {
+    const studentsData = [];
+    for (const studentID of selectedValues) {
+      const student = await getStudent(studentID);
+      studentsData.push(student.data);
+    }
+    setSelectedStudentsData(studentsData);
+  };
+
+  const handleClassroomChange = async (selectedValues) => {
+    const classroomData = [];
+    for (const classroomID of selectedValues) {
+      //instead of getting classroom by id, search from the list of all classrooms
+      const allClasses = await getAllClassrooms();
+      const classroom = allClasses.data.find((classroom) => classroom.id === classroomID);
+      //append to classroomData
+      classroomData.push(classroom);
+    }
+    setSelectedClassroomsData(classroomData);
+  }
     
   const handleCheckboxChange = (checkboxId) => (e) => {
     setCheckboxValues((prevValues) => ({
@@ -104,14 +116,7 @@ const CreateStudyPage =()=>{
       [checkboxId]: e.target.checked,
     }));
   };
-
-  const navigate = useNavigate();
-  const [studyForm] = Form.useForm();
-  const [checkboxForm] = Form.useForm();
-  const [searchBarForm] = Form.useForm();
-
-  //add submit button
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -148,12 +153,14 @@ const CreateStudyPage =()=>{
         published_at	string($date-time)
         created_by	string
         updated_by	string
+        student_invites [string]
       }
     */
     
     // Get study form values
     const studyValues = studyForm.getFieldsValue();
     //sanitize data
+    //TODO: Fix errors relating to null value
     studyValues['Study name'] = studyValues['Study name'].replace(/[^a-zA-Z0-9 ]/g, "");
     studyValues['Study ID'] = studyValues['Study ID'].replace(/[^a-zA-Z0-9 ]/g, "");
     //check if defined 
@@ -164,7 +171,6 @@ const CreateStudyPage =()=>{
     }
     //keep @ and . for email
     //studyValues['Student Email'] = studyValues['Student Email'].replace(/[^a-zA-Z0-9@. ]/g, "");
-    console.log(studyValues);
 
     // Use the updated checkboxValues state
     const values = {
@@ -175,9 +181,6 @@ const CreateStudyPage =()=>{
       selectTags: selectedStudyTag.toString(),
       classrooms: selectedClassrooms,
     };
-
-    console.log(values);
-
 
     // Adjust the email template creation according to your form field names
     const emailTemplate = {
@@ -195,8 +198,6 @@ const CreateStudyPage =()=>{
       }
     }
 
-     console.log(consentOptionsReformat);
-
     if (!values.newTag) {
       values.newTag = [];
       values.newTag.push("");
@@ -209,11 +210,49 @@ const CreateStudyPage =()=>{
         //add them to study
         //get student
         const studentData = await getStudent(student.id);
-        console.log(studentData);
         //add study to selected student
         selectedStudentsData.push(studentData.data);
       }
     }
+
+    //Iterate through students to create appropriate invites
+    console.error(selectedStudentsData)
+    let consentingStudents = []
+    for (const student of selectedStudentsData) {
+      console.log("Checking" + student.name)
+      if(student.sessions.length > 0){
+        for( const session of student["sessions"]){
+          const fetchedSession = await getSession(session.id).then(x => x.data)
+          console.warn(fetchedSession)
+          for( const sessionStudent of fetchedSession["students"]){
+            consentingStudents.push(sessionStudent)
+          }
+        }
+      }
+    }
+    console.info("Consenting Students:")
+    //deduplicate invites list
+    const result = [];
+    const map = new Map();
+    for (const item of consentingStudents) {
+        if(!map.has(item.id)){
+            map.set(item.id, true);    // set any value to Map
+            result.push(item);
+        }
+    }
+    consentingStudents = result;
+    console.log(consentingStudents);
+
+    //Deduplicated selected student data
+    const result2 = [];
+    const map2 = new Map();
+    for (const item of selectedStudentsData) {
+        if(!map2.has(item.id)){
+            map2.set(item.id, true);
+            result2.push(item);
+        }
+    }
+    setSelectedStudentsData(result2);
 
     const studyData = {
       studyID: values['Study ID'],
@@ -224,13 +263,13 @@ const CreateStudyPage =()=>{
       studyName: values['Study name'],
       studyTag: values.selectTags,
       consentOptions: consentOptionsReformat,
+      student_invites: []
     }
     console.log(studyData);
 
     //post study to database
-    addStudy(studyData);
+    await addStudy(studyData);
     //send email to all added researchers
-    console.log(values.newResearchers);
     for (const researcher of values.newResearchers) {
       const emailTemplate = {
         name: researcher.first_name + ' ' + researcher.last_name,
@@ -238,7 +277,19 @@ const CreateStudyPage =()=>{
         studyID: values['Study ID'],
       }
       sendEmail(emailTemplate);
-    } 
+    }
+    await setTimeout(async () =>{
+    for(let student of consentingStudents){
+      let invite = {
+        study: parseInt(studyData.studyID),
+        student: student.id,
+        Consent: false,
+      }
+      await createStudentInvite(invite).then(x => console.log(x))
+    }}, 1000)
+
+    console.log("DONEDONE🚨")
+    
 
     // Clear form fields
     studyForm.resetFields();
@@ -249,33 +300,26 @@ const CreateStudyPage =()=>{
     setSelectedStudyTag(null);
     setSelectedResearchers([]);
     setIsModalVisible(false);
-
-  
-
-    console.log("all fields cleared");
   }
+  
   const handleCancel = () => {
-
     setIsModalVisible(false);
   }
 
   
 
-  return (
-    <div className='container nav-padding'>
-      <NavBar/>
+  return (<>
       <div className='menu-bar'>
         <div id='create-study-header'>Create New study</div>
         <button
           className='activity-level-return'
-          onClick={() => navigate('/report')}
+          onClick={() => navigate('/researcher/report')}
         >
           Return to Dashboard
         </button>
       </div>
-
       <div id='button-container'>
-      <Form form={studyForm} id={"study-form"}>
+        <Form form={studyForm} id={"study-form"}>
           <h1 id="new-study-header">Study Information</h1>
           <Form.Item
           name="Study name"
@@ -365,33 +409,33 @@ const CreateStudyPage =()=>{
         </Form>
         <ResetCheckboxEffect checkboxForm={checkboxForm} checkboxValues={checkboxValues} />
         <Form form={searchBarForm} id={"search-bar-form"}>
-        <Form.Item>
-        <Select
-            mode="multiple"
-            placeholder="Search for a Student"
-            onChange={handleStudentChange}
-            value={selectedStudentsData.map(student => student.id)}  // Use selectedStudentsData
-            className="search-bar"
-          >
-            {students.map(student => (
-              <Option key={student.id} value={student.id}>
-                {student.name}
-              </Option>
-            ))}
-          </Select>
+          <Form.Item>
           <Select
-            mode="multiple"
-            placeholder="Search for a Classroom"
-            onChange={handleClassroomChange}
-            value={selectedClassrooms.map((classroom) => classroom.id)}
-            className="search-bar"
-          >
-            {classrooms.map((classroom) => (
-              <Option key={classroom.id} value={classroom.id}>
-                {classroom.id !== null && classroom.id !== undefined ? classroom.id : 'No ID'} - {classroom.name}
-              </Option>
-            ))}
-          </Select>
+              mode="multiple"
+              placeholder="Search for a Student"
+              onChange={handleStudentChange}
+              value={selectedStudentsData.map(student => student.id)}  // Use selectedStudentsData
+              className="search-bar"
+            >
+              {students.map(student => (
+                <Option key={student.id} value={student.id}>
+                  {student.name}
+                </Option>
+              ))}
+            </Select>
+            <Select
+              mode="multiple"
+              placeholder="Search for a Classroom"
+              onChange={handleClassroomChange}
+              value={selectedClassrooms.map((classroom) => classroom.id)}
+              className="search-bar"
+            >
+              {classrooms.map((classroom) => (
+                <Option key={classroom.id} value={classroom.id}>
+                  {classroom.id !== null && classroom.id !== undefined ? classroom.id : 'No ID'} - {classroom.name}
+                </Option>
+              ))}
+            </Select>
 
           </Form.Item>
           <Button className='add-researcher-button' onClick={showModal}>
@@ -402,14 +446,8 @@ const CreateStudyPage =()=>{
           </Modal>
           
         </Form>
-        
-        
-        
       </div>
-    </div>
-    
-  )
-
+  </>)
 };
 
 export default CreateStudyPage;

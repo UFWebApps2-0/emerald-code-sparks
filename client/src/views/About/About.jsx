@@ -2,13 +2,10 @@ import React from "react"
 import NSF from "../../assets/nsf_logo.png"
 import TAMU from "../../assets/tamu_logo.png"
 import UF from "../../assets/uf_logo.png"
-import NavBar from "../../components/NavBar/NavBar"
 import "./About.less"
 
 export default function About(props) {
   return (
-    <div className="container nav-padding">
-      <NavBar />
       <div id="about-content-container">
         <h1 id="title">About CASMM</h1>
         <div id="logos" className="flex space-between">
@@ -84,6 +81,5 @@ export default function About(props) {
           David Magda
         </p>
       </div>
-    </div>
   )
 }

@@ -566,6 +566,18 @@
                     "type": "string"
                   }
                 },
+                "student_invites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "saves": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -713,6 +725,37 @@
           "consentOptions": {
             "type": "object"
           },
+          "student_invites": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "study": {
+                  "type": "string"
+                },
+                "student": {
+                  "type": "string"
+                },
+                "Consent": {
+                  "type": "boolean"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -759,6 +802,12 @@
           },
           "consentOptions": {
             "type": "object"
+          },
+          "student_invites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",

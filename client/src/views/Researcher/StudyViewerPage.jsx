@@ -6,10 +6,8 @@ import fakeStudyData from './fakeStudyData.json';
 
 const StudyViewerPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedStudy, setSelectedStudy] = useState(null);
 
   const showModal = (record) => {
-    setSelectedStudy(record);
     setIsModalVisible(true);
   };
 

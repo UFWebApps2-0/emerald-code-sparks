@@ -742,6 +742,12 @@
                 "consentOptions": {
                   "type": "object"
                 },
+                "student_invites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "published_at": {
                   "type": "string"
                 },

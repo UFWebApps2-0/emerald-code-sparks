@@ -46,6 +46,10 @@
     },
     "consentOptions": {
       "type": "json"
+    },
+    "student_invites": {
+      "via": "study",
+      "collection": "student-invite"
     }
   }
 }

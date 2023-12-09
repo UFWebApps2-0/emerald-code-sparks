@@ -36,14 +36,6 @@
     "studies": {
       "via": "students",
       "collection": "study"
-    },
-    "student_invites": {
-      "via": "student",
-      "collection": "student-invite"
-    },
-    "saves": {
-      "via": "student",
-      "collection": "save"
     }
   }
 }

@@ -29,7 +29,7 @@ export default function HomeJoin(props) {
         type='text'
         value={joinCode}
         placeholder='Join Code'
-        onKeyDown={(e) => {if(e.key === "Enter"){handleLogin}}}
+        onKeyDown={(e) => {if(e.key === "Enter"){handleLogin()}}}
         onChange={(e) => setJoinCode(e.target.value)}
       />
       <input

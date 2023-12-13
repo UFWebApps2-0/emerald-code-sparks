@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './WrenchButton.less';
 
+
 import { Button } from 'antd';
 
 const Sidebar = ({uniqueKey, handleClose }) => {
@@ -31,17 +32,6 @@ const Sidebar = ({uniqueKey, handleClose }) => {
 
 export default function WrenchButton({uniqueKey}) {
   const [showSidebar, setSidebar] = useState(false);
-  function UnWrench() {
-    // Mark content as inappropriate and restrict it from being displayed publically
-    alert("The content has been rejected! Unique key: " + uniqueKey);
-    //setStatus("Unclicked");
-    //setClicked(false);
-    // Use setter from requests.js to update status column as rejected
-
-    // Enabling hiding post from gallery if not already hidden
-    
-  }*/
-
   const toggleSidebar = () => {
     setSidebar(!showSidebar);
   };

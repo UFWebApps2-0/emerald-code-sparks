@@ -17,7 +17,6 @@ import PlotterLogo from '../../Icons/PlotterLogo';
 import { getActivityToolbox } from '../../../../../Utils/requests';
 import PublicCanvas from '../PublicCanvas';
 import './blocks';
-import './factory';
 import NavBar from '../../../../NavBar/NavBar';
 
 
@@ -25,10 +24,6 @@ import NavBar from '../../../../NavBar/NavBar';
 let plotId = 1;
 
 export default function CustomBlock({activity}) {
-  const [hoverUndo, setHoverUndo] = useState(false);
-  const [hoverRedo, setHoverRedo] = useState(false);
-  const [hoverCompile, setHoverCompile] = useState(false);
-  const [hoverConsole, setHoverConsole] = useState(false);
   const [showConsole, setShowConsole] = useState(false);
   const [showPlotter, setShowPlotter] = useState(false);
   const [plotData, setPlotData] = useState([]);
@@ -37,7 +32,7 @@ export default function CustomBlock({activity}) {
   const [compileError, setCompileError] = useState('');
 
   //  useStates for Program your Arduino... / Custom Blocks
-  const [selectedFeature, setSelectedFeature] = useState('Custom Blocks');
+  //const [selectedFeature, setSelectedFeature] = useState('Custom Blocks');
   const [blockCode, setBlockCode] = useState('');
   const [generatorCode, setGeneratorCode] = useState('');
 
@@ -45,39 +40,15 @@ export default function CustomBlock({activity}) {
   const [forceUpdate] = useReducer((x) => x + 1, 0);
 
   const workspaceRef = useRef(null);
-  // const activity = null;
   const activityRef = useRef(null);
 
-  /* ADDED */ const blockMap = new Map(); // IMPORTANT
-  /* ADDED */ const descriptionMap = new Map(); // IMPORTANT
+  /* ADDED */ const blockMap = new Map(); // variable to store block name for save button
+  /* ADDED */ const descriptionMap = new Map(); // variable to store block contents for save button
 
 
   
 
-  // const setWorkspace = () => {
-  //   workspaceRef.current = window.Blockly.inject('newblockly-canvas', {
-  //     toolbox: document.getElementById('toolbox'),
-  //   });
-  //   // Define the XML for the root block
-  //   const rootBlockXml = '<xml>' +
-  //     '<block type="factory_base" deletable="false" movable="false"></block>' +
-  //     '</xml>';
-  
-  //   // Convert the XML string to a DOM element
-  //   const xmlDom = Blockly.Xml.textToDom(rootBlockXml);
-  
-  //   // Initialize the workspace with the root block
-  //   Blockly.Xml.domToWorkspace(xmlDom, workspaceRef.current);
-  
-  //   workspaceRef.current.addChangeListener(() => {
-  //     const xml = Blockly.Xml.workspaceToDom(workspaceRef.current);
-  //     const xmlText = Blockly.Xml.domToText(xml);
-  //     setBlockCode(xmlText);
-  
-  //     const generatorCode = Blockly.JavaScript.workspaceToCode(workspaceRef.current);
-  //     setGeneratorCode(generatorCode);
-  //   });
-  // };
+
 
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('newblockly-canvas', {
@@ -144,42 +115,7 @@ export default function CustomBlock({activity}) {
     }, [activity]);
   
   
-  const handleUndo = () => {
-    if (workspaceRef.current.undoStack_.length > 0)
-      workspaceRef.current.undo(false);
-  };
 
-  const handleRedo = () => {
-    if (workspaceRef.current.redoStack_.length > 0)
-      workspaceRef.current.undo(true);
-  };
-
-  const handleConsole = async () => {
-    if (showPlotter) {
-      message.warning('Close serial plotter before openning serial monitor');
-      return;
-    }
-    // if serial monitor is not shown
-    if (!showConsole) {
-      // connect to port
-      await handleOpenConnection(9600, 'newLine');
-      // if fail to connect to port, return
-      if (typeof window['port'] === 'undefined') {
-        message.error('Fail to select serial device');
-        return;
-      }
-      setConnectionOpen(true);
-      setShowConsole(true);
-    }
-    // if serial monitor is shown, close the connection
-    else {
-      if (connectionOpen) {
-        await handleCloseConnection();
-        setConnectionOpen(false);
-      }
-      setShowConsole(false);
-    }
-  };
 
   const handlePlotter = async () => {
     if (showConsole) {
@@ -212,29 +148,7 @@ export default function CustomBlock({activity}) {
     }
   };
 
-  const handleCompile = async () => {
-    if (showConsole || showPlotter) {
-      message.warning(
-        'Close Serial Monitor and Serial Plotter before uploading your code'
-      );
-    } else {
-      if (typeof window['port'] === 'undefined') {
-        await connectToPort();
-      }
-      if (typeof window['port'] === 'undefined') {
-        message.error('Fail to select serial device');
-        return;
-      }
-      setCompileError('');
-      await compileArduinoCode(
-        workspaceRef.current,
-        setSelectedCompile,
-        setCompileError,
-        activity,
-        false
-      );
-    }
-  };
+
 
   const menu = (
     <Menu>
@@ -322,64 +236,12 @@ export default function CustomBlock({activity}) {
  * @param {string} xmlCode - The input XML code.
  * @returns {string} - The generated Blockly JavaScript code.
  */
-function xmlToBlocklyJs(xmlCode) {
-  // Parse the XML code into a DOM structure.
-  
-  var xmlDoc = new DOMParser().parseFromString(xmlCode, 'text/xml');
 
-  // Helper function to process a block and its children.
-  function parseBlock(block) {
 
-    var blockType = block.getAttribute('type') || 'unnamed';
-    var jsCode = "Blockly.Blocks['" + blockType + "'] = {\n";
-    jsCode += "  init: function() {\n";
 
-    // Process fields.
-    var fields = block.querySelectorAll('field');
-    if (fields.length > 0) {
-      fields.forEach(function (field) {
-        jsCode += "    this.appendField('" + field.textContent + "');\n";
-      });
-    }
-
-    // Process inputs.
-    var inputs = block.querySelectorAll('value, statement, shadow');
-    if (inputs.length > 0) {
-      inputs.forEach(function (input) {
-        var inputName = input.getAttribute('name');
-        jsCode += "    this.append" + input.tagName + "('" + inputName + "', " +
-          parseBlock(input.firstElementChild) + ");\n";
-      });
-    }
-
-    // Process mutations.
-    var mutation = block.querySelector('mutation');
-    if (mutation) {
-      for (var i = 0; i < mutation.attributes.length; i++) {
-        var attribute = mutation.attributes[i];
-        jsCode += "    this.setMutatorAttribute('" + attribute.name + "', '" +
-          attribute.value + "');\n";
-      }
-    }
-
-    jsCode += "  }\n";
-    jsCode += "};\n\n";
-
-    return jsCode;
-  }
-
-  // Get the root block and start parsing.
-  var rootBlock = xmlDoc.querySelector('block[type="factory_base"]');
-  if (rootBlock) {
-    return parseBlock(rootBlock);
-  } else {
-    return ''; // Return an empty string if no block is found.
-  }
-}
-
+//algorithm borrowed from ardublockly factory https://github.com/carlosperate/ardublockly
 function updateLanguage(xmlCode, varToChange) {
-  //const xml = Blockly.Xml.workspaceToDom(workspaceRef.current);
-  //const xmlCode2 = Blockly.Xml.domToText(xml);
+
   var xmlDoc = new DOMParser().parseFromString(xmlCode, 'text/xml');
   var blockX = xmlDoc.querySelector('block[type="factory_base"]');
   var temporaryWorkspace = new Blockly.Workspace();
@@ -393,12 +255,10 @@ function updateLanguage(xmlCode, varToChange) {
   }
   blockType = blockType.replace(/\W/g, '_').replace(/^(\d)/, '_\\1');
 
-  varToChange = formatJson_(blockType, rootBlock);
-  //var code = blockType;
+  var code = formatJson_(blockType, rootBlock);
   temporaryWorkspace.clear();
   temporaryWorkspace.dispose();  
-  //injectCode(code, 'blocklyCanvasMid')
-  return varToChange;
+  return code;
   
 
 }
@@ -627,65 +487,7 @@ function getTypesFrom_(block, name) {
 
 
 
-// function updatePreview(jsonCode, previewWorkspace) {
-//   previewWorkspace.clear();
 
-//   var format = 'JSON';
-//   var code = jsonCode;
-//   if (!code.trim()) {
-//     // Nothing to render.  Happens while cloud storage is loading.
-//     return;
-//   }
-//   var backupBlocks = Blockly.Blocks;
-//   try {
-//     // Make a shallow copy.
-//     Blockly.Blocks = {};
-//     for (var prop in backupBlocks) {
-//       Blockly.Blocks[prop] = backupBlocks[prop];
-//     }
-
-//     if (format === 'JSON') {
-//       var json = JSON.parse(code);
-//       Blockly.Blocks[json.id || UNNAMED] = {
-//         init: function() {
-//           this.jsonInit(json);
-//         }
-//       };
-//     }  else {
-//       throw 'Unknown format: ' + format;
-//     }
-
-//     // Look for a block on Blockly.Blocks that does not match the backup.
-//     var blockType = null;
-//     for (var type in Blockly.Blocks) {
-//       if (typeof Blockly.Blocks[type].init == 'function' &&
-//           Blockly.Blocks[type] != backupBlocks[type]) {
-//         blockType = type;
-//         break;
-//       }
-//     }
-//     if (!blockType) {
-//       return;
-//     }
-
-//     const block = previewWorkspace.newBlock(blockType);
-//     block.moveBy(50, 50);
-//     block.initSvg();
-//     block.render();
-
-//     // var previewBlock = previewWorkspace.newBlock(blockType);
-//     // previewBlock.initSvg();
-//     // previewBlock.render();
-//     // previewBlock.setMovable(false);
-//     // previewBlock.setDeletable(false);
-//     // previewBlock.moveBy(15, 10);
-//     // previewWorkspace.clearUndo();
-
-//     // updateGenerator(previewBlock);
-//   } finally {
-//     Blockly.Blocks = backupBlocks;
-//   }
-// }
 
 function updatePreview(jsonCode, previewWorkspace) {
   previewWorkspace.clear();
@@ -747,29 +549,9 @@ function updatePreview(jsonCode, previewWorkspace) {
 }
 
 
-function createWorkspaceInPreview() {
-  // Reference to the #preview element
-  const previewDiv = document.getElementById('preview');
 
-  // Create a Blockly workspace in the #preview element
-  const workspace = Blockly.inject(previewDiv, {
-    media: '../../media/', // Path to media files (icons, etc.)
-    scrollbars: true, // Enable scrollbars
-  });
-
-  // Create a new block (you can change the type to your desired block type)
-  const block = workspace.newBlock('math_number');
-
-  // Position the block within the workspace (optional)
-  block.moveBy(50, 50);
-
-  // Render the block in the workspace
-  block.initSvg();
-  block.render();
-
-  // Return the workspace object (optional, for further manipulation)
-  return workspace;
-}
+//arduino code generator takes contents from custom block and parses it in arduino code
+//algorithm taken from blocklyduino https://github.com/BlocklyDuino/BlocklyDuinoFactory
 
 function updateGenerator(block) {
   function makeVar(root, name) {
@@ -844,7 +626,7 @@ function updateGenerator(block) {
 };
 
 
-  // Get the root block and start parsing.
+ 
   
 
   return (
@@ -919,7 +701,7 @@ function updateGenerator(block) {
         />
       </div>
 
-      {/* This xml is for the blocks' menu we will provide. Here are examples on how to include categories and subcategories */}
+      
       
       <xml id="toolbox" is = "Blockly workspace">
     <category name="Input">

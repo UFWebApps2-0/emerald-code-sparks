@@ -8,8 +8,8 @@ import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
 import './style.css'
 
-const CLIENT_ID = "296846904571-jiau68kb1m5ovbjodmho8ei6fe69qbkv.apps.googleusercontent.com";
-const API_KEY = "AIzaSyBH4GlSHNm7zUcrcINb-uKI82l36vbD4jA";
+const CLIENT_ID = import.meta.env.CLIENT_ID;
+const API_KEY = import.meta.env.API_KEY;
 const SCOPES = "https://www.googleapis.com/auth/drive";
 
 const useFormInput = (initialValue) => {

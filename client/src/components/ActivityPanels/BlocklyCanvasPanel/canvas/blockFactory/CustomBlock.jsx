@@ -63,6 +63,10 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
       const xmlText = Blockly.Xml.domToText(xml);
       setBlockCode(xmlText);
 
+      const arduino = Blockly.Arduino.workspaceToDom(workspaceRef.current);
+      const arduinoText = Blockly.Arduino.domToText(arduino);
+      setBlockCode(arduinoTex);
+
       const generatorCode = Blockly.JavaScript.workspaceToCode(workspaceRef.current);
       setGeneratorCode(generatorCode);
 
@@ -71,6 +75,7 @@ export default function CustomBlock({ activity, isSandbox, workspace}) {
     });
   };
 
+   
 
   
     // useEffect(() => {

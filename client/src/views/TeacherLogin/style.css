@@ -1,0 +1,25 @@
+.googleButton {
+    margin-top: 50px;  
+    color: black !important;
+    font-weight: bold !important;
+    background-color: #f4f4f5 !important;
+    border-radius: 25px !important;
+    font-size: 1rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    transition: 0.5s ease all !important;
+}
+
+.googleButton:hover {
+    opacity: 0.8 !important;
+}
+
+.googleButton div {
+    background-color: #f4f4f5 !important;
+    border-radius: 50% !important;
+}
+.googleButton svg {
+    margin-top: 5px;
+}
+
+

@@ -1,23 +1,27 @@
 import React, { useEffect, useRef, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
-import '../../ActivityLevels.less';
-import { compileArduinoCode } from '../../Utils/helpers';
+
+import '../../../ActivityLevels.less';
+import { compileArduinoCode } from '../../../Utils/helpers';
 import { message, Spin, Row, Col, Alert, Menu, Dropdown } from 'antd';
-import CodeModal from '../modals/CodeModal';
-import ConsoleModal from '../modals/ConsoleModal';
-import PlotterModal from '../modals/PlotterModal';
+import CodeModal from '../../modals/CodeModal';
+import ConsoleModal from '../../modals/ConsoleModal';
+import PlotterModal from '../../modals/PlotterModal';
 import {
   connectToPort,
   handleCloseConnection,
   handleOpenConnection,
-} from '../../Utils/consoleHelpers';
-import ArduinoLogo from '../Icons/ArduinoLogo';
-import PlotterLogo from '../Icons/PlotterLogo';
-import CustomBlock from './blockFactory/CustomBlock'
+} from '../../../Utils/consoleHelpers';
+import ArduinoLogo from '../../Icons/ArduinoLogo';
+import PlotterLogo from '../../Icons/PlotterLogo';
+import { getActivityToolbox } from '../../../../../Utils/requests';
+import PublicCanvas from '../PublicCanvas';
+import './blocks';
+
 
 let plotId = 1;
 
-export default function PublicCanvas({ activity, isSandbox}) {
+export default function CustomBlock({ activity, isSandbox, workspace}) {
   const [hoverUndo, setHoverUndo] = useState(false);
   const [hoverRedo, setHoverRedo] = useState(false);
   const [hoverCompile, setHoverCompile] = useState(false);
@@ -29,22 +33,57 @@ export default function PublicCanvas({ activity, isSandbox}) {
   const [selectedCompile, setSelectedCompile] = useState(false);
   const [compileError, setCompileError] = useState('');
 
+  //  useStates for Program your Arduino... / Custom Blocks
+  const [selectedFeature, setSelectedFeature] = useState('Custom Blocks');
+  const [notSelectedFeature, setNotSelectedFeature] = useState('Program your Arduino...')
+  const [blockCode, setBlockCode] = useState('');
+  const [generatorCode, setGeneratorCode] = useState('');
+  const [arduinoCode, setArduinoCode] = useState('');
+
   const [forceUpdate] = useReducer((x) => x + 1, 0);
+
   const workspaceRef = useRef(null);
   const activityRef = useRef(null);
 
-    //  useStates for Program your Arduino... / Custom Blocks
-    const [selectedFeature, setSelectedFeature] = useState('Program your Arduino...');
-    const [notSelectedFeature, setNotSelectedFeature] = useState('Custom Blocks')
+
+  // const xmlToBlockDefinition = (xmlText) => {
+
+  // };
+  
+  
 
   const setWorkspace = () => {
-    workspaceRef.current = window.Blockly.inject('blockly-canvas', {
+    workspaceRef.current = window.Blockly.inject('newblockly-canvas', {
       toolbox: document.getElementById('toolbox'),
+    });
+  
+
+    workspaceRef.current.addChangeListener(() => {
+      const xml = Blockly.Xml.workspaceToDom(workspaceRef.current);
+      const xmlText = Blockly.Xml.domToText(xml);
+      setBlockCode(xmlText);
+
+      const arduino = Blockly.Arduino.workspaceToDom(workspaceRef.current);
+      const arduinoText = Blockly.Arduino.domToText(arduino);
+      setBlockCode(arduinoTex);
+
+      const generatorCode = Blockly.JavaScript.workspaceToCode(workspaceRef.current);
+      setGeneratorCode(generatorCode);
+
+      const arduinoCode = Blockly.Arduino.workspaceToCode(workspaceRef.current);
+      setArduinoCode(arduinoCode);
     });
   };
 
+   
+
+  
+    // useEffect(() => {
+    //   setInitialWorkspace();
+    // }, [workspace]);
+
+
   useEffect(() => {
-    // once the activity state is set, set the workspace and save
     const setUp = async () => {
       activityRef.current = activity;
       if (!workspaceRef.current && activity && Object.keys(activity).length !== 0) {
@@ -53,7 +92,7 @@ export default function PublicCanvas({ activity, isSandbox}) {
     };
     setUp();
   }, [activity]);
-
+  
   const handleUndo = () => {
     if (workspaceRef.current.undoStack_.length > 0)
       workspaceRef.current.undo(false);
@@ -159,32 +198,53 @@ export default function PublicCanvas({ activity, isSandbox}) {
     </Menu>
   );
 
-    //Program you Arduino... / Custom Blocks | switch
-    const featureList = (buttonText, newFeature) => (
-        <button
-        // fix to switch to CustomBlock canvas
-        onClick={() => {setNotSelectedFeature(selectedFeature);setSelectedFeature(newFeature)}}
-          style={{
-            backgroundColor: 'teal',
-            color: 'white',
-            transition: 'background-color 0.3s',
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = 'lightblue';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = 'teal';
-          }}
-        >
-          {buttonText}
-        </button>
-      );
-    
-  if(selectedFeature === 'Custom Blocks'){
-    return <CustomBlock activity={activity} isSandbox={isSandbox} workspaceRef={workspaceRef.current}/>;
+  //Program you Arduino... / Custom Blocks | switch
+  const featureList = (buttonText, newFeature) => (
+    <button
+      onClick={() => {setNotSelectedFeature(selectedFeature);setSelectedFeature(newFeature)}}
+      style={{
+        backgroundColor: 'teal',
+        color: 'white',
+        transition: 'background-color 0.3s',
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = 'lightblue';
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = 'teal';
+      }}
+    >
+      {buttonText}
+    </button>
+  );
+
+  const saveBlock = (buttonText) => (
+
+    <button
+      //onClick={() => {}}
+      style={{
+        backgroundColor: 'teal',
+        color: 'white',
+        transition: 'background-color 0.3s',
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = 'lightblue';
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = 'teal';
+      }}
+    >
+      {buttonText}
+    </button>
+  );
+
+  if(selectedFeature === 'Program your Arduino...'){
+    return <PublicCanvas activity={activity} isSandbox={isSandbox}/>;
   }
+
   return (
     <div id='horizontal-container' className='flex flex-column'>
+      <script src="blocks.js"></script>
       <div className='flex flex-row'>
         <div
           id='bottom-container'
@@ -198,6 +258,7 @@ export default function PublicCanvas({ activity, isSandbox}) {
           >
             <Row id='icon-control-panel'>
               <Col flex='none' id='section-header'>
+                {/* Program your Arduino... / Custom Blocks */}
                 {selectedFeature}
               </Col>
               <Col flex='auto'>
@@ -208,6 +269,7 @@ export default function PublicCanvas({ activity, isSandbox}) {
                         <Link id='link' to={'/'} className='flex flex-column'>
                           <i className='fa fa-home fa-lg' />
                         </Link>
+                        {/* Custom Blocks / Program your Arduino... */}
                         <Row flex='auto' id='tb-feature-bg'>
                           {featureList(notSelectedFeature, notSelectedFeature)}
                         </Row>
@@ -301,7 +363,23 @@ export default function PublicCanvas({ activity, isSandbox}) {
                 </Row>
               </Col>
             </Row>
-            <div id='blockly-canvas' />
+            {/* Code to fix the workspace to half and provide space for the block def and gen code, will need to add a block preview */}
+            <div id='newblockly-canvas'/>
+            <Row id='block-bs'>{saveBlock('Save Block')}</Row>
+            <Row id='pre-text'>Block Preview</Row>
+            <Row id='blocklyCanvasTop'>
+              {/* Block Preview */}
+            </Row>
+            <Row id='def-text'>Block Definition</Row>
+            <Row id='blocklyCanvasMid'>
+              {/* {Block Definition} */}
+              {blockCode}
+            </Row>
+            <Row id='gen-text'>Generator Stub</Row>
+            <Row id='blocklyCanvasBottom'>
+              {/* {Generator Stub} */}
+              {arduinoCode}
+            </Row>
           </Spin>
         </div>
         <ConsoleModal
@@ -320,30 +398,53 @@ export default function PublicCanvas({ activity, isSandbox}) {
       </div>
 
       {/* This xml is for the blocks' menu we will provide. Here are examples on how to include categories and subcategories */}
-      <xml id='toolbox' is='Blockly workspace'>
-        {
-          // Maps out block categories
-          activity &&
-            activity.toolbox &&
-            activity.toolbox.map(([category, blocks]) => (
-              <category name={category} is='Blockly category' key={category}>
-                {
-                  // maps out blocks in category
-                  // eslint-disable-next-line
-                  blocks.map((block) => {
-                    return (
-                      <block
-                        type={block.name}
-                        is='Blockly block'
-                        key={block.name}
-                      />
-                    );
-                  })
-                }
-              </category>
-            ))
-        }
-      </xml>
+      
+      <xml id="toolbox">
+    <category name="Input">
+      <block type="input_value">
+        <value name="TYPE">
+          <shadow type="type_null"></shadow>
+        </value>
+      </block>
+      <block type="input_statement">
+        <value name="TYPE">
+          <shadow type="type_null"></shadow>
+        </value>
+      </block>
+      <block type="input_dummy"></block>
+    </category>
+    <category name="Field">
+      <block type="field_static"></block>
+      <block type="field_input"></block>
+      <block type="field_angle"></block>
+      <block type="field_dropdown"></block>
+      <block type="field_checkbox"></block>
+      <block type="field_colour"></block>
+      <block type="field_variable"></block>
+      <block type="field_image"></block>
+    </category>
+    <category name="Type">
+      <block type="type_group"></block>
+      <block type="type_null"></block>
+      <block type="type_boolean"></block>
+      <block type="type_number"></block>
+      <block type="type_string"></block>
+      <block type="type_list"></block>
+      <block type="type_other"></block>
+    </category>
+    <category name="Colour" id="colourCategory">
+      <block type="colour_hue"><mutation colour="20"></mutation><field name="HUE">20</field></block>
+      <block type="colour_hue"><mutation colour="65"></mutation><field name="HUE">65</field></block>
+      <block type="colour_hue"><mutation colour="120"></mutation><field name="HUE">120</field></block>
+      <block type="colour_hue"><mutation colour="160"></mutation><field name="HUE">160</field></block>
+      <block type="colour_hue"><mutation colour="210"></mutation><field name="HUE">210</field></block>
+      <block type="colour_hue"><mutation colour="230"></mutation><field name="HUE">230</field></block>
+      <block type="colour_hue"><mutation colour="260"></mutation><field name="HUE">260</field></block>
+      <block type="colour_hue"><mutation colour="290"></mutation><field name="HUE">290</field></block>
+      <block type="colour_hue"><mutation colour="330"></mutation><field name="HUE">330</field></block>
+    </category>
+  </xml>
+
 
       {compileError && (
         <Alert

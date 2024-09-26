@@ -42,6 +42,7 @@ export default function LessonModuleSelect({
             name: unitData.name,
           };
         });
+        console.log(options);
         setPlainOptions(options);
         setCheckedList(options);
       } else {
@@ -121,6 +122,11 @@ export default function LessonModuleSelect({
     setActivePanel('panel-1');
   };
 
+  function deleteUnit(unit) {
+    // Now 'unit' contains the data you passed in
+    console.log(`Deleting ${unit}`);
+    // Rest of the deleteUnit logic
+  }
   const color = [
     'magenta',
     'purple',
@@ -166,7 +172,7 @@ export default function LessonModuleSelect({
           {visibleStandardsByUnit.map((unit) => {
             return checkedList.find((checked) => checked.id === unit.id) ? (
               <div key={unit.id}>
-                <Divider orientation='left'>{`Unit ${unit.number}- ${unit.name}`}</Divider>
+                <Divider orientation='left'> {`Unit ${unit.number}- ${unit.name}`} <button id='delete-Unit' onClick={() => deleteUnit(unit)}> <i className=" fa fa-solid fa-trash" aria-hidden='true'/> </button></Divider>
                 {unit.lesson_modules.map((ls) => (
                   <div
                     key={ls.id}
